@@ -1,0 +1,1275 @@
+# \ChannelsAPI
+
+All URIs are relative to *http://localhost*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateChannels**](ChannelsAPI.md#CreateChannels) | **Post** /v2/channels | Create a channel
+[**CreateChannelsByIdTeamSets**](ChannelsAPI.md#CreateChannelsByIdTeamSets) | **Post** /v2/channels/{id}/team-sets | Create a channel-owned team set
+[**CreateChannelsByIdValidateAccessCode**](ChannelsAPI.md#CreateChannelsByIdValidateAccessCode) | **Post** /v2/channels/{id}/validate-access-code | Validate a channel access code
+[**DeleteChannelsById**](ChannelsAPI.md#DeleteChannelsById) | **Delete** /v2/channels/{id} | Delete Channel
+[**GetChannels**](ChannelsAPI.md#GetChannels) | **Get** /v2/channels | List the caller&#39;s channels (cursor-paginated)
+[**GetChannelsById**](ChannelsAPI.md#GetChannelsById) | **Get** /v2/channels/{id} | Get a channel by ID
+[**GetChannelsByIdTeamSets**](ChannelsAPI.md#GetChannelsByIdTeamSets) | **Get** /v2/channels/{id}/team-sets | List team sets owned by a channel
+[**GetChannelsSearch**](ChannelsAPI.md#GetChannelsSearch) | **Get** /v2/channels/search | List public channels the caller is not subscribed to (cursor-paginated)
+[**GetChannelsSearchKeywordByKeyword**](ChannelsAPI.md#GetChannelsSearchKeywordByKeyword) | **Get** /v2/channels/searchKeyword/{keyword} | Search channels by keyword (cursor-paginated)
+[**GetIdentitiesByPiidChannels**](ChannelsAPI.md#GetIdentitiesByPiidChannels) | **Get** /v2/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
+[**GetPublicChannels**](ChannelsAPI.md#GetPublicChannels) | **Get** /v2/public/channels | Get Channels by Region (v2)
+[**GetPublicChannelsById**](ChannelsAPI.md#GetPublicChannelsById) | **Get** /v2/public/channels/{id} | Get a channel by ID
+[**GetPublicChannelsSearchKeywordByKeyword**](ChannelsAPI.md#GetPublicChannelsSearchKeywordByKeyword) | **Get** /v2/public/channels/searchKeyword/{keyword} | Search channels by keyword (cursor-paginated)
+[**GetPublicIdentitiesByPiidChannels**](ChannelsAPI.md#GetPublicIdentitiesByPiidChannels) | **Get** /v2/public/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
+[**GetPublicTeamSetsSystem**](ChannelsAPI.md#GetPublicTeamSetsSystem) | **Get** /v2/public/team-sets/system | List platform-defined system team sets
+[**GetTeamSetsSystem**](ChannelsAPI.md#GetTeamSetsSystem) | **Get** /v2/team-sets/system | List platform-defined system team sets
+[**UpdateChannelsById**](ChannelsAPI.md#UpdateChannelsById) | **Put** /v2/channels/{id} | Update Channel
+[**UpdateChannelsByIdTeamSetsByTeamSetId**](ChannelsAPI.md#UpdateChannelsByIdTeamSetsByTeamSetId) | **Put** /v2/channels/{id}/team-sets/{teamSetId} | Replace a channel team set&#39;s lineup
+
+
+
+## CreateChannels
+
+> DomainChannel CreateChannels(ctx).RequestCreateChannelRequest(requestCreateChannelRequest).Execute()
+
+Create a channel
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	requestCreateChannelRequest := *openapiclient.NewRequestCreateChannelRequest("HeaderImageUrl_example", "Name_example", int32(123)) // RequestCreateChannelRequest | Channel payload
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.CreateChannels(context.Background()).RequestCreateChannelRequest(requestCreateChannelRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateChannels`: DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateChannelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **requestCreateChannelRequest** | [**RequestCreateChannelRequest**](RequestCreateChannelRequest.md) | Channel payload | 
+
+### Return type
+
+[**DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateChannelsByIdTeamSets
+
+> DomainTeamSet CreateChannelsByIdTeamSets(ctx, id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+
+Create a channel-owned team set
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+	requestCreateTeamSetRequest := *openapiclient.NewRequestCreateTeamSetRequest("Name_example", []openapiclient.RequestCreateTeamRequest{*openapiclient.NewRequestCreateTeamRequest("Name_example")}) // RequestCreateTeamSetRequest | Team set payload
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdTeamSets(context.Background(), id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdTeamSets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateChannelsByIdTeamSets`: DomainTeamSet
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannelsByIdTeamSets`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateChannelsByIdTeamSetsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **requestCreateTeamSetRequest** | [**RequestCreateTeamSetRequest**](RequestCreateTeamSetRequest.md) | Team set payload | 
+
+### Return type
+
+[**DomainTeamSet**](DomainTeamSet.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateChannelsByIdValidateAccessCode
+
+> HandlerStatusResponse CreateChannelsByIdValidateAccessCode(ctx, id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).Execute()
+
+Validate a channel access code
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+	requestValidateAccessCodeRequest := *openapiclient.NewRequestValidateAccessCodeRequest("AccessCode_example") // RequestValidateAccessCodeRequest | Access code body
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdValidateAccessCode(context.Background(), id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdValidateAccessCode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateChannelsByIdValidateAccessCode`: HandlerStatusResponse
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannelsByIdValidateAccessCode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateChannelsByIdValidateAccessCodeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **requestValidateAccessCodeRequest** | [**RequestValidateAccessCodeRequest**](RequestValidateAccessCodeRequest.md) | Access code body | 
+
+### Return type
+
+[**HandlerStatusResponse**](HandlerStatusResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteChannelsById
+
+> DomainChannel DeleteChannelsById(ctx, id).Execute()
+
+Delete Channel
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.DeleteChannelsById(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.DeleteChannelsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteChannelsById`: DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.DeleteChannelsById`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteChannelsByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetChannels
+
+> []DomainChannel GetChannels(ctx).Cursor(cursor).Limit(limit).Execute()
+
+List the caller's channels (cursor-paginated)
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 20, max 200) (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetChannels(context.Background()).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChannels`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChannelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 20, max 200) | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetChannelsById
+
+> DomainChannel GetChannelsById(ctx, id).Execute()
+
+Get a channel by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsById(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChannelsById`: DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsById`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChannelsByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetChannelsByIdTeamSets
+
+> []DomainTeamSet GetChannelsByIdTeamSets(ctx, id).Execute()
+
+List team sets owned by a channel
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsByIdTeamSets(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsByIdTeamSets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChannelsByIdTeamSets`: []DomainTeamSet
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsByIdTeamSets`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChannelsByIdTeamSetsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]DomainTeamSet**](DomainTeamSet.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetChannelsSearch
+
+> []DomainChannel GetChannelsSearch(ctx).Cursor(cursor).Limit(limit).Execute()
+
+List public channels the caller is not subscribed to (cursor-paginated)
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsSearch(context.Background()).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsSearch``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChannelsSearch`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsSearch`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChannelsSearchRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetChannelsSearchKeywordByKeyword
+
+> []DomainChannel GetChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Execute()
+
+Search channels by keyword (cursor-paginated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	keyword := "keyword_example" // string | Search keyword
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsSearchKeywordByKeyword``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChannelsSearchKeywordByKeyword`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsSearchKeywordByKeyword`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**keyword** | **string** | Search keyword | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChannelsSearchKeywordByKeywordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetIdentitiesByPiidChannels
+
+> []DomainChannel GetIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).Execute()
+
+List channels for a platform identity (cursor-paginated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	piid := "piid_example" // string | Platform Identity ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetIdentitiesByPiidChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetIdentitiesByPiidChannels`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetIdentitiesByPiidChannels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**piid** | **string** | Platform Identity ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetIdentitiesByPiidChannelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPublicChannels
+
+> []DomainChannel GetPublicChannels(ctx).Region(region).Cursor(cursor).Limit(limit).Execute()
+
+Get Channels by Region (v2)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	region := "region_example" // string | Region Code
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetPublicChannels(context.Background()).Region(region).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPublicChannels`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPublicChannelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **region** | **string** | Region Code | 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPublicChannelsById
+
+> DomainChannel GetPublicChannelsById(ctx, id).Execute()
+
+Get a channel by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsById(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPublicChannelsById`: DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannelsById`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPublicChannelsByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPublicChannelsSearchKeywordByKeyword
+
+> []DomainChannel GetPublicChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Execute()
+
+Search channels by keyword (cursor-paginated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	keyword := "keyword_example" // string | Search keyword
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPublicChannelsSearchKeywordByKeyword`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**keyword** | **string** | Search keyword | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPublicChannelsSearchKeywordByKeywordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPublicIdentitiesByPiidChannels
+
+> []DomainChannel GetPublicIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).Execute()
+
+List channels for a platform identity (cursor-paginated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	piid := "piid_example" // string | Platform Identity ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetPublicIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicIdentitiesByPiidChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPublicIdentitiesByPiidChannels`: []DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicIdentitiesByPiidChannels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**piid** | **string** | Platform Identity ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPublicIdentitiesByPiidChannelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+
+### Return type
+
+[**[]DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPublicTeamSetsSystem
+
+> []DomainTeamSet GetPublicTeamSetsSystem(ctx).Execute()
+
+List platform-defined system team sets
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetPublicTeamSetsSystem(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicTeamSetsSystem``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPublicTeamSetsSystem`: []DomainTeamSet
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicTeamSetsSystem`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPublicTeamSetsSystemRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]DomainTeamSet**](DomainTeamSet.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTeamSetsSystem
+
+> []DomainTeamSet GetTeamSetsSystem(ctx).Execute()
+
+List platform-defined system team sets
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetTeamSetsSystem(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetTeamSetsSystem``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTeamSetsSystem`: []DomainTeamSet
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetTeamSetsSystem`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTeamSetsSystemRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]DomainTeamSet**](DomainTeamSet.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateChannelsById
+
+> DomainChannel UpdateChannelsById(ctx, id).RequestUpdateChannelRequest(requestUpdateChannelRequest).Execute()
+
+Update Channel
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+	requestUpdateChannelRequest := *openapiclient.NewRequestUpdateChannelRequest("HeaderImageUrl_example", "Name_example", int32(123)) // RequestUpdateChannelRequest | request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.UpdateChannelsById(context.Background(), id).RequestUpdateChannelRequest(requestUpdateChannelRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.UpdateChannelsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateChannelsById`: DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.UpdateChannelsById`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateChannelsByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **requestUpdateChannelRequest** | [**RequestUpdateChannelRequest**](RequestUpdateChannelRequest.md) | request | 
+
+### Return type
+
+[**DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateChannelsByIdTeamSetsByTeamSetId
+
+> DomainTeamSet UpdateChannelsByIdTeamSetsByTeamSetId(ctx, id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+
+Replace a channel team set's lineup
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+	teamSetId := "teamSetId_example" // string | Team Set ID
+	requestCreateTeamSetRequest := *openapiclient.NewRequestCreateTeamSetRequest("Name_example", []openapiclient.RequestCreateTeamRequest{*openapiclient.NewRequestCreateTeamRequest("Name_example")}) // RequestCreateTeamSetRequest | Replacement team set payload
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId(context.Background(), id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateChannelsByIdTeamSetsByTeamSetId`: DomainTeamSet
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+**teamSetId** | **string** | Team Set ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateChannelsByIdTeamSetsByTeamSetIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **requestCreateTeamSetRequest** | [**RequestCreateTeamSetRequest**](RequestCreateTeamSetRequest.md) | Replacement team set payload | 
+
+### Return type
+
+[**DomainTeamSet**](DomainTeamSet.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+

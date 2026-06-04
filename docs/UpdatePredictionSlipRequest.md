@@ -1,0 +1,102 @@
+# UpdatePredictionSlipRequest
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Events** | Pointer to **[]map[string]interface{}** |  | [optional] 
+**Name** | Pointer to **NullableString** |  | [optional] 
+
+## Methods
+
+### NewUpdatePredictionSlipRequest
+
+`func NewUpdatePredictionSlipRequest() *UpdatePredictionSlipRequest`
+
+NewUpdatePredictionSlipRequest instantiates a new UpdatePredictionSlipRequest object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewUpdatePredictionSlipRequestWithDefaults
+
+`func NewUpdatePredictionSlipRequestWithDefaults() *UpdatePredictionSlipRequest`
+
+NewUpdatePredictionSlipRequestWithDefaults instantiates a new UpdatePredictionSlipRequest object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetEvents
+
+`func (o *UpdatePredictionSlipRequest) GetEvents() []map[string]interface{}`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *UpdatePredictionSlipRequest) GetEventsOk() (*[]map[string]interface{}, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *UpdatePredictionSlipRequest) SetEvents(v []map[string]interface{})`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *UpdatePredictionSlipRequest) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *UpdatePredictionSlipRequest) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *UpdatePredictionSlipRequest) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
+### GetName
+
+`func (o *UpdatePredictionSlipRequest) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *UpdatePredictionSlipRequest) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *UpdatePredictionSlipRequest) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *UpdatePredictionSlipRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### SetNameNil
+
+`func (o *UpdatePredictionSlipRequest) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *UpdatePredictionSlipRequest) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
