@@ -28,11 +28,18 @@ type ApiCreateSponsorsRequest struct {
 	ctx context.Context
 	ApiService *SponsorsAPIService
 	requestCreateSponsorRequest *RequestCreateSponsorRequest
+	xTenantUserId *string
 }
 
 // Create Sponsor Request
 func (r ApiCreateSponsorsRequest) RequestCreateSponsorRequest(requestCreateSponsorRequest RequestCreateSponsorRequest) ApiCreateSponsorsRequest {
 	r.requestCreateSponsorRequest = &requestCreateSponsorRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateSponsorsRequest) XTenantUserId(xTenantUserId string) ApiCreateSponsorsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -95,6 +102,9 @@ func (a *SponsorsAPIService) CreateSponsorsExecute(r ApiCreateSponsorsRequest) (
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateSponsorRequest
@@ -159,6 +169,13 @@ func (a *SponsorsAPIService) CreateSponsorsExecute(r ApiCreateSponsorsRequest) (
 type ApiGetSponsorsRequest struct {
 	ctx context.Context
 	ApiService *SponsorsAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSponsorsRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSponsorsRequest) Execute() ([]DomainSponsor, *http.Response, error) {
@@ -217,6 +234,9 @@ func (a *SponsorsAPIService) GetSponsorsExecute(r ApiGetSponsorsRequest) ([]Doma
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -280,6 +300,13 @@ type ApiGetSponsorsByIdRequest struct {
 	ctx context.Context
 	ApiService *SponsorsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSponsorsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorsByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSponsorsByIdRequest) Execute() (*DomainSponsor, *http.Response, error) {
@@ -341,6 +368,9 @@ func (a *SponsorsAPIService) GetSponsorsByIdExecute(r ApiGetSponsorsByIdRequest)
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -404,6 +434,13 @@ type ApiGetSponsorsByIdSponsorshipsRequest struct {
 	ctx context.Context
 	ApiService *SponsorsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSponsorsByIdSponsorshipsRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorsByIdSponsorshipsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSponsorsByIdSponsorshipsRequest) Execute() ([]DomainSponsorship, *http.Response, error) {
@@ -465,6 +502,9 @@ func (a *SponsorsAPIService) GetSponsorsByIdSponsorshipsExecute(r ApiGetSponsors
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

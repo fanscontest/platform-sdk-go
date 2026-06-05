@@ -28,6 +28,13 @@ type ApiCreateContestsByIdEnrollmentRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateContestsByIdEnrollmentRequest) XTenantUserId(xTenantUserId string) ApiCreateContestsByIdEnrollmentRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiCreateContestsByIdEnrollmentRequest) Execute() (*DomainParticipation, *http.Response, error) {
@@ -89,6 +96,9 @@ func (a *ParticipationAPIService) CreateContestsByIdEnrollmentExecute(r ApiCreat
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -152,6 +162,13 @@ type ApiCreateContestsByIdParticipateRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateContestsByIdParticipateRequest) XTenantUserId(xTenantUserId string) ApiCreateContestsByIdParticipateRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiCreateContestsByIdParticipateRequest) Execute() (*DomainParticipation, *http.Response, error) {
@@ -213,6 +230,9 @@ func (a *ParticipationAPIService) CreateContestsByIdParticipateExecute(r ApiCrea
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -276,6 +296,13 @@ type ApiCreateParticipationByIdStartRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateParticipationByIdStartRequest) XTenantUserId(xTenantUserId string) ApiCreateParticipationByIdStartRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiCreateParticipationByIdStartRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
@@ -335,6 +362,9 @@ func (a *ParticipationAPIService) CreateParticipationByIdStartExecute(r ApiCreat
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -398,6 +428,13 @@ type ApiDeleteContestsByIdEnrollmentRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteContestsByIdEnrollmentRequest) XTenantUserId(xTenantUserId string) ApiDeleteContestsByIdEnrollmentRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteContestsByIdEnrollmentRequest) Execute() (*http.Response, error) {
@@ -456,6 +493,9 @@ func (a *ParticipationAPIService) DeleteContestsByIdEnrollmentExecute(r ApiDelet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -509,6 +549,13 @@ type ApiGetContestsByIdScoreboardRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetContestsByIdScoreboardRequest) XTenantUserId(xTenantUserId string) ApiGetContestsByIdScoreboardRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetContestsByIdScoreboardRequest) Execute() (*DomainScoreBoard, *http.Response, error) {
@@ -574,6 +621,9 @@ func (a *ParticipationAPIService) GetContestsByIdScoreboardExecute(r ApiGetConte
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -596,7 +646,7 @@ func (a *ParticipationAPIService) GetContestsByIdScoreboardExecute(r ApiGetConte
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -639,6 +689,7 @@ type ApiGetIdentitiesByPiidParticipationRequest struct {
 	limit *int32
 	cursor *string
 	state *string
+	xTenantUserId *string
 }
 
 // Page size (1-200, default 50)
@@ -656,6 +707,12 @@ func (r ApiGetIdentitiesByPiidParticipationRequest) Cursor(cursor string) ApiGet
 // Contest state filter (created|started|closed|completed)
 func (r ApiGetIdentitiesByPiidParticipationRequest) State(state string) ApiGetIdentitiesByPiidParticipationRequest {
 	r.state = &state
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByPiidParticipationRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByPiidParticipationRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -728,6 +785,9 @@ func (a *ParticipationAPIService) GetIdentitiesByPiidParticipationExecute(r ApiG
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -802,6 +862,13 @@ type ApiGetIdentitiesByPiidScheduleRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	piid string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByPiidScheduleRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByPiidScheduleRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetIdentitiesByPiidScheduleRequest) Execute() ([]DomainParticipation, *http.Response, error) {
@@ -865,6 +932,9 @@ func (a *ParticipationAPIService) GetIdentitiesByPiidScheduleExecute(r ApiGetIde
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -927,6 +997,13 @@ type ApiGetParticipationByIdRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetParticipationByIdRequest) XTenantUserId(xTenantUserId string) ApiGetParticipationByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetParticipationByIdRequest) Execute() (*DomainParticipation, *http.Response, error) {
@@ -988,6 +1065,9 @@ func (a *ParticipationAPIService) GetParticipationByIdExecute(r ApiGetParticipat
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1051,6 +1131,13 @@ type ApiGetParticipationContestByIdRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetParticipationContestByIdRequest) XTenantUserId(xTenantUserId string) ApiGetParticipationContestByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetParticipationContestByIdRequest) Execute() (*DomainParticipation, *http.Response, error) {
@@ -1112,6 +1199,9 @@ func (a *ParticipationAPIService) GetParticipationContestByIdExecute(r ApiGetPar
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1175,6 +1265,13 @@ type ApiGetPublicContestsByIdGroupedScoreboardRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicContestsByIdGroupedScoreboardRequest) XTenantUserId(xTenantUserId string) ApiGetPublicContestsByIdGroupedScoreboardRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicContestsByIdGroupedScoreboardRequest) Execute() (*DomainGroupedScoreBoard, *http.Response, error) {
@@ -1237,6 +1334,9 @@ func (a *ParticipationAPIService) GetPublicContestsByIdGroupedScoreboardExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1259,7 +1359,7 @@ func (a *ParticipationAPIService) GetPublicContestsByIdGroupedScoreboardExecute(
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1299,6 +1399,13 @@ type ApiGetPublicContestsByIdLiveRankingRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicContestsByIdLiveRankingRequest) XTenantUserId(xTenantUserId string) ApiGetPublicContestsByIdLiveRankingRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicContestsByIdLiveRankingRequest) Execute() (*DomainGroupedScoreBoard, *http.Response, error) {
@@ -1361,6 +1468,9 @@ func (a *ParticipationAPIService) GetPublicContestsByIdLiveRankingExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1412,6 +1522,13 @@ type ApiGetPublicContestsByIdScoreboardRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicContestsByIdScoreboardRequest) XTenantUserId(xTenantUserId string) ApiGetPublicContestsByIdScoreboardRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicContestsByIdScoreboardRequest) Execute() (*DomainScoreBoard, *http.Response, error) {
@@ -1477,6 +1594,9 @@ func (a *ParticipationAPIService) GetPublicContestsByIdScoreboardExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1499,7 +1619,7 @@ func (a *ParticipationAPIService) GetPublicContestsByIdScoreboardExecute(r ApiGe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1540,11 +1660,18 @@ type ApiPatchParticipationByParticipationIdGroupRequest struct {
 	ApiService *ParticipationAPIService
 	participationId string
 	requestSelectGroupRequest *RequestSelectGroupRequest
+	xTenantUserId *string
 }
 
 // Select Group Request
 func (r ApiPatchParticipationByParticipationIdGroupRequest) RequestSelectGroupRequest(requestSelectGroupRequest RequestSelectGroupRequest) ApiPatchParticipationByParticipationIdGroupRequest {
 	r.requestSelectGroupRequest = &requestSelectGroupRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPatchParticipationByParticipationIdGroupRequest) XTenantUserId(xTenantUserId string) ApiPatchParticipationByParticipationIdGroupRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -1610,6 +1737,9 @@ func (a *ParticipationAPIService) PatchParticipationByParticipationIdGroupExecut
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestSelectGroupRequest

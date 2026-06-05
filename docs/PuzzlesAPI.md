@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## PuzzleWebV2PuzzleControllerCreate
 
-> PuzzleResponse PuzzleWebV2PuzzleControllerCreate(ctx).CreatePuzzleRequest(createPuzzleRequest).Execute()
+> PuzzleResponse PuzzleWebV2PuzzleControllerCreate(ctx).XTenantUserId(xTenantUserId).CreatePuzzleRequest(createPuzzleRequest).Execute()
 
 Create puzzle
 
@@ -35,11 +35,12 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 	createPuzzleRequest := *openapiclient.NewCreatePuzzleRequest(map[string]interface{}{"key": interface{}(123)}) // CreatePuzzleRequest | Create puzzle request (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerCreate(context.Background()).CreatePuzzleRequest(createPuzzleRequest).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerCreate(context.Background()).XTenantUserId(xTenantUserId).CreatePuzzleRequest(createPuzzleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +61,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
  **createPuzzleRequest** | [**CreatePuzzleRequest**](CreatePuzzleRequest.md) | Create puzzle request | 
 
 ### Return type
@@ -82,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleControllerDelete
 
-> PuzzleWebV2PuzzleControllerDelete(ctx, id).Execute()
+> PuzzleWebV2PuzzleControllerDelete(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete puzzle
 
@@ -100,10 +102,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerDelete(context.Background(), id).Execute()
+	r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerDelete(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -127,6 +130,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -148,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleControllerGetTopicConfiguration
 
-> TopicConfigurationResponse PuzzleWebV2PuzzleControllerGetTopicConfiguration(ctx).Topic(topic).Execute()
+> TopicConfigurationResponse PuzzleWebV2PuzzleControllerGetTopicConfiguration(ctx).Topic(topic).XTenantUserId(xTenantUserId).Execute()
 
 Get topic configuration
 
@@ -168,10 +172,11 @@ import (
 
 func main() {
 	topic := "topic_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerGetTopicConfiguration(context.Background()).Topic(topic).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerGetTopicConfiguration(context.Background()).Topic(topic).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerGetTopicConfiguration``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -193,6 +198,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **topic** | **string** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -214,7 +220,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleControllerGetUniqueCategories
 
-> CategoriesResponse PuzzleWebV2PuzzleControllerGetUniqueCategories(ctx).Execute()
+> CategoriesResponse PuzzleWebV2PuzzleControllerGetUniqueCategories(ctx).XTenantUserId(xTenantUserId).Execute()
 
 List unique categories
 
@@ -233,10 +239,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerGetUniqueCategories(context.Background()).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerGetUniqueCategories(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerGetUniqueCategories``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -248,12 +255,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControllerGetUniqueCategoriesRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -275,7 +286,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 
 ## PuzzleWebV2PuzzleControllerIndex
 
-> PuzzlesListResponse PuzzleWebV2PuzzleControllerIndex(ctx).Cursor(cursor).Limit(limit).Execute()
+> PuzzlesListResponse PuzzleWebV2PuzzleControllerIndex(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List puzzles
 
@@ -296,10 +307,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerIndex(context.Background()).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerIndex(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerIndex``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -322,6 +334,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -343,7 +356,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearch
 
-> MessageResponse PuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearch(ctx).Execute()
+> MessageResponse PuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearch(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Migrate puzzles to OpenSearch
 
@@ -362,10 +375,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearch(context.Background()).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearch(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -377,12 +391,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControllerMigratePuzzlesToOpensearchRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -404,7 +422,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 
 ## PuzzleWebV2PuzzleControllerSearchPuzzleBank
 
-> PuzzlesListResponse PuzzleWebV2PuzzleControllerSearchPuzzleBank(ctx).Topic(topic).Difficulty(difficulty).Cursor(cursor).Limit(limit).Execute()
+> PuzzlesListResponse PuzzleWebV2PuzzleControllerSearchPuzzleBank(ctx).Topic(topic).Difficulty(difficulty).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search puzzle bank
 
@@ -427,10 +445,11 @@ func main() {
 	difficulty := "difficulty_example" // string |  (optional)
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerSearchPuzzleBank(context.Background()).Topic(topic).Difficulty(difficulty).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerSearchPuzzleBank(context.Background()).Topic(topic).Difficulty(difficulty).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerSearchPuzzleBank``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -455,6 +474,7 @@ Name | Type | Description  | Notes
  **difficulty** | **string** |  | 
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -476,7 +496,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleControllerShow
 
-> PuzzleResponse PuzzleWebV2PuzzleControllerShow(ctx, id).Execute()
+> PuzzleResponse PuzzleWebV2PuzzleControllerShow(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get puzzle
 
@@ -494,10 +514,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerShow(context.Background(), id).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerShow(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerShow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -523,6 +544,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -544,7 +566,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleControllerUpdate
 
-> PuzzleResponse PuzzleWebV2PuzzleControllerUpdate(ctx, id).UpdatePuzzleRequest(updatePuzzleRequest).Execute()
+> PuzzleResponse PuzzleWebV2PuzzleControllerUpdate(ctx, id).XTenantUserId(xTenantUserId).UpdatePuzzleRequest(updatePuzzleRequest).Execute()
 
 Update puzzle
 
@@ -562,11 +584,12 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 	updatePuzzleRequest := *openapiclient.NewUpdatePuzzleRequest() // UpdatePuzzleRequest | Update puzzle request (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerUpdate(context.Background(), id).UpdatePuzzleRequest(updatePuzzleRequest).Execute()
+	resp, r, err := apiClient.PuzzlesAPI.PuzzleWebV2PuzzleControllerUpdate(context.Background(), id).XTenantUserId(xTenantUserId).UpdatePuzzleRequest(updatePuzzleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzlesAPI.PuzzleWebV2PuzzleControllerUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -592,6 +615,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleControlle
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
  **updatePuzzleRequest** | [**UpdatePuzzleRequest**](UpdatePuzzleRequest.md) | Update puzzle request | 
 
 ### Return type

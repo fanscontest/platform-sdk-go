@@ -28,11 +28,18 @@ type ApiCreateIdentitiesRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	handlerCreatePlatformIdentityRequest *HandlerCreatePlatformIdentityRequest
+	xTenantUserId *string
 }
 
 // Platform identity payload
 func (r ApiCreateIdentitiesRequest) HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest HandlerCreatePlatformIdentityRequest) ApiCreateIdentitiesRequest {
 	r.handlerCreatePlatformIdentityRequest = &handlerCreatePlatformIdentityRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateIdentitiesRequest) XTenantUserId(xTenantUserId string) ApiCreateIdentitiesRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -97,6 +104,9 @@ func (a *IdentitiesAPIService) CreateIdentitiesExecute(r ApiCreateIdentitiesRequ
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreatePlatformIdentityRequest
@@ -184,6 +194,13 @@ type ApiDeleteIdentitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteIdentitiesByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteIdentitiesByIdRequest) Execute() (*http.Response, error) {
@@ -247,6 +264,9 @@ func (a *IdentitiesAPIService) DeleteIdentitiesByIdExecute(r ApiDeleteIdentities
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -312,11 +332,18 @@ type ApiGetIdentitiesRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	tenantUserId *string
+	xTenantUserId *string
 }
 
 // Tenant-supplied user ID
 func (r ApiGetIdentitiesRequest) TenantUserId(tenantUserId string) ApiGetIdentitiesRequest {
 	r.tenantUserId = &tenantUserId
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -383,6 +410,9 @@ func (a *IdentitiesAPIService) GetIdentitiesExecute(r ApiGetIdentitiesRequest) (
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -468,6 +498,13 @@ type ApiGetIdentitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetIdentitiesByIdRequest) Execute() (*DomainPlatformIdentity, *http.Response, error) {
@@ -530,6 +567,9 @@ func (a *IdentitiesAPIService) GetIdentitiesByIdExecute(r ApiGetIdentitiesByIdRe
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -605,11 +645,18 @@ type ApiUpdateIdentitiesByIdRequest struct {
 	ApiService *IdentitiesAPIService
 	id string
 	handlerUpdatePlatformIdentityRequest *HandlerUpdatePlatformIdentityRequest
+	xTenantUserId *string
 }
 
 // Profile fields
 func (r ApiUpdateIdentitiesByIdRequest) HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest HandlerUpdatePlatformIdentityRequest) ApiUpdateIdentitiesByIdRequest {
 	r.handlerUpdatePlatformIdentityRequest = &handlerUpdatePlatformIdentityRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiUpdateIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateIdentitiesByIdRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -678,6 +725,9 @@ func (a *IdentitiesAPIService) UpdateIdentitiesByIdExecute(r ApiUpdateIdentities
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerUpdatePlatformIdentityRequest

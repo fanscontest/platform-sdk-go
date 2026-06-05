@@ -27,11 +27,18 @@ type ApiCreateAnalyticsImpressionRequest struct {
 	ctx context.Context
 	ApiService *AnalyticsAPIService
 	requestUpdateClickCountRequest *RequestUpdateClickCountRequest
+	xTenantUserId *string
 }
 
 // Impression payload
 func (r ApiCreateAnalyticsImpressionRequest) RequestUpdateClickCountRequest(requestUpdateClickCountRequest RequestUpdateClickCountRequest) ApiCreateAnalyticsImpressionRequest {
 	r.requestUpdateClickCountRequest = &requestUpdateClickCountRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateAnalyticsImpressionRequest) XTenantUserId(xTenantUserId string) ApiCreateAnalyticsImpressionRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -95,6 +102,9 @@ func (a *AnalyticsAPIService) CreateAnalyticsImpressionExecute(r ApiCreateAnalyt
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpdateClickCountRequest
@@ -160,11 +170,18 @@ type ApiCreateTrackerClickRequest struct {
 	ctx context.Context
 	ApiService *AnalyticsAPIService
 	requestUpdateClickCountRequest *RequestUpdateClickCountRequest
+	xTenantUserId *string
 }
 
 // Impression payload
 func (r ApiCreateTrackerClickRequest) RequestUpdateClickCountRequest(requestUpdateClickCountRequest RequestUpdateClickCountRequest) ApiCreateTrackerClickRequest {
 	r.requestUpdateClickCountRequest = &requestUpdateClickCountRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateTrackerClickRequest) XTenantUserId(xTenantUserId string) ApiCreateTrackerClickRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -229,6 +246,9 @@ func (a *AnalyticsAPIService) CreateTrackerClickExecute(r ApiCreateTrackerClickR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.requestUpdateClickCountRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -292,6 +312,13 @@ func (a *AnalyticsAPIService) CreateTrackerClickExecute(r ApiCreateTrackerClickR
 type ApiGetAnalyticsOverviewRequest struct {
 	ctx context.Context
 	ApiService *AnalyticsAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetAnalyticsOverviewRequest) XTenantUserId(xTenantUserId string) ApiGetAnalyticsOverviewRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetAnalyticsOverviewRequest) Execute() (*DomainStatsOverview, *http.Response, error) {
@@ -348,6 +375,9 @@ func (a *AnalyticsAPIService) GetAnalyticsOverviewExecute(r ApiGetAnalyticsOverv
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

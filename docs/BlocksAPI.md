@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateBlocks
 
-> DomainBlock CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).Execute()
+> DomainBlock CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Block
 
@@ -32,10 +32,11 @@ import (
 
 func main() {
 	handlerCreateBlockRequest := *openapiclient.NewHandlerCreateBlockRequest("PlatformIdentityId_example") // HandlerCreateBlockRequest | Block payload; optional channel_id scopes the block to a channel
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.CreateBlocks(context.Background()).HandlerCreateBlockRequest(handlerCreateBlockRequest).Execute()
+	resp, r, err := apiClient.BlocksAPI.CreateBlocks(context.Background()).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.CreateBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -57,6 +58,7 @@ Other parameters are passed through a pointer to a apiCreateBlocksRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **handlerCreateBlockRequest** | [**HandlerCreateBlockRequest**](HandlerCreateBlockRequest.md) | Block payload; optional channel_id scopes the block to a channel | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -78,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DeleteBlocksById
 
-> bool DeleteBlocksById(ctx, id).Execute()
+> bool DeleteBlocksById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Block
 
@@ -98,10 +100,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Blocked PlatformIdentity ID to unblock
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.DeleteBlocksById(context.Background(), id).Execute()
+	resp, r, err := apiClient.BlocksAPI.DeleteBlocksById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.DeleteBlocksById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -127,6 +130,7 @@ Other parameters are passed through a pointer to a apiDeleteBlocksByIdRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -148,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetBlocks
 
-> []DomainBlock GetBlocks(ctx).Execute()
+> []DomainBlock GetBlocks(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get Blocked Members
 
@@ -167,10 +171,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.GetBlocks(context.Background()).Execute()
+	resp, r, err := apiClient.BlocksAPI.GetBlocks(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.GetBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -182,12 +187,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetBlocksRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

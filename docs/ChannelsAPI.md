@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 ## CreateChannels
 
-> DomainChannel CreateChannels(ctx).RequestCreateChannelRequest(requestCreateChannelRequest).Execute()
+> DomainChannel CreateChannels(ctx).RequestCreateChannelRequest(requestCreateChannelRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a channel
 
@@ -47,10 +47,11 @@ import (
 
 func main() {
 	requestCreateChannelRequest := *openapiclient.NewRequestCreateChannelRequest("HeaderImageUrl_example", "Name_example", int32(123)) // RequestCreateChannelRequest | Channel payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.CreateChannels(context.Background()).RequestCreateChannelRequest(requestCreateChannelRequest).Execute()
+	resp, r, err := apiClient.ChannelsAPI.CreateChannels(context.Background()).RequestCreateChannelRequest(requestCreateChannelRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -72,6 +73,7 @@ Other parameters are passed through a pointer to a apiCreateChannelsRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestCreateChannelRequest** | [**RequestCreateChannelRequest**](RequestCreateChannelRequest.md) | Channel payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -93,7 +95,7 @@ Name | Type | Description  | Notes
 
 ## CreateChannelsByIdReport
 
-> string CreateChannelsByIdReport(ctx, id).Execute()
+> string CreateChannelsByIdReport(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Report a channel
 
@@ -113,10 +115,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdReport(context.Background(), id).Execute()
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdReport(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -142,6 +145,7 @@ Other parameters are passed through a pointer to a apiCreateChannelsByIdReportRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -163,7 +167,7 @@ Name | Type | Description  | Notes
 
 ## CreateChannelsByIdTeamSets
 
-> DomainTeamSet CreateChannelsByIdTeamSets(ctx, id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+> DomainTeamSet CreateChannelsByIdTeamSets(ctx, id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a channel-owned team set
 
@@ -182,10 +186,11 @@ import (
 func main() {
 	id := "id_example" // string | Channel ID
 	requestCreateTeamSetRequest := *openapiclient.NewRequestCreateTeamSetRequest("Name_example", []openapiclient.RequestCreateTeamRequest{*openapiclient.NewRequestCreateTeamRequest("Name_example")}) // RequestCreateTeamSetRequest | Team set payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdTeamSets(context.Background(), id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdTeamSets(context.Background(), id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdTeamSets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,6 +217,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestCreateTeamSetRequest** | [**RequestCreateTeamSetRequest**](RequestCreateTeamSetRequest.md) | Team set payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -233,7 +239,7 @@ Name | Type | Description  | Notes
 
 ## CreateChannelsByIdValidateAccessCode
 
-> HandlerStatusResponse CreateChannelsByIdValidateAccessCode(ctx, id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).Execute()
+> HandlerStatusResponse CreateChannelsByIdValidateAccessCode(ctx, id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
 
 Validate a channel access code
 
@@ -252,10 +258,11 @@ import (
 func main() {
 	id := "id_example" // string | Channel ID
 	requestValidateAccessCodeRequest := *openapiclient.NewRequestValidateAccessCodeRequest("AccessCode_example") // RequestValidateAccessCodeRequest | Access code body
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdValidateAccessCode(context.Background(), id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).Execute()
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdValidateAccessCode(context.Background(), id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdValidateAccessCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,6 +289,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestValidateAccessCodeRequest** | [**RequestValidateAccessCodeRequest**](RequestValidateAccessCodeRequest.md) | Access code body | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -303,7 +311,7 @@ Name | Type | Description  | Notes
 
 ## DeleteChannelsById
 
-> DomainChannel DeleteChannelsById(ctx, id).Execute()
+> DomainChannel DeleteChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Channel
 
@@ -323,10 +331,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.DeleteChannelsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.ChannelsAPI.DeleteChannelsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.DeleteChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -352,6 +361,7 @@ Other parameters are passed through a pointer to a apiDeleteChannelsByIdRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -373,7 +383,7 @@ Name | Type | Description  | Notes
 
 ## GetChannels
 
-> []DomainChannel GetChannels(ctx).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetChannels(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List the caller's channels (cursor-paginated)
 
@@ -392,10 +402,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 20, max 200) (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetChannels(context.Background()).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetChannels(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -418,6 +429,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 20, max 200) | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -439,7 +451,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsById
 
-> DomainChannel GetChannelsById(ctx, id).Execute()
+> DomainChannel GetChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a channel by ID
 
@@ -459,10 +471,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetChannelsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -488,6 +501,7 @@ Other parameters are passed through a pointer to a apiGetChannelsByIdRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -509,7 +523,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdTeamSets
 
-> []DomainTeamSet GetChannelsByIdTeamSets(ctx, id).Execute()
+> []DomainTeamSet GetChannelsByIdTeamSets(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 List team sets owned by a channel
 
@@ -527,10 +541,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetChannelsByIdTeamSets(context.Background(), id).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsByIdTeamSets(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsByIdTeamSets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -556,6 +571,7 @@ Other parameters are passed through a pointer to a apiGetChannelsByIdTeamSetsReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -577,7 +593,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsSearch
 
-> []DomainChannel GetChannelsSearch(ctx).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetChannelsSearch(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List public channels the caller is not subscribed to (cursor-paginated)
 
@@ -596,10 +612,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetChannelsSearch(context.Background()).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsSearch(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsSearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -622,6 +639,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -643,7 +661,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsSearchKeywordByKeyword
 
-> []DomainChannel GetChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search channels by keyword (cursor-paginated)
 
@@ -665,10 +683,11 @@ func main() {
 	keyword := "keyword_example" // string | Search keyword
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -696,6 +715,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -717,7 +737,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidChannels
 
-> []DomainChannel GetIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channels for a platform identity (cursor-paginated)
 
@@ -739,10 +759,11 @@ func main() {
 	piid := "piid_example" // string | Platform Identity ID
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetIdentitiesByPiidChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -770,6 +791,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -791,7 +813,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannels
 
-> []DomainChannel GetPublicChannels(ctx).Region(region).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetPublicChannels(ctx).Region(region).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Channels by Region (v2)
 
@@ -813,10 +835,11 @@ func main() {
 	region := "region_example" // string | Region Code
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicChannels(context.Background()).Region(region).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetPublicChannels(context.Background()).Region(region).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -840,6 +863,7 @@ Name | Type | Description  | Notes
  **region** | **string** | Region Code | 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -861,7 +885,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsById
 
-> DomainChannel GetPublicChannelsById(ctx, id).Execute()
+> DomainChannel GetPublicChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a channel by ID
 
@@ -881,10 +905,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -910,6 +935,7 @@ Other parameters are passed through a pointer to a apiGetPublicChannelsByIdReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -931,7 +957,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsSearchKeywordByKeyword
 
-> []DomainChannel GetPublicChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetPublicChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search channels by keyword (cursor-paginated)
 
@@ -953,10 +979,11 @@ func main() {
 	keyword := "keyword_example" // string | Search keyword
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -984,6 +1011,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -1005,7 +1033,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicIdentitiesByPiidChannels
 
-> []DomainChannel GetPublicIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).Execute()
+> []DomainChannel GetPublicIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channels for a platform identity (cursor-paginated)
 
@@ -1027,10 +1055,11 @@ func main() {
 	piid := "piid_example" // string | Platform Identity ID
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetPublicIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicIdentitiesByPiidChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1058,6 +1087,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -1079,7 +1109,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicTeamSetsSystem
 
-> []DomainTeamSet GetPublicTeamSetsSystem(ctx).Execute()
+> []DomainTeamSet GetPublicTeamSetsSystem(ctx).XTenantUserId(xTenantUserId).Execute()
 
 List platform-defined system team sets
 
@@ -1098,10 +1128,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicTeamSetsSystem(context.Background()).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetPublicTeamSetsSystem(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicTeamSetsSystem``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1113,12 +1144,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetPublicTeamSetsSystemRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -1140,7 +1175,7 @@ Other parameters are passed through a pointer to a apiGetPublicTeamSetsSystemReq
 
 ## GetTeamSetsSystem
 
-> []DomainTeamSet GetTeamSetsSystem(ctx).Execute()
+> []DomainTeamSet GetTeamSetsSystem(ctx).XTenantUserId(xTenantUserId).Execute()
 
 List platform-defined system team sets
 
@@ -1159,10 +1194,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetTeamSetsSystem(context.Background()).Execute()
+	resp, r, err := apiClient.ChannelsAPI.GetTeamSetsSystem(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetTeamSetsSystem``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1174,12 +1210,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetTeamSetsSystemRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -1201,7 +1241,7 @@ Other parameters are passed through a pointer to a apiGetTeamSetsSystemRequest s
 
 ## PatchChannelsByIdAccessCode
 
-> DomainChannel PatchChannelsByIdAccessCode(ctx, id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).Execute()
+> DomainChannel PatchChannelsByIdAccessCode(ctx, id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Channel Access Code
 
@@ -1222,10 +1262,11 @@ import (
 func main() {
 	id := "id_example" // string | Channel ID
 	requestUpdateChannelAccessCodeRequest := *openapiclient.NewRequestUpdateChannelAccessCodeRequest("AccessCode_example") // RequestUpdateChannelAccessCodeRequest | request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.PatchChannelsByIdAccessCode(context.Background(), id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).Execute()
+	resp, r, err := apiClient.ChannelsAPI.PatchChannelsByIdAccessCode(context.Background(), id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.PatchChannelsByIdAccessCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1252,6 +1293,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestUpdateChannelAccessCodeRequest** | [**RequestUpdateChannelAccessCodeRequest**](RequestUpdateChannelAccessCodeRequest.md) | request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -1273,7 +1315,7 @@ Name | Type | Description  | Notes
 
 ## UpdateChannelsById
 
-> DomainChannel UpdateChannelsById(ctx, id).RequestUpdateChannelRequest(requestUpdateChannelRequest).Execute()
+> DomainChannel UpdateChannelsById(ctx, id).RequestUpdateChannelRequest(requestUpdateChannelRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Channel
 
@@ -1294,10 +1336,11 @@ import (
 func main() {
 	id := "id_example" // string | Channel ID
 	requestUpdateChannelRequest := *openapiclient.NewRequestUpdateChannelRequest("HeaderImageUrl_example", "Name_example", int32(123)) // RequestUpdateChannelRequest | request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.UpdateChannelsById(context.Background(), id).RequestUpdateChannelRequest(requestUpdateChannelRequest).Execute()
+	resp, r, err := apiClient.ChannelsAPI.UpdateChannelsById(context.Background(), id).RequestUpdateChannelRequest(requestUpdateChannelRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.UpdateChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1324,6 +1367,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestUpdateChannelRequest** | [**RequestUpdateChannelRequest**](RequestUpdateChannelRequest.md) | request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -1345,7 +1389,7 @@ Name | Type | Description  | Notes
 
 ## UpdateChannelsByIdTeamSetsByTeamSetId
 
-> DomainTeamSet UpdateChannelsByIdTeamSetsByTeamSetId(ctx, id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+> DomainTeamSet UpdateChannelsByIdTeamSetsByTeamSetId(ctx, id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
 
 Replace a channel team set's lineup
 
@@ -1367,10 +1411,11 @@ func main() {
 	id := "id_example" // string | Channel ID
 	teamSetId := "teamSetId_example" // string | Team Set ID
 	requestCreateTeamSetRequest := *openapiclient.NewRequestCreateTeamSetRequest("Name_example", []openapiclient.RequestCreateTeamRequest{*openapiclient.NewRequestCreateTeamRequest("Name_example")}) // RequestCreateTeamSetRequest | Replacement team set payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId(context.Background(), id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).Execute()
+	resp, r, err := apiClient.ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId(context.Background(), id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1399,6 +1444,7 @@ Name | Type | Description  | Notes
 
 
  **requestCreateTeamSetRequest** | [**RequestCreateTeamSetRequest**](RequestCreateTeamSetRequest.md) | Replacement team set payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## CreateSubscriptions
 
-> DomainSubscription CreateSubscriptions(ctx).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).Execute()
+> DomainSubscription CreateSubscriptions(ctx).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
 
 Subscribe the caller to a channel
 
@@ -35,10 +35,11 @@ import (
 
 func main() {
 	requestCreateSubscriptionRequest := *openapiclient.NewRequestCreateSubscriptionRequest("ChannelId_example") // RequestCreateSubscriptionRequest | Subscription payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.CreateSubscriptions(context.Background()).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.CreateSubscriptions(context.Background()).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.CreateSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +61,7 @@ Other parameters are passed through a pointer to a apiCreateSubscriptionsRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestCreateSubscriptionRequest** | [**RequestCreateSubscriptionRequest**](RequestCreateSubscriptionRequest.md) | Subscription payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -81,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSubscriptionsById
 
-> DeleteSubscriptionsById(ctx, id).Execute()
+> DeleteSubscriptionsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Unsubscribe from Channel
 
@@ -101,10 +103,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Subscription ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.SubscriptionsAPI.DeleteSubscriptionsById(context.Background(), id).Execute()
+	r, err := apiClient.SubscriptionsAPI.DeleteSubscriptionsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.DeleteSubscriptionsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -128,6 +131,7 @@ Other parameters are passed through a pointer to a apiDeleteSubscriptionsByIdReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -149,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdSubscriptions
 
-> []DomainSubscription GetChannelsByIdSubscriptions(ctx, id).Execute()
+> []DomainSubscription GetChannelsByIdSubscriptions(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get channel subscribers
 
@@ -169,10 +173,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetChannelsByIdSubscriptions(context.Background(), id).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetChannelsByIdSubscriptions(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetChannelsByIdSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -198,6 +203,7 @@ Other parameters are passed through a pointer to a apiGetChannelsByIdSubscriptio
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -219,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidSubscriptions
 
-> []DomainSubscription GetIdentitiesByPiidSubscriptions(ctx, piid).Cursor(cursor).Limit(limit).Execute()
+> []DomainSubscription GetIdentitiesByPiidSubscriptions(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get a platform identity's channel subscriptions (v2)
 
@@ -241,10 +247,11 @@ func main() {
 	piid := "piid_example" // string | Platform Identity ID
 	cursor := "cursor_example" // string | Cursor for pagination (optional)
 	limit := int32(56) // int32 | Items per page (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetIdentitiesByPiidSubscriptions(context.Background(), piid).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetIdentitiesByPiidSubscriptions(context.Background(), piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetIdentitiesByPiidSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,6 +279,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Cursor for pagination | 
  **limit** | **int32** | Items per page | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -293,7 +301,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsByIdSubscriptions
 
-> []DomainSubscription GetPublicChannelsByIdSubscriptions(ctx, id).Execute()
+> []DomainSubscription GetPublicChannelsByIdSubscriptions(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get channel subscribers
 
@@ -313,10 +321,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetPublicChannelsByIdSubscriptions(context.Background(), id).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetPublicChannelsByIdSubscriptions(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -342,6 +351,7 @@ Other parameters are passed through a pointer to a apiGetPublicChannelsByIdSubsc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -363,7 +373,7 @@ Name | Type | Description  | Notes
 
 ## GetSubscriptionsByIdLogs
 
-> []DomainParticipation GetSubscriptionsByIdLogs(ctx, id).Execute()
+> []DomainParticipation GetSubscriptionsByIdLogs(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get the participation log for a subscription
 
@@ -381,10 +391,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Subscription ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetSubscriptionsByIdLogs(context.Background(), id).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetSubscriptionsByIdLogs(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetSubscriptionsByIdLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -410,6 +421,7 @@ Other parameters are passed through a pointer to a apiGetSubscriptionsByIdLogsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -431,7 +443,7 @@ Name | Type | Description  | Notes
 
 ## GetSubscriptionsSearchKeywordByKeyword
 
-> []DomainSubscription GetSubscriptionsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Execute()
+> []DomainSubscription GetSubscriptionsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search subscriptions by keyword (cursor-paginated)
 
@@ -451,10 +463,11 @@ func main() {
 	keyword := "keyword_example" // string | Search keyword
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -482,6 +495,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -503,7 +517,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSubscriptionsByIdStatus
 
-> UpdateSubscriptionsByIdStatus(ctx, id).RequestUpdateSubscriptionStatusRequest(requestUpdateSubscriptionStatusRequest).Execute()
+> UpdateSubscriptionsByIdStatus(ctx, id).RequestUpdateSubscriptionStatusRequest(requestUpdateSubscriptionStatusRequest).XTenantUserId(xTenantUserId).Execute()
 
 Approve or deny subscription
 
@@ -524,10 +538,11 @@ import (
 func main() {
 	id := "id_example" // string | Subscription ID
 	requestUpdateSubscriptionStatusRequest := *openapiclient.NewRequestUpdateSubscriptionStatusRequest("Status_example") // RequestUpdateSubscriptionStatusRequest | request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.SubscriptionsAPI.UpdateSubscriptionsByIdStatus(context.Background(), id).RequestUpdateSubscriptionStatusRequest(requestUpdateSubscriptionStatusRequest).Execute()
+	r, err := apiClient.SubscriptionsAPI.UpdateSubscriptionsByIdStatus(context.Background(), id).RequestUpdateSubscriptionStatusRequest(requestUpdateSubscriptionStatusRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.UpdateSubscriptionsByIdStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -552,6 +567,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestUpdateSubscriptionStatusRequest** | [**RequestUpdateSubscriptionStatusRequest**](RequestUpdateSubscriptionStatusRequest.md) | request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

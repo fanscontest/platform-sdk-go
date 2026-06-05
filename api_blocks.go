@@ -28,11 +28,18 @@ type ApiCreateBlocksRequest struct {
 	ctx context.Context
 	ApiService *BlocksAPIService
 	handlerCreateBlockRequest *HandlerCreateBlockRequest
+	xTenantUserId *string
 }
 
 // Block payload; optional channel_id scopes the block to a channel
 func (r ApiCreateBlocksRequest) HandlerCreateBlockRequest(handlerCreateBlockRequest HandlerCreateBlockRequest) ApiCreateBlocksRequest {
 	r.handlerCreateBlockRequest = &handlerCreateBlockRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateBlocksRequest) XTenantUserId(xTenantUserId string) ApiCreateBlocksRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -100,6 +107,9 @@ func (a *BlocksAPIService) CreateBlocksExecute(r ApiCreateBlocksRequest) (*Domai
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreateBlockRequest
@@ -176,6 +186,13 @@ type ApiDeleteBlocksByIdRequest struct {
 	ctx context.Context
 	ApiService *BlocksAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteBlocksByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteBlocksByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteBlocksByIdRequest) Execute() (bool, *http.Response, error) {
@@ -238,6 +255,9 @@ func (a *BlocksAPIService) DeleteBlocksByIdExecute(r ApiDeleteBlocksByIdRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -299,6 +319,13 @@ func (a *BlocksAPIService) DeleteBlocksByIdExecute(r ApiDeleteBlocksByIdRequest)
 type ApiGetBlocksRequest struct {
 	ctx context.Context
 	ApiService *BlocksAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetBlocksRequest) XTenantUserId(xTenantUserId string) ApiGetBlocksRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetBlocksRequest) Execute() ([]DomainBlock, *http.Response, error) {
@@ -357,6 +384,9 @@ func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) ([]DomainBloc
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

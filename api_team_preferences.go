@@ -29,11 +29,18 @@ type ApiUpdateTeamPreferenceByTeamSetIdRequest struct {
 	ApiService *TeamPreferencesAPIService
 	teamSetId string
 	requestUpsertTeamPreferenceRequest *RequestUpsertTeamPreferenceRequest
+	xTenantUserId *string
 }
 
 // Preference payload
 func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest RequestUpsertTeamPreferenceRequest) ApiUpdateTeamPreferenceByTeamSetIdRequest {
 	r.requestUpsertTeamPreferenceRequest = &requestUpsertTeamPreferenceRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateTeamPreferenceByTeamSetIdRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -97,6 +104,9 @@ func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r Api
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpsertTeamPreferenceRequest

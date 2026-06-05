@@ -30,6 +30,7 @@ type ApiGetIdentitiesByPiidFeedPersonalizedRequest struct {
 	piid string
 	limit *int32
 	cursor *string
+	xTenantUserId *string
 }
 
 // Page size (1-200, default 20)
@@ -41,6 +42,12 @@ func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) Limit(limit int32) ApiGet
 // Opaque pagination cursor
 func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) Cursor(cursor string) ApiGetIdentitiesByPiidFeedPersonalizedRequest {
 	r.cursor = &cursor
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByPiidFeedPersonalizedRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -110,6 +117,9 @@ func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIde
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -197,6 +207,7 @@ type ApiGetPublicFeedRequest struct {
 	limit *int32
 	cursor *string
 	region *string
+	xTenantUserId *string
 }
 
 // Page size (1-200, default 20)
@@ -214,6 +225,12 @@ func (r ApiGetPublicFeedRequest) Cursor(cursor string) ApiGetPublicFeedRequest {
 // Optional ISO 3166-1 alpha-2 region filter
 func (r ApiGetPublicFeedRequest) Region(region string) ApiGetPublicFeedRequest {
 	r.region = &region
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicFeedRequest) XTenantUserId(xTenantUserId string) ApiGetPublicFeedRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -280,6 +297,9 @@ func (a *FeedsAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) ([]Dom
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

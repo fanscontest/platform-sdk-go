@@ -28,6 +28,13 @@ type ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest struct {
 	ctx context.Context
 	ApiService *ContestPuzzlesAPIService
 	contestId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest) Execute() (*ContestPuzzleResponse, *http.Response, error) {
@@ -40,7 +47,7 @@ PuzzleWebV2ContestPuzzleControllerGetPuzzle Get contest source
 Returns the contest's source directly: a PuzzleSheet for MCQ, a PredictionSlip for prediction contests, or a creative challenge map.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param contestId 
+ @param contestId
  @return ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest
 */
 func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerGetPuzzle(ctx context.Context, contestId string) ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest {
@@ -89,6 +96,9 @@ func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerGetPuzzleEx
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -152,6 +162,13 @@ type ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest struct {
 	ctx context.Context
 	ApiService *ContestPuzzlesAPIService
 	contestId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest) Execute() (*RankingsResponse, *http.Response, error) {
@@ -164,7 +181,7 @@ PuzzleWebV2ContestPuzzleControllerRankings Get contest rankings
 Returns the leaderboard for a contest.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param contestId 
+ @param contestId
  @return ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest
 */
 func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerRankings(ctx context.Context, contestId string) ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest {
@@ -214,6 +231,9 @@ func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerRankingsExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -255,6 +275,13 @@ type ApiPuzzleWebV2ContestPuzzleControllerStatusRequest struct {
 	ctx context.Context
 	ApiService *ContestPuzzlesAPIService
 	contestId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2ContestPuzzleControllerStatusRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2ContestPuzzleControllerStatusRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2ContestPuzzleControllerStatusRequest) Execute() (*ContestStatusResponse, *http.Response, error) {
@@ -267,7 +294,7 @@ PuzzleWebV2ContestPuzzleControllerStatus Get contest status
 Returns the contest's lifecycle status and source type.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param contestId 
+ @param contestId
  @return ApiPuzzleWebV2ContestPuzzleControllerStatusRequest
 */
 func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerStatus(ctx context.Context, contestId string) ApiPuzzleWebV2ContestPuzzleControllerStatusRequest {
@@ -316,6 +343,9 @@ func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerStatusExecu
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

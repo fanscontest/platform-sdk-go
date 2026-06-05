@@ -28,11 +28,18 @@ type ApiCreateSponsorshipTermsRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
 	requestCreateSponsorshipTermRequest *RequestCreateSponsorshipTermRequest
+	xTenantUserId *string
 }
 
 // Create Term Request
 func (r ApiCreateSponsorshipTermsRequest) RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest RequestCreateSponsorshipTermRequest) ApiCreateSponsorshipTermsRequest {
 	r.requestCreateSponsorshipTermRequest = &requestCreateSponsorshipTermRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateSponsorshipTermsRequest) XTenantUserId(xTenantUserId string) ApiCreateSponsorshipTermsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -95,6 +102,9 @@ func (a *SponsorshipTermsAPIService) CreateSponsorshipTermsExecute(r ApiCreateSp
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateSponsorshipTermRequest
@@ -160,6 +170,13 @@ type ApiDeleteSponsorshipTermsByIdRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteSponsorshipTermsByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteSponsorshipTermsByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteSponsorshipTermsByIdRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
@@ -221,6 +238,9 @@ func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsByIdExecute(r ApiDele
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -305,6 +325,13 @@ func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsByIdExecute(r ApiDele
 type ApiGetSponsorshipTermsRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSponsorshipTermsRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorshipTermsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSponsorshipTermsRequest) Execute() ([]DomainSponsorshipTerm, *http.Response, error) {
@@ -363,6 +390,9 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsExecute(r ApiGetSponsors
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -426,6 +456,13 @@ type ApiGetSponsorshipTermsByIdRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSponsorshipTermsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorshipTermsByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSponsorshipTermsByIdRequest) Execute() (*DomainSponsorshipTerm, *http.Response, error) {
@@ -487,6 +524,9 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsByIdExecute(r ApiGetSpon
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -560,6 +600,13 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsByIdExecute(r ApiGetSpon
 type ApiGetSponsorshipTermsPlatformRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSponsorshipTermsPlatformRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorshipTermsPlatformRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSponsorshipTermsPlatformRequest) Execute() ([]DomainSponsorshipTerm, *http.Response, error) {
@@ -618,6 +665,9 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatformExecute(r ApiGet
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -682,11 +732,18 @@ type ApiUpdateSponsorshipTermsByIdRequest struct {
 	ApiService *SponsorshipTermsAPIService
 	id string
 	requestUpdateSponsorshipTermRequest *RequestUpdateSponsorshipTermRequest
+	xTenantUserId *string
 }
 
 // Update Term Request
 func (r ApiUpdateSponsorshipTermsByIdRequest) RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest RequestUpdateSponsorshipTermRequest) ApiUpdateSponsorshipTermsByIdRequest {
 	r.requestUpdateSponsorshipTermRequest = &requestUpdateSponsorshipTermRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiUpdateSponsorshipTermsByIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateSponsorshipTermsByIdRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -752,6 +809,9 @@ func (a *SponsorshipTermsAPIService) UpdateSponsorshipTermsByIdExecute(r ApiUpda
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpdateSponsorshipTermRequest

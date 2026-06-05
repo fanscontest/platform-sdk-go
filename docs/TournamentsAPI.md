@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateTournaments
 
-> DomainTournament CreateTournaments(ctx).Execute()
+> DomainTournament CreateTournaments(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Create tournament
 
@@ -32,10 +32,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentsAPI.CreateTournaments(context.Background()).Execute()
+	resp, r, err := apiClient.TournamentsAPI.CreateTournaments(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.CreateTournaments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -47,12 +48,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateTournamentsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -74,7 +79,7 @@ Other parameters are passed through a pointer to a apiCreateTournamentsRequest s
 
 ## GetChannelsByIdTournamentConfiguration
 
-> DomainTournamentConfiguration GetChannelsByIdTournamentConfiguration(ctx, id).Execute()
+> DomainTournamentConfiguration GetChannelsByIdTournamentConfiguration(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get tournament configuration templates
 
@@ -94,10 +99,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentsAPI.GetChannelsByIdTournamentConfiguration(context.Background(), id).Execute()
+	resp, r, err := apiClient.TournamentsAPI.GetChannelsByIdTournamentConfiguration(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetChannelsByIdTournamentConfiguration``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -123,6 +129,7 @@ Other parameters are passed through a pointer to a apiGetChannelsByIdTournamentC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -144,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdTournaments
 
-> []DomainTournament GetChannelsByIdTournaments(ctx, id).Cursor(cursor).Limit(limit).Execute()
+> []DomainTournament GetChannelsByIdTournaments(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channel tournaments (cursor-paginated)
 
@@ -164,10 +171,11 @@ func main() {
 	id := "id_example" // string | Channel ID
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentsAPI.GetChannelsByIdTournaments(context.Background(), id).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.TournamentsAPI.GetChannelsByIdTournaments(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetChannelsByIdTournaments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -195,6 +203,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -216,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetTournamentsById
 
-> DomainTournament GetTournamentsById(ctx, id).Execute()
+> DomainTournament GetTournamentsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get tournament
 
@@ -236,10 +245,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Tournament ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentsAPI.GetTournamentsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.TournamentsAPI.GetTournamentsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetTournamentsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -265,6 +275,7 @@ Other parameters are passed through a pointer to a apiGetTournamentsByIdRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

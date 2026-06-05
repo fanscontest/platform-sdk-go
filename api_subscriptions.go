@@ -28,11 +28,18 @@ type ApiCreateSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	requestCreateSubscriptionRequest *RequestCreateSubscriptionRequest
+	xTenantUserId *string
 }
 
 // Subscription payload
 func (r ApiCreateSubscriptionsRequest) RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest RequestCreateSubscriptionRequest) ApiCreateSubscriptionsRequest {
 	r.requestCreateSubscriptionRequest = &requestCreateSubscriptionRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiCreateSubscriptionsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -93,6 +100,9 @@ func (a *SubscriptionsAPIService) CreateSubscriptionsExecute(r ApiCreateSubscrip
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateSubscriptionRequest
@@ -158,6 +168,13 @@ type ApiDeleteSubscriptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteSubscriptionsByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteSubscriptionsByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteSubscriptionsByIdRequest) Execute() (*http.Response, error) {
@@ -218,6 +235,9 @@ func (a *SubscriptionsAPIService) DeleteSubscriptionsByIdExecute(r ApiDeleteSubs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -271,6 +291,13 @@ type ApiGetChannelsByIdSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetChannelsByIdSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsByIdSubscriptionsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetChannelsByIdSubscriptionsRequest) Execute() ([]DomainSubscription, *http.Response, error) {
@@ -332,6 +359,9 @@ func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptionsExecute(r ApiGetCh
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -397,6 +427,7 @@ type ApiGetIdentitiesByPiidSubscriptionsRequest struct {
 	piid string
 	cursor *string
 	limit *int32
+	xTenantUserId *string
 }
 
 // Cursor for pagination
@@ -408,6 +439,12 @@ func (r ApiGetIdentitiesByPiidSubscriptionsRequest) Cursor(cursor string) ApiGet
 // Items per page
 func (r ApiGetIdentitiesByPiidSubscriptionsRequest) Limit(limit int32) ApiGetIdentitiesByPiidSubscriptionsRequest {
 	r.limit = &limit
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByPiidSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByPiidSubscriptionsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -477,6 +514,9 @@ func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptionsExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -539,6 +579,13 @@ type ApiGetPublicChannelsByIdSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicChannelsByIdSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiGetPublicChannelsByIdSubscriptionsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Execute() ([]DomainSubscription, *http.Response, error) {
@@ -600,6 +647,9 @@ func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptionsExecute(r Ap
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -663,6 +713,13 @@ type ApiGetSubscriptionsByIdLogsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSubscriptionsByIdLogsRequest) XTenantUserId(xTenantUserId string) ApiGetSubscriptionsByIdLogsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetSubscriptionsByIdLogsRequest) Execute() ([]DomainParticipation, *http.Response, error) {
@@ -722,6 +779,9 @@ func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogsExecute(r ApiGetSubscr
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -787,6 +847,7 @@ type ApiGetSubscriptionsSearchKeywordByKeywordRequest struct {
 	keyword string
 	cursor *string
 	limit *int32
+	xTenantUserId *string
 }
 
 // Opaque pagination cursor
@@ -798,6 +859,12 @@ func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) Cursor(cursor string) 
 // Page size
 func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) Limit(limit int32) ApiGetSubscriptionsSearchKeywordByKeywordRequest {
 	r.limit = &limit
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) XTenantUserId(xTenantUserId string) ApiGetSubscriptionsSearchKeywordByKeywordRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -865,6 +932,9 @@ func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeywordExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -928,11 +998,18 @@ type ApiUpdateSubscriptionsByIdStatusRequest struct {
 	ApiService *SubscriptionsAPIService
 	id string
 	requestUpdateSubscriptionStatusRequest *RequestUpdateSubscriptionStatusRequest
+	xTenantUserId *string
 }
 
 // request
 func (r ApiUpdateSubscriptionsByIdStatusRequest) RequestUpdateSubscriptionStatusRequest(requestUpdateSubscriptionStatusRequest RequestUpdateSubscriptionStatusRequest) ApiUpdateSubscriptionsByIdStatusRequest {
 	r.requestUpdateSubscriptionStatusRequest = &requestUpdateSubscriptionStatusRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiUpdateSubscriptionsByIdStatusRequest) XTenantUserId(xTenantUserId string) ApiUpdateSubscriptionsByIdStatusRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -996,6 +1073,9 @@ func (a *SubscriptionsAPIService) UpdateSubscriptionsByIdStatusExecute(r ApiUpda
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpdateSubscriptionStatusRequest

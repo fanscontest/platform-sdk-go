@@ -28,11 +28,18 @@ type ApiCreateTenantsRequest struct {
 	ctx context.Context
 	ApiService *TenantsAPIService
 	handlerCreatePlatformRequest *HandlerCreatePlatformRequest
+	xTenantUserId *string
 }
 
 // Tenant application payload
 func (r ApiCreateTenantsRequest) HandlerCreatePlatformRequest(handlerCreatePlatformRequest HandlerCreatePlatformRequest) ApiCreateTenantsRequest {
 	r.handlerCreatePlatformRequest = &handlerCreatePlatformRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateTenantsRequest) XTenantUserId(xTenantUserId string) ApiCreateTenantsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -98,6 +105,9 @@ func (a *TenantsAPIService) CreateTenantsExecute(r ApiCreateTenantsRequest) (*Do
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreatePlatformRequest
@@ -175,11 +185,18 @@ type ApiCreateTenantsByIdApiKeysRequest struct {
 	ApiService *TenantsAPIService
 	id string
 	handlerCreateApiKeyRequest *HandlerCreateApiKeyRequest
+	xTenantUserId *string
 }
 
 // API key request (env + name)
 func (r ApiCreateTenantsByIdApiKeysRequest) HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest HandlerCreateApiKeyRequest) ApiCreateTenantsByIdApiKeysRequest {
 	r.handlerCreateApiKeyRequest = &handlerCreateApiKeyRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateTenantsByIdApiKeysRequest) XTenantUserId(xTenantUserId string) ApiCreateTenantsByIdApiKeysRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -248,6 +265,9 @@ func (a *TenantsAPIService) CreateTenantsByIdApiKeysExecute(r ApiCreateTenantsBy
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreateApiKeyRequest
@@ -358,11 +378,18 @@ type ApiCreateTenantsByIdWebhookSubscriptionsRequest struct {
 	ApiService *TenantsAPIService
 	id string
 	handlerCreateWebhookSubscriptionRequest *HandlerCreateWebhookSubscriptionRequest
+	xTenantUserId *string
 }
 
 // Subscription payload
 func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest HandlerCreateWebhookSubscriptionRequest) ApiCreateTenantsByIdWebhookSubscriptionsRequest {
 	r.handlerCreateWebhookSubscriptionRequest = &handlerCreateWebhookSubscriptionRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiCreateTenantsByIdWebhookSubscriptionsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -430,6 +457,9 @@ func (a *TenantsAPIService) CreateTenantsByIdWebhookSubscriptionsExecute(r ApiCr
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreateWebhookSubscriptionRequest
@@ -540,6 +570,13 @@ type ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest struct {
 	ApiService *TenantsAPIService
 	id string
 	subscriptionId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest) Execute() (*http.Response, error) {
@@ -603,6 +640,9 @@ func (a *TenantsAPIService) DeleteTenantsByIdWebhookSubscriptionsBySubscriptionI
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -679,6 +719,13 @@ type ApiGetTenantsByIdWebhookSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *TenantsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiGetTenantsByIdWebhookSubscriptionsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) Execute() ([]DomainWebhookSubscription, *http.Response, error) {
@@ -741,6 +788,9 @@ func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsExecute(r ApiGetTe
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

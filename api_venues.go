@@ -28,11 +28,18 @@ type ApiCreateVenuesRequest struct {
 	ctx context.Context
 	ApiService *VenuesAPIService
 	handlerCreatePlatformVenueRequest *HandlerCreatePlatformVenueRequest
+	xTenantUserId *string
 }
 
 // Venue payload
 func (r ApiCreateVenuesRequest) HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest HandlerCreatePlatformVenueRequest) ApiCreateVenuesRequest {
 	r.handlerCreatePlatformVenueRequest = &handlerCreatePlatformVenueRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateVenuesRequest) XTenantUserId(xTenantUserId string) ApiCreateVenuesRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -93,6 +100,9 @@ func (a *VenuesAPIService) CreateVenuesExecute(r ApiCreateVenuesRequest) (*Handl
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreatePlatformVenueRequest
@@ -170,11 +180,18 @@ type ApiCreateVenuesByVenueIdChannelsRequest struct {
 	ApiService *VenuesAPIService
 	venueId string
 	handlerCreatePlatformChannelRequest *HandlerCreatePlatformChannelRequest
+	xTenantUserId *string
 }
 
 // Channel payload
 func (r ApiCreateVenuesByVenueIdChannelsRequest) HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest HandlerCreatePlatformChannelRequest) ApiCreateVenuesByVenueIdChannelsRequest {
 	r.handlerCreatePlatformChannelRequest = &handlerCreatePlatformChannelRequest
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateVenuesByVenueIdChannelsRequest) XTenantUserId(xTenantUserId string) ApiCreateVenuesByVenueIdChannelsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -238,6 +255,9 @@ func (a *VenuesAPIService) CreateVenuesByVenueIdChannelsExecute(r ApiCreateVenue
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreatePlatformChannelRequest
@@ -324,6 +344,13 @@ func (a *VenuesAPIService) CreateVenuesByVenueIdChannelsExecute(r ApiCreateVenue
 type ApiGetVenuesRequest struct {
 	ctx context.Context
 	ApiService *VenuesAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetVenuesRequest) XTenantUserId(xTenantUserId string) ApiGetVenuesRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetVenuesRequest) Execute() ([]DomainVenue, *http.Response, error) {
@@ -380,6 +407,9 @@ func (a *VenuesAPIService) GetVenuesExecute(r ApiGetVenuesRequest) ([]DomainVenu
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -443,6 +473,13 @@ type ApiGetVenuesByVenueIdChannelsRequest struct {
 	ctx context.Context
 	ApiService *VenuesAPIService
 	venueId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetVenuesByVenueIdChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetVenuesByVenueIdChannelsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetVenuesByVenueIdChannelsRequest) Execute() ([]DomainChannel, *http.Response, error) {
@@ -502,6 +539,9 @@ func (a *VenuesAPIService) GetVenuesByVenueIdChannelsExecute(r ApiGetVenuesByVen
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

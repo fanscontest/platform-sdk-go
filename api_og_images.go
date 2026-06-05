@@ -29,11 +29,18 @@ type ApiGetPublicOgChannelByChannelIdRequest struct {
 	ApiService *OGImagesAPIService
 	channelId string
 	accessCode *string
+	xTenantUserId *string
 }
 
 // Access code for restricted channels
 func (r ApiGetPublicOgChannelByChannelIdRequest) AccessCode(accessCode string) ApiGetPublicOgChannelByChannelIdRequest {
 	r.accessCode = &accessCode
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgChannelByChannelIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgChannelByChannelIdRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -100,6 +107,9 @@ func (a *OGImagesAPIService) GetPublicOgChannelByChannelIdExecute(r ApiGetPublic
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -162,6 +172,13 @@ type ApiGetPublicOgContestByContestIdRequest struct {
 	ctx context.Context
 	ApiService *OGImagesAPIService
 	contestId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgContestByContestIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgContestByContestIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicOgContestByContestIdRequest) Execute() (*HandlerOGContestData, *http.Response, error) {
@@ -223,6 +240,9 @@ func (a *OGImagesAPIService) GetPublicOgContestByContestIdExecute(r ApiGetPublic
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -286,6 +306,13 @@ type ApiGetPublicOgScoreboardByContestIdRequest struct {
 	ctx context.Context
 	ApiService *OGImagesAPIService
 	contestId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgScoreboardByContestIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgScoreboardByContestIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicOgScoreboardByContestIdRequest) Execute() (*HandlerOGScoreboardData, *http.Response, error) {
@@ -347,6 +374,9 @@ func (a *OGImagesAPIService) GetPublicOgScoreboardByContestIdExecute(r ApiGetPub
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -410,6 +440,13 @@ type ApiGetPublicOgSubmissionsByParticipationIdRequest struct {
 	ctx context.Context
 	ApiService *OGImagesAPIService
 	participationId string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgSubmissionsByParticipationIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) Execute() (*HandlerOGParticipationData, *http.Response, error) {
@@ -471,6 +508,9 @@ func (a *OGImagesAPIService) GetPublicOgSubmissionsByParticipationIdExecute(r Ap
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

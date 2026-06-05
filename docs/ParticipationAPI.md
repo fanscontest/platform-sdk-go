@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 ## CreateContestsByIdEnrollment
 
-> DomainParticipation CreateContestsByIdEnrollment(ctx, id).Execute()
+> DomainParticipation CreateContestsByIdEnrollment(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Enroll in a Contest
 
@@ -42,10 +42,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.CreateContestsByIdEnrollment(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.CreateContestsByIdEnrollment(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.CreateContestsByIdEnrollment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -71,6 +72,7 @@ Other parameters are passed through a pointer to a apiCreateContestsByIdEnrollme
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -92,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdParticipate
 
-> DomainParticipation CreateContestsByIdParticipate(ctx, id).Execute()
+> DomainParticipation CreateContestsByIdParticipate(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Create Participation
 
@@ -112,10 +114,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.CreateContestsByIdParticipate(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.CreateContestsByIdParticipate(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.CreateContestsByIdParticipate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -141,6 +144,7 @@ Other parameters are passed through a pointer to a apiCreateContestsByIdParticip
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -162,7 +166,7 @@ Name | Type | Description  | Notes
 
 ## CreateParticipationByIdStart
 
-> HandlerStatusResponse CreateParticipationByIdStart(ctx, id).Execute()
+> HandlerStatusResponse CreateParticipationByIdStart(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Log the start of a participation
 
@@ -180,10 +184,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Participation ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.CreateParticipationByIdStart(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.CreateParticipationByIdStart(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.CreateParticipationByIdStart``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -209,6 +214,7 @@ Other parameters are passed through a pointer to a apiCreateParticipationByIdSta
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -230,7 +236,7 @@ Name | Type | Description  | Notes
 
 ## DeleteContestsByIdEnrollment
 
-> DeleteContestsByIdEnrollment(ctx, id).Execute()
+> DeleteContestsByIdEnrollment(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Withdraw the caller's enrollment from a contest
 
@@ -248,10 +254,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ParticipationAPI.DeleteContestsByIdEnrollment(context.Background(), id).Execute()
+	r, err := apiClient.ParticipationAPI.DeleteContestsByIdEnrollment(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.DeleteContestsByIdEnrollment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,6 +282,7 @@ Other parameters are passed through a pointer to a apiDeleteContestsByIdEnrollme
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -296,7 +304,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdScoreboard
 
-> DomainScoreBoard GetContestsByIdScoreboard(ctx, id).Execute()
+> DomainScoreBoard GetContestsByIdScoreboard(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a contest scoreboard
 
@@ -316,10 +324,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetContestsByIdScoreboard(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetContestsByIdScoreboard(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetContestsByIdScoreboard``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,6 +354,7 @@ Other parameters are passed through a pointer to a apiGetContestsByIdScoreboardR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -366,7 +376,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidParticipation
 
-> []DomainParticipation GetIdentitiesByPiidParticipation(ctx, piid).Limit(limit).Cursor(cursor).State(state).Execute()
+> []DomainParticipation GetIdentitiesByPiidParticipation(ctx, piid).Limit(limit).Cursor(cursor).State(state).XTenantUserId(xTenantUserId).Execute()
 
 Get all participation for a platform identity (cursor-paginated)
 
@@ -389,10 +399,11 @@ func main() {
 	limit := int32(56) // int32 | Page size (1-200, default 50) (optional)
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	state := "state_example" // string | Contest state filter (created|started|closed|completed) (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetIdentitiesByPiidParticipation(context.Background(), piid).Limit(limit).Cursor(cursor).State(state).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetIdentitiesByPiidParticipation(context.Background(), piid).Limit(limit).Cursor(cursor).State(state).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetIdentitiesByPiidParticipation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -421,6 +432,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** | Page size (1-200, default 50) | 
  **cursor** | **string** | Opaque pagination cursor | 
  **state** | **string** | Contest state filter (created|started|closed|completed) | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -442,7 +454,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidSchedule
 
-> []DomainParticipation GetIdentitiesByPiidSchedule(ctx, piid).Execute()
+> []DomainParticipation GetIdentitiesByPiidSchedule(ctx, piid).XTenantUserId(xTenantUserId).Execute()
 
 Get a platform identity's contest schedule (cached read model)
 
@@ -462,10 +474,11 @@ import (
 
 func main() {
 	piid := "piid_example" // string | Platform Identity ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetIdentitiesByPiidSchedule(context.Background(), piid).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetIdentitiesByPiidSchedule(context.Background(), piid).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetIdentitiesByPiidSchedule``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -491,6 +504,7 @@ Other parameters are passed through a pointer to a apiGetIdentitiesByPiidSchedul
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -512,7 +526,7 @@ Name | Type | Description  | Notes
 
 ## GetParticipationById
 
-> DomainParticipation GetParticipationById(ctx, id).Execute()
+> DomainParticipation GetParticipationById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get participation by id
 
@@ -532,10 +546,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Participation ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetParticipationById(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetParticipationById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetParticipationById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -561,6 +576,7 @@ Other parameters are passed through a pointer to a apiGetParticipationByIdReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -582,7 +598,7 @@ Name | Type | Description  | Notes
 
 ## GetParticipationContestById
 
-> DomainParticipation GetParticipationContestById(ctx, id).Execute()
+> DomainParticipation GetParticipationContestById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get member participation by contest id
 
@@ -602,10 +618,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetParticipationContestById(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetParticipationContestById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetParticipationContestById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -631,6 +648,7 @@ Other parameters are passed through a pointer to a apiGetParticipationContestByI
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -652,7 +670,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByIdGroupedScoreboard
 
-> DomainGroupedScoreBoard GetPublicContestsByIdGroupedScoreboard(ctx, id).Execute()
+> DomainGroupedScoreBoard GetPublicContestsByIdGroupedScoreboard(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get ScoreBoard
 
@@ -672,10 +690,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdGroupedScoreboard(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdGroupedScoreboard(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetPublicContestsByIdGroupedScoreboard``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -701,6 +720,7 @@ Other parameters are passed through a pointer to a apiGetPublicContestsByIdGroup
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -722,7 +742,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByIdLiveRanking
 
-> DomainGroupedScoreBoard GetPublicContestsByIdLiveRanking(ctx, id).Execute()
+> DomainGroupedScoreBoard GetPublicContestsByIdLiveRanking(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get live ranking snapshot
 
@@ -742,10 +762,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdLiveRanking(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdLiveRanking(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetPublicContestsByIdLiveRanking``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -771,6 +792,7 @@ Other parameters are passed through a pointer to a apiGetPublicContestsByIdLiveR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -792,7 +814,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByIdScoreboard
 
-> DomainScoreBoard GetPublicContestsByIdScoreboard(ctx, id).Execute()
+> DomainScoreBoard GetPublicContestsByIdScoreboard(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a contest scoreboard
 
@@ -812,10 +834,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdScoreboard(context.Background(), id).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdScoreboard(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetPublicContestsByIdScoreboard``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -841,6 +864,7 @@ Other parameters are passed through a pointer to a apiGetPublicContestsByIdScore
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -862,7 +886,7 @@ Name | Type | Description  | Notes
 
 ## PatchParticipationByParticipationIdGroup
 
-> DomainSelectGroupResponse PatchParticipationByParticipationIdGroup(ctx, participationId).RequestSelectGroupRequest(requestSelectGroupRequest).Execute()
+> DomainSelectGroupResponse PatchParticipationByParticipationIdGroup(ctx, participationId).RequestSelectGroupRequest(requestSelectGroupRequest).XTenantUserId(xTenantUserId).Execute()
 
 Select group for open grouping contest
 
@@ -883,10 +907,11 @@ import (
 func main() {
 	participationId := "participationId_example" // string | Participation ID
 	requestSelectGroupRequest := *openapiclient.NewRequestSelectGroupRequest("Group_example") // RequestSelectGroupRequest | Select Group Request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.PatchParticipationByParticipationIdGroup(context.Background(), participationId).RequestSelectGroupRequest(requestSelectGroupRequest).Execute()
+	resp, r, err := apiClient.ParticipationAPI.PatchParticipationByParticipationIdGroup(context.Background(), participationId).RequestSelectGroupRequest(requestSelectGroupRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.PatchParticipationByParticipationIdGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -913,6 +938,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestSelectGroupRequest** | [**RequestSelectGroupRequest**](RequestSelectGroupRequest.md) | Select Group Request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## PuzzleWebV2EventControllerApproveResult
 
-> EventResponse PuzzleWebV2EventControllerApproveResult(ctx, id).Execute()
+> EventResponse PuzzleWebV2EventControllerApproveResult(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Approve event result
 
@@ -35,10 +35,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerApproveResult(context.Background(), id).Execute()
+	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerApproveResult(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.PuzzleWebV2EventControllerApproveResult``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2EventController
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2EventControllerEnterResult
 
-> EventResponse PuzzleWebV2EventControllerEnterResult(ctx, id).EnterEventResultRequest(enterEventResultRequest).Execute()
+> EventResponse PuzzleWebV2EventControllerEnterResult(ctx, id).XTenantUserId(xTenantUserId).EnterEventResultRequest(enterEventResultRequest).Execute()
 
 Enter event result
 
@@ -103,11 +105,12 @@ import (
 
 func main() {
 	id := "id_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 	enterEventResultRequest := *openapiclient.NewEnterEventResultRequest(map[string]interface{}{"key": interface{}(123)}) // EnterEventResultRequest | Result payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerEnterResult(context.Background(), id).EnterEventResultRequest(enterEventResultRequest).Execute()
+	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerEnterResult(context.Background(), id).XTenantUserId(xTenantUserId).EnterEventResultRequest(enterEventResultRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.PuzzleWebV2EventControllerEnterResult``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,6 +136,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2EventController
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
  **enterEventResultRequest** | [**EnterEventResultRequest**](EnterEventResultRequest.md) | Result payload | 
 
 ### Return type
@@ -155,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2EventControllerPendingApproval
 
-> EventsListResponse PuzzleWebV2EventControllerPendingApproval(ctx).Cursor(cursor).Limit(limit).Execute()
+> EventsListResponse PuzzleWebV2EventControllerPendingApproval(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List events with results pending approval
 
@@ -176,10 +180,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerPendingApproval(context.Background()).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerPendingApproval(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.PuzzleWebV2EventControllerPendingApproval``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -202,6 +207,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -223,7 +229,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2EventControllerSearch
 
-> EventsListResponse PuzzleWebV2EventControllerSearch(ctx).Q(q).DateFrom(dateFrom).DateTo(dateTo).Category(category).Competition(competition).IsUserEvent(isUserEvent).Size(size).Cursor(cursor).Limit(limit).Execute()
+> EventsListResponse PuzzleWebV2EventControllerSearch(ctx).Q(q).DateFrom(dateFrom).DateTo(dateTo).Category(category).Competition(competition).IsUserEvent(isUserEvent).Size(size).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search events
 
@@ -252,10 +258,11 @@ func main() {
 	size := int32(56) // int32 |  (optional)
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerSearch(context.Background()).Q(q).DateFrom(dateFrom).DateTo(dateTo).Category(category).Competition(competition).IsUserEvent(isUserEvent).Size(size).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerSearch(context.Background()).Q(q).DateFrom(dateFrom).DateTo(dateTo).Category(category).Competition(competition).IsUserEvent(isUserEvent).Size(size).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.PuzzleWebV2EventControllerSearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -285,6 +292,7 @@ Name | Type | Description  | Notes
  **size** | **int32** |  | 
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -306,7 +314,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2EventControllerShow
 
-> EventResponse PuzzleWebV2EventControllerShow(ctx, id).Execute()
+> EventResponse PuzzleWebV2EventControllerShow(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get event by es_event_id
 
@@ -324,10 +332,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerShow(context.Background(), id).Execute()
+	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerShow(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.PuzzleWebV2EventControllerShow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -353,6 +362,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2EventController
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -374,7 +384,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2EventControllerShowDetails
 
-> EventResponse PuzzleWebV2EventControllerShowDetails(ctx, id).Execute()
+> EventResponse PuzzleWebV2EventControllerShowDetails(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get event details (from Postgres)
 
@@ -394,10 +404,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerShowDetails(context.Background(), id).Execute()
+	resp, r, err := apiClient.EventsAPI.PuzzleWebV2EventControllerShowDetails(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.PuzzleWebV2EventControllerShowDetails``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -423,6 +434,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2EventController
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetPublicCountries
 
-> []DomainCountry GetPublicCountries(ctx).Execute()
+> []DomainCountry GetPublicCountries(ctx).XTenantUserId(xTenantUserId).Execute()
 
 List enabled countries (sorted, with native names for non-English Accept-Language)
 
@@ -28,10 +28,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CountriesAPI.GetPublicCountries(context.Background()).Execute()
+	resp, r, err := apiClient.CountriesAPI.GetPublicCountries(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicCountries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -43,12 +44,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetPublicCountriesRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -70,7 +75,7 @@ Other parameters are passed through a pointer to a apiGetPublicCountriesRequest 
 
 ## GetPublicLocation
 
-> DomainCountry GetPublicLocation(ctx).Execute()
+> DomainCountry GetPublicLocation(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Resolve the caller's country by IP (CF-Ipcountry, then Maxmind)
 
@@ -87,10 +92,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CountriesAPI.GetPublicLocation(context.Background()).Execute()
+	resp, r, err := apiClient.CountriesAPI.GetPublicLocation(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicLocation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -102,12 +108,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetPublicLocationRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

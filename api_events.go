@@ -28,6 +28,13 @@ type ApiPuzzleWebV2EventControllerApproveResultRequest struct {
 	ctx context.Context
 	ApiService *EventsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2EventControllerApproveResultRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2EventControllerApproveResultRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2EventControllerApproveResultRequest) Execute() (*EventResponse, *http.Response, error) {
@@ -40,7 +47,7 @@ PuzzleWebV2EventControllerApproveResult Approve event result
 Approves a previously-entered result. Queues an async job to advance contest grading when all events in a contest are approved.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2EventControllerApproveResultRequest
 */
 func (a *EventsAPIService) PuzzleWebV2EventControllerApproveResult(ctx context.Context, id string) ApiPuzzleWebV2EventControllerApproveResultRequest {
@@ -89,6 +96,9 @@ func (a *EventsAPIService) PuzzleWebV2EventControllerApproveResultExecute(r ApiP
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -174,7 +184,14 @@ type ApiPuzzleWebV2EventControllerEnterResultRequest struct {
 	ctx context.Context
 	ApiService *EventsAPIService
 	id string
+	xTenantUserId *string
 	enterEventResultRequest *EnterEventResultRequest
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2EventControllerEnterResultRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2EventControllerEnterResultRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 // Result payload
@@ -191,7 +208,7 @@ func (r ApiPuzzleWebV2EventControllerEnterResultRequest) Execute() (*EventRespon
 PuzzleWebV2EventControllerEnterResult Enter event result
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2EventControllerEnterResultRequest
 */
 func (a *EventsAPIService) PuzzleWebV2EventControllerEnterResult(ctx context.Context, id string) ApiPuzzleWebV2EventControllerEnterResultRequest {
@@ -240,6 +257,9 @@ func (a *EventsAPIService) PuzzleWebV2EventControllerEnterResultExecute(r ApiPuz
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.enterEventResultRequest
@@ -328,17 +348,22 @@ type ApiPuzzleWebV2EventControllerPendingApprovalRequest struct {
 	ApiService *EventsAPIService
 	cursor *string
 	limit *int32
+	xTenantUserId *string
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerPendingApprovalRequest) Cursor(cursor string) ApiPuzzleWebV2EventControllerPendingApprovalRequest {
 	r.cursor = &cursor
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerPendingApprovalRequest) Limit(limit int32) ApiPuzzleWebV2EventControllerPendingApprovalRequest {
 	r.limit = &limit
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2EventControllerPendingApprovalRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2EventControllerPendingApprovalRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -405,6 +430,9 @@ func (a *EventsAPIService) PuzzleWebV2EventControllerPendingApprovalExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -454,59 +482,57 @@ type ApiPuzzleWebV2EventControllerSearchRequest struct {
 	size *int32
 	cursor *string
 	limit *int32
+	xTenantUserId *string
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) Q(q string) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.q = &q
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) DateFrom(dateFrom string) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) DateTo(dateTo string) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.dateTo = &dateTo
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) Category(category string) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.category = &category
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) Competition(competition string) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.competition = &competition
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) IsUserEvent(isUserEvent bool) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.isUserEvent = &isUserEvent
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) Size(size int32) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.size = &size
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) Cursor(cursor string) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.cursor = &cursor
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2EventControllerSearchRequest) Limit(limit int32) ApiPuzzleWebV2EventControllerSearchRequest {
 	r.limit = &limit
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2EventControllerSearchRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2EventControllerSearchRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -594,6 +620,9 @@ func (a *EventsAPIService) PuzzleWebV2EventControllerSearchExecute(r ApiPuzzleWe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -656,6 +685,13 @@ type ApiPuzzleWebV2EventControllerShowRequest struct {
 	ctx context.Context
 	ApiService *EventsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2EventControllerShowRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2EventControllerShowRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2EventControllerShowRequest) Execute() (*EventResponse, *http.Response, error) {
@@ -666,7 +702,7 @@ func (r ApiPuzzleWebV2EventControllerShowRequest) Execute() (*EventResponse, *ht
 PuzzleWebV2EventControllerShow Get event by es_event_id
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2EventControllerShowRequest
 */
 func (a *EventsAPIService) PuzzleWebV2EventControllerShow(ctx context.Context, id string) ApiPuzzleWebV2EventControllerShowRequest {
@@ -715,6 +751,9 @@ func (a *EventsAPIService) PuzzleWebV2EventControllerShowExecute(r ApiPuzzleWebV
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -778,6 +817,13 @@ type ApiPuzzleWebV2EventControllerShowDetailsRequest struct {
 	ctx context.Context
 	ApiService *EventsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2EventControllerShowDetailsRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2EventControllerShowDetailsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2EventControllerShowDetailsRequest) Execute() (*EventResponse, *http.Response, error) {
@@ -790,7 +836,7 @@ PuzzleWebV2EventControllerShowDetails Get event details (from Postgres)
 Fetches a prediction event directly from Postgres rather than the search index.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2EventControllerShowDetailsRequest
 */
 func (a *EventsAPIService) PuzzleWebV2EventControllerShowDetails(ctx context.Context, id string) ApiPuzzleWebV2EventControllerShowDetailsRequest {
@@ -839,6 +885,9 @@ func (a *EventsAPIService) PuzzleWebV2EventControllerShowDetailsExecute(r ApiPuz
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

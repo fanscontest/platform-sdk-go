@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateIdentities
 
-> DomainPlatformIdentity CreateIdentities(ctx).HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest).Execute()
+> DomainPlatformIdentity CreateIdentities(ctx).HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
 
 Register a tenant-supplied end-user as a platform identity
 
@@ -34,10 +34,11 @@ import (
 
 func main() {
 	handlerCreatePlatformIdentityRequest := *openapiclient.NewHandlerCreatePlatformIdentityRequest("TenantUserId_example") // HandlerCreatePlatformIdentityRequest | Platform identity payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IdentitiesAPI.CreateIdentities(context.Background()).HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest).Execute()
+	resp, r, err := apiClient.IdentitiesAPI.CreateIdentities(context.Background()).HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.CreateIdentities``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,6 +60,7 @@ Other parameters are passed through a pointer to a apiCreateIdentitiesRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **handlerCreatePlatformIdentityRequest** | [**HandlerCreatePlatformIdentityRequest**](HandlerCreatePlatformIdentityRequest.md) | Platform identity payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -80,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## DeleteIdentitiesById
 
-> DeleteIdentitiesById(ctx, id).Execute()
+> DeleteIdentitiesById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Soft-delete a platform identity, scoped to the calling tenant
 
@@ -100,10 +102,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Platform Identity ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.IdentitiesAPI.DeleteIdentitiesById(context.Background(), id).Execute()
+	r, err := apiClient.IdentitiesAPI.DeleteIdentitiesById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.DeleteIdentitiesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -127,6 +130,7 @@ Other parameters are passed through a pointer to a apiDeleteIdentitiesByIdReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -148,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentities
 
-> DomainPlatformIdentity GetIdentities(ctx).TenantUserId(tenantUserId).Execute()
+> DomainPlatformIdentity GetIdentities(ctx).TenantUserId(tenantUserId).XTenantUserId(xTenantUserId).Execute()
 
 Look up a platform identity by tenant_user_id (409 recovery)
 
@@ -168,10 +172,11 @@ import (
 
 func main() {
 	tenantUserId := "tenantUserId_example" // string | Tenant-supplied user ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IdentitiesAPI.GetIdentities(context.Background()).TenantUserId(tenantUserId).Execute()
+	resp, r, err := apiClient.IdentitiesAPI.GetIdentities(context.Background()).TenantUserId(tenantUserId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.GetIdentities``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -193,6 +198,7 @@ Other parameters are passed through a pointer to a apiGetIdentitiesRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenantUserId** | **string** | Tenant-supplied user ID | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -214,7 +220,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesById
 
-> DomainPlatformIdentity GetIdentitiesById(ctx, id).Execute()
+> DomainPlatformIdentity GetIdentitiesById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a platform identity by ID, scoped to the calling tenant
 
@@ -234,10 +240,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Platform Identity ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IdentitiesAPI.GetIdentitiesById(context.Background(), id).Execute()
+	resp, r, err := apiClient.IdentitiesAPI.GetIdentitiesById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.GetIdentitiesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -263,6 +270,7 @@ Other parameters are passed through a pointer to a apiGetIdentitiesByIdRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -284,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## UpdateIdentitiesById
 
-> DomainPlatformIdentity UpdateIdentitiesById(ctx, id).HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest).Execute()
+> DomainPlatformIdentity UpdateIdentitiesById(ctx, id).HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
 
 Replace a platform identity's profile, scoped to the calling tenant
 
@@ -305,10 +313,11 @@ import (
 func main() {
 	id := "id_example" // string | Platform Identity ID
 	handlerUpdatePlatformIdentityRequest := *openapiclient.NewHandlerUpdatePlatformIdentityRequest("DisplayName_example") // HandlerUpdatePlatformIdentityRequest | Profile fields
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IdentitiesAPI.UpdateIdentitiesById(context.Background(), id).HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest).Execute()
+	resp, r, err := apiClient.IdentitiesAPI.UpdateIdentitiesById(context.Background(), id).HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.UpdateIdentitiesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -335,6 +344,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **handlerUpdatePlatformIdentityRequest** | [**HandlerUpdatePlatformIdentityRequest**](HandlerUpdatePlatformIdentityRequest.md) | Profile fields | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## CreateContestsByIdEntries
 
-> DomainEntry CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).Execute()
+> DomainEntry CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Submit entry for creative contest
 
@@ -44,10 +44,11 @@ import (
 func main() {
 	id := "id_example" // string | Contest ID
 	requestSubmitEntryRequest := *openapiclient.NewRequestSubmitEntryRequest("MediaType_example", "MediaUrl_example") // RequestSubmitEntryRequest | Entry submission
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdEntries(context.Background(), id).RequestSubmitEntryRequest(requestSubmitEntryRequest).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdEntries(context.Background(), id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestSubmitEntryRequest** | [**RequestSubmitEntryRequest**](RequestSubmitEntryRequest.md) | Entry submission | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -95,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdEntriesByEntryIdScore
 
-> DomainJurorScore CreateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).Execute()
+> DomainJurorScore CreateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Score an entry
 
@@ -117,10 +119,11 @@ func main() {
 	id := "id_example" // string | Contest ID
 	entryId := "entryId_example" // string | Entry ID
 	requestScoreEntryRequest := *openapiclient.NewRequestScoreEntryRequest(int32(123)) // RequestScoreEntryRequest | Score
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore(context.Background(), id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore(context.Background(), id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -149,6 +152,7 @@ Name | Type | Description  | Notes
 
 
  **requestScoreEntryRequest** | [**RequestScoreEntryRequest**](RequestScoreEntryRequest.md) | Score | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -170,7 +174,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdForceProceed
 
-> HandlerStatusResponse CreateContestsByIdForceProceed(ctx, id).Execute()
+> HandlerStatusResponse CreateContestsByIdForceProceed(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Force proceed from paused state
 
@@ -190,10 +194,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdForceProceed(context.Background(), id).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdForceProceed(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdForceProceed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -219,6 +224,7 @@ Other parameters are passed through a pointer to a apiCreateContestsByIdForcePro
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -240,7 +246,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdJurorsInvite
 
-> HandlerStatusResponse CreateContestsByIdJurorsInvite(ctx, id).RequestInviteJurorsRequest(requestInviteJurorsRequest).Execute()
+> HandlerStatusResponse CreateContestsByIdJurorsInvite(ctx, id).RequestInviteJurorsRequest(requestInviteJurorsRequest).XTenantUserId(xTenantUserId).Execute()
 
 Invite jurors to judge a contest
 
@@ -261,10 +267,11 @@ import (
 func main() {
 	id := "id_example" // string | Contest ID
 	requestInviteJurorsRequest := *openapiclient.NewRequestInviteJurorsRequest([]string{"PlatformIdentityIds_example"}) // RequestInviteJurorsRequest | Member IDs to invite
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdJurorsInvite(context.Background(), id).RequestInviteJurorsRequest(requestInviteJurorsRequest).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdJurorsInvite(context.Background(), id).RequestInviteJurorsRequest(requestInviteJurorsRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdJurorsInvite``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -291,6 +298,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestInviteJurorsRequest** | [**RequestInviteJurorsRequest**](RequestInviteJurorsRequest.md) | Member IDs to invite | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -312,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsInvitationsByInvitationIdAccept
 
-> DomainJurorAssignment CreateJurorsInvitationsByInvitationIdAccept(ctx, invitationId).Execute()
+> DomainJurorAssignment CreateJurorsInvitationsByInvitationIdAccept(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
 
 Accept a juror invitation
 
@@ -332,10 +340,11 @@ import (
 
 func main() {
 	invitationId := "invitationId_example" // string | Invitation ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept(context.Background(), invitationId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept(context.Background(), invitationId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -361,6 +370,7 @@ Other parameters are passed through a pointer to a apiCreateJurorsInvitationsByI
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -382,7 +392,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsInvitationsByInvitationIdDecline
 
-> HandlerStatusResponse CreateJurorsInvitationsByInvitationIdDecline(ctx, invitationId).Execute()
+> HandlerStatusResponse CreateJurorsInvitationsByInvitationIdDecline(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
 
 Decline a juror invitation
 
@@ -402,10 +412,11 @@ import (
 
 func main() {
 	invitationId := "invitationId_example" // string | Invitation ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline(context.Background(), invitationId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline(context.Background(), invitationId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -431,6 +442,7 @@ Other parameters are passed through a pointer to a apiCreateJurorsInvitationsByI
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -452,7 +464,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsOptIn
 
-> DomainJuror CreateJurorsOptIn(ctx).RequestOptInJurorRequest(requestOptInJurorRequest).Execute()
+> DomainJuror CreateJurorsOptIn(ctx).RequestOptInJurorRequest(requestOptInJurorRequest).XTenantUserId(xTenantUserId).Execute()
 
 Opt into jury pool
 
@@ -472,10 +484,11 @@ import (
 
 func main() {
 	requestOptInJurorRequest := *openapiclient.NewRequestOptInJurorRequest([]string{"Categories_example"}) // RequestOptInJurorRequest | Categories
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateJurorsOptIn(context.Background()).RequestOptInJurorRequest(requestOptInJurorRequest).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateJurorsOptIn(context.Background()).RequestOptInJurorRequest(requestOptInJurorRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsOptIn``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -497,6 +510,7 @@ Other parameters are passed through a pointer to a apiCreateJurorsOptInRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestOptInJurorRequest** | [**RequestOptInJurorRequest**](RequestOptInJurorRequest.md) | Categories | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -518,7 +532,7 @@ Name | Type | Description  | Notes
 
 ## DeleteContestsByIdEntries
 
-> HandlerStatusResponse DeleteContestsByIdEntries(ctx, id).Execute()
+> HandlerStatusResponse DeleteContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Withdraw entry from creative contest
 
@@ -538,10 +552,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.DeleteContestsByIdEntries(context.Background(), id).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.DeleteContestsByIdEntries(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.DeleteContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -567,6 +582,7 @@ Other parameters are passed through a pointer to a apiDeleteContestsByIdEntriesR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -588,7 +604,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdEntries
 
-> []DomainEntry GetContestsByIdEntries(ctx, id).Execute()
+> []DomainEntry GetContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get entries for a contest
 
@@ -608,10 +624,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdEntries(context.Background(), id).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdEntries(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -637,6 +654,7 @@ Other parameters are passed through a pointer to a apiGetContestsByIdEntriesRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -658,7 +676,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdJurors
 
-> []DomainJuror GetContestsByIdJurors(ctx, id).Execute()
+> []DomainJuror GetContestsByIdJurors(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get jurors for a contest
 
@@ -678,10 +696,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurors(context.Background(), id).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurors(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdJurors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -707,6 +726,7 @@ Other parameters are passed through a pointer to a apiGetContestsByIdJurorsReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -728,7 +748,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdJurorsInvitations
 
-> []DomainJurorAssignment GetContestsByIdJurorsInvitations(ctx, id).Execute()
+> []DomainJurorAssignment GetContestsByIdJurorsInvitations(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get invitations for a contest
 
@@ -748,10 +768,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurorsInvitations(context.Background(), id).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurorsInvitations(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdJurorsInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -777,6 +798,7 @@ Other parameters are passed through a pointer to a apiGetContestsByIdJurorsInvit
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -798,7 +820,7 @@ Name | Type | Description  | Notes
 
 ## GetJurorsAssignments
 
-> []DomainJurorAssignment GetJurorsAssignments(ctx).Execute()
+> []DomainJurorAssignment GetJurorsAssignments(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get juror assignments
 
@@ -817,10 +839,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsAssignments(context.Background()).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsAssignments(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetJurorsAssignments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -832,12 +855,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJurorsAssignmentsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -859,7 +886,7 @@ Other parameters are passed through a pointer to a apiGetJurorsAssignmentsReques
 
 ## GetJurorsInvitations
 
-> []DomainJurorAssignment GetJurorsInvitations(ctx).Execute()
+> []DomainJurorAssignment GetJurorsInvitations(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get my pending invitations
 
@@ -878,10 +905,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsInvitations(context.Background()).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsInvitations(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetJurorsInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -893,12 +921,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJurorsInvitationsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -920,7 +952,7 @@ Other parameters are passed through a pointer to a apiGetJurorsInvitationsReques
 
 ## UpdateContestsByIdEntriesByEntryIdScore
 
-> DomainJurorScore UpdateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).Execute()
+> DomainJurorScore UpdateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Score an entry
 
@@ -942,10 +974,11 @@ func main() {
 	id := "id_example" // string | Contest ID
 	entryId := "entryId_example" // string | Entry ID
 	requestScoreEntryRequest := *openapiclient.NewRequestScoreEntryRequest(int32(123)) // RequestScoreEntryRequest | Score
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore(context.Background(), id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore(context.Background(), id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -974,6 +1007,7 @@ Name | Type | Description  | Notes
 
 
  **requestScoreEntryRequest** | [**RequestScoreEntryRequest**](RequestScoreEntryRequest.md) | Score | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

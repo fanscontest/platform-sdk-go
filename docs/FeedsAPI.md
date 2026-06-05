@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetIdentitiesByPiidFeedPersonalized
 
-> []DomainFeedItem GetIdentitiesByPiidFeedPersonalized(ctx, piid).Limit(limit).Cursor(cursor).Execute()
+> []DomainFeedItem GetIdentitiesByPiidFeedPersonalized(ctx, piid).Limit(limit).Cursor(cursor).XTenantUserId(xTenantUserId).Execute()
 
 Get the personalized feed for a platform identity
 
@@ -33,10 +33,11 @@ func main() {
 	piid := "piid_example" // string | Platform Identity ID
 	limit := int32(56) // int32 | Page size (1-200, default 20) (optional)
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeedsAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Limit(limit).Cursor(cursor).Execute()
+	resp, r, err := apiClient.FeedsAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Limit(limit).Cursor(cursor).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeedsAPI.GetIdentitiesByPiidFeedPersonalized``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
 
  **limit** | **int32** | Page size (1-200, default 20) | 
  **cursor** | **string** | Opaque pagination cursor | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicFeed
 
-> []DomainFeedItem GetPublicFeed(ctx).Limit(limit).Cursor(cursor).Region(region).Execute()
+> []DomainFeedItem GetPublicFeed(ctx).Limit(limit).Cursor(cursor).Region(region).XTenantUserId(xTenantUserId).Execute()
 
 Get the public feed (trending content, unauthenticated)
 
@@ -105,10 +107,11 @@ func main() {
 	limit := int32(56) // int32 | Page size (1-200, default 20) (optional)
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	region := "region_example" // string | Optional ISO 3166-1 alpha-2 region filter (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeedsAPI.GetPublicFeed(context.Background()).Limit(limit).Cursor(cursor).Region(region).Execute()
+	resp, r, err := apiClient.FeedsAPI.GetPublicFeed(context.Background()).Limit(limit).Cursor(cursor).Region(region).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeedsAPI.GetPublicFeed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -132,6 +135,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** | Page size (1-200, default 20) | 
  **cursor** | **string** | Opaque pagination cursor | 
  **region** | **string** | Optional ISO 3166-1 alpha-2 region filter | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

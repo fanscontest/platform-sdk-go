@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateCelebs
 
-> DomainStan CreateCelebs(ctx).Body(body).Execute()
+> DomainStan CreateCelebs(ctx).Body(body).XTenantUserId(xTenantUserId).Execute()
 
 Create Member Stan
 
@@ -33,10 +33,11 @@ import (
 
 func main() {
 	body := "body_example" // string | Celeb PlatformIdentity ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.StansAPI.CreateCelebs(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.StansAPI.CreateCelebs(context.Background()).Body(body).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.CreateCelebs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,6 +59,7 @@ Other parameters are passed through a pointer to a apiCreateCelebsRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **string** | Celeb PlatformIdentity ID | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -79,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCelebsById
 
-> bool DeleteCelebsById(ctx, id).Execute()
+> bool DeleteCelebsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Member Stan
 
@@ -99,10 +101,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Celeb PlatformIdentity ID to un-stan
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.StansAPI.DeleteCelebsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.StansAPI.DeleteCelebsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.DeleteCelebsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -128,6 +131,7 @@ Other parameters are passed through a pointer to a apiDeleteCelebsByIdRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -149,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## GetCelebs
 
-> []DomainStan GetCelebs(ctx).Execute()
+> []DomainStan GetCelebs(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get Member Celebs
 
@@ -168,10 +172,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.StansAPI.GetCelebs(context.Background()).Execute()
+	resp, r, err := apiClient.StansAPI.GetCelebs(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.GetCelebs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -183,12 +188,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetCelebsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -210,7 +219,7 @@ Other parameters are passed through a pointer to a apiGetCelebsRequest struct vi
 
 ## GetStans
 
-> []DomainStan GetStans(ctx).Execute()
+> []DomainStan GetStans(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get Celeb Stans
 
@@ -229,10 +238,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.StansAPI.GetStans(context.Background()).Execute()
+	resp, r, err := apiClient.StansAPI.GetStans(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.GetStans``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -244,12 +254,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetStansRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

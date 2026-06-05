@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## PuzzleWebV2PredictionControllerClonePredictionSlip
 
-> PredictionSlipResponse PuzzleWebV2PredictionControllerClonePredictionSlip(ctx, id).ClonePredictionSlipRequest(clonePredictionSlipRequest).Execute()
+> PredictionSlipResponse PuzzleWebV2PredictionControllerClonePredictionSlip(ctx, id).XTenantUserId(xTenantUserId).ClonePredictionSlipRequest(clonePredictionSlipRequest).Execute()
 
 Clone prediction slip
 
@@ -35,11 +35,12 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 	clonePredictionSlipRequest := *openapiclient.NewClonePredictionSlipRequest() // ClonePredictionSlipRequest | Clone payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerClonePredictionSlip(context.Background(), id).ClonePredictionSlipRequest(clonePredictionSlipRequest).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerClonePredictionSlip(context.Background(), id).XTenantUserId(xTenantUserId).ClonePredictionSlipRequest(clonePredictionSlipRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerClonePredictionSlip``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
  **clonePredictionSlipRequest** | [**ClonePredictionSlipRequest**](ClonePredictionSlipRequest.md) | Clone payload | 
 
 ### Return type
@@ -87,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PredictionControllerCreatePredictionSlip
 
-> PredictionSlipResponse PuzzleWebV2PredictionControllerCreatePredictionSlip(ctx).CreatePredictionSlipRequest(createPredictionSlipRequest).Execute()
+> PredictionSlipResponse PuzzleWebV2PredictionControllerCreatePredictionSlip(ctx).XTenantUserId(xTenantUserId).CreatePredictionSlipRequest(createPredictionSlipRequest).Execute()
 
 Create prediction slip
 
@@ -104,11 +106,12 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 	createPredictionSlipRequest := *openapiclient.NewCreatePredictionSlipRequest([]openapiclient.CreatePredictionSlipRequestEventsInner{*openapiclient.NewCreatePredictionSlipRequestEventsInner("EsEventId_example", []openapiclient.CreatePredictionSlipRequestEventsInnerItemsInner{*openapiclient.NewCreatePredictionSlipRequestEventsInnerItemsInner()})}, "Name_example") // CreatePredictionSlipRequest | Prediction slip payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerCreatePredictionSlip(context.Background()).CreatePredictionSlipRequest(createPredictionSlipRequest).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerCreatePredictionSlip(context.Background()).XTenantUserId(xTenantUserId).CreatePredictionSlipRequest(createPredictionSlipRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerCreatePredictionSlip``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,6 +132,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionContr
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
  **createPredictionSlipRequest** | [**CreatePredictionSlipRequest**](CreatePredictionSlipRequest.md) | Prediction slip payload | 
 
 ### Return type
@@ -151,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PredictionControllerDeletePredictionSlip
 
-> PuzzleWebV2PredictionControllerDeletePredictionSlip(ctx, id).Execute()
+> PuzzleWebV2PredictionControllerDeletePredictionSlip(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete prediction slip
 
@@ -169,10 +173,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerDeletePredictionSlip(context.Background(), id).Execute()
+	r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerDeletePredictionSlip(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerDeletePredictionSlip``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -196,6 +201,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -217,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PredictionControllerListCuratedSlips
 
-> PredictionSlipsListResponse PuzzleWebV2PredictionControllerListCuratedSlips(ctx).Family(family).Tags(tags).IsPublic(isPublic).Cursor(cursor).Limit(limit).Execute()
+> PredictionSlipsListResponse PuzzleWebV2PredictionControllerListCuratedSlips(ctx).Family(family).Tags(tags).IsPublic(isPublic).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List curated prediction slips
 
@@ -239,10 +245,11 @@ func main() {
 	isPublic := true // bool |  (optional)
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCuratedSlips(context.Background()).Family(family).Tags(tags).IsPublic(isPublic).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCuratedSlips(context.Background()).Family(family).Tags(tags).IsPublic(isPublic).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCuratedSlips``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -268,6 +275,7 @@ Name | Type | Description  | Notes
  **isPublic** | **bool** |  | 
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -289,7 +297,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PredictionControllerListPredictionSlips
 
-> PredictionSlipsListResponse PuzzleWebV2PredictionControllerListPredictionSlips(ctx).Locked(locked).Cursor(cursor).Limit(limit).Execute()
+> PredictionSlipsListResponse PuzzleWebV2PredictionControllerListPredictionSlips(ctx).Locked(locked).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List the caller's prediction slips
 
@@ -309,10 +317,11 @@ func main() {
 	locked := true // bool |  (optional)
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerListPredictionSlips(context.Background()).Locked(locked).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerListPredictionSlips(context.Background()).Locked(locked).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerListPredictionSlips``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -336,6 +345,7 @@ Name | Type | Description  | Notes
  **locked** | **bool** |  | 
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -357,7 +367,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PredictionControllerShowOpenPredictionSlip
 
-> OpenPredictionSlipResponse PuzzleWebV2PredictionControllerShowOpenPredictionSlip(ctx).Execute()
+> OpenPredictionSlipResponse PuzzleWebV2PredictionControllerShowOpenPredictionSlip(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get the caller's open prediction slip
 
@@ -376,10 +386,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerShowOpenPredictionSlip(context.Background()).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerShowOpenPredictionSlip(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerShowOpenPredictionSlip``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -391,12 +402,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionControllerShowOpenPredictionSlipRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -418,7 +433,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionContr
 
 ## PuzzleWebV2PredictionControllerShowPredictionSlip
 
-> PredictionSlipResponse PuzzleWebV2PredictionControllerShowPredictionSlip(ctx, id).Execute()
+> PredictionSlipResponse PuzzleWebV2PredictionControllerShowPredictionSlip(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get prediction slip
 
@@ -436,10 +451,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerShowPredictionSlip(context.Background(), id).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerShowPredictionSlip(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerShowPredictionSlip``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -465,6 +481,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -486,7 +503,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PredictionControllerUpdatePredictionSlip
 
-> PredictionSlipResponse PuzzleWebV2PredictionControllerUpdatePredictionSlip(ctx, id).UpdatePredictionSlipRequest(updatePredictionSlipRequest).Execute()
+> PredictionSlipResponse PuzzleWebV2PredictionControllerUpdatePredictionSlip(ctx, id).XTenantUserId(xTenantUserId).UpdatePredictionSlipRequest(updatePredictionSlipRequest).Execute()
 
 Update prediction slip
 
@@ -504,11 +521,12 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 	updatePredictionSlipRequest := *openapiclient.NewUpdatePredictionSlipRequest() // UpdatePredictionSlipRequest | Prediction slip update payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerUpdatePredictionSlip(context.Background(), id).UpdatePredictionSlipRequest(updatePredictionSlipRequest).Execute()
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerUpdatePredictionSlip(context.Background(), id).XTenantUserId(xTenantUserId).UpdatePredictionSlipRequest(updatePredictionSlipRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerUpdatePredictionSlip``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -534,6 +552,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
  **updatePredictionSlipRequest** | [**UpdatePredictionSlipRequest**](UpdatePredictionSlipRequest.md) | Prediction slip update payload | 
 
 ### Return type

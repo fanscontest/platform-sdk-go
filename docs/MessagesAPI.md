@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateMessages
 
-> string CreateMessages(ctx).DomainMessage(domainMessage).Execute()
+> string CreateMessages(ctx).DomainMessage(domainMessage).XTenantUserId(xTenantUserId).Execute()
 
 Create a message
 
@@ -33,10 +33,11 @@ import (
 
 func main() {
 	domainMessage := *openapiclient.NewDomainMessage() // DomainMessage | Message payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.CreateMessages(context.Background()).DomainMessage(domainMessage).Execute()
+	resp, r, err := apiClient.MessagesAPI.CreateMessages(context.Background()).DomainMessage(domainMessage).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.CreateMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,6 +59,7 @@ Other parameters are passed through a pointer to a apiCreateMessagesRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domainMessage** | [**DomainMessage**](DomainMessage.md) | Message payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -79,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetMessages
 
-> string GetMessages(ctx).Execute()
+> string GetMessages(ctx).XTenantUserId(xTenantUserId).Execute()
 
 List messages for the caller
 
@@ -98,10 +100,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.GetMessages(context.Background()).Execute()
+	resp, r, err := apiClient.MessagesAPI.GetMessages(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.GetMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -113,12 +116,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetMessagesRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -140,7 +147,7 @@ Other parameters are passed through a pointer to a apiGetMessagesRequest struct 
 
 ## GetMessagesById
 
-> string GetMessagesById(ctx, id).Execute()
+> string GetMessagesById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a message by ID
 
@@ -160,10 +167,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Message ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.GetMessagesById(context.Background(), id).Execute()
+	resp, r, err := apiClient.MessagesAPI.GetMessagesById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.GetMessagesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -189,6 +197,7 @@ Other parameters are passed through a pointer to a apiGetMessagesByIdRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -210,7 +219,7 @@ Name | Type | Description  | Notes
 
 ## UpdateMessagesById
 
-> string UpdateMessagesById(ctx, id).Body(body).Execute()
+> string UpdateMessagesById(ctx, id).Body(body).XTenantUserId(xTenantUserId).Execute()
 
 Update a message's status
 
@@ -231,10 +240,11 @@ import (
 func main() {
 	id := "id_example" // string | Message ID
 	body := "body_example" // string | New status
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.UpdateMessagesById(context.Background(), id).Body(body).Execute()
+	resp, r, err := apiClient.MessagesAPI.UpdateMessagesById(context.Background(), id).Body(body).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.UpdateMessagesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -261,6 +271,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **body** | **string** | New status | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

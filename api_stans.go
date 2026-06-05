@@ -28,11 +28,18 @@ type ApiCreateCelebsRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
 	body *string
+	xTenantUserId *string
 }
 
 // Celeb PlatformIdentity ID
 func (r ApiCreateCelebsRequest) Body(body string) ApiCreateCelebsRequest {
 	r.body = &body
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateCelebsRequest) XTenantUserId(xTenantUserId string) ApiCreateCelebsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -98,6 +105,9 @@ func (a *StansAPIService) CreateCelebsExecute(r ApiCreateCelebsRequest) (*Domain
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.body
@@ -174,6 +184,13 @@ type ApiDeleteCelebsByIdRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiDeleteCelebsByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteCelebsByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiDeleteCelebsByIdRequest) Execute() (bool, *http.Response, error) {
@@ -236,6 +253,9 @@ func (a *StansAPIService) DeleteCelebsByIdExecute(r ApiDeleteCelebsByIdRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -297,6 +317,13 @@ func (a *StansAPIService) DeleteCelebsByIdExecute(r ApiDeleteCelebsByIdRequest) 
 type ApiGetCelebsRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetCelebsRequest) XTenantUserId(xTenantUserId string) ApiGetCelebsRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetCelebsRequest) Execute() ([]DomainStan, *http.Response, error) {
@@ -355,6 +382,9 @@ func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) ([]DomainStan,
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -417,6 +447,13 @@ func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) ([]DomainStan,
 type ApiGetStansRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetStansRequest) XTenantUserId(xTenantUserId string) ApiGetStansRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetStansRequest) Execute() ([]DomainStan, *http.Response, error) {
@@ -475,6 +512,9 @@ func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) ([]DomainStan, *
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

@@ -28,11 +28,18 @@ type ApiCreateMessagesRequest struct {
 	ctx context.Context
 	ApiService *MessagesAPIService
 	domainMessage *DomainMessage
+	xTenantUserId *string
 }
 
 // Message payload
 func (r ApiCreateMessagesRequest) DomainMessage(domainMessage DomainMessage) ApiCreateMessagesRequest {
 	r.domainMessage = &domainMessage
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiCreateMessagesRequest) XTenantUserId(xTenantUserId string) ApiCreateMessagesRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -97,6 +104,9 @@ func (a *MessagesAPIService) CreateMessagesExecute(r ApiCreateMessagesRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.domainMessage
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -160,6 +170,13 @@ func (a *MessagesAPIService) CreateMessagesExecute(r ApiCreateMessagesRequest) (
 type ApiGetMessagesRequest struct {
 	ctx context.Context
 	ApiService *MessagesAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetMessagesRequest) XTenantUserId(xTenantUserId string) ApiGetMessagesRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetMessagesRequest) Execute() (string, *http.Response, error) {
@@ -218,6 +235,9 @@ func (a *MessagesAPIService) GetMessagesExecute(r ApiGetMessagesRequest) (string
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -281,6 +301,13 @@ type ApiGetMessagesByIdRequest struct {
 	ctx context.Context
 	ApiService *MessagesAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetMessagesByIdRequest) XTenantUserId(xTenantUserId string) ApiGetMessagesByIdRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetMessagesByIdRequest) Execute() (string, *http.Response, error) {
@@ -345,6 +372,9 @@ func (a *MessagesAPIService) GetMessagesByIdExecute(r ApiGetMessagesByIdRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -408,11 +438,18 @@ type ApiUpdateMessagesByIdRequest struct {
 	ApiService *MessagesAPIService
 	id string
 	body *string
+	xTenantUserId *string
 }
 
 // New status
 func (r ApiUpdateMessagesByIdRequest) Body(body string) ApiUpdateMessagesByIdRequest {
 	r.body = &body
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiUpdateMessagesByIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateMessagesByIdRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -478,6 +515,9 @@ func (a *MessagesAPIService) UpdateMessagesByIdExecute(r ApiUpdateMessagesByIdRe
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.body

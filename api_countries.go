@@ -26,6 +26,13 @@ type CountriesAPIService service
 type ApiGetPublicCountriesRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicCountriesRequest) XTenantUserId(xTenantUserId string) ApiGetPublicCountriesRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicCountriesRequest) Execute() ([]DomainCountry, *http.Response, error) {
@@ -83,6 +90,9 @@ func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -133,6 +143,13 @@ func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesR
 type ApiGetPublicLocationRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiGetPublicLocationRequest) XTenantUserId(xTenantUserId string) ApiGetPublicLocationRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiGetPublicLocationRequest) Execute() (*DomainCountry, *http.Response, error) {
@@ -189,6 +206,9 @@ func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationReq
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

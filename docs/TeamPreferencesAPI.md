@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## UpdateTeamPreferenceByTeamSetId
 
-> HandlerStatusResponse UpdateTeamPreferenceByTeamSetId(ctx, teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).Execute()
+> HandlerStatusResponse UpdateTeamPreferenceByTeamSetId(ctx, teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).XTenantUserId(xTenantUserId).Execute()
 
 Set the caller's default team for a logical team set
 
@@ -29,10 +29,11 @@ import (
 func main() {
 	teamSetId := "teamSetId_example" // string | Team Set ID
 	requestUpsertTeamPreferenceRequest := *openapiclient.NewRequestUpsertTeamPreferenceRequest() // RequestUpsertTeamPreferenceRequest | Preference payload
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId(context.Background(), teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).Execute()
+	resp, r, err := apiClient.TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId(context.Background(), teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,6 +60,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestUpsertTeamPreferenceRequest** | [**RequestUpsertTeamPreferenceRequest**](RequestUpsertTeamPreferenceRequest.md) | Preference payload | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

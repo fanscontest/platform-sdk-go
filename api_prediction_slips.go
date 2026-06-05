@@ -28,7 +28,14 @@ type ApiPuzzleWebV2PredictionControllerClonePredictionSlipRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
 	id string
+	xTenantUserId *string
 	clonePredictionSlipRequest *ClonePredictionSlipRequest
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerClonePredictionSlipRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerClonePredictionSlipRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 // Clone payload
@@ -45,7 +52,7 @@ func (r ApiPuzzleWebV2PredictionControllerClonePredictionSlipRequest) Execute() 
 PuzzleWebV2PredictionControllerClonePredictionSlip Clone prediction slip
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2PredictionControllerClonePredictionSlipRequest
 */
 func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerClonePredictionSlip(ctx context.Context, id string) ApiPuzzleWebV2PredictionControllerClonePredictionSlipRequest {
@@ -94,6 +101,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerClonePredicti
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.clonePredictionSlipRequest
@@ -158,7 +168,14 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerClonePredicti
 type ApiPuzzleWebV2PredictionControllerCreatePredictionSlipRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
+	xTenantUserId *string
 	createPredictionSlipRequest *CreatePredictionSlipRequest
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerCreatePredictionSlipRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerCreatePredictionSlipRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 // Prediction slip payload
@@ -221,6 +238,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerCreatePredict
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.createPredictionSlipRequest
@@ -286,6 +306,13 @@ type ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest) Execute() (*http.Response, error) {
@@ -296,7 +323,7 @@ func (r ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest) Execute()
 PuzzleWebV2PredictionControllerDeletePredictionSlip Delete prediction slip
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest
 */
 func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerDeletePredictionSlip(ctx context.Context, id string) ApiPuzzleWebV2PredictionControllerDeletePredictionSlipRequest {
@@ -343,6 +370,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerDeletePredict
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -412,35 +442,37 @@ type ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest struct {
 	isPublic *bool
 	cursor *string
 	limit *int32
+	xTenantUserId *string
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest) Family(family string) ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest {
 	r.family = &family
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest) Tags(tags string) ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest {
 	r.tags = &tags
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest) IsPublic(isPublic bool) ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest {
 	r.isPublic = &isPublic
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest) Cursor(cursor string) ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest {
 	r.cursor = &cursor
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest) Limit(limit int32) ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest {
 	r.limit = &limit
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -514,6 +546,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerListCuratedSl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -557,23 +592,27 @@ type ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest struct {
 	locked *bool
 	cursor *string
 	limit *int32
+	xTenantUserId *string
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest) Locked(locked bool) ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest {
 	r.locked = &locked
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest) Cursor(cursor string) ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest {
 	r.cursor = &cursor
 	return r
 }
 
-// 
 func (r ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest) Limit(limit int32) ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest {
 	r.limit = &limit
+	return r
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerListPredictionSlipsRequest {
+	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
@@ -641,6 +680,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerListPredictio
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -681,6 +723,13 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerListPredictio
 type ApiPuzzleWebV2PredictionControllerShowOpenPredictionSlipRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerShowOpenPredictionSlipRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerShowOpenPredictionSlipRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2PredictionControllerShowOpenPredictionSlipRequest) Execute() (*OpenPredictionSlipResponse, *http.Response, error) {
@@ -740,6 +789,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerShowOpenPredi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -781,6 +833,13 @@ type ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
 	id string
+	xTenantUserId *string
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 func (r ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest) Execute() (*PredictionSlipResponse, *http.Response, error) {
@@ -791,7 +850,7 @@ func (r ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest) Execute() (
 PuzzleWebV2PredictionControllerShowPredictionSlip Get prediction slip
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest
 */
 func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerShowPredictionSlip(ctx context.Context, id string) ApiPuzzleWebV2PredictionControllerShowPredictionSlipRequest {
@@ -840,6 +899,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerShowPredictio
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -892,7 +954,14 @@ type ApiPuzzleWebV2PredictionControllerUpdatePredictionSlipRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
 	id string
+	xTenantUserId *string
 	updatePredictionSlipRequest *UpdatePredictionSlipRequest
+}
+
+// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerUpdatePredictionSlipRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2PredictionControllerUpdatePredictionSlipRequest {
+	r.xTenantUserId = &xTenantUserId
+	return r
 }
 
 // Prediction slip update payload
@@ -909,7 +978,7 @@ func (r ApiPuzzleWebV2PredictionControllerUpdatePredictionSlipRequest) Execute()
 PuzzleWebV2PredictionControllerUpdatePredictionSlip Update prediction slip
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id 
+ @param id
  @return ApiPuzzleWebV2PredictionControllerUpdatePredictionSlipRequest
 */
 func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerUpdatePredictionSlip(ctx context.Context, id string) ApiPuzzleWebV2PredictionControllerUpdatePredictionSlipRequest {
@@ -958,6 +1027,9 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerUpdatePredict
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xTenantUserId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.updatePredictionSlipRequest

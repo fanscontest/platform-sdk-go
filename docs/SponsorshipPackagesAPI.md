@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipPackages
 
-> DomainSponsorshipPackage CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).Execute()
+> DomainSponsorshipPackage CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Package (v2)
 
@@ -35,10 +35,11 @@ import (
 
 func main() {
 	requestCreateSponsorshipPackageRequest := *openapiclient.NewRequestCreateSponsorshipPackageRequest("BudgetPerContestCurrency_example", "BudgetPerContestValue_example", []string{"TermIds_example"}, "TotalBudgetCurrency_example", "TotalBudgetValue_example", int32(123)) // RequestCreateSponsorshipPackageRequest | Create Sponsorship Package Request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackages(context.Background()).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackages(context.Background()).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +61,7 @@ Other parameters are passed through a pointer to a apiCreateSponsorshipPackagesR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestCreateSponsorshipPackageRequest** | [**RequestCreateSponsorshipPackageRequest**](RequestCreateSponsorshipPackageRequest.md) | Create Sponsorship Package Request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -81,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## CreateSponsorshipPackagesByIdCancel
 
-> DomainSponsorshipPackage CreateSponsorshipPackagesByIdCancel(ctx, id).Execute()
+> DomainSponsorshipPackage CreateSponsorshipPackagesByIdCancel(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Cancel Sponsorship Package (v2)
 
@@ -101,10 +103,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Package ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,6 +133,7 @@ Other parameters are passed through a pointer to a apiCreateSponsorshipPackagesB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -151,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackages
 
-> []DomainSponsorshipPackage GetSponsorshipPackages(ctx).Execute()
+> []DomainSponsorshipPackage GetSponsorshipPackages(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Packages (v2)
 
@@ -170,10 +174,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -185,12 +190,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSponsorshipPackagesRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -212,7 +221,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipPackagesRequ
 
 ## GetSponsorshipPackagesAvailable
 
-> []DomainSponsorshipPackage GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).Execute()
+> []DomainSponsorshipPackage GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).XTenantUserId(xTenantUserId).Execute()
 
 Get Available Packages (v2)
 
@@ -233,10 +242,11 @@ import (
 func main() {
 	sponsorId := "sponsorId_example" // string | Filter by sponsor ID (optional)
 	packageId := "packageId_example" // string | Get specific package by ID (optional)
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -259,6 +269,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sponsorId** | **string** | Filter by sponsor ID | 
  **packageId** | **string** | Get specific package by ID | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -280,7 +291,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdAgreement
 
-> DomainSponsorshipPackageAgreement GetSponsorshipPackagesByIdAgreement(ctx, id).Execute()
+> DomainSponsorshipPackageAgreement GetSponsorshipPackagesByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Package Agreement (v2)
 
@@ -300,10 +311,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Package ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -329,6 +341,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipPackagesById
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -350,7 +363,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdSponsorships
 
-> []DomainSponsorship GetSponsorshipPackagesByIdSponsorships(ctx, id).Execute()
+> []DomainSponsorship GetSponsorshipPackagesByIdSponsorships(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Package Sponsorships (v2)
 
@@ -370,10 +383,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Package ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -399,6 +413,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipPackagesById
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

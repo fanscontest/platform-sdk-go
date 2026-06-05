@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## PuzzleWebV2ContestPuzzleControllerGetPuzzle
 
-> ContestPuzzleResponse PuzzleWebV2ContestPuzzleControllerGetPuzzle(ctx, contestId).Execute()
+> ContestPuzzleResponse PuzzleWebV2ContestPuzzleControllerGetPuzzle(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
 
 Get contest source
 
@@ -32,10 +32,11 @@ import (
 
 func main() {
 	contestId := "contestId_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerGetPuzzle(context.Background(), contestId).Execute()
+	resp, r, err := apiClient.ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerGetPuzzle(context.Background(), contestId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerGetPuzzle``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,6 +62,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2ContestPuzzleCo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -82,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2ContestPuzzleControllerRankings
 
-> RankingsResponse PuzzleWebV2ContestPuzzleControllerRankings(ctx, contestId).Execute()
+> RankingsResponse PuzzleWebV2ContestPuzzleControllerRankings(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
 
 Get contest rankings
 
@@ -102,10 +104,11 @@ import (
 
 func main() {
 	contestId := "contestId_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerRankings(context.Background(), contestId).Execute()
+	resp, r, err := apiClient.ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerRankings(context.Background(), contestId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerRankings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -131,6 +134,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2ContestPuzzleCo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -152,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2ContestPuzzleControllerStatus
 
-> ContestStatusResponse PuzzleWebV2ContestPuzzleControllerStatus(ctx, contestId).Execute()
+> ContestStatusResponse PuzzleWebV2ContestPuzzleControllerStatus(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
 
 Get contest status
 
@@ -172,10 +176,11 @@ import (
 
 func main() {
 	contestId := "contestId_example" // string | 
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerStatus(context.Background(), contestId).Execute()
+	resp, r, err := apiClient.ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerStatus(context.Background(), contestId).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestPuzzlesAPI.PuzzleWebV2ContestPuzzleControllerStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -201,6 +206,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2ContestPuzzleCo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 

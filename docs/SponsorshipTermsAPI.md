@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipTerms
 
-> DomainSponsorshipTerm CreateSponsorshipTerms(ctx).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).Execute()
+> DomainSponsorshipTerm CreateSponsorshipTerms(ctx).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Term (v2)
 
@@ -35,10 +35,11 @@ import (
 
 func main() {
 	requestCreateSponsorshipTermRequest := *openapiclient.NewRequestCreateSponsorshipTermRequest("Description_example", "Title_example") // RequestCreateSponsorshipTermRequest | Create Term Request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.CreateSponsorshipTerms(context.Background()).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.CreateSponsorshipTerms(context.Background()).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.CreateSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +61,7 @@ Other parameters are passed through a pointer to a apiCreateSponsorshipTermsRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestCreateSponsorshipTermRequest** | [**RequestCreateSponsorshipTermRequest**](RequestCreateSponsorshipTermRequest.md) | Create Term Request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -81,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSponsorshipTermsById
 
-> HandlerStatusResponse DeleteSponsorshipTermsById(ctx, id).Execute()
+> HandlerStatusResponse DeleteSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Deactivate Sponsorship Term (v2)
 
@@ -101,10 +103,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Term ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.DeleteSponsorshipTermsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.DeleteSponsorshipTermsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.DeleteSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,6 +133,7 @@ Other parameters are passed through a pointer to a apiDeleteSponsorshipTermsById
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -151,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTerms
 
-> []DomainSponsorshipTerm GetSponsorshipTerms(ctx).Execute()
+> []DomainSponsorshipTerm GetSponsorshipTerms(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Terms (v2)
 
@@ -170,10 +174,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTerms(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTerms(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -185,12 +190,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSponsorshipTermsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -212,7 +221,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipTermsRequest
 
 ## GetSponsorshipTermsById
 
-> DomainSponsorshipTerm GetSponsorshipTermsById(ctx, id).Execute()
+> DomainSponsorshipTerm GetSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Term (v2)
 
@@ -232,10 +241,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Term ID
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -261,6 +271,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipTermsByIdReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -282,7 +293,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTermsPlatform
 
-> []DomainSponsorshipTerm GetSponsorshipTermsPlatform(ctx).Execute()
+> []DomainSponsorshipTerm GetSponsorshipTermsPlatform(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get Platform Terms (v2)
 
@@ -301,10 +312,11 @@ import (
 )
 
 func main() {
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsPlatform(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsPlatform(context.Background()).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsPlatform``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -316,12 +328,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSponsorshipTermsPlatformRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -343,7 +359,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipTermsPlatfor
 
 ## UpdateSponsorshipTermsById
 
-> DomainSponsorshipTerm UpdateSponsorshipTermsById(ctx, id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).Execute()
+> DomainSponsorshipTerm UpdateSponsorshipTermsById(ctx, id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Sponsorship Term (v2)
 
@@ -364,10 +380,11 @@ import (
 func main() {
 	id := "id_example" // string | Term ID
 	requestUpdateSponsorshipTermRequest := *openapiclient.NewRequestUpdateSponsorshipTermRequest("Description_example", "Title_example", "Version_example") // RequestUpdateSponsorshipTermRequest | Update Term Request
+	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.UpdateSponsorshipTermsById(context.Background(), id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.UpdateSponsorshipTermsById(context.Background(), id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.UpdateSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -394,6 +411,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestUpdateSponsorshipTermRequest** | [**RequestUpdateSponsorshipTermRequest**](RequestUpdateSponsorshipTermRequest.md) | Update Term Request | 
+ **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
