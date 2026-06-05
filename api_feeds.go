@@ -21,12 +21,12 @@ import (
 )
 
 
-// FeedAPIService FeedAPI service
-type FeedAPIService service
+// FeedsAPIService FeedsAPI service
+type FeedsAPIService service
 
 type ApiGetIdentitiesByPiidFeedPersonalizedRequest struct {
 	ctx context.Context
-	ApiService *FeedAPIService
+	ApiService *FeedsAPIService
 	piid string
 	limit *int32
 	cursor *string
@@ -58,7 +58,7 @@ or unknown PI returns 404.
  @param piid Platform Identity ID
  @return ApiGetIdentitiesByPiidFeedPersonalizedRequest
 */
-func (a *FeedAPIService) GetIdentitiesByPiidFeedPersonalized(ctx context.Context, piid string) ApiGetIdentitiesByPiidFeedPersonalizedRequest {
+func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalized(ctx context.Context, piid string) ApiGetIdentitiesByPiidFeedPersonalizedRequest {
 	return ApiGetIdentitiesByPiidFeedPersonalizedRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -68,7 +68,7 @@ func (a *FeedAPIService) GetIdentitiesByPiidFeedPersonalized(ctx context.Context
 
 // Execute executes the request
 //  @return []DomainFeedItem
-func (a *FeedAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIdentitiesByPiidFeedPersonalizedRequest) ([]DomainFeedItem, *http.Response, error) {
+func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIdentitiesByPiidFeedPersonalizedRequest) ([]DomainFeedItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -76,7 +76,7 @@ func (a *FeedAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIden
 		localVarReturnValue  []DomainFeedItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedAPIService.GetIdentitiesByPiidFeedPersonalized")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedsAPIService.GetIdentitiesByPiidFeedPersonalized")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -193,7 +193,7 @@ func (a *FeedAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIden
 
 type ApiGetPublicFeedRequest struct {
 	ctx context.Context
-	ApiService *FeedAPIService
+	ApiService *FeedsAPIService
 	limit *int32
 	cursor *string
 	region *string
@@ -227,7 +227,7 @@ GetPublicFeed Get the public feed (trending content, unauthenticated)
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPublicFeedRequest
 */
-func (a *FeedAPIService) GetPublicFeed(ctx context.Context) ApiGetPublicFeedRequest {
+func (a *FeedsAPIService) GetPublicFeed(ctx context.Context) ApiGetPublicFeedRequest {
 	return ApiGetPublicFeedRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -236,7 +236,7 @@ func (a *FeedAPIService) GetPublicFeed(ctx context.Context) ApiGetPublicFeedRequ
 
 // Execute executes the request
 //  @return []DomainFeedItem
-func (a *FeedAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) ([]DomainFeedItem, *http.Response, error) {
+func (a *FeedsAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) ([]DomainFeedItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -244,7 +244,7 @@ func (a *FeedAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) ([]Doma
 		localVarReturnValue  []DomainFeedItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedAPIService.GetPublicFeed")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedsAPIService.GetPublicFeed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

@@ -54,23 +54,19 @@ type APIClient struct {
 
 	BlocksAPI *BlocksAPIService
 
-	ChannelAPI *ChannelAPIService
-
 	ChannelsAPI *ChannelsAPIService
-
-	ContestAPI *ContestAPIService
 
 	ContestPuzzlesAPI *ContestPuzzlesAPIService
 
 	ContestsAPI *ContestsAPIService
 
-	CountryAPI *CountryAPIService
+	CountriesAPI *CountriesAPIService
 
-	CreativeContestAPI *CreativeContestAPIService
+	CreativeContestsAPI *CreativeContestsAPIService
 
 	EventsAPI *EventsAPIService
 
-	FeedAPI *FeedAPIService
+	FeedsAPI *FeedsAPIService
 
 	IdentitiesAPI *IdentitiesAPIService
 
@@ -86,25 +82,23 @@ type APIClient struct {
 
 	PuzzlesAPI *PuzzlesAPIService
 
-	SponsorV2API *SponsorV2APIService
+	SponsorsAPI *SponsorsAPIService
 
-	SponsorshipAgreementV2API *SponsorshipAgreementV2APIService
+	SponsorshipPackagesAPI *SponsorshipPackagesAPIService
 
-	SponsorshipPackageV2API *SponsorshipPackageV2APIService
+	SponsorshipTermsAPI *SponsorshipTermsAPIService
 
-	SponsorshipTermV2API *SponsorshipTermV2APIService
-
-	SponsorshipV2API *SponsorshipV2APIService
+	SponsorshipsAPI *SponsorshipsAPIService
 
 	StansAPI *StansAPIService
 
 	SubscriptionsAPI *SubscriptionsAPIService
 
-	TeamPreferenceAPI *TeamPreferenceAPIService
+	TeamPreferencesAPI *TeamPreferencesAPIService
 
 	TenantsAPI *TenantsAPIService
 
-	TournamentAPI *TournamentAPIService
+	TournamentsAPI *TournamentsAPIService
 
 	UserEventsAPI *UserEventsAPIService
 
@@ -129,15 +123,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AnalyticsAPI = (*AnalyticsAPIService)(&c.common)
 	c.BlocksAPI = (*BlocksAPIService)(&c.common)
-	c.ChannelAPI = (*ChannelAPIService)(&c.common)
 	c.ChannelsAPI = (*ChannelsAPIService)(&c.common)
-	c.ContestAPI = (*ContestAPIService)(&c.common)
 	c.ContestPuzzlesAPI = (*ContestPuzzlesAPIService)(&c.common)
 	c.ContestsAPI = (*ContestsAPIService)(&c.common)
-	c.CountryAPI = (*CountryAPIService)(&c.common)
-	c.CreativeContestAPI = (*CreativeContestAPIService)(&c.common)
+	c.CountriesAPI = (*CountriesAPIService)(&c.common)
+	c.CreativeContestsAPI = (*CreativeContestsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
-	c.FeedAPI = (*FeedAPIService)(&c.common)
+	c.FeedsAPI = (*FeedsAPIService)(&c.common)
 	c.IdentitiesAPI = (*IdentitiesAPIService)(&c.common)
 	c.MessagesAPI = (*MessagesAPIService)(&c.common)
 	c.OGImagesAPI = (*OGImagesAPIService)(&c.common)
@@ -145,16 +137,15 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PredictionSlipsAPI = (*PredictionSlipsAPIService)(&c.common)
 	c.PuzzleSheetsAPI = (*PuzzleSheetsAPIService)(&c.common)
 	c.PuzzlesAPI = (*PuzzlesAPIService)(&c.common)
-	c.SponsorV2API = (*SponsorV2APIService)(&c.common)
-	c.SponsorshipAgreementV2API = (*SponsorshipAgreementV2APIService)(&c.common)
-	c.SponsorshipPackageV2API = (*SponsorshipPackageV2APIService)(&c.common)
-	c.SponsorshipTermV2API = (*SponsorshipTermV2APIService)(&c.common)
-	c.SponsorshipV2API = (*SponsorshipV2APIService)(&c.common)
+	c.SponsorsAPI = (*SponsorsAPIService)(&c.common)
+	c.SponsorshipPackagesAPI = (*SponsorshipPackagesAPIService)(&c.common)
+	c.SponsorshipTermsAPI = (*SponsorshipTermsAPIService)(&c.common)
+	c.SponsorshipsAPI = (*SponsorshipsAPIService)(&c.common)
 	c.StansAPI = (*StansAPIService)(&c.common)
 	c.SubscriptionsAPI = (*SubscriptionsAPIService)(&c.common)
-	c.TeamPreferenceAPI = (*TeamPreferenceAPIService)(&c.common)
+	c.TeamPreferencesAPI = (*TeamPreferencesAPIService)(&c.common)
 	c.TenantsAPI = (*TenantsAPIService)(&c.common)
-	c.TournamentAPI = (*TournamentAPIService)(&c.common)
+	c.TournamentsAPI = (*TournamentsAPIService)(&c.common)
 	c.UserEventsAPI = (*UserEventsAPIService)(&c.common)
 	c.VenuesAPI = (*VenuesAPIService)(&c.common)
 

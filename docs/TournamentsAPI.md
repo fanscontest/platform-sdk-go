@@ -1,13 +1,13 @@
-# \TournamentAPI
+# \TournamentsAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateTournaments**](TournamentAPI.md#CreateTournaments) | **Post** /v2/tournaments | Create tournament
-[**GetChannelsByIdTournamentConfiguration**](TournamentAPI.md#GetChannelsByIdTournamentConfiguration) | **Get** /v2/channels/{id}/tournament-configuration | Get tournament configuration templates
-[**GetChannelsByIdTournaments**](TournamentAPI.md#GetChannelsByIdTournaments) | **Get** /v2/channels/{id}/tournaments | List channel tournaments (cursor-paginated)
-[**GetTournamentsById**](TournamentAPI.md#GetTournamentsById) | **Get** /v2/tournaments/{id} | Get tournament
+[**CreateTournaments**](TournamentsAPI.md#CreateTournaments) | **Post** /v2/tournaments | Create tournament
+[**GetChannelsByIdTournamentConfiguration**](TournamentsAPI.md#GetChannelsByIdTournamentConfiguration) | **Get** /v2/channels/{id}/tournament-configuration | Get tournament configuration templates
+[**GetChannelsByIdTournaments**](TournamentsAPI.md#GetChannelsByIdTournaments) | **Get** /v2/channels/{id}/tournaments | List channel tournaments (cursor-paginated)
+[**GetTournamentsById**](TournamentsAPI.md#GetTournamentsById) | **Get** /v2/tournaments/{id} | Get tournament
 
 
 
@@ -35,13 +35,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentAPI.CreateTournaments(context.Background()).Execute()
+	resp, r, err := apiClient.TournamentsAPI.CreateTournaments(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TournamentAPI.CreateTournaments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.CreateTournaments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateTournaments`: DomainTournament
-	fmt.Fprintf(os.Stdout, "Response from `TournamentAPI.CreateTournaments`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.CreateTournaments`: %v\n", resp)
 }
 ```
 
@@ -97,13 +97,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentAPI.GetChannelsByIdTournamentConfiguration(context.Background(), id).Execute()
+	resp, r, err := apiClient.TournamentsAPI.GetChannelsByIdTournamentConfiguration(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TournamentAPI.GetChannelsByIdTournamentConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetChannelsByIdTournamentConfiguration``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetChannelsByIdTournamentConfiguration`: DomainTournamentConfiguration
-	fmt.Fprintf(os.Stdout, "Response from `TournamentAPI.GetChannelsByIdTournamentConfiguration`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.GetChannelsByIdTournamentConfiguration`: %v\n", resp)
 }
 ```
 
@@ -167,13 +167,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentAPI.GetChannelsByIdTournaments(context.Background(), id).Cursor(cursor).Limit(limit).Execute()
+	resp, r, err := apiClient.TournamentsAPI.GetChannelsByIdTournaments(context.Background(), id).Cursor(cursor).Limit(limit).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TournamentAPI.GetChannelsByIdTournaments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetChannelsByIdTournaments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetChannelsByIdTournaments`: []DomainTournament
-	fmt.Fprintf(os.Stdout, "Response from `TournamentAPI.GetChannelsByIdTournaments`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.GetChannelsByIdTournaments`: %v\n", resp)
 }
 ```
 
@@ -239,13 +239,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TournamentAPI.GetTournamentsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.TournamentsAPI.GetTournamentsById(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TournamentAPI.GetTournamentsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetTournamentsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetTournamentsById`: DomainTournament
-	fmt.Fprintf(os.Stdout, "Response from `TournamentAPI.GetTournamentsById`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.GetTournamentsById`: %v\n", resp)
 }
 ```
 

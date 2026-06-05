@@ -21,49 +21,189 @@ import (
 )
 
 
-// TournamentAPIService TournamentAPI service
-type TournamentAPIService service
+// SponsorshipsAPIService SponsorshipsAPI service
+type SponsorshipsAPIService service
 
-type ApiCreateTournamentsRequest struct {
+type ApiCreateContestsByContestIdSponsorshipsRequest struct {
 	ctx context.Context
-	ApiService *TournamentAPIService
+	ApiService *SponsorshipsAPIService
+	contestId string
+	requestCreateSponsorshipOfferRequest *RequestCreateSponsorshipOfferRequest
 }
 
-func (r ApiCreateTournamentsRequest) Execute() (*DomainTournament, *http.Response, error) {
-	return r.ApiService.CreateTournamentsExecute(r)
+// Create Sponsorship Offer Request
+func (r ApiCreateContestsByContestIdSponsorshipsRequest) RequestCreateSponsorshipOfferRequest(requestCreateSponsorshipOfferRequest RequestCreateSponsorshipOfferRequest) ApiCreateContestsByContestIdSponsorshipsRequest {
+	r.requestCreateSponsorshipOfferRequest = &requestCreateSponsorshipOfferRequest
+	return r
+}
+
+func (r ApiCreateContestsByContestIdSponsorshipsRequest) Execute() (*DomainSponsorship, *http.Response, error) {
+	return r.ApiService.CreateContestsByContestIdSponsorshipsExecute(r)
 }
 
 /*
-CreateTournaments Create tournament
+CreateContestsByContestIdSponsorships Create Sponsorship Offer (v2)
 
-Create a tournament with explicit round configuration
+Create a sponsorship offer for an existing contest
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTournamentsRequest
+ @param contestId Contest ID
+ @return ApiCreateContestsByContestIdSponsorshipsRequest
 */
-func (a *TournamentAPIService) CreateTournaments(ctx context.Context) ApiCreateTournamentsRequest {
-	return ApiCreateTournamentsRequest{
+func (a *SponsorshipsAPIService) CreateContestsByContestIdSponsorships(ctx context.Context, contestId string) ApiCreateContestsByContestIdSponsorshipsRequest {
+	return ApiCreateContestsByContestIdSponsorshipsRequest{
 		ApiService: a,
 		ctx: ctx,
+		contestId: contestId,
 	}
 }
 
 // Execute executes the request
-//  @return DomainTournament
-func (a *TournamentAPIService) CreateTournamentsExecute(r ApiCreateTournamentsRequest) (*DomainTournament, *http.Response, error) {
+//  @return DomainSponsorship
+func (a *SponsorshipsAPIService) CreateContestsByContestIdSponsorshipsExecute(r ApiCreateContestsByContestIdSponsorshipsRequest) (*DomainSponsorship, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTournament
+		localVarReturnValue  *DomainSponsorship
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentAPIService.CreateTournaments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.CreateContestsByContestIdSponsorships")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/tournaments"
+	localVarPath := localBasePath + "/v2/contests/{contestId}/sponsorships"
+	localVarPath = strings.Replace(localVarPath, "{"+"contestId"+"}", url.PathEscape(parameterValueToString(r.contestId, "contestId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.requestCreateSponsorshipOfferRequest == nil {
+		return localVarReturnValue, nil, reportError("requestCreateSponsorshipOfferRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.requestCreateSponsorshipOfferRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateSponsorshipsByIdAcceptRequest struct {
+	ctx context.Context
+	ApiService *SponsorshipsAPIService
+	id string
+}
+
+func (r ApiCreateSponsorshipsByIdAcceptRequest) Execute() (*DomainSponsorship, *http.Response, error) {
+	return r.ApiService.CreateSponsorshipsByIdAcceptExecute(r)
+}
+
+/*
+CreateSponsorshipsByIdAccept Accept Sponsorship (v2)
+
+Accept a sponsorship offer
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Sponsorship ID
+ @return ApiCreateSponsorshipsByIdAcceptRequest
+*/
+func (a *SponsorshipsAPIService) CreateSponsorshipsByIdAccept(ctx context.Context, id string) ApiCreateSponsorshipsByIdAcceptRequest {
+	return ApiCreateSponsorshipsByIdAcceptRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return DomainSponsorship
+func (a *SponsorshipsAPIService) CreateSponsorshipsByIdAcceptExecute(r ApiCreateSponsorshipsByIdAcceptRequest) (*DomainSponsorship, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainSponsorship
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.CreateSponsorshipsByIdAccept")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/sponsorships/{id}/accept"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -144,27 +284,27 @@ func (a *TournamentAPIService) CreateTournamentsExecute(r ApiCreateTournamentsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChannelsByIdTournamentConfigurationRequest struct {
+type ApiCreateSponsorshipsByIdRejectRequest struct {
 	ctx context.Context
-	ApiService *TournamentAPIService
+	ApiService *SponsorshipsAPIService
 	id string
 }
 
-func (r ApiGetChannelsByIdTournamentConfigurationRequest) Execute() (*DomainTournamentConfiguration, *http.Response, error) {
-	return r.ApiService.GetChannelsByIdTournamentConfigurationExecute(r)
+func (r ApiCreateSponsorshipsByIdRejectRequest) Execute() (*DomainSponsorship, *http.Response, error) {
+	return r.ApiService.CreateSponsorshipsByIdRejectExecute(r)
 }
 
 /*
-GetChannelsByIdTournamentConfiguration Get tournament configuration templates
+CreateSponsorshipsByIdReject Reject Sponsorship (v2)
 
-Returns viable tournament templates for the channel subscriber count
+Reject a sponsorship offer
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Channel ID
- @return ApiGetChannelsByIdTournamentConfigurationRequest
+ @param id Sponsorship ID
+ @return ApiCreateSponsorshipsByIdRejectRequest
 */
-func (a *TournamentAPIService) GetChannelsByIdTournamentConfiguration(ctx context.Context, id string) ApiGetChannelsByIdTournamentConfigurationRequest {
-	return ApiGetChannelsByIdTournamentConfigurationRequest{
+func (a *SponsorshipsAPIService) CreateSponsorshipsByIdReject(ctx context.Context, id string) ApiCreateSponsorshipsByIdRejectRequest {
+	return ApiCreateSponsorshipsByIdRejectRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -172,21 +312,21 @@ func (a *TournamentAPIService) GetChannelsByIdTournamentConfiguration(ctx contex
 }
 
 // Execute executes the request
-//  @return DomainTournamentConfiguration
-func (a *TournamentAPIService) GetChannelsByIdTournamentConfigurationExecute(r ApiGetChannelsByIdTournamentConfigurationRequest) (*DomainTournamentConfiguration, *http.Response, error) {
+//  @return DomainSponsorship
+func (a *SponsorshipsAPIService) CreateSponsorshipsByIdRejectExecute(r ApiCreateSponsorshipsByIdRejectRequest) (*DomainSponsorship, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTournamentConfiguration
+		localVarReturnValue  *DomainSponsorship
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentAPIService.GetChannelsByIdTournamentConfiguration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.CreateSponsorshipsByIdReject")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/channels/{id}/tournament-configuration"
+	localVarPath := localBasePath + "/v2/sponsorships/{id}/reject"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -243,7 +383,7 @@ func (a *TournamentAPIService) GetChannelsByIdTournamentConfigurationExecute(r A
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
+		if localVarHTTPResponse.StatusCode == 500 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -268,73 +408,55 @@ func (a *TournamentAPIService) GetChannelsByIdTournamentConfigurationExecute(r A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChannelsByIdTournamentsRequest struct {
+type ApiGetContestsByContestIdSponsorshipsRequest struct {
 	ctx context.Context
-	ApiService *TournamentAPIService
-	id string
-	cursor *string
-	limit *int32
+	ApiService *SponsorshipsAPIService
+	contestId string
 }
 
-// Opaque pagination cursor
-func (r ApiGetChannelsByIdTournamentsRequest) Cursor(cursor string) ApiGetChannelsByIdTournamentsRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size
-func (r ApiGetChannelsByIdTournamentsRequest) Limit(limit int32) ApiGetChannelsByIdTournamentsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiGetChannelsByIdTournamentsRequest) Execute() ([]DomainTournament, *http.Response, error) {
-	return r.ApiService.GetChannelsByIdTournamentsExecute(r)
+func (r ApiGetContestsByContestIdSponsorshipsRequest) Execute() ([]DomainSponsorship, *http.Response, error) {
+	return r.ApiService.GetContestsByContestIdSponsorshipsExecute(r)
 }
 
 /*
-GetChannelsByIdTournaments List channel tournaments (cursor-paginated)
+GetContestsByContestIdSponsorships Get Contest Sponsorships (v2)
+
+Get all sponsorships for a contest
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Channel ID
- @return ApiGetChannelsByIdTournamentsRequest
+ @param contestId Contest ID
+ @return ApiGetContestsByContestIdSponsorshipsRequest
 */
-func (a *TournamentAPIService) GetChannelsByIdTournaments(ctx context.Context, id string) ApiGetChannelsByIdTournamentsRequest {
-	return ApiGetChannelsByIdTournamentsRequest{
+func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorships(ctx context.Context, contestId string) ApiGetContestsByContestIdSponsorshipsRequest {
+	return ApiGetContestsByContestIdSponsorshipsRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
+		contestId: contestId,
 	}
 }
 
 // Execute executes the request
-//  @return []DomainTournament
-func (a *TournamentAPIService) GetChannelsByIdTournamentsExecute(r ApiGetChannelsByIdTournamentsRequest) ([]DomainTournament, *http.Response, error) {
+//  @return []DomainSponsorship
+func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorshipsExecute(r ApiGetContestsByContestIdSponsorshipsRequest) ([]DomainSponsorship, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainTournament
+		localVarReturnValue  []DomainSponsorship
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentAPIService.GetChannelsByIdTournaments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.GetContestsByContestIdSponsorships")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/channels/{id}/tournaments"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath := localBasePath + "/v2/contests/{contestId}/sponsorships"
+	localVarPath = strings.Replace(localVarPath, "{"+"contestId"+"}", url.PathEscape(parameterValueToString(r.contestId, "contestId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -374,7 +496,7 @@ func (a *TournamentAPIService) GetChannelsByIdTournamentsExecute(r ApiGetChannel
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
+		if localVarHTTPResponse.StatusCode == 400 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -410,27 +532,27 @@ func (a *TournamentAPIService) GetChannelsByIdTournamentsExecute(r ApiGetChannel
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetTournamentsByIdRequest struct {
+type ApiGetSponsorshipsByIdAgreementRequest struct {
 	ctx context.Context
-	ApiService *TournamentAPIService
+	ApiService *SponsorshipsAPIService
 	id string
 }
 
-func (r ApiGetTournamentsByIdRequest) Execute() (*DomainTournament, *http.Response, error) {
-	return r.ApiService.GetTournamentsByIdExecute(r)
+func (r ApiGetSponsorshipsByIdAgreementRequest) Execute() (*DomainSponsorshipAgreement, *http.Response, error) {
+	return r.ApiService.GetSponsorshipsByIdAgreementExecute(r)
 }
 
 /*
-GetTournamentsById Get tournament
+GetSponsorshipsByIdAgreement Get Sponsorship Agreement (v2)
 
-Get tournament details with rounds
+Get agreement details for a sponsorship (creator or sponsor can view)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Tournament ID
- @return ApiGetTournamentsByIdRequest
+ @param id Sponsorship ID
+ @return ApiGetSponsorshipsByIdAgreementRequest
 */
-func (a *TournamentAPIService) GetTournamentsById(ctx context.Context, id string) ApiGetTournamentsByIdRequest {
-	return ApiGetTournamentsByIdRequest{
+func (a *SponsorshipsAPIService) GetSponsorshipsByIdAgreement(ctx context.Context, id string) ApiGetSponsorshipsByIdAgreementRequest {
+	return ApiGetSponsorshipsByIdAgreementRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -438,21 +560,21 @@ func (a *TournamentAPIService) GetTournamentsById(ctx context.Context, id string
 }
 
 // Execute executes the request
-//  @return DomainTournament
-func (a *TournamentAPIService) GetTournamentsByIdExecute(r ApiGetTournamentsByIdRequest) (*DomainTournament, *http.Response, error) {
+//  @return DomainSponsorshipAgreement
+func (a *SponsorshipsAPIService) GetSponsorshipsByIdAgreementExecute(r ApiGetSponsorshipsByIdAgreementRequest) (*DomainSponsorshipAgreement, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTournament
+		localVarReturnValue  *DomainSponsorshipAgreement
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentAPIService.GetTournamentsById")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.GetSponsorshipsByIdAgreement")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/tournaments/{id}"
+	localVarPath := localBasePath + "/v2/sponsorships/{id}/agreement"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -497,6 +619,28 @@ func (a *TournamentAPIService) GetTournamentsByIdExecute(r ApiGetTournamentsById
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v HandlerErrorResponse

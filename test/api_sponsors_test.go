@@ -1,7 +1,7 @@
 /*
 User Management API
 
-Testing TournamentAPIService
+Testing SponsorsAPIService
 
 */
 
@@ -17,16 +17,16 @@ import (
 	openapiclient "github.com/fanscontest/platform-sdk-go"
 )
 
-func Test_platform_TournamentAPIService(t *testing.T) {
+func Test_platform_SponsorsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test TournamentAPIService CreateTournaments", func(t *testing.T) {
+	t.Run("Test SponsorsAPIService CreateSponsors", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.TournamentAPI.CreateTournaments(context.Background()).Execute()
+		resp, httpRes, err := apiClient.SponsorsAPI.CreateSponsors(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,13 +34,11 @@ func Test_platform_TournamentAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test TournamentAPIService GetChannelsByIdTournamentConfiguration", func(t *testing.T) {
+	t.Run("Test SponsorsAPIService GetSponsors", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
-
-		resp, httpRes, err := apiClient.TournamentAPI.GetChannelsByIdTournamentConfiguration(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.SponsorsAPI.GetSponsors(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -48,13 +46,13 @@ func Test_platform_TournamentAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test TournamentAPIService GetChannelsByIdTournaments", func(t *testing.T) {
+	t.Run("Test SponsorsAPIService GetSponsorsById", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.TournamentAPI.GetChannelsByIdTournaments(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.SponsorsAPI.GetSponsorsById(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -62,13 +60,13 @@ func Test_platform_TournamentAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test TournamentAPIService GetTournamentsById", func(t *testing.T) {
+	t.Run("Test SponsorsAPIService GetSponsorsByIdSponsorships", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.TournamentAPI.GetTournamentsById(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.SponsorsAPI.GetSponsorsByIdSponsorships(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateChannels**](ChannelsAPI.md#CreateChannels) | **Post** /v2/channels | Create a channel
+[**CreateChannelsByIdReport**](ChannelsAPI.md#CreateChannelsByIdReport) | **Post** /v2/channels/{id}/report | Report a channel
 [**CreateChannelsByIdTeamSets**](ChannelsAPI.md#CreateChannelsByIdTeamSets) | **Post** /v2/channels/{id}/team-sets | Create a channel-owned team set
 [**CreateChannelsByIdValidateAccessCode**](ChannelsAPI.md#CreateChannelsByIdValidateAccessCode) | **Post** /v2/channels/{id}/validate-access-code | Validate a channel access code
 [**DeleteChannelsById**](ChannelsAPI.md#DeleteChannelsById) | **Delete** /v2/channels/{id} | Delete Channel
@@ -20,6 +21,7 @@ Method | HTTP request | Description
 [**GetPublicIdentitiesByPiidChannels**](ChannelsAPI.md#GetPublicIdentitiesByPiidChannels) | **Get** /v2/public/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
 [**GetPublicTeamSetsSystem**](ChannelsAPI.md#GetPublicTeamSetsSystem) | **Get** /v2/public/team-sets/system | List platform-defined system team sets
 [**GetTeamSetsSystem**](ChannelsAPI.md#GetTeamSetsSystem) | **Get** /v2/team-sets/system | List platform-defined system team sets
+[**PatchChannelsByIdAccessCode**](ChannelsAPI.md#PatchChannelsByIdAccessCode) | **Patch** /v2/channels/{id}/access-code | Update Channel Access Code
 [**UpdateChannelsById**](ChannelsAPI.md#UpdateChannelsById) | **Put** /v2/channels/{id} | Update Channel
 [**UpdateChannelsByIdTeamSetsByTeamSetId**](ChannelsAPI.md#UpdateChannelsByIdTeamSetsByTeamSetId) | **Put** /v2/channels/{id}/team-sets/{teamSetId} | Replace a channel team set&#39;s lineup
 
@@ -82,6 +84,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateChannelsByIdReport
+
+> string CreateChannelsByIdReport(ctx, id).Execute()
+
+Report a channel
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelsByIdReport(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateChannelsByIdReport`: string
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannelsByIdReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateChannelsByIdReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+**string**
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1120,6 +1192,78 @@ Other parameters are passed through a pointer to a apiGetTeamSetsSystemRequest s
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchChannelsByIdAccessCode
+
+> DomainChannel PatchChannelsByIdAccessCode(ctx, id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).Execute()
+
+Update Channel Access Code
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Channel ID
+	requestUpdateChannelAccessCodeRequest := *openapiclient.NewRequestUpdateChannelAccessCodeRequest("AccessCode_example") // RequestUpdateChannelAccessCodeRequest | request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.PatchChannelsByIdAccessCode(context.Background(), id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.PatchChannelsByIdAccessCode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchChannelsByIdAccessCode`: DomainChannel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.PatchChannelsByIdAccessCode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Channel ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchChannelsByIdAccessCodeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **requestUpdateChannelAccessCodeRequest** | [**RequestUpdateChannelAccessCodeRequest**](RequestUpdateChannelAccessCodeRequest.md) | request | 
+
+### Return type
+
+[**DomainChannel**](DomainChannel.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

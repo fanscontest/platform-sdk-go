@@ -21,12 +21,12 @@ import (
 )
 
 
-// TeamPreferenceAPIService TeamPreferenceAPI service
-type TeamPreferenceAPIService service
+// TeamPreferencesAPIService TeamPreferencesAPI service
+type TeamPreferencesAPIService service
 
 type ApiUpdateTeamPreferenceByTeamSetIdRequest struct {
 	ctx context.Context
-	ApiService *TeamPreferenceAPIService
+	ApiService *TeamPreferencesAPIService
 	teamSetId string
 	requestUpsertTeamPreferenceRequest *RequestUpsertTeamPreferenceRequest
 }
@@ -48,7 +48,7 @@ UpdateTeamPreferenceByTeamSetId Set the caller's default team for a logical team
  @param teamSetId Team Set ID
  @return ApiUpdateTeamPreferenceByTeamSetIdRequest
 */
-func (a *TeamPreferenceAPIService) UpdateTeamPreferenceByTeamSetId(ctx context.Context, teamSetId string) ApiUpdateTeamPreferenceByTeamSetIdRequest {
+func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetId(ctx context.Context, teamSetId string) ApiUpdateTeamPreferenceByTeamSetIdRequest {
 	return ApiUpdateTeamPreferenceByTeamSetIdRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -58,7 +58,7 @@ func (a *TeamPreferenceAPIService) UpdateTeamPreferenceByTeamSetId(ctx context.C
 
 // Execute executes the request
 //  @return HandlerStatusResponse
-func (a *TeamPreferenceAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r ApiUpdateTeamPreferenceByTeamSetIdRequest) (*HandlerStatusResponse, *http.Response, error) {
+func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r ApiUpdateTeamPreferenceByTeamSetIdRequest) (*HandlerStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -66,7 +66,7 @@ func (a *TeamPreferenceAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r ApiU
 		localVarReturnValue  *HandlerStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamPreferenceAPIService.UpdateTeamPreferenceByTeamSetId")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamPreferencesAPIService.UpdateTeamPreferenceByTeamSetId")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

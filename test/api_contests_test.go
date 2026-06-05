@@ -416,6 +416,20 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ContestsAPIService GetPublicContestsByIdGroups", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsByIdGroups(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ContestsAPIService GetPublicContestsByIdSubmissionFeed", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

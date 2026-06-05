@@ -85,9 +85,8 @@ Class | Method | HTTP request | Description
 *BlocksAPI* | [**CreateBlocks**](docs/BlocksAPI.md#createblocks) | **Post** /v2/blocks | Create Block
 *BlocksAPI* | [**DeleteBlocksById**](docs/BlocksAPI.md#deleteblocksbyid) | **Delete** /v2/blocks/{id} | Delete Block
 *BlocksAPI* | [**GetBlocks**](docs/BlocksAPI.md#getblocks) | **Get** /v2/blocks | Get Blocked Members
-*ChannelAPI* | [**CreateChannelsByIdReport**](docs/ChannelAPI.md#createchannelsbyidreport) | **Post** /v2/channels/{id}/report | Report a channel
-*ChannelAPI* | [**PatchChannelsByIdAccessCode**](docs/ChannelAPI.md#patchchannelsbyidaccesscode) | **Patch** /v2/channels/{id}/access-code | Update Channel Access Code
 *ChannelsAPI* | [**CreateChannels**](docs/ChannelsAPI.md#createchannels) | **Post** /v2/channels | Create a channel
+*ChannelsAPI* | [**CreateChannelsByIdReport**](docs/ChannelsAPI.md#createchannelsbyidreport) | **Post** /v2/channels/{id}/report | Report a channel
 *ChannelsAPI* | [**CreateChannelsByIdTeamSets**](docs/ChannelsAPI.md#createchannelsbyidteamsets) | **Post** /v2/channels/{id}/team-sets | Create a channel-owned team set
 *ChannelsAPI* | [**CreateChannelsByIdValidateAccessCode**](docs/ChannelsAPI.md#createchannelsbyidvalidateaccesscode) | **Post** /v2/channels/{id}/validate-access-code | Validate a channel access code
 *ChannelsAPI* | [**DeleteChannelsById**](docs/ChannelsAPI.md#deletechannelsbyid) | **Delete** /v2/channels/{id} | Delete Channel
@@ -103,9 +102,9 @@ Class | Method | HTTP request | Description
 *ChannelsAPI* | [**GetPublicIdentitiesByPiidChannels**](docs/ChannelsAPI.md#getpublicidentitiesbypiidchannels) | **Get** /v2/public/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
 *ChannelsAPI* | [**GetPublicTeamSetsSystem**](docs/ChannelsAPI.md#getpublicteamsetssystem) | **Get** /v2/public/team-sets/system | List platform-defined system team sets
 *ChannelsAPI* | [**GetTeamSetsSystem**](docs/ChannelsAPI.md#getteamsetssystem) | **Get** /v2/team-sets/system | List platform-defined system team sets
+*ChannelsAPI* | [**PatchChannelsByIdAccessCode**](docs/ChannelsAPI.md#patchchannelsbyidaccesscode) | **Patch** /v2/channels/{id}/access-code | Update Channel Access Code
 *ChannelsAPI* | [**UpdateChannelsById**](docs/ChannelsAPI.md#updatechannelsbyid) | **Put** /v2/channels/{id} | Update Channel
 *ChannelsAPI* | [**UpdateChannelsByIdTeamSetsByTeamSetId**](docs/ChannelsAPI.md#updatechannelsbyidteamsetsbyteamsetid) | **Put** /v2/channels/{id}/team-sets/{teamSetId} | Replace a channel team set&#39;s lineup
-*ContestAPI* | [**GetPublicContestsByIdGroups**](docs/ContestAPI.md#getpubliccontestsbyidgroups) | **Get** /v2/public/contests/{id}/groups | Get Contest Groups
 *ContestPuzzlesAPI* | [**PuzzleWebV2ContestPuzzleControllerGetPuzzle**](docs/ContestPuzzlesAPI.md#puzzlewebv2contestpuzzlecontrollergetpuzzle) | **Get** /v2/contest-puzzles/{contest_id} | Get contest source
 *ContestPuzzlesAPI* | [**PuzzleWebV2ContestPuzzleControllerRankings**](docs/ContestPuzzlesAPI.md#puzzlewebv2contestpuzzlecontrollerrankings) | **Get** /v2/contest-puzzles/{contest_id}/rankings | Get contest rankings
 *ContestPuzzlesAPI* | [**PuzzleWebV2ContestPuzzleControllerStatus**](docs/ContestPuzzlesAPI.md#puzzlewebv2contestpuzzlecontrollerstatus) | **Get** /v2/contest-puzzles/{contest_id}/status | Get contest status
@@ -137,34 +136,35 @@ Class | Method | HTTP request | Description
 *ContestsAPI* | [**GetPublicContestsByContestIdBuddyBoardsByBoardId**](docs/ContestsAPI.md#getpubliccontestsbycontestidbuddyboardsbyboardid) | **Get** /v2/public/contests/{contestId}/buddy-boards/{boardId} | Get buddy board view (metadata + scores filtered to board members)
 *ContestsAPI* | [**GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers**](docs/ContestsAPI.md#getpubliccontestsbycontestidbuddyboardsbyboardidmembers) | **Get** /v2/public/contests/{contestId}/buddy-boards/{boardId}/members | List buddy board members (public or authed)
 *ContestsAPI* | [**GetPublicContestsById**](docs/ContestsAPI.md#getpubliccontestsbyid) | **Get** /v2/public/contests/{id} | Get a contest by ID
+*ContestsAPI* | [**GetPublicContestsByIdGroups**](docs/ContestsAPI.md#getpubliccontestsbyidgroups) | **Get** /v2/public/contests/{id}/groups | Get Contest Groups
 *ContestsAPI* | [**GetPublicContestsByIdSubmissionFeed**](docs/ContestsAPI.md#getpubliccontestsbyidsubmissionfeed) | **Get** /v2/public/contests/{id}/submission-feed | Get the real-time feed of contest submissions (cursor-paginated)
 *ContestsAPI* | [**GetPublicContestsSearchKeywordByKeyword**](docs/ContestsAPI.md#getpubliccontestssearchkeywordbykeyword) | **Get** /v2/public/contests/searchKeyword/{keyword} | Search public contests by keyword (cursor-paginated)
 *ContestsAPI* | [**PatchContestsById**](docs/ContestsAPI.md#patchcontestsbyid) | **Patch** /v2/contests/{id} | Update a contest
 *ContestsAPI* | [**UpdateContestsByIdHeaderImage**](docs/ContestsAPI.md#updatecontestsbyidheaderimage) | **Put** /v2/contests/{id}/header-image | Update a contest&#39;s header image
-*CountryAPI* | [**GetPublicCountries**](docs/CountryAPI.md#getpubliccountries) | **Get** /v2/public/countries | List enabled countries (sorted, with native names for non-English Accept-Language)
-*CountryAPI* | [**GetPublicLocation**](docs/CountryAPI.md#getpubliclocation) | **Get** /v2/public/location | Resolve the caller&#39;s country by IP (CF-Ipcountry, then Maxmind)
-*CreativeContestAPI* | [**CreateContestsByIdEntries**](docs/CreativeContestAPI.md#createcontestsbyidentries) | **Post** /v2/contests/{id}/entries | Submit entry for creative contest
-*CreativeContestAPI* | [**CreateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestAPI.md#createcontestsbyidentriesbyentryidscore) | **Post** /v2/contests/{id}/entries/{entryId}/score | Score an entry
-*CreativeContestAPI* | [**CreateContestsByIdForceProceed**](docs/CreativeContestAPI.md#createcontestsbyidforceproceed) | **Post** /v2/contests/{id}/force-proceed | Force proceed from paused state
-*CreativeContestAPI* | [**CreateContestsByIdJurorsInvite**](docs/CreativeContestAPI.md#createcontestsbyidjurorsinvite) | **Post** /v2/contests/{id}/jurors/invite | Invite jurors to judge a contest
-*CreativeContestAPI* | [**CreateJurorsInvitationsByInvitationIdAccept**](docs/CreativeContestAPI.md#createjurorsinvitationsbyinvitationidaccept) | **Post** /v2/jurors/invitations/{invitationId}/accept | Accept a juror invitation
-*CreativeContestAPI* | [**CreateJurorsInvitationsByInvitationIdDecline**](docs/CreativeContestAPI.md#createjurorsinvitationsbyinvitationiddecline) | **Post** /v2/jurors/invitations/{invitationId}/decline | Decline a juror invitation
-*CreativeContestAPI* | [**CreateJurorsOptIn**](docs/CreativeContestAPI.md#createjurorsoptin) | **Post** /v2/jurors/opt-in | Opt into jury pool
-*CreativeContestAPI* | [**DeleteContestsByIdEntries**](docs/CreativeContestAPI.md#deletecontestsbyidentries) | **Delete** /v2/contests/{id}/entries | Withdraw entry from creative contest
-*CreativeContestAPI* | [**GetContestsByIdEntries**](docs/CreativeContestAPI.md#getcontestsbyidentries) | **Get** /v2/contests/{id}/entries | Get entries for a contest
-*CreativeContestAPI* | [**GetContestsByIdJurors**](docs/CreativeContestAPI.md#getcontestsbyidjurors) | **Get** /v2/contests/{id}/jurors | Get jurors for a contest
-*CreativeContestAPI* | [**GetContestsByIdJurorsInvitations**](docs/CreativeContestAPI.md#getcontestsbyidjurorsinvitations) | **Get** /v2/contests/{id}/jurors/invitations | Get invitations for a contest
-*CreativeContestAPI* | [**GetJurorsAssignments**](docs/CreativeContestAPI.md#getjurorsassignments) | **Get** /v2/jurors/assignments | Get juror assignments
-*CreativeContestAPI* | [**GetJurorsInvitations**](docs/CreativeContestAPI.md#getjurorsinvitations) | **Get** /v2/jurors/invitations | Get my pending invitations
-*CreativeContestAPI* | [**UpdateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestAPI.md#updatecontestsbyidentriesbyentryidscore) | **Put** /v2/contests/{id}/entries/{entryId}/score | Score an entry
+*CountriesAPI* | [**GetPublicCountries**](docs/CountriesAPI.md#getpubliccountries) | **Get** /v2/public/countries | List enabled countries (sorted, with native names for non-English Accept-Language)
+*CountriesAPI* | [**GetPublicLocation**](docs/CountriesAPI.md#getpubliclocation) | **Get** /v2/public/location | Resolve the caller&#39;s country by IP (CF-Ipcountry, then Maxmind)
+*CreativeContestsAPI* | [**CreateContestsByIdEntries**](docs/CreativeContestsAPI.md#createcontestsbyidentries) | **Post** /v2/contests/{id}/entries | Submit entry for creative contest
+*CreativeContestsAPI* | [**CreateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestsAPI.md#createcontestsbyidentriesbyentryidscore) | **Post** /v2/contests/{id}/entries/{entryId}/score | Score an entry
+*CreativeContestsAPI* | [**CreateContestsByIdForceProceed**](docs/CreativeContestsAPI.md#createcontestsbyidforceproceed) | **Post** /v2/contests/{id}/force-proceed | Force proceed from paused state
+*CreativeContestsAPI* | [**CreateContestsByIdJurorsInvite**](docs/CreativeContestsAPI.md#createcontestsbyidjurorsinvite) | **Post** /v2/contests/{id}/jurors/invite | Invite jurors to judge a contest
+*CreativeContestsAPI* | [**CreateJurorsInvitationsByInvitationIdAccept**](docs/CreativeContestsAPI.md#createjurorsinvitationsbyinvitationidaccept) | **Post** /v2/jurors/invitations/{invitationId}/accept | Accept a juror invitation
+*CreativeContestsAPI* | [**CreateJurorsInvitationsByInvitationIdDecline**](docs/CreativeContestsAPI.md#createjurorsinvitationsbyinvitationiddecline) | **Post** /v2/jurors/invitations/{invitationId}/decline | Decline a juror invitation
+*CreativeContestsAPI* | [**CreateJurorsOptIn**](docs/CreativeContestsAPI.md#createjurorsoptin) | **Post** /v2/jurors/opt-in | Opt into jury pool
+*CreativeContestsAPI* | [**DeleteContestsByIdEntries**](docs/CreativeContestsAPI.md#deletecontestsbyidentries) | **Delete** /v2/contests/{id}/entries | Withdraw entry from creative contest
+*CreativeContestsAPI* | [**GetContestsByIdEntries**](docs/CreativeContestsAPI.md#getcontestsbyidentries) | **Get** /v2/contests/{id}/entries | Get entries for a contest
+*CreativeContestsAPI* | [**GetContestsByIdJurors**](docs/CreativeContestsAPI.md#getcontestsbyidjurors) | **Get** /v2/contests/{id}/jurors | Get jurors for a contest
+*CreativeContestsAPI* | [**GetContestsByIdJurorsInvitations**](docs/CreativeContestsAPI.md#getcontestsbyidjurorsinvitations) | **Get** /v2/contests/{id}/jurors/invitations | Get invitations for a contest
+*CreativeContestsAPI* | [**GetJurorsAssignments**](docs/CreativeContestsAPI.md#getjurorsassignments) | **Get** /v2/jurors/assignments | Get juror assignments
+*CreativeContestsAPI* | [**GetJurorsInvitations**](docs/CreativeContestsAPI.md#getjurorsinvitations) | **Get** /v2/jurors/invitations | Get my pending invitations
+*CreativeContestsAPI* | [**UpdateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestsAPI.md#updatecontestsbyidentriesbyentryidscore) | **Put** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 *EventsAPI* | [**PuzzleWebV2EventControllerApproveResult**](docs/EventsAPI.md#puzzlewebv2eventcontrollerapproveresult) | **Post** /v2/events/{id}/approve | Approve event result
 *EventsAPI* | [**PuzzleWebV2EventControllerEnterResult**](docs/EventsAPI.md#puzzlewebv2eventcontrollerenterresult) | **Patch** /v2/events/{id}/result | Enter event result
 *EventsAPI* | [**PuzzleWebV2EventControllerPendingApproval**](docs/EventsAPI.md#puzzlewebv2eventcontrollerpendingapproval) | **Get** /v2/events/pending-approval | List events with results pending approval
 *EventsAPI* | [**PuzzleWebV2EventControllerSearch**](docs/EventsAPI.md#puzzlewebv2eventcontrollersearch) | **Get** /v2/events/search | Search events
 *EventsAPI* | [**PuzzleWebV2EventControllerShow**](docs/EventsAPI.md#puzzlewebv2eventcontrollershow) | **Get** /v2/events/{id} | Get event by es_event_id
 *EventsAPI* | [**PuzzleWebV2EventControllerShowDetails**](docs/EventsAPI.md#puzzlewebv2eventcontrollershowdetails) | **Get** /v2/events/{id}/details | Get event details (from Postgres)
-*FeedAPI* | [**GetIdentitiesByPiidFeedPersonalized**](docs/FeedAPI.md#getidentitiesbypiidfeedpersonalized) | **Get** /v2/identities/{piid}/feed-personalized | Get the personalized feed for a platform identity
-*FeedAPI* | [**GetPublicFeed**](docs/FeedAPI.md#getpublicfeed) | **Get** /v2/public/feed | Get the public feed (trending content, unauthenticated)
+*FeedsAPI* | [**GetIdentitiesByPiidFeedPersonalized**](docs/FeedsAPI.md#getidentitiesbypiidfeedpersonalized) | **Get** /v2/identities/{piid}/feed-personalized | Get the personalized feed for a platform identity
+*FeedsAPI* | [**GetPublicFeed**](docs/FeedsAPI.md#getpublicfeed) | **Get** /v2/public/feed | Get the public feed (trending content, unauthenticated)
 *IdentitiesAPI* | [**CreateIdentities**](docs/IdentitiesAPI.md#createidentities) | **Post** /v2/identities | Register a tenant-supplied end-user as a platform identity
 *IdentitiesAPI* | [**DeleteIdentitiesById**](docs/IdentitiesAPI.md#deleteidentitiesbyid) | **Delete** /v2/identities/{id} | Soft-delete a platform identity, scoped to the calling tenant
 *IdentitiesAPI* | [**GetIdentities**](docs/IdentitiesAPI.md#getidentities) | **Get** /v2/identities | Look up a platform identity by tenant_user_id (409 recovery)
@@ -216,27 +216,27 @@ Class | Method | HTTP request | Description
 *PuzzlesAPI* | [**PuzzleWebV2PuzzleControllerSearchPuzzleBank**](docs/PuzzlesAPI.md#puzzlewebv2puzzlecontrollersearchpuzzlebank) | **Get** /v2/puzzles/search-puzzle-bank | Search puzzle bank
 *PuzzlesAPI* | [**PuzzleWebV2PuzzleControllerShow**](docs/PuzzlesAPI.md#puzzlewebv2puzzlecontrollershow) | **Get** /v2/puzzles/{id} | Get puzzle
 *PuzzlesAPI* | [**PuzzleWebV2PuzzleControllerUpdate**](docs/PuzzlesAPI.md#puzzlewebv2puzzlecontrollerupdate) | **Patch** /v2/puzzles/{id} | Update puzzle
-*SponsorV2API* | [**CreateSponsors**](docs/SponsorV2API.md#createsponsors) | **Post** /v2/sponsors | Create Sponsor (v2)
-*SponsorV2API* | [**GetSponsors**](docs/SponsorV2API.md#getsponsors) | **Get** /v2/sponsors | Get Sponsors (v2)
-*SponsorV2API* | [**GetSponsorsById**](docs/SponsorV2API.md#getsponsorsbyid) | **Get** /v2/sponsors/{id} | Get Sponsor by ID (v2)
-*SponsorV2API* | [**GetSponsorsByIdSponsorships**](docs/SponsorV2API.md#getsponsorsbyidsponsorships) | **Get** /v2/sponsors/{id}/sponsorships | Get Sponsor Sponsorships (v2)
-*SponsorshipAgreementV2API* | [**GetSponsorshipsByIdAgreement**](docs/SponsorshipAgreementV2API.md#getsponsorshipsbyidagreement) | **Get** /v2/sponsorships/{id}/agreement | Get Sponsorship Agreement (v2)
-*SponsorshipPackageV2API* | [**CreateSponsorshipPackages**](docs/SponsorshipPackageV2API.md#createsponsorshippackages) | **Post** /v2/sponsorship-packages | Create Sponsorship Package (v2)
-*SponsorshipPackageV2API* | [**CreateSponsorshipPackagesByIdCancel**](docs/SponsorshipPackageV2API.md#createsponsorshippackagesbyidcancel) | **Post** /v2/sponsorship-packages/{id}/cancel | Cancel Sponsorship Package (v2)
-*SponsorshipPackageV2API* | [**GetSponsorshipPackages**](docs/SponsorshipPackageV2API.md#getsponsorshippackages) | **Get** /v2/sponsorship-packages | Get Sponsorship Packages (v2)
-*SponsorshipPackageV2API* | [**GetSponsorshipPackagesAvailable**](docs/SponsorshipPackageV2API.md#getsponsorshippackagesavailable) | **Get** /v2/sponsorship-packages/available | Get Available Packages (v2)
-*SponsorshipPackageV2API* | [**GetSponsorshipPackagesByIdAgreement**](docs/SponsorshipPackageV2API.md#getsponsorshippackagesbyidagreement) | **Get** /v2/sponsorship-packages/{id}/agreement | Get Package Agreement (v2)
-*SponsorshipPackageV2API* | [**GetSponsorshipPackagesByIdSponsorships**](docs/SponsorshipPackageV2API.md#getsponsorshippackagesbyidsponsorships) | **Get** /v2/sponsorship-packages/{id}/sponsorships | Get Package Sponsorships (v2)
-*SponsorshipTermV2API* | [**CreateSponsorshipTerms**](docs/SponsorshipTermV2API.md#createsponsorshipterms) | **Post** /v2/sponsorship-terms | Create Sponsorship Term (v2)
-*SponsorshipTermV2API* | [**DeleteSponsorshipTermsById**](docs/SponsorshipTermV2API.md#deletesponsorshiptermsbyid) | **Delete** /v2/sponsorship-terms/{id} | Deactivate Sponsorship Term (v2)
-*SponsorshipTermV2API* | [**GetSponsorshipTerms**](docs/SponsorshipTermV2API.md#getsponsorshipterms) | **Get** /v2/sponsorship-terms | Get Sponsorship Terms (v2)
-*SponsorshipTermV2API* | [**GetSponsorshipTermsById**](docs/SponsorshipTermV2API.md#getsponsorshiptermsbyid) | **Get** /v2/sponsorship-terms/{id} | Get Sponsorship Term (v2)
-*SponsorshipTermV2API* | [**GetSponsorshipTermsPlatform**](docs/SponsorshipTermV2API.md#getsponsorshiptermsplatform) | **Get** /v2/sponsorship-terms/platform | Get Platform Terms (v2)
-*SponsorshipTermV2API* | [**UpdateSponsorshipTermsById**](docs/SponsorshipTermV2API.md#updatesponsorshiptermsbyid) | **Put** /v2/sponsorship-terms/{id} | Update Sponsorship Term (v2)
-*SponsorshipV2API* | [**CreateContestsByContestIdSponsorships**](docs/SponsorshipV2API.md#createcontestsbycontestidsponsorships) | **Post** /v2/contests/{contestId}/sponsorships | Create Sponsorship Offer (v2)
-*SponsorshipV2API* | [**CreateSponsorshipsByIdAccept**](docs/SponsorshipV2API.md#createsponsorshipsbyidaccept) | **Post** /v2/sponsorships/{id}/accept | Accept Sponsorship (v2)
-*SponsorshipV2API* | [**CreateSponsorshipsByIdReject**](docs/SponsorshipV2API.md#createsponsorshipsbyidreject) | **Post** /v2/sponsorships/{id}/reject | Reject Sponsorship (v2)
-*SponsorshipV2API* | [**GetContestsByContestIdSponsorships**](docs/SponsorshipV2API.md#getcontestsbycontestidsponsorships) | **Get** /v2/contests/{contestId}/sponsorships | Get Contest Sponsorships (v2)
+*SponsorsAPI* | [**CreateSponsors**](docs/SponsorsAPI.md#createsponsors) | **Post** /v2/sponsors | Create Sponsor (v2)
+*SponsorsAPI* | [**GetSponsors**](docs/SponsorsAPI.md#getsponsors) | **Get** /v2/sponsors | Get Sponsors (v2)
+*SponsorsAPI* | [**GetSponsorsById**](docs/SponsorsAPI.md#getsponsorsbyid) | **Get** /v2/sponsors/{id} | Get Sponsor by ID (v2)
+*SponsorsAPI* | [**GetSponsorsByIdSponsorships**](docs/SponsorsAPI.md#getsponsorsbyidsponsorships) | **Get** /v2/sponsors/{id}/sponsorships | Get Sponsor Sponsorships (v2)
+*SponsorshipPackagesAPI* | [**CreateSponsorshipPackages**](docs/SponsorshipPackagesAPI.md#createsponsorshippackages) | **Post** /v2/sponsorship-packages | Create Sponsorship Package (v2)
+*SponsorshipPackagesAPI* | [**CreateSponsorshipPackagesByIdCancel**](docs/SponsorshipPackagesAPI.md#createsponsorshippackagesbyidcancel) | **Post** /v2/sponsorship-packages/{id}/cancel | Cancel Sponsorship Package (v2)
+*SponsorshipPackagesAPI* | [**GetSponsorshipPackages**](docs/SponsorshipPackagesAPI.md#getsponsorshippackages) | **Get** /v2/sponsorship-packages | Get Sponsorship Packages (v2)
+*SponsorshipPackagesAPI* | [**GetSponsorshipPackagesAvailable**](docs/SponsorshipPackagesAPI.md#getsponsorshippackagesavailable) | **Get** /v2/sponsorship-packages/available | Get Available Packages (v2)
+*SponsorshipPackagesAPI* | [**GetSponsorshipPackagesByIdAgreement**](docs/SponsorshipPackagesAPI.md#getsponsorshippackagesbyidagreement) | **Get** /v2/sponsorship-packages/{id}/agreement | Get Package Agreement (v2)
+*SponsorshipPackagesAPI* | [**GetSponsorshipPackagesByIdSponsorships**](docs/SponsorshipPackagesAPI.md#getsponsorshippackagesbyidsponsorships) | **Get** /v2/sponsorship-packages/{id}/sponsorships | Get Package Sponsorships (v2)
+*SponsorshipTermsAPI* | [**CreateSponsorshipTerms**](docs/SponsorshipTermsAPI.md#createsponsorshipterms) | **Post** /v2/sponsorship-terms | Create Sponsorship Term (v2)
+*SponsorshipTermsAPI* | [**DeleteSponsorshipTermsById**](docs/SponsorshipTermsAPI.md#deletesponsorshiptermsbyid) | **Delete** /v2/sponsorship-terms/{id} | Deactivate Sponsorship Term (v2)
+*SponsorshipTermsAPI* | [**GetSponsorshipTerms**](docs/SponsorshipTermsAPI.md#getsponsorshipterms) | **Get** /v2/sponsorship-terms | Get Sponsorship Terms (v2)
+*SponsorshipTermsAPI* | [**GetSponsorshipTermsById**](docs/SponsorshipTermsAPI.md#getsponsorshiptermsbyid) | **Get** /v2/sponsorship-terms/{id} | Get Sponsorship Term (v2)
+*SponsorshipTermsAPI* | [**GetSponsorshipTermsPlatform**](docs/SponsorshipTermsAPI.md#getsponsorshiptermsplatform) | **Get** /v2/sponsorship-terms/platform | Get Platform Terms (v2)
+*SponsorshipTermsAPI* | [**UpdateSponsorshipTermsById**](docs/SponsorshipTermsAPI.md#updatesponsorshiptermsbyid) | **Put** /v2/sponsorship-terms/{id} | Update Sponsorship Term (v2)
+*SponsorshipsAPI* | [**CreateContestsByContestIdSponsorships**](docs/SponsorshipsAPI.md#createcontestsbycontestidsponsorships) | **Post** /v2/contests/{contestId}/sponsorships | Create Sponsorship Offer (v2)
+*SponsorshipsAPI* | [**CreateSponsorshipsByIdAccept**](docs/SponsorshipsAPI.md#createsponsorshipsbyidaccept) | **Post** /v2/sponsorships/{id}/accept | Accept Sponsorship (v2)
+*SponsorshipsAPI* | [**CreateSponsorshipsByIdReject**](docs/SponsorshipsAPI.md#createsponsorshipsbyidreject) | **Post** /v2/sponsorships/{id}/reject | Reject Sponsorship (v2)
+*SponsorshipsAPI* | [**GetContestsByContestIdSponsorships**](docs/SponsorshipsAPI.md#getcontestsbycontestidsponsorships) | **Get** /v2/contests/{contestId}/sponsorships | Get Contest Sponsorships (v2)
+*SponsorshipsAPI* | [**GetSponsorshipsByIdAgreement**](docs/SponsorshipsAPI.md#getsponsorshipsbyidagreement) | **Get** /v2/sponsorships/{id}/agreement | Get Sponsorship Agreement (v2)
 *StansAPI* | [**CreateCelebs**](docs/StansAPI.md#createcelebs) | **Post** /v2/celebs | Create Member Stan
 *StansAPI* | [**DeleteCelebsById**](docs/StansAPI.md#deletecelebsbyid) | **Delete** /v2/celebs/{id} | Delete Member Stan
 *StansAPI* | [**GetCelebs**](docs/StansAPI.md#getcelebs) | **Get** /v2/celebs | Get Member Celebs
@@ -249,16 +249,16 @@ Class | Method | HTTP request | Description
 *SubscriptionsAPI* | [**GetSubscriptionsByIdLogs**](docs/SubscriptionsAPI.md#getsubscriptionsbyidlogs) | **Get** /v2/subscriptions/{id}/logs | Get the participation log for a subscription
 *SubscriptionsAPI* | [**GetSubscriptionsSearchKeywordByKeyword**](docs/SubscriptionsAPI.md#getsubscriptionssearchkeywordbykeyword) | **Get** /v2/subscriptions/searchKeyword/{keyword} | Search subscriptions by keyword (cursor-paginated)
 *SubscriptionsAPI* | [**UpdateSubscriptionsByIdStatus**](docs/SubscriptionsAPI.md#updatesubscriptionsbyidstatus) | **Put** /v2/subscriptions/{id}/status | Approve or deny subscription
-*TeamPreferenceAPI* | [**UpdateTeamPreferenceByTeamSetId**](docs/TeamPreferenceAPI.md#updateteampreferencebyteamsetid) | **Put** /v2/team-preference/{teamSetId} | Set the caller&#39;s default team for a logical team set
+*TeamPreferencesAPI* | [**UpdateTeamPreferenceByTeamSetId**](docs/TeamPreferencesAPI.md#updateteampreferencebyteamsetid) | **Put** /v2/team-preference/{teamSetId} | Set the caller&#39;s default team for a logical team set
 *TenantsAPI* | [**CreateTenants**](docs/TenantsAPI.md#createtenants) | **Post** /v2/tenants | Apply to become a tenant (vetted-signup)
 *TenantsAPI* | [**CreateTenantsByIdApiKeys**](docs/TenantsAPI.md#createtenantsbyidapikeys) | **Post** /v2/tenants/{id}/api-keys | Mint an API key for an approved tenant
 *TenantsAPI* | [**CreateTenantsByIdWebhookSubscriptions**](docs/TenantsAPI.md#createtenantsbyidwebhooksubscriptions) | **Post** /v2/tenants/{id}/webhook-subscriptions | Register a webhook subscription for a tenant
 *TenantsAPI* | [**DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId**](docs/TenantsAPI.md#deletetenantsbyidwebhooksubscriptionsbysubscriptionid) | **Delete** /v2/tenants/{id}/webhook-subscriptions/{subscriptionId} | Delete a webhook subscription
 *TenantsAPI* | [**GetTenantsByIdWebhookSubscriptions**](docs/TenantsAPI.md#gettenantsbyidwebhooksubscriptions) | **Get** /v2/tenants/{id}/webhook-subscriptions | List a tenant&#39;s webhook subscriptions
-*TournamentAPI* | [**CreateTournaments**](docs/TournamentAPI.md#createtournaments) | **Post** /v2/tournaments | Create tournament
-*TournamentAPI* | [**GetChannelsByIdTournamentConfiguration**](docs/TournamentAPI.md#getchannelsbyidtournamentconfiguration) | **Get** /v2/channels/{id}/tournament-configuration | Get tournament configuration templates
-*TournamentAPI* | [**GetChannelsByIdTournaments**](docs/TournamentAPI.md#getchannelsbyidtournaments) | **Get** /v2/channels/{id}/tournaments | List channel tournaments (cursor-paginated)
-*TournamentAPI* | [**GetTournamentsById**](docs/TournamentAPI.md#gettournamentsbyid) | **Get** /v2/tournaments/{id} | Get tournament
+*TournamentsAPI* | [**CreateTournaments**](docs/TournamentsAPI.md#createtournaments) | **Post** /v2/tournaments | Create tournament
+*TournamentsAPI* | [**GetChannelsByIdTournamentConfiguration**](docs/TournamentsAPI.md#getchannelsbyidtournamentconfiguration) | **Get** /v2/channels/{id}/tournament-configuration | Get tournament configuration templates
+*TournamentsAPI* | [**GetChannelsByIdTournaments**](docs/TournamentsAPI.md#getchannelsbyidtournaments) | **Get** /v2/channels/{id}/tournaments | List channel tournaments (cursor-paginated)
+*TournamentsAPI* | [**GetTournamentsById**](docs/TournamentsAPI.md#gettournamentsbyid) | **Get** /v2/tournaments/{id} | Get tournament
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerCreate**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollercreate) | **Post** /v2/user-events | Create user event
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerDelete**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollerdelete) | **Delete** /v2/user-events/{id} | Delete user event
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerGetResultSuggestions**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollergetresultsuggestions) | **Get** /v2/user-events/{user_events_id}/result-suggestions | Get result suggestions for a user event

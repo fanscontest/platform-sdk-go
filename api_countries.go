@@ -20,12 +20,12 @@ import (
 )
 
 
-// CountryAPIService CountryAPI service
-type CountryAPIService service
+// CountriesAPIService CountriesAPI service
+type CountriesAPIService service
 
 type ApiGetPublicCountriesRequest struct {
 	ctx context.Context
-	ApiService *CountryAPIService
+	ApiService *CountriesAPIService
 }
 
 func (r ApiGetPublicCountriesRequest) Execute() ([]DomainCountry, *http.Response, error) {
@@ -38,7 +38,7 @@ GetPublicCountries List enabled countries (sorted, with native names for non-Eng
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPublicCountriesRequest
 */
-func (a *CountryAPIService) GetPublicCountries(ctx context.Context) ApiGetPublicCountriesRequest {
+func (a *CountriesAPIService) GetPublicCountries(ctx context.Context) ApiGetPublicCountriesRequest {
 	return ApiGetPublicCountriesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -47,7 +47,7 @@ func (a *CountryAPIService) GetPublicCountries(ctx context.Context) ApiGetPublic
 
 // Execute executes the request
 //  @return []DomainCountry
-func (a *CountryAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesRequest) ([]DomainCountry, *http.Response, error) {
+func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesRequest) ([]DomainCountry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -55,7 +55,7 @@ func (a *CountryAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesReq
 		localVarReturnValue  []DomainCountry
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountryAPIService.GetPublicCountries")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountriesAPIService.GetPublicCountries")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -132,7 +132,7 @@ func (a *CountryAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesReq
 
 type ApiGetPublicLocationRequest struct {
 	ctx context.Context
-	ApiService *CountryAPIService
+	ApiService *CountriesAPIService
 }
 
 func (r ApiGetPublicLocationRequest) Execute() (*DomainCountry, *http.Response, error) {
@@ -145,7 +145,7 @@ GetPublicLocation Resolve the caller's country by IP (CF-Ipcountry, then Maxmind
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPublicLocationRequest
 */
-func (a *CountryAPIService) GetPublicLocation(ctx context.Context) ApiGetPublicLocationRequest {
+func (a *CountriesAPIService) GetPublicLocation(ctx context.Context) ApiGetPublicLocationRequest {
 	return ApiGetPublicLocationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -154,7 +154,7 @@ func (a *CountryAPIService) GetPublicLocation(ctx context.Context) ApiGetPublicL
 
 // Execute executes the request
 //  @return DomainCountry
-func (a *CountryAPIService) GetPublicLocationExecute(r ApiGetPublicLocationRequest) (*DomainCountry, *http.Response, error) {
+func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationRequest) (*DomainCountry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -162,7 +162,7 @@ func (a *CountryAPIService) GetPublicLocationExecute(r ApiGetPublicLocationReque
 		localVarReturnValue  *DomainCountry
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountryAPIService.GetPublicLocation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountriesAPIService.GetPublicLocation")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

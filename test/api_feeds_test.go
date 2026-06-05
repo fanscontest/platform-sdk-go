@@ -1,7 +1,7 @@
 /*
 User Management API
 
-Testing CountryAPIService
+Testing FeedsAPIService
 
 */
 
@@ -17,16 +17,18 @@ import (
 	openapiclient "github.com/fanscontest/platform-sdk-go"
 )
 
-func Test_platform_CountryAPIService(t *testing.T) {
+func Test_platform_FeedsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CountryAPIService GetPublicCountries", func(t *testing.T) {
+	t.Run("Test FeedsAPIService GetIdentitiesByPiidFeedPersonalized", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.CountryAPI.GetPublicCountries(context.Background()).Execute()
+		var piid string
+
+		resp, httpRes, err := apiClient.FeedsAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +36,11 @@ func Test_platform_CountryAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CountryAPIService GetPublicLocation", func(t *testing.T) {
+	t.Run("Test FeedsAPIService GetPublicFeed", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.CountryAPI.GetPublicLocation(context.Background()).Execute()
+		resp, httpRes, err := apiClient.FeedsAPI.GetPublicFeed(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

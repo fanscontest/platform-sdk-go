@@ -1,15 +1,15 @@
-# \SponsorshipPackageV2API
+# \SponsorshipPackagesAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSponsorshipPackages**](SponsorshipPackageV2API.md#CreateSponsorshipPackages) | **Post** /v2/sponsorship-packages | Create Sponsorship Package (v2)
-[**CreateSponsorshipPackagesByIdCancel**](SponsorshipPackageV2API.md#CreateSponsorshipPackagesByIdCancel) | **Post** /v2/sponsorship-packages/{id}/cancel | Cancel Sponsorship Package (v2)
-[**GetSponsorshipPackages**](SponsorshipPackageV2API.md#GetSponsorshipPackages) | **Get** /v2/sponsorship-packages | Get Sponsorship Packages (v2)
-[**GetSponsorshipPackagesAvailable**](SponsorshipPackageV2API.md#GetSponsorshipPackagesAvailable) | **Get** /v2/sponsorship-packages/available | Get Available Packages (v2)
-[**GetSponsorshipPackagesByIdAgreement**](SponsorshipPackageV2API.md#GetSponsorshipPackagesByIdAgreement) | **Get** /v2/sponsorship-packages/{id}/agreement | Get Package Agreement (v2)
-[**GetSponsorshipPackagesByIdSponsorships**](SponsorshipPackageV2API.md#GetSponsorshipPackagesByIdSponsorships) | **Get** /v2/sponsorship-packages/{id}/sponsorships | Get Package Sponsorships (v2)
+[**CreateSponsorshipPackages**](SponsorshipPackagesAPI.md#CreateSponsorshipPackages) | **Post** /v2/sponsorship-packages | Create Sponsorship Package (v2)
+[**CreateSponsorshipPackagesByIdCancel**](SponsorshipPackagesAPI.md#CreateSponsorshipPackagesByIdCancel) | **Post** /v2/sponsorship-packages/{id}/cancel | Cancel Sponsorship Package (v2)
+[**GetSponsorshipPackages**](SponsorshipPackagesAPI.md#GetSponsorshipPackages) | **Get** /v2/sponsorship-packages | Get Sponsorship Packages (v2)
+[**GetSponsorshipPackagesAvailable**](SponsorshipPackagesAPI.md#GetSponsorshipPackagesAvailable) | **Get** /v2/sponsorship-packages/available | Get Available Packages (v2)
+[**GetSponsorshipPackagesByIdAgreement**](SponsorshipPackagesAPI.md#GetSponsorshipPackagesByIdAgreement) | **Get** /v2/sponsorship-packages/{id}/agreement | Get Package Agreement (v2)
+[**GetSponsorshipPackagesByIdSponsorships**](SponsorshipPackagesAPI.md#GetSponsorshipPackagesByIdSponsorships) | **Get** /v2/sponsorship-packages/{id}/sponsorships | Get Package Sponsorships (v2)
 
 
 
@@ -38,13 +38,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackageV2API.CreateSponsorshipPackages(context.Background()).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackages(context.Background()).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackageV2API.CreateSponsorshipPackages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateSponsorshipPackages`: DomainSponsorshipPackage
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackageV2API.CreateSponsorshipPackages`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.CreateSponsorshipPackages`: %v\n", resp)
 }
 ```
 
@@ -104,13 +104,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackageV2API.CreateSponsorshipPackagesByIdCancel(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackageV2API.CreateSponsorshipPackagesByIdCancel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateSponsorshipPackagesByIdCancel`: DomainSponsorshipPackage
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackageV2API.CreateSponsorshipPackagesByIdCancel`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel`: %v\n", resp)
 }
 ```
 
@@ -173,13 +173,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackageV2API.GetSponsorshipPackages(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackageV2API.GetSponsorshipPackages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipPackages`: []DomainSponsorshipPackage
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackageV2API.GetSponsorshipPackages`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackages`: %v\n", resp)
 }
 ```
 
@@ -236,13 +236,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackageV2API.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackageV2API.GetSponsorshipPackagesAvailable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipPackagesAvailable`: []DomainSponsorshipPackage
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackageV2API.GetSponsorshipPackagesAvailable`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable`: %v\n", resp)
 }
 ```
 
@@ -303,13 +303,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackageV2API.GetSponsorshipPackagesByIdAgreement(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackageV2API.GetSponsorshipPackagesByIdAgreement``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipPackagesByIdAgreement`: DomainSponsorshipPackageAgreement
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackageV2API.GetSponsorshipPackagesByIdAgreement`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement`: %v\n", resp)
 }
 ```
 
@@ -373,13 +373,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackageV2API.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackageV2API.GetSponsorshipPackagesByIdSponsorships``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipPackagesByIdSponsorships`: []DomainSponsorship
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackageV2API.GetSponsorshipPackagesByIdSponsorships`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships`: %v\n", resp)
 }
 ```
 

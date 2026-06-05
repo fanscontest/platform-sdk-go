@@ -1,10 +1,10 @@
-# \TeamPreferenceAPI
+# \TeamPreferencesAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UpdateTeamPreferenceByTeamSetId**](TeamPreferenceAPI.md#UpdateTeamPreferenceByTeamSetId) | **Put** /v2/team-preference/{teamSetId} | Set the caller&#39;s default team for a logical team set
+[**UpdateTeamPreferenceByTeamSetId**](TeamPreferencesAPI.md#UpdateTeamPreferenceByTeamSetId) | **Put** /v2/team-preference/{teamSetId} | Set the caller&#39;s default team for a logical team set
 
 
 
@@ -32,13 +32,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TeamPreferenceAPI.UpdateTeamPreferenceByTeamSetId(context.Background(), teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).Execute()
+	resp, r, err := apiClient.TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId(context.Background(), teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TeamPreferenceAPI.UpdateTeamPreferenceByTeamSetId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `UpdateTeamPreferenceByTeamSetId`: HandlerStatusResponse
-	fmt.Fprintf(os.Stdout, "Response from `TeamPreferenceAPI.UpdateTeamPreferenceByTeamSetId`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId`: %v\n", resp)
 }
 ```
 

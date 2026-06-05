@@ -1,13 +1,13 @@
-# \SponsorV2API
+# \SponsorsAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSponsors**](SponsorV2API.md#CreateSponsors) | **Post** /v2/sponsors | Create Sponsor (v2)
-[**GetSponsors**](SponsorV2API.md#GetSponsors) | **Get** /v2/sponsors | Get Sponsors (v2)
-[**GetSponsorsById**](SponsorV2API.md#GetSponsorsById) | **Get** /v2/sponsors/{id} | Get Sponsor by ID (v2)
-[**GetSponsorsByIdSponsorships**](SponsorV2API.md#GetSponsorsByIdSponsorships) | **Get** /v2/sponsors/{id}/sponsorships | Get Sponsor Sponsorships (v2)
+[**CreateSponsors**](SponsorsAPI.md#CreateSponsors) | **Post** /v2/sponsors | Create Sponsor (v2)
+[**GetSponsors**](SponsorsAPI.md#GetSponsors) | **Get** /v2/sponsors | Get Sponsors (v2)
+[**GetSponsorsById**](SponsorsAPI.md#GetSponsorsById) | **Get** /v2/sponsors/{id} | Get Sponsor by ID (v2)
+[**GetSponsorsByIdSponsorships**](SponsorsAPI.md#GetSponsorsByIdSponsorships) | **Get** /v2/sponsors/{id}/sponsorships | Get Sponsor Sponsorships (v2)
 
 
 
@@ -36,13 +36,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorV2API.CreateSponsors(context.Background()).RequestCreateSponsorRequest(requestCreateSponsorRequest).Execute()
+	resp, r, err := apiClient.SponsorsAPI.CreateSponsors(context.Background()).RequestCreateSponsorRequest(requestCreateSponsorRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorV2API.CreateSponsors``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.CreateSponsors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateSponsors`: DomainSponsor
-	fmt.Fprintf(os.Stdout, "Response from `SponsorV2API.CreateSponsors`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.CreateSponsors`: %v\n", resp)
 }
 ```
 
@@ -101,13 +101,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorV2API.GetSponsors(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorsAPI.GetSponsors(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorV2API.GetSponsors``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsors`: []DomainSponsor
-	fmt.Fprintf(os.Stdout, "Response from `SponsorV2API.GetSponsors`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsors`: %v\n", resp)
 }
 ```
 
@@ -163,13 +163,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorV2API.GetSponsorsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorsAPI.GetSponsorsById(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorV2API.GetSponsorsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsorsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorsById`: DomainSponsor
-	fmt.Fprintf(os.Stdout, "Response from `SponsorV2API.GetSponsorsById`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsorsById`: %v\n", resp)
 }
 ```
 
@@ -233,13 +233,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorV2API.GetSponsorsByIdSponsorships(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorsAPI.GetSponsorsByIdSponsorships(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorV2API.GetSponsorsByIdSponsorships``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsorsByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorsByIdSponsorships`: []DomainSponsorship
-	fmt.Fprintf(os.Stdout, "Response from `SponsorV2API.GetSponsorsByIdSponsorships`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsorsByIdSponsorships`: %v\n", resp)
 }
 ```
 

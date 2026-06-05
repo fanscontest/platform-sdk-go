@@ -21,12 +21,12 @@ import (
 )
 
 
-// CreativeContestAPIService CreativeContestAPI service
-type CreativeContestAPIService service
+// CreativeContestsAPIService CreativeContestsAPI service
+type CreativeContestsAPIService service
 
 type ApiCreateContestsByIdEntriesRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 	requestSubmitEntryRequest *RequestSubmitEntryRequest
 }
@@ -50,7 +50,7 @@ Submit a media entry (image or video) for a creative contest
  @param id Contest ID
  @return ApiCreateContestsByIdEntriesRequest
 */
-func (a *CreativeContestAPIService) CreateContestsByIdEntries(ctx context.Context, id string) ApiCreateContestsByIdEntriesRequest {
+func (a *CreativeContestsAPIService) CreateContestsByIdEntries(ctx context.Context, id string) ApiCreateContestsByIdEntriesRequest {
 	return ApiCreateContestsByIdEntriesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -60,7 +60,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdEntries(ctx context.Contex
 
 // Execute executes the request
 //  @return DomainEntry
-func (a *CreativeContestAPIService) CreateContestsByIdEntriesExecute(r ApiCreateContestsByIdEntriesRequest) (*DomainEntry, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreateContestsByIdEntriesRequest) (*DomainEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdEntriesExecute(r ApiCreate
 		localVarReturnValue  *DomainEntry
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateContestsByIdEntries")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdEntries")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -162,7 +162,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdEntriesExecute(r ApiCreate
 
 type ApiCreateContestsByIdEntriesByEntryIdScoreRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 	entryId string
 	requestScoreEntryRequest *RequestScoreEntryRequest
@@ -188,7 +188,7 @@ Score an entry as a juror (1-5)
  @param entryId Entry ID
  @return ApiCreateContestsByIdEntriesByEntryIdScoreRequest
 */
-func (a *CreativeContestAPIService) CreateContestsByIdEntriesByEntryIdScore(ctx context.Context, id string, entryId string) ApiCreateContestsByIdEntriesByEntryIdScoreRequest {
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScore(ctx context.Context, id string, entryId string) ApiCreateContestsByIdEntriesByEntryIdScoreRequest {
 	return ApiCreateContestsByIdEntriesByEntryIdScoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -199,7 +199,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdEntriesByEntryIdScore(ctx 
 
 // Execute executes the request
 //  @return DomainJurorScore
-func (a *CreativeContestAPIService) CreateContestsByIdEntriesByEntryIdScoreExecute(r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScore, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScoreExecute(r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScore, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -207,7 +207,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdEntriesByEntryIdScoreExecu
 		localVarReturnValue  *DomainJurorScore
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateContestsByIdEntriesByEntryIdScore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdEntriesByEntryIdScore")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -302,7 +302,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdEntriesByEntryIdScoreExecu
 
 type ApiCreateContestsByIdForceProceedRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 }
 
@@ -319,7 +319,7 @@ Force proceed with available jurors (requires ≥3 jurors)
  @param id Contest ID
  @return ApiCreateContestsByIdForceProceedRequest
 */
-func (a *CreativeContestAPIService) CreateContestsByIdForceProceed(ctx context.Context, id string) ApiCreateContestsByIdForceProceedRequest {
+func (a *CreativeContestsAPIService) CreateContestsByIdForceProceed(ctx context.Context, id string) ApiCreateContestsByIdForceProceedRequest {
 	return ApiCreateContestsByIdForceProceedRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -329,7 +329,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdForceProceed(ctx context.C
 
 // Execute executes the request
 //  @return HandlerStatusResponse
-func (a *CreativeContestAPIService) CreateContestsByIdForceProceedExecute(r ApiCreateContestsByIdForceProceedRequest) (*HandlerStatusResponse, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateContestsByIdForceProceedExecute(r ApiCreateContestsByIdForceProceedRequest) (*HandlerStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -337,7 +337,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdForceProceedExecute(r ApiC
 		localVarReturnValue  *HandlerStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateContestsByIdForceProceed")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdForceProceed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -426,7 +426,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdForceProceedExecute(r ApiC
 
 type ApiCreateContestsByIdJurorsInviteRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 	requestInviteJurorsRequest *RequestInviteJurorsRequest
 }
@@ -450,7 +450,7 @@ Invite specific members as jurors for a creative contest (creator only)
  @param id Contest ID
  @return ApiCreateContestsByIdJurorsInviteRequest
 */
-func (a *CreativeContestAPIService) CreateContestsByIdJurorsInvite(ctx context.Context, id string) ApiCreateContestsByIdJurorsInviteRequest {
+func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInvite(ctx context.Context, id string) ApiCreateContestsByIdJurorsInviteRequest {
 	return ApiCreateContestsByIdJurorsInviteRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -460,7 +460,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdJurorsInvite(ctx context.C
 
 // Execute executes the request
 //  @return HandlerStatusResponse
-func (a *CreativeContestAPIService) CreateContestsByIdJurorsInviteExecute(r ApiCreateContestsByIdJurorsInviteRequest) (*HandlerStatusResponse, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInviteExecute(r ApiCreateContestsByIdJurorsInviteRequest) (*HandlerStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -468,7 +468,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdJurorsInviteExecute(r ApiC
 		localVarReturnValue  *HandlerStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateContestsByIdJurorsInvite")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdJurorsInvite")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -573,7 +573,7 @@ func (a *CreativeContestAPIService) CreateContestsByIdJurorsInviteExecute(r ApiC
 
 type ApiCreateJurorsInvitationsByInvitationIdAcceptRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	invitationId string
 }
 
@@ -590,7 +590,7 @@ Accept a pending invitation to judge a contest
  @param invitationId Invitation ID
  @return ApiCreateJurorsInvitationsByInvitationIdAcceptRequest
 */
-func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdAccept(ctx context.Context, invitationId string) ApiCreateJurorsInvitationsByInvitationIdAcceptRequest {
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAccept(ctx context.Context, invitationId string) ApiCreateJurorsInvitationsByInvitationIdAcceptRequest {
 	return ApiCreateJurorsInvitationsByInvitationIdAcceptRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -600,7 +600,7 @@ func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdAccept(
 
 // Execute executes the request
 //  @return DomainJurorAssignment
-func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdAcceptExecute(r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) (*DomainJurorAssignment, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAcceptExecute(r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) (*DomainJurorAssignment, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -608,7 +608,7 @@ func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdAcceptE
 		localVarReturnValue  *DomainJurorAssignment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateJurorsInvitationsByInvitationIdAccept")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsInvitationsByInvitationIdAccept")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -719,7 +719,7 @@ func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdAcceptE
 
 type ApiCreateJurorsInvitationsByInvitationIdDeclineRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	invitationId string
 }
 
@@ -736,7 +736,7 @@ Decline a pending invitation to judge a contest
  @param invitationId Invitation ID
  @return ApiCreateJurorsInvitationsByInvitationIdDeclineRequest
 */
-func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdDecline(ctx context.Context, invitationId string) ApiCreateJurorsInvitationsByInvitationIdDeclineRequest {
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDecline(ctx context.Context, invitationId string) ApiCreateJurorsInvitationsByInvitationIdDeclineRequest {
 	return ApiCreateJurorsInvitationsByInvitationIdDeclineRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -746,7 +746,7 @@ func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdDecline
 
 // Execute executes the request
 //  @return HandlerStatusResponse
-func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdDeclineExecute(r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) (*HandlerStatusResponse, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclineExecute(r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) (*HandlerStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -754,7 +754,7 @@ func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdDecline
 		localVarReturnValue  *HandlerStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateJurorsInvitationsByInvitationIdDecline")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsInvitationsByInvitationIdDecline")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -865,7 +865,7 @@ func (a *CreativeContestAPIService) CreateJurorsInvitationsByInvitationIdDecline
 
 type ApiCreateJurorsOptInRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	requestOptInJurorRequest *RequestOptInJurorRequest
 }
 
@@ -887,7 +887,7 @@ Opt into the jury pool for specific categories
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateJurorsOptInRequest
 */
-func (a *CreativeContestAPIService) CreateJurorsOptIn(ctx context.Context) ApiCreateJurorsOptInRequest {
+func (a *CreativeContestsAPIService) CreateJurorsOptIn(ctx context.Context) ApiCreateJurorsOptInRequest {
 	return ApiCreateJurorsOptInRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -896,7 +896,7 @@ func (a *CreativeContestAPIService) CreateJurorsOptIn(ctx context.Context) ApiCr
 
 // Execute executes the request
 //  @return DomainJuror
-func (a *CreativeContestAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOptInRequest) (*DomainJuror, *http.Response, error) {
+func (a *CreativeContestsAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOptInRequest) (*DomainJuror, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -904,7 +904,7 @@ func (a *CreativeContestAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOp
 		localVarReturnValue  *DomainJuror
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.CreateJurorsOptIn")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsOptIn")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -997,7 +997,7 @@ func (a *CreativeContestAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOp
 
 type ApiDeleteContestsByIdEntriesRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 }
 
@@ -1014,7 +1014,7 @@ Withdraw a submitted entry (only allowed before contest deadline)
  @param id Contest ID
  @return ApiDeleteContestsByIdEntriesRequest
 */
-func (a *CreativeContestAPIService) DeleteContestsByIdEntries(ctx context.Context, id string) ApiDeleteContestsByIdEntriesRequest {
+func (a *CreativeContestsAPIService) DeleteContestsByIdEntries(ctx context.Context, id string) ApiDeleteContestsByIdEntriesRequest {
 	return ApiDeleteContestsByIdEntriesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1024,7 +1024,7 @@ func (a *CreativeContestAPIService) DeleteContestsByIdEntries(ctx context.Contex
 
 // Execute executes the request
 //  @return HandlerStatusResponse
-func (a *CreativeContestAPIService) DeleteContestsByIdEntriesExecute(r ApiDeleteContestsByIdEntriesRequest) (*HandlerStatusResponse, *http.Response, error) {
+func (a *CreativeContestsAPIService) DeleteContestsByIdEntriesExecute(r ApiDeleteContestsByIdEntriesRequest) (*HandlerStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -1032,7 +1032,7 @@ func (a *CreativeContestAPIService) DeleteContestsByIdEntriesExecute(r ApiDelete
 		localVarReturnValue  *HandlerStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.DeleteContestsByIdEntries")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.DeleteContestsByIdEntries")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1132,7 +1132,7 @@ func (a *CreativeContestAPIService) DeleteContestsByIdEntriesExecute(r ApiDelete
 
 type ApiGetContestsByIdEntriesRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 }
 
@@ -1149,7 +1149,7 @@ Get all entries for a creative contest (jurors see only assigned entries)
  @param id Contest ID
  @return ApiGetContestsByIdEntriesRequest
 */
-func (a *CreativeContestAPIService) GetContestsByIdEntries(ctx context.Context, id string) ApiGetContestsByIdEntriesRequest {
+func (a *CreativeContestsAPIService) GetContestsByIdEntries(ctx context.Context, id string) ApiGetContestsByIdEntriesRequest {
 	return ApiGetContestsByIdEntriesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1159,7 +1159,7 @@ func (a *CreativeContestAPIService) GetContestsByIdEntries(ctx context.Context, 
 
 // Execute executes the request
 //  @return []DomainEntry
-func (a *CreativeContestAPIService) GetContestsByIdEntriesExecute(r ApiGetContestsByIdEntriesRequest) ([]DomainEntry, *http.Response, error) {
+func (a *CreativeContestsAPIService) GetContestsByIdEntriesExecute(r ApiGetContestsByIdEntriesRequest) ([]DomainEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1167,7 +1167,7 @@ func (a *CreativeContestAPIService) GetContestsByIdEntriesExecute(r ApiGetContes
 		localVarReturnValue  []DomainEntry
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.GetContestsByIdEntries")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdEntries")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1256,7 +1256,7 @@ func (a *CreativeContestAPIService) GetContestsByIdEntriesExecute(r ApiGetContes
 
 type ApiGetContestsByIdJurorsRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 }
 
@@ -1273,7 +1273,7 @@ Get public list of jurors for a contest (visible after contest ends)
  @param id Contest ID
  @return ApiGetContestsByIdJurorsRequest
 */
-func (a *CreativeContestAPIService) GetContestsByIdJurors(ctx context.Context, id string) ApiGetContestsByIdJurorsRequest {
+func (a *CreativeContestsAPIService) GetContestsByIdJurors(ctx context.Context, id string) ApiGetContestsByIdJurorsRequest {
 	return ApiGetContestsByIdJurorsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1283,7 +1283,7 @@ func (a *CreativeContestAPIService) GetContestsByIdJurors(ctx context.Context, i
 
 // Execute executes the request
 //  @return []DomainJuror
-func (a *CreativeContestAPIService) GetContestsByIdJurorsExecute(r ApiGetContestsByIdJurorsRequest) ([]DomainJuror, *http.Response, error) {
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsExecute(r ApiGetContestsByIdJurorsRequest) ([]DomainJuror, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1291,7 +1291,7 @@ func (a *CreativeContestAPIService) GetContestsByIdJurorsExecute(r ApiGetContest
 		localVarReturnValue  []DomainJuror
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.GetContestsByIdJurors")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdJurors")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1380,7 +1380,7 @@ func (a *CreativeContestAPIService) GetContestsByIdJurorsExecute(r ApiGetContest
 
 type ApiGetContestsByIdJurorsInvitationsRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 }
 
@@ -1397,7 +1397,7 @@ Get all pending/declined/expired invitations for a contest (creator only)
  @param id Contest ID
  @return ApiGetContestsByIdJurorsInvitationsRequest
 */
-func (a *CreativeContestAPIService) GetContestsByIdJurorsInvitations(ctx context.Context, id string) ApiGetContestsByIdJurorsInvitationsRequest {
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitations(ctx context.Context, id string) ApiGetContestsByIdJurorsInvitationsRequest {
 	return ApiGetContestsByIdJurorsInvitationsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1407,7 +1407,7 @@ func (a *CreativeContestAPIService) GetContestsByIdJurorsInvitations(ctx context
 
 // Execute executes the request
 //  @return []DomainJurorAssignment
-func (a *CreativeContestAPIService) GetContestsByIdJurorsInvitationsExecute(r ApiGetContestsByIdJurorsInvitationsRequest) ([]DomainJurorAssignment, *http.Response, error) {
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r ApiGetContestsByIdJurorsInvitationsRequest) ([]DomainJurorAssignment, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1415,7 +1415,7 @@ func (a *CreativeContestAPIService) GetContestsByIdJurorsInvitationsExecute(r Ap
 		localVarReturnValue  []DomainJurorAssignment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.GetContestsByIdJurorsInvitations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdJurorsInvitations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1515,7 +1515,7 @@ func (a *CreativeContestAPIService) GetContestsByIdJurorsInvitationsExecute(r Ap
 
 type ApiGetJurorsAssignmentsRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 }
 
 func (r ApiGetJurorsAssignmentsRequest) Execute() ([]DomainJurorAssignment, *http.Response, error) {
@@ -1530,7 +1530,7 @@ Get all contest assignments for the current juror
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetJurorsAssignmentsRequest
 */
-func (a *CreativeContestAPIService) GetJurorsAssignments(ctx context.Context) ApiGetJurorsAssignmentsRequest {
+func (a *CreativeContestsAPIService) GetJurorsAssignments(ctx context.Context) ApiGetJurorsAssignmentsRequest {
 	return ApiGetJurorsAssignmentsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1539,7 +1539,7 @@ func (a *CreativeContestAPIService) GetJurorsAssignments(ctx context.Context) Ap
 
 // Execute executes the request
 //  @return []DomainJurorAssignment
-func (a *CreativeContestAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAssignmentsRequest) ([]DomainJurorAssignment, *http.Response, error) {
+func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAssignmentsRequest) ([]DomainJurorAssignment, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1547,7 +1547,7 @@ func (a *CreativeContestAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAs
 		localVarReturnValue  []DomainJurorAssignment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.GetJurorsAssignments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetJurorsAssignments")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1635,7 +1635,7 @@ func (a *CreativeContestAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAs
 
 type ApiGetJurorsInvitationsRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 }
 
 func (r ApiGetJurorsInvitationsRequest) Execute() ([]DomainJurorAssignment, *http.Response, error) {
@@ -1650,7 +1650,7 @@ Get all pending invitations for the current user
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetJurorsInvitationsRequest
 */
-func (a *CreativeContestAPIService) GetJurorsInvitations(ctx context.Context) ApiGetJurorsInvitationsRequest {
+func (a *CreativeContestsAPIService) GetJurorsInvitations(ctx context.Context) ApiGetJurorsInvitationsRequest {
 	return ApiGetJurorsInvitationsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1659,7 +1659,7 @@ func (a *CreativeContestAPIService) GetJurorsInvitations(ctx context.Context) Ap
 
 // Execute executes the request
 //  @return []DomainJurorAssignment
-func (a *CreativeContestAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsInvitationsRequest) ([]DomainJurorAssignment, *http.Response, error) {
+func (a *CreativeContestsAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsInvitationsRequest) ([]DomainJurorAssignment, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1667,7 +1667,7 @@ func (a *CreativeContestAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsIn
 		localVarReturnValue  []DomainJurorAssignment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.GetJurorsInvitations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetJurorsInvitations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1744,7 +1744,7 @@ func (a *CreativeContestAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsIn
 
 type ApiUpdateContestsByIdEntriesByEntryIdScoreRequest struct {
 	ctx context.Context
-	ApiService *CreativeContestAPIService
+	ApiService *CreativeContestsAPIService
 	id string
 	entryId string
 	requestScoreEntryRequest *RequestScoreEntryRequest
@@ -1770,7 +1770,7 @@ Score an entry as a juror (1-5)
  @param entryId Entry ID
  @return ApiUpdateContestsByIdEntriesByEntryIdScoreRequest
 */
-func (a *CreativeContestAPIService) UpdateContestsByIdEntriesByEntryIdScore(ctx context.Context, id string, entryId string) ApiUpdateContestsByIdEntriesByEntryIdScoreRequest {
+func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScore(ctx context.Context, id string, entryId string) ApiUpdateContestsByIdEntriesByEntryIdScoreRequest {
 	return ApiUpdateContestsByIdEntriesByEntryIdScoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1781,7 +1781,7 @@ func (a *CreativeContestAPIService) UpdateContestsByIdEntriesByEntryIdScore(ctx 
 
 // Execute executes the request
 //  @return DomainJurorScore
-func (a *CreativeContestAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecute(r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScore, *http.Response, error) {
+func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecute(r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScore, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1789,7 +1789,7 @@ func (a *CreativeContestAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecu
 		localVarReturnValue  *DomainJurorScore
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestAPIService.UpdateContestsByIdEntriesByEntryIdScore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.UpdateContestsByIdEntriesByEntryIdScore")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

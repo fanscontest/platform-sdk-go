@@ -32,6 +32,7 @@ Method | HTTP request | Description
 [**GetPublicContestsByContestIdBuddyBoardsByBoardId**](ContestsAPI.md#GetPublicContestsByContestIdBuddyBoardsByBoardId) | **Get** /v2/public/contests/{contestId}/buddy-boards/{boardId} | Get buddy board view (metadata + scores filtered to board members)
 [**GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers**](ContestsAPI.md#GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers) | **Get** /v2/public/contests/{contestId}/buddy-boards/{boardId}/members | List buddy board members (public or authed)
 [**GetPublicContestsById**](ContestsAPI.md#GetPublicContestsById) | **Get** /v2/public/contests/{id} | Get a contest by ID
+[**GetPublicContestsByIdGroups**](ContestsAPI.md#GetPublicContestsByIdGroups) | **Get** /v2/public/contests/{id}/groups | Get Contest Groups
 [**GetPublicContestsByIdSubmissionFeed**](ContestsAPI.md#GetPublicContestsByIdSubmissionFeed) | **Get** /v2/public/contests/{id}/submission-feed | Get the real-time feed of contest submissions (cursor-paginated)
 [**GetPublicContestsSearchKeywordByKeyword**](ContestsAPI.md#GetPublicContestsSearchKeywordByKeyword) | **Get** /v2/public/contests/searchKeyword/{keyword} | Search public contests by keyword (cursor-paginated)
 [**PatchContestsById**](ContestsAPI.md#PatchContestsById) | **Patch** /v2/contests/{id} | Update a contest
@@ -2020,6 +2021,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DomainContest**](DomainContest.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPublicContestsByIdGroups
+
+> DomainContestGroups GetPublicContestsByIdGroups(ctx, id).Execute()
+
+Get Contest Groups
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Contest ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ContestsAPI.GetPublicContestsByIdGroups(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsByIdGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPublicContestsByIdGroups`: DomainContestGroups
+	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsByIdGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Contest ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPublicContestsByIdGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DomainContestGroups**](DomainContestGroups.md)
 
 ### Authorization
 

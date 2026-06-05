@@ -1,11 +1,11 @@
-# \CountryAPI
+# \CountriesAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetPublicCountries**](CountryAPI.md#GetPublicCountries) | **Get** /v2/public/countries | List enabled countries (sorted, with native names for non-English Accept-Language)
-[**GetPublicLocation**](CountryAPI.md#GetPublicLocation) | **Get** /v2/public/location | Resolve the caller&#39;s country by IP (CF-Ipcountry, then Maxmind)
+[**GetPublicCountries**](CountriesAPI.md#GetPublicCountries) | **Get** /v2/public/countries | List enabled countries (sorted, with native names for non-English Accept-Language)
+[**GetPublicLocation**](CountriesAPI.md#GetPublicLocation) | **Get** /v2/public/location | Resolve the caller&#39;s country by IP (CF-Ipcountry, then Maxmind)
 
 
 
@@ -31,13 +31,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CountryAPI.GetPublicCountries(context.Background()).Execute()
+	resp, r, err := apiClient.CountriesAPI.GetPublicCountries(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CountryAPI.GetPublicCountries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicCountries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetPublicCountries`: []DomainCountry
-	fmt.Fprintf(os.Stdout, "Response from `CountryAPI.GetPublicCountries`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `CountriesAPI.GetPublicCountries`: %v\n", resp)
 }
 ```
 
@@ -90,13 +90,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CountryAPI.GetPublicLocation(context.Background()).Execute()
+	resp, r, err := apiClient.CountriesAPI.GetPublicLocation(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CountryAPI.GetPublicLocation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicLocation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetPublicLocation`: DomainCountry
-	fmt.Fprintf(os.Stdout, "Response from `CountryAPI.GetPublicLocation`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `CountriesAPI.GetPublicLocation`: %v\n", resp)
 }
 ```
 

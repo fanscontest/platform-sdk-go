@@ -21,12 +21,12 @@ import (
 )
 
 
-// SponsorshipPackageV2APIService SponsorshipPackageV2API service
-type SponsorshipPackageV2APIService service
+// SponsorshipPackagesAPIService SponsorshipPackagesAPI service
+type SponsorshipPackagesAPIService service
 
 type ApiCreateSponsorshipPackagesRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipPackageV2APIService
+	ApiService *SponsorshipPackagesAPIService
 	requestCreateSponsorshipPackageRequest *RequestCreateSponsorshipPackageRequest
 }
 
@@ -48,7 +48,7 @@ Create a sponsorship package for upfront funding
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateSponsorshipPackagesRequest
 */
-func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackages(ctx context.Context) ApiCreateSponsorshipPackagesRequest {
+func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackages(ctx context.Context) ApiCreateSponsorshipPackagesRequest {
 	return ApiCreateSponsorshipPackagesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -57,7 +57,7 @@ func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackages(ctx context.C
 
 // Execute executes the request
 //  @return DomainSponsorshipPackage
-func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesExecute(r ApiCreateSponsorshipPackagesRequest) (*DomainSponsorshipPackage, *http.Response, error) {
+func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesExecute(r ApiCreateSponsorshipPackagesRequest) (*DomainSponsorshipPackage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesExecute(r ApiC
 		localVarReturnValue  *DomainSponsorshipPackage
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackageV2APIService.CreateSponsorshipPackages")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.CreateSponsorshipPackages")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -158,7 +158,7 @@ func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesExecute(r ApiC
 
 type ApiCreateSponsorshipPackagesByIdCancelRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipPackageV2APIService
+	ApiService *SponsorshipPackagesAPIService
 	id string
 }
 
@@ -175,7 +175,7 @@ Cancel a sponsorship package. Cannot cancel if package has accepted sponsorships
  @param id Package ID
  @return ApiCreateSponsorshipPackagesByIdCancelRequest
 */
-func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesByIdCancel(ctx context.Context, id string) ApiCreateSponsorshipPackagesByIdCancelRequest {
+func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesByIdCancel(ctx context.Context, id string) ApiCreateSponsorshipPackagesByIdCancelRequest {
 	return ApiCreateSponsorshipPackagesByIdCancelRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -185,7 +185,7 @@ func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesByIdCancel(ctx
 
 // Execute executes the request
 //  @return DomainSponsorshipPackage
-func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesByIdCancelExecute(r ApiCreateSponsorshipPackagesByIdCancelRequest) (*DomainSponsorshipPackage, *http.Response, error) {
+func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesByIdCancelExecute(r ApiCreateSponsorshipPackagesByIdCancelRequest) (*DomainSponsorshipPackage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -193,7 +193,7 @@ func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesByIdCancelExec
 		localVarReturnValue  *DomainSponsorshipPackage
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackageV2APIService.CreateSponsorshipPackagesByIdCancel")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.CreateSponsorshipPackagesByIdCancel")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -304,7 +304,7 @@ func (a *SponsorshipPackageV2APIService) CreateSponsorshipPackagesByIdCancelExec
 
 type ApiGetSponsorshipPackagesRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipPackageV2APIService
+	ApiService *SponsorshipPackagesAPIService
 }
 
 func (r ApiGetSponsorshipPackagesRequest) Execute() ([]DomainSponsorshipPackage, *http.Response, error) {
@@ -319,7 +319,7 @@ Get all sponsorship packages for the logged-in user
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSponsorshipPackagesRequest
 */
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackages(ctx context.Context) ApiGetSponsorshipPackagesRequest {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackages(ctx context.Context) ApiGetSponsorshipPackagesRequest {
 	return ApiGetSponsorshipPackagesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -328,7 +328,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackages(ctx context.Cont
 
 // Execute executes the request
 //  @return []DomainSponsorshipPackage
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesExecute(r ApiGetSponsorshipPackagesRequest) ([]DomainSponsorshipPackage, *http.Response, error) {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesExecute(r ApiGetSponsorshipPackagesRequest) ([]DomainSponsorshipPackage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -336,7 +336,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesExecute(r ApiGetS
 		localVarReturnValue  []DomainSponsorshipPackage
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackageV2APIService.GetSponsorshipPackages")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackages")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -424,7 +424,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesExecute(r ApiGetS
 
 type ApiGetSponsorshipPackagesAvailableRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipPackageV2APIService
+	ApiService *SponsorshipPackagesAPIService
 	sponsorId *string
 	packageId *string
 }
@@ -453,7 +453,7 @@ Get available sponsorship packages for contest creation. Public endpoint to disc
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSponsorshipPackagesAvailableRequest
 */
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesAvailable(ctx context.Context) ApiGetSponsorshipPackagesAvailableRequest {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesAvailable(ctx context.Context) ApiGetSponsorshipPackagesAvailableRequest {
 	return ApiGetSponsorshipPackagesAvailableRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -462,7 +462,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesAvailable(ctx con
 
 // Execute executes the request
 //  @return []DomainSponsorshipPackage
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesAvailableExecute(r ApiGetSponsorshipPackagesAvailableRequest) ([]DomainSponsorshipPackage, *http.Response, error) {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesAvailableExecute(r ApiGetSponsorshipPackagesAvailableRequest) ([]DomainSponsorshipPackage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -470,7 +470,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesAvailableExecute(
 		localVarReturnValue  []DomainSponsorshipPackage
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackageV2APIService.GetSponsorshipPackagesAvailable")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackagesAvailable")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -564,7 +564,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesAvailableExecute(
 
 type ApiGetSponsorshipPackagesByIdAgreementRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipPackageV2APIService
+	ApiService *SponsorshipPackagesAPIService
 	id string
 }
 
@@ -581,7 +581,7 @@ Get agreement details for a sponsorship package
  @param id Package ID
  @return ApiGetSponsorshipPackagesByIdAgreementRequest
 */
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdAgreement(ctx context.Context, id string) ApiGetSponsorshipPackagesByIdAgreementRequest {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdAgreement(ctx context.Context, id string) ApiGetSponsorshipPackagesByIdAgreementRequest {
 	return ApiGetSponsorshipPackagesByIdAgreementRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -591,7 +591,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdAgreement(ctx
 
 // Execute executes the request
 //  @return DomainSponsorshipPackageAgreement
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdAgreementExecute(r ApiGetSponsorshipPackagesByIdAgreementRequest) (*DomainSponsorshipPackageAgreement, *http.Response, error) {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdAgreementExecute(r ApiGetSponsorshipPackagesByIdAgreementRequest) (*DomainSponsorshipPackageAgreement, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -599,7 +599,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdAgreementExec
 		localVarReturnValue  *DomainSponsorshipPackageAgreement
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackageV2APIService.GetSponsorshipPackagesByIdAgreement")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackagesByIdAgreement")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -710,7 +710,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdAgreementExec
 
 type ApiGetSponsorshipPackagesByIdSponsorshipsRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipPackageV2APIService
+	ApiService *SponsorshipPackagesAPIService
 	id string
 }
 
@@ -727,7 +727,7 @@ Get all sponsorships for a package
  @param id Package ID
  @return ApiGetSponsorshipPackagesByIdSponsorshipsRequest
 */
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdSponsorships(ctx context.Context, id string) ApiGetSponsorshipPackagesByIdSponsorshipsRequest {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdSponsorships(ctx context.Context, id string) ApiGetSponsorshipPackagesByIdSponsorshipsRequest {
 	return ApiGetSponsorshipPackagesByIdSponsorshipsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -737,7 +737,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdSponsorships(
 
 // Execute executes the request
 //  @return []DomainSponsorship
-func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdSponsorshipsExecute(r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) ([]DomainSponsorship, *http.Response, error) {
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdSponsorshipsExecute(r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) ([]DomainSponsorship, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -745,7 +745,7 @@ func (a *SponsorshipPackageV2APIService) GetSponsorshipPackagesByIdSponsorshipsE
 		localVarReturnValue  []DomainSponsorship
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackageV2APIService.GetSponsorshipPackagesByIdSponsorships")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackagesByIdSponsorships")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

@@ -1,15 +1,15 @@
-# \SponsorshipTermV2API
+# \SponsorshipTermsAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSponsorshipTerms**](SponsorshipTermV2API.md#CreateSponsorshipTerms) | **Post** /v2/sponsorship-terms | Create Sponsorship Term (v2)
-[**DeleteSponsorshipTermsById**](SponsorshipTermV2API.md#DeleteSponsorshipTermsById) | **Delete** /v2/sponsorship-terms/{id} | Deactivate Sponsorship Term (v2)
-[**GetSponsorshipTerms**](SponsorshipTermV2API.md#GetSponsorshipTerms) | **Get** /v2/sponsorship-terms | Get Sponsorship Terms (v2)
-[**GetSponsorshipTermsById**](SponsorshipTermV2API.md#GetSponsorshipTermsById) | **Get** /v2/sponsorship-terms/{id} | Get Sponsorship Term (v2)
-[**GetSponsorshipTermsPlatform**](SponsorshipTermV2API.md#GetSponsorshipTermsPlatform) | **Get** /v2/sponsorship-terms/platform | Get Platform Terms (v2)
-[**UpdateSponsorshipTermsById**](SponsorshipTermV2API.md#UpdateSponsorshipTermsById) | **Put** /v2/sponsorship-terms/{id} | Update Sponsorship Term (v2)
+[**CreateSponsorshipTerms**](SponsorshipTermsAPI.md#CreateSponsorshipTerms) | **Post** /v2/sponsorship-terms | Create Sponsorship Term (v2)
+[**DeleteSponsorshipTermsById**](SponsorshipTermsAPI.md#DeleteSponsorshipTermsById) | **Delete** /v2/sponsorship-terms/{id} | Deactivate Sponsorship Term (v2)
+[**GetSponsorshipTerms**](SponsorshipTermsAPI.md#GetSponsorshipTerms) | **Get** /v2/sponsorship-terms | Get Sponsorship Terms (v2)
+[**GetSponsorshipTermsById**](SponsorshipTermsAPI.md#GetSponsorshipTermsById) | **Get** /v2/sponsorship-terms/{id} | Get Sponsorship Term (v2)
+[**GetSponsorshipTermsPlatform**](SponsorshipTermsAPI.md#GetSponsorshipTermsPlatform) | **Get** /v2/sponsorship-terms/platform | Get Platform Terms (v2)
+[**UpdateSponsorshipTermsById**](SponsorshipTermsAPI.md#UpdateSponsorshipTermsById) | **Put** /v2/sponsorship-terms/{id} | Update Sponsorship Term (v2)
 
 
 
@@ -38,13 +38,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermV2API.CreateSponsorshipTerms(context.Background()).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.CreateSponsorshipTerms(context.Background()).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermV2API.CreateSponsorshipTerms``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.CreateSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateSponsorshipTerms`: DomainSponsorshipTerm
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermV2API.CreateSponsorshipTerms`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.CreateSponsorshipTerms`: %v\n", resp)
 }
 ```
 
@@ -104,13 +104,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermV2API.DeleteSponsorshipTermsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.DeleteSponsorshipTermsById(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermV2API.DeleteSponsorshipTermsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.DeleteSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `DeleteSponsorshipTermsById`: HandlerStatusResponse
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermV2API.DeleteSponsorshipTermsById`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.DeleteSponsorshipTermsById`: %v\n", resp)
 }
 ```
 
@@ -173,13 +173,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermV2API.GetSponsorshipTerms(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTerms(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermV2API.GetSponsorshipTerms``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipTerms`: []DomainSponsorshipTerm
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermV2API.GetSponsorshipTerms`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTerms`: %v\n", resp)
 }
 ```
 
@@ -235,13 +235,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermV2API.GetSponsorshipTermsById(context.Background(), id).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsById(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermV2API.GetSponsorshipTermsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipTermsById`: DomainSponsorshipTerm
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermV2API.GetSponsorshipTermsById`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTermsById`: %v\n", resp)
 }
 ```
 
@@ -304,13 +304,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermV2API.GetSponsorshipTermsPlatform(context.Background()).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsPlatform(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermV2API.GetSponsorshipTermsPlatform``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsPlatform``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetSponsorshipTermsPlatform`: []DomainSponsorshipTerm
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermV2API.GetSponsorshipTermsPlatform`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTermsPlatform`: %v\n", resp)
 }
 ```
 
@@ -367,13 +367,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermV2API.UpdateSponsorshipTermsById(context.Background(), id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.UpdateSponsorshipTermsById(context.Background(), id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermV2API.UpdateSponsorshipTermsById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.UpdateSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `UpdateSponsorshipTermsById`: DomainSponsorshipTerm
-	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermV2API.UpdateSponsorshipTermsById`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.UpdateSponsorshipTermsById`: %v\n", resp)
 }
 ```
 

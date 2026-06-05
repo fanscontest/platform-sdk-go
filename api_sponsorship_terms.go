@@ -21,12 +21,12 @@ import (
 )
 
 
-// SponsorshipTermV2APIService SponsorshipTermV2API service
-type SponsorshipTermV2APIService service
+// SponsorshipTermsAPIService SponsorshipTermsAPI service
+type SponsorshipTermsAPIService service
 
 type ApiCreateSponsorshipTermsRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipTermV2APIService
+	ApiService *SponsorshipTermsAPIService
 	requestCreateSponsorshipTermRequest *RequestCreateSponsorshipTermRequest
 }
 
@@ -48,7 +48,7 @@ Create a new sponsorship term (platform or sponsor-owned)
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateSponsorshipTermsRequest
 */
-func (a *SponsorshipTermV2APIService) CreateSponsorshipTerms(ctx context.Context) ApiCreateSponsorshipTermsRequest {
+func (a *SponsorshipTermsAPIService) CreateSponsorshipTerms(ctx context.Context) ApiCreateSponsorshipTermsRequest {
 	return ApiCreateSponsorshipTermsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -57,7 +57,7 @@ func (a *SponsorshipTermV2APIService) CreateSponsorshipTerms(ctx context.Context
 
 // Execute executes the request
 //  @return DomainSponsorshipTerm
-func (a *SponsorshipTermV2APIService) CreateSponsorshipTermsExecute(r ApiCreateSponsorshipTermsRequest) (*DomainSponsorshipTerm, *http.Response, error) {
+func (a *SponsorshipTermsAPIService) CreateSponsorshipTermsExecute(r ApiCreateSponsorshipTermsRequest) (*DomainSponsorshipTerm, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *SponsorshipTermV2APIService) CreateSponsorshipTermsExecute(r ApiCreateS
 		localVarReturnValue  *DomainSponsorshipTerm
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermV2APIService.CreateSponsorshipTerms")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.CreateSponsorshipTerms")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -158,7 +158,7 @@ func (a *SponsorshipTermV2APIService) CreateSponsorshipTermsExecute(r ApiCreateS
 
 type ApiDeleteSponsorshipTermsByIdRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipTermV2APIService
+	ApiService *SponsorshipTermsAPIService
 	id string
 }
 
@@ -175,7 +175,7 @@ Deactivate a term (soft delete)
  @param id Term ID
  @return ApiDeleteSponsorshipTermsByIdRequest
 */
-func (a *SponsorshipTermV2APIService) DeleteSponsorshipTermsById(ctx context.Context, id string) ApiDeleteSponsorshipTermsByIdRequest {
+func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsById(ctx context.Context, id string) ApiDeleteSponsorshipTermsByIdRequest {
 	return ApiDeleteSponsorshipTermsByIdRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -185,7 +185,7 @@ func (a *SponsorshipTermV2APIService) DeleteSponsorshipTermsById(ctx context.Con
 
 // Execute executes the request
 //  @return HandlerStatusResponse
-func (a *SponsorshipTermV2APIService) DeleteSponsorshipTermsByIdExecute(r ApiDeleteSponsorshipTermsByIdRequest) (*HandlerStatusResponse, *http.Response, error) {
+func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsByIdExecute(r ApiDeleteSponsorshipTermsByIdRequest) (*HandlerStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -193,7 +193,7 @@ func (a *SponsorshipTermV2APIService) DeleteSponsorshipTermsByIdExecute(r ApiDel
 		localVarReturnValue  *HandlerStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermV2APIService.DeleteSponsorshipTermsById")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.DeleteSponsorshipTermsById")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -304,7 +304,7 @@ func (a *SponsorshipTermV2APIService) DeleteSponsorshipTermsByIdExecute(r ApiDel
 
 type ApiGetSponsorshipTermsRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipTermV2APIService
+	ApiService *SponsorshipTermsAPIService
 }
 
 func (r ApiGetSponsorshipTermsRequest) Execute() ([]DomainSponsorshipTerm, *http.Response, error) {
@@ -319,7 +319,7 @@ Get available terms (platform + sponsor's own terms)
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSponsorshipTermsRequest
 */
-func (a *SponsorshipTermV2APIService) GetSponsorshipTerms(ctx context.Context) ApiGetSponsorshipTermsRequest {
+func (a *SponsorshipTermsAPIService) GetSponsorshipTerms(ctx context.Context) ApiGetSponsorshipTermsRequest {
 	return ApiGetSponsorshipTermsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -328,7 +328,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTerms(ctx context.Context) A
 
 // Execute executes the request
 //  @return []DomainSponsorshipTerm
-func (a *SponsorshipTermV2APIService) GetSponsorshipTermsExecute(r ApiGetSponsorshipTermsRequest) ([]DomainSponsorshipTerm, *http.Response, error) {
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsExecute(r ApiGetSponsorshipTermsRequest) ([]DomainSponsorshipTerm, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -336,7 +336,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsExecute(r ApiGetSponsor
 		localVarReturnValue  []DomainSponsorshipTerm
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermV2APIService.GetSponsorshipTerms")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.GetSponsorshipTerms")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -424,7 +424,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsExecute(r ApiGetSponsor
 
 type ApiGetSponsorshipTermsByIdRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipTermV2APIService
+	ApiService *SponsorshipTermsAPIService
 	id string
 }
 
@@ -441,7 +441,7 @@ Get term details by ID
  @param id Term ID
  @return ApiGetSponsorshipTermsByIdRequest
 */
-func (a *SponsorshipTermV2APIService) GetSponsorshipTermsById(ctx context.Context, id string) ApiGetSponsorshipTermsByIdRequest {
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsById(ctx context.Context, id string) ApiGetSponsorshipTermsByIdRequest {
 	return ApiGetSponsorshipTermsByIdRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -451,7 +451,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsById(ctx context.Contex
 
 // Execute executes the request
 //  @return DomainSponsorshipTerm
-func (a *SponsorshipTermV2APIService) GetSponsorshipTermsByIdExecute(r ApiGetSponsorshipTermsByIdRequest) (*DomainSponsorshipTerm, *http.Response, error) {
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsByIdExecute(r ApiGetSponsorshipTermsByIdRequest) (*DomainSponsorshipTerm, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -459,7 +459,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsByIdExecute(r ApiGetSpo
 		localVarReturnValue  *DomainSponsorshipTerm
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermV2APIService.GetSponsorshipTermsById")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.GetSponsorshipTermsById")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -559,7 +559,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsByIdExecute(r ApiGetSpo
 
 type ApiGetSponsorshipTermsPlatformRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipTermV2APIService
+	ApiService *SponsorshipTermsAPIService
 }
 
 func (r ApiGetSponsorshipTermsPlatformRequest) Execute() ([]DomainSponsorshipTerm, *http.Response, error) {
@@ -574,7 +574,7 @@ Get all platform-owned terms
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSponsorshipTermsPlatformRequest
 */
-func (a *SponsorshipTermV2APIService) GetSponsorshipTermsPlatform(ctx context.Context) ApiGetSponsorshipTermsPlatformRequest {
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatform(ctx context.Context) ApiGetSponsorshipTermsPlatformRequest {
 	return ApiGetSponsorshipTermsPlatformRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -583,7 +583,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsPlatform(ctx context.Co
 
 // Execute executes the request
 //  @return []DomainSponsorshipTerm
-func (a *SponsorshipTermV2APIService) GetSponsorshipTermsPlatformExecute(r ApiGetSponsorshipTermsPlatformRequest) ([]DomainSponsorshipTerm, *http.Response, error) {
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatformExecute(r ApiGetSponsorshipTermsPlatformRequest) ([]DomainSponsorshipTerm, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -591,7 +591,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsPlatformExecute(r ApiGe
 		localVarReturnValue  []DomainSponsorshipTerm
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermV2APIService.GetSponsorshipTermsPlatform")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.GetSponsorshipTermsPlatform")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -679,7 +679,7 @@ func (a *SponsorshipTermV2APIService) GetSponsorshipTermsPlatformExecute(r ApiGe
 
 type ApiUpdateSponsorshipTermsByIdRequest struct {
 	ctx context.Context
-	ApiService *SponsorshipTermV2APIService
+	ApiService *SponsorshipTermsAPIService
 	id string
 	requestUpdateSponsorshipTermRequest *RequestUpdateSponsorshipTermRequest
 }
@@ -703,7 +703,7 @@ Update a term (version must be incremented)
  @param id Term ID
  @return ApiUpdateSponsorshipTermsByIdRequest
 */
-func (a *SponsorshipTermV2APIService) UpdateSponsorshipTermsById(ctx context.Context, id string) ApiUpdateSponsorshipTermsByIdRequest {
+func (a *SponsorshipTermsAPIService) UpdateSponsorshipTermsById(ctx context.Context, id string) ApiUpdateSponsorshipTermsByIdRequest {
 	return ApiUpdateSponsorshipTermsByIdRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -713,7 +713,7 @@ func (a *SponsorshipTermV2APIService) UpdateSponsorshipTermsById(ctx context.Con
 
 // Execute executes the request
 //  @return DomainSponsorshipTerm
-func (a *SponsorshipTermV2APIService) UpdateSponsorshipTermsByIdExecute(r ApiUpdateSponsorshipTermsByIdRequest) (*DomainSponsorshipTerm, *http.Response, error) {
+func (a *SponsorshipTermsAPIService) UpdateSponsorshipTermsByIdExecute(r ApiUpdateSponsorshipTermsByIdRequest) (*DomainSponsorshipTerm, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -721,7 +721,7 @@ func (a *SponsorshipTermV2APIService) UpdateSponsorshipTermsByIdExecute(r ApiUpd
 		localVarReturnValue  *DomainSponsorshipTerm
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermV2APIService.UpdateSponsorshipTermsById")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.UpdateSponsorshipTermsById")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

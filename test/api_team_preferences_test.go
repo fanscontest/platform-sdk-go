@@ -1,7 +1,7 @@
 /*
 User Management API
 
-Testing ContestAPIService
+Testing TeamPreferencesAPIService
 
 */
 
@@ -17,18 +17,18 @@ import (
 	openapiclient "github.com/fanscontest/platform-sdk-go"
 )
 
-func Test_platform_ContestAPIService(t *testing.T) {
+func Test_platform_TeamPreferencesAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ContestAPIService GetPublicContestsByIdGroups", func(t *testing.T) {
+	t.Run("Test TeamPreferencesAPIService UpdateTeamPreferenceByTeamSetId", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
+		var teamSetId string
 
-		resp, httpRes, err := apiClient.ContestAPI.GetPublicContestsByIdGroups(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId(context.Background(), teamSetId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

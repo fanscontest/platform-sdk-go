@@ -1,7 +1,7 @@
 /*
 User Management API
 
-Testing SponsorshipTermV2APIService
+Testing SponsorshipTermsAPIService
 
 */
 
@@ -17,16 +17,16 @@ import (
 	openapiclient "github.com/fanscontest/platform-sdk-go"
 )
 
-func Test_platform_SponsorshipTermV2APIService(t *testing.T) {
+func Test_platform_SponsorshipTermsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SponsorshipTermV2APIService CreateSponsorshipTerms", func(t *testing.T) {
+	t.Run("Test SponsorshipTermsAPIService CreateSponsorshipTerms", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.SponsorshipTermV2API.CreateSponsorshipTerms(context.Background()).Execute()
+		resp, httpRes, err := apiClient.SponsorshipTermsAPI.CreateSponsorshipTerms(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,13 +34,13 @@ func Test_platform_SponsorshipTermV2APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SponsorshipTermV2APIService DeleteSponsorshipTermsById", func(t *testing.T) {
+	t.Run("Test SponsorshipTermsAPIService DeleteSponsorshipTermsById", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.SponsorshipTermV2API.DeleteSponsorshipTermsById(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.SponsorshipTermsAPI.DeleteSponsorshipTermsById(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -48,11 +48,11 @@ func Test_platform_SponsorshipTermV2APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SponsorshipTermV2APIService GetSponsorshipTerms", func(t *testing.T) {
+	t.Run("Test SponsorshipTermsAPIService GetSponsorshipTerms", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.SponsorshipTermV2API.GetSponsorshipTerms(context.Background()).Execute()
+		resp, httpRes, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTerms(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -60,39 +60,39 @@ func Test_platform_SponsorshipTermV2APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SponsorshipTermV2APIService GetSponsorshipTermsById", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.SponsorshipTermV2API.GetSponsorshipTermsById(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SponsorshipTermV2APIService GetSponsorshipTermsPlatform", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.SponsorshipTermV2API.GetSponsorshipTermsPlatform(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SponsorshipTermV2APIService UpdateSponsorshipTermsById", func(t *testing.T) {
+	t.Run("Test SponsorshipTermsAPIService GetSponsorshipTermsById", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.SponsorshipTermV2API.UpdateSponsorshipTermsById(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsById(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SponsorshipTermsAPIService GetSponsorshipTermsPlatform", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsPlatform(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SponsorshipTermsAPIService UpdateSponsorshipTermsById", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.SponsorshipTermsAPI.UpdateSponsorshipTermsById(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

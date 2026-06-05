@@ -1,7 +1,7 @@
 /*
 User Management API
 
-Testing ChannelAPIService
+Testing CountriesAPIService
 
 */
 
@@ -17,18 +17,16 @@ import (
 	openapiclient "github.com/fanscontest/platform-sdk-go"
 )
 
-func Test_platform_ChannelAPIService(t *testing.T) {
+func Test_platform_CountriesAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ChannelAPIService CreateChannelsByIdReport", func(t *testing.T) {
+	t.Run("Test CountriesAPIService GetPublicCountries", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
-
-		resp, httpRes, err := apiClient.ChannelAPI.CreateChannelsByIdReport(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.CountriesAPI.GetPublicCountries(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,13 +34,11 @@ func Test_platform_ChannelAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ChannelAPIService PatchChannelsByIdAccessCode", func(t *testing.T) {
+	t.Run("Test CountriesAPIService GetPublicLocation", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
-
-		resp, httpRes, err := apiClient.ChannelAPI.PatchChannelsByIdAccessCode(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.CountriesAPI.GetPublicLocation(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

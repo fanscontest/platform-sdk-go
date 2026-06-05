@@ -24,42 +24,36 @@ tags:
   x-displayName: Stans
 - name: Channels
   x-displayName: Channels
-- name: Channel
-  x-displayName: Channel
 - name: Contests
   x-displayName: Contests
 - name: Subscriptions
   x-displayName: Subscriptions
-- name: Tournament
-  x-displayName: Tournament
-- name: Sponsorship v2
-  x-displayName: Sponsorship v2
+- name: Tournaments
+  x-displayName: Tournaments
+- name: Sponsorships
+  x-displayName: Sponsorships
 - name: Participation
   x-displayName: Participation
-- name: Creative Contest
-  x-displayName: Creative Contest
+- name: CreativeContests
+  x-displayName: CreativeContests
 - name: Identities
   x-displayName: Identities
-- name: Feed
-  x-displayName: Feed
+- name: Feeds
+  x-displayName: Feeds
 - name: Messages
   x-displayName: Messages
-- name: Contest
-  x-displayName: Contest
-- name: Country
-  x-displayName: Country
-- name: OG Images
-  x-displayName: OG Images
-- name: Sponsor v2
-  x-displayName: Sponsor v2
-- name: Sponsorship Package v2
-  x-displayName: Sponsorship Package v2
-- name: Sponsorship Term v2
-  x-displayName: Sponsorship Term v2
-- name: Sponsorship Agreement v2
-  x-displayName: Sponsorship Agreement v2
-- name: TeamPreference
-  x-displayName: TeamPreference
+- name: Countries
+  x-displayName: Countries
+- name: OGImages
+  x-displayName: OGImages
+- name: Sponsors
+  x-displayName: Sponsors
+- name: SponsorshipPackages
+  x-displayName: SponsorshipPackages
+- name: SponsorshipTerms
+  x-displayName: SponsorshipTerms
+- name: TeamPreferences
+  x-displayName: TeamPreferences
 - name: Tenants
   x-displayName: Tenants
 - name: Venues
@@ -678,7 +672,7 @@ paths:
           description: Internal Server Error
       summary: Update Channel Access Code
       tags:
-      - Channel
+      - Channels
   /v2/channels/{id}/contests:
     get:
       description: Mounted twice (authed + public) with identical semantics.
@@ -772,7 +766,7 @@ paths:
           description: Internal Server Error
       summary: Report a channel
       tags:
-      - Channel
+      - Channels
   /v2/channels/{id}/subscriptions:
     get:
       description: Mounted twice (authed + public) with identical semantics.
@@ -1011,7 +1005,7 @@ paths:
           description: Not Found
       summary: Get tournament configuration templates
       tags:
-      - Tournament
+      - Tournaments
   /v2/channels/{id}/tournaments:
     get:
       operationId: getChannelsByIdTournaments
@@ -1063,7 +1057,7 @@ paths:
           description: Internal Server Error
       summary: List channel tournaments (cursor-paginated)
       tags:
-      - Tournament
+      - Tournaments
   /v2/channels/{id}/validate-access-code:
     post:
       operationId: createChannelsByIdValidateAccessCode
@@ -1622,7 +1616,7 @@ paths:
           description: Internal Server Error
       summary: Get Contest Sponsorships (v2)
       tags:
-      - Sponsorship v2
+      - Sponsorships
     post:
       description: Create a sponsorship offer for an existing contest
       operationId: createContestsByContestIdSponsorships
@@ -1664,7 +1658,7 @@ paths:
           description: Internal Server Error
       summary: Create Sponsorship Offer (v2)
       tags:
-      - Sponsorship v2
+      - Sponsorships
   /v2/contests/{id}:
     delete:
       description: Delete an Ended Contest
@@ -1879,7 +1873,7 @@ paths:
           description: Internal Server Error
       summary: Withdraw entry from creative contest
       tags:
-      - Creative Contest
+      - CreativeContests
     get:
       description: Get all entries for a creative contest (jurors see only assigned
         entries)
@@ -1916,7 +1910,7 @@ paths:
           description: Internal Server Error
       summary: Get entries for a contest
       tags:
-      - Creative Contest
+      - CreativeContests
     post:
       description: Submit a media entry (image or video) for a creative contest
       operationId: createContestsByIdEntries
@@ -1958,7 +1952,7 @@ paths:
           description: Internal Server Error
       summary: Submit entry for creative contest
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/contests/{id}/entries/{entryId}/score:
     post:
       description: Score an entry as a juror (1-5)
@@ -2009,7 +2003,7 @@ paths:
           description: Internal Server Error
       summary: Score an entry
       tags:
-      - Creative Contest
+      - CreativeContests
     put:
       description: Score an entry as a juror (1-5)
       operationId: updateContestsByIdEntriesByEntryIdScore
@@ -2059,7 +2053,7 @@ paths:
           description: Internal Server Error
       summary: Score an entry
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/contests/{id}/force-proceed:
     post:
       description: Force proceed with available jurors (requires ≥3 jurors)
@@ -2094,7 +2088,7 @@ paths:
           description: Internal Server Error
       summary: Force proceed from paused state
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/contests/{id}/header-image:
     put:
       operationId: updateContestsByIdHeaderImage
@@ -2365,7 +2359,7 @@ paths:
           description: Internal Server Error
       summary: Get jurors for a contest
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/contests/{id}/jurors/invitations:
     get:
       description: Get all pending/declined/expired invitations for a contest (creator
@@ -2409,7 +2403,7 @@ paths:
           description: Internal Server Error
       summary: Get invitations for a contest
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/contests/{id}/jurors/invite:
     post:
       description: Invite specific members as jurors for a creative contest (creator
@@ -2459,7 +2453,7 @@ paths:
           description: Internal Server Error
       summary: Invite jurors to judge a contest
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/contests/{id}/participate:
     post:
       description: Create Participation. The request body is resolved by contest type
@@ -3163,7 +3157,7 @@ paths:
           description: Internal Server Error
       summary: Get the personalized feed for a platform identity
       tags:
-      - Feed
+      - Feeds
   /v2/identities/{piid}/participation:
     get:
       description: |-
@@ -3352,7 +3346,7 @@ paths:
           description: Internal Server Error
       summary: Get juror assignments
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/jurors/invitations:
     get:
       description: Get all pending invitations for the current user
@@ -3374,7 +3368,7 @@ paths:
           description: Internal Server Error
       summary: Get my pending invitations
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/jurors/invitations/{invitationId}/accept:
     post:
       description: Accept a pending invitation to judge a contest
@@ -3421,7 +3415,7 @@ paths:
           description: Internal Server Error
       summary: Accept a juror invitation
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/jurors/invitations/{invitationId}/decline:
     post:
       description: Decline a pending invitation to judge a contest
@@ -3468,7 +3462,7 @@ paths:
           description: Internal Server Error
       summary: Decline a juror invitation
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/jurors/opt-in:
     post:
       description: Opt into the jury pool for specific categories
@@ -3502,7 +3496,7 @@ paths:
           description: Internal Server Error
       summary: Opt into jury pool
       tags:
-      - Creative Contest
+      - CreativeContests
   /v2/messages:
     get:
       description: Stub handler — currently writes the literal text "OK".
@@ -4368,7 +4362,7 @@ paths:
           description: Internal Server Error
       summary: Get Contest Groups
       tags:
-      - Contest
+      - Contests
   /v2/public/contests/{id}/live-ranking:
     get:
       description: "Returns the latest provisional ranking for an active contest,\
@@ -4514,7 +4508,7 @@ paths:
       summary: "List enabled countries (sorted, with native names for non-English\
         \ Accept-Language)"
       tags:
-      - Country
+      - Countries
   /v2/public/feed:
     get:
       operationId: getPublicFeed
@@ -4566,7 +4560,7 @@ paths:
           description: Internal Server Error
       summary: "Get the public feed (trending content, unauthenticated)"
       tags:
-      - Feed
+      - Feeds
   /v2/public/identities/{piid}/channels:
     get:
       description: Mounted twice (authed + public) with identical semantics.
@@ -4632,7 +4626,7 @@ paths:
           description: OK
       summary: "Resolve the caller's country by IP (CF-Ipcountry, then Maxmind)"
       tags:
-      - Country
+      - Countries
   /v2/public/og/channel/{channelId}:
     get:
       description: Returns channel data formatted for OG image generation (public
@@ -4676,7 +4670,7 @@ paths:
           description: Not Found
       summary: Get channel data for OG image generation
       tags:
-      - OG Images
+      - OGImages
   /v2/public/og/contest/{contestId}:
     get:
       description: Returns contest data formatted for OG image generation (public
@@ -4712,7 +4706,7 @@ paths:
           description: Not Found
       summary: Get contest data for OG image generation
       tags:
-      - OG Images
+      - OGImages
   /v2/public/og/scoreboard/{contestId}:
     get:
       description: Returns scoreboard data formatted for OG image generation (public
@@ -4748,7 +4742,7 @@ paths:
           description: Not Found
       summary: Get scoreboard data for OG image generation
       tags:
-      - OG Images
+      - OGImages
   /v2/public/og/submissions/{participationId}:
     get:
       description: Returns participation data formatted for OG image generation (public
@@ -4784,7 +4778,7 @@ paths:
           description: Not Found
       summary: Get participation data for OG image generation
       tags:
-      - OG Images
+      - OGImages
   /v2/public/team-sets/system:
     get:
       description: |-
@@ -4836,7 +4830,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsors (v2)
       tags:
-      - Sponsor v2
+      - Sponsors
     post:
       description: Create a new sponsor
       operationId: createSponsors
@@ -4869,7 +4863,7 @@ paths:
           description: Internal Server Error
       summary: Create Sponsor (v2)
       tags:
-      - Sponsor v2
+      - Sponsors
   /v2/sponsors/{id}:
     get:
       description: Get sponsor details by ID
@@ -4904,7 +4898,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsor by ID (v2)
       tags:
-      - Sponsor v2
+      - Sponsors
   /v2/sponsors/{id}/sponsorships:
     get:
       description: Get all sponsorships for a sponsor
@@ -4947,7 +4941,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsor Sponsorships (v2)
       tags:
-      - Sponsor v2
+      - Sponsors
   /v2/sponsorship-packages:
     get:
       description: Get all sponsorship packages for the logged-in user
@@ -4975,7 +4969,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsorship Packages (v2)
       tags:
-      - Sponsorship Package v2
+      - SponsorshipPackages
     post:
       description: Create a sponsorship package for upfront funding
       operationId: createSponsorshipPackages
@@ -5008,7 +5002,7 @@ paths:
           description: Internal Server Error
       summary: Create Sponsorship Package (v2)
       tags:
-      - Sponsorship Package v2
+      - SponsorshipPackages
   /v2/sponsorship-packages/available:
     get:
       description: Get available sponsorship packages for contest creation. Public
@@ -5054,7 +5048,7 @@ paths:
           description: Internal Server Error
       summary: Get Available Packages (v2)
       tags:
-      - Sponsorship Package v2
+      - SponsorshipPackages
   /v2/sponsorship-packages/{id}/agreement:
     get:
       description: Get agreement details for a sponsorship package
@@ -5101,7 +5095,7 @@ paths:
           description: Internal Server Error
       summary: Get Package Agreement (v2)
       tags:
-      - Sponsorship Package v2
+      - SponsorshipPackages
   /v2/sponsorship-packages/{id}/cancel:
     post:
       description: Cancel a sponsorship package. Cannot cancel if package has accepted
@@ -5149,7 +5143,7 @@ paths:
           description: Internal Server Error
       summary: Cancel Sponsorship Package (v2)
       tags:
-      - Sponsorship Package v2
+      - SponsorshipPackages
   /v2/sponsorship-packages/{id}/sponsorships:
     get:
       description: Get all sponsorships for a package
@@ -5186,7 +5180,7 @@ paths:
           description: Internal Server Error
       summary: Get Package Sponsorships (v2)
       tags:
-      - Sponsorship Package v2
+      - SponsorshipPackages
   /v2/sponsorship-terms:
     get:
       description: Get available terms (platform + sponsor's own terms)
@@ -5214,7 +5208,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsorship Terms (v2)
       tags:
-      - Sponsorship Term v2
+      - SponsorshipTerms
     post:
       description: Create a new sponsorship term (platform or sponsor-owned)
       operationId: createSponsorshipTerms
@@ -5247,7 +5241,7 @@ paths:
           description: Internal Server Error
       summary: Create Sponsorship Term (v2)
       tags:
-      - Sponsorship Term v2
+      - SponsorshipTerms
   /v2/sponsorship-terms/platform:
     get:
       description: Get all platform-owned terms
@@ -5275,7 +5269,7 @@ paths:
           description: Internal Server Error
       summary: Get Platform Terms (v2)
       tags:
-      - Sponsorship Term v2
+      - SponsorshipTerms
   /v2/sponsorship-terms/{id}:
     delete:
       description: Deactivate a term (soft delete)
@@ -5322,7 +5316,7 @@ paths:
           description: Internal Server Error
       summary: Deactivate Sponsorship Term (v2)
       tags:
-      - Sponsorship Term v2
+      - SponsorshipTerms
     get:
       description: Get term details by ID
       operationId: getSponsorshipTermsById
@@ -5362,7 +5356,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsorship Term (v2)
       tags:
-      - Sponsorship Term v2
+      - SponsorshipTerms
     put:
       description: Update a term (version must be incremented)
       operationId: updateSponsorshipTermsById
@@ -5416,7 +5410,7 @@ paths:
           description: Internal Server Error
       summary: Update Sponsorship Term (v2)
       tags:
-      - Sponsorship Term v2
+      - SponsorshipTerms
   /v2/sponsorships/{id}/accept:
     post:
       description: Accept a sponsorship offer
@@ -5451,7 +5445,7 @@ paths:
           description: Internal Server Error
       summary: Accept Sponsorship (v2)
       tags:
-      - Sponsorship v2
+      - Sponsorships
   /v2/sponsorships/{id}/agreement:
     get:
       description: Get agreement details for a sponsorship (creator or sponsor can
@@ -5499,7 +5493,7 @@ paths:
           description: Internal Server Error
       summary: Get Sponsorship Agreement (v2)
       tags:
-      - Sponsorship Agreement v2
+      - Sponsorships
   /v2/sponsorships/{id}/reject:
     post:
       description: Reject a sponsorship offer
@@ -5534,7 +5528,7 @@ paths:
           description: Internal Server Error
       summary: Reject Sponsorship (v2)
       tags:
-      - Sponsorship v2
+      - Sponsorships
   /v2/stans:
     get:
       description: Get Celeb Stans
@@ -5801,7 +5795,7 @@ paths:
           description: Internal Server Error
       summary: Set the caller's default team for a logical team set
       tags:
-      - TeamPreference
+      - TeamPreferences
   /v2/team-sets/system:
     get:
       description: |-
@@ -6139,7 +6133,7 @@ paths:
           description: Internal Server Error
       summary: Create tournament
       tags:
-      - Tournament
+      - Tournaments
   /v2/tournaments/{id}:
     get:
       description: Get tournament details with rounds
@@ -6174,7 +6168,7 @@ paths:
           description: Internal Server Error
       summary: Get tournament
       tags:
-      - Tournament
+      - Tournaments
   /v2/tournaments/{id}/contest:
     post:
       operationId: createTournamentsByIdContest
@@ -15789,24 +15783,21 @@ x-tagGroups:
   - Blocks
   - Stans
   - Channels
-  - Channel
   - Contests
   - Subscriptions
-  - Tournament
-  - Sponsorship v2
+  - Tournaments
+  - Sponsorships
   - Participation
-  - Creative Contest
+  - CreativeContests
   - Identities
-  - Feed
+  - Feeds
   - Messages
-  - Contest
-  - Country
-  - OG Images
-  - Sponsor v2
-  - Sponsorship Package v2
-  - Sponsorship Term v2
-  - Sponsorship Agreement v2
-  - TeamPreference
+  - Countries
+  - OGImages
+  - Sponsors
+  - SponsorshipPackages
+  - SponsorshipTerms
+  - TeamPreferences
   - Tenants
   - Venues
 - name: Puzzle Platform API

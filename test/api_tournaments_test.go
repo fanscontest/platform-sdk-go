@@ -1,7 +1,7 @@
 /*
 User Management API
 
-Testing SponsorV2APIService
+Testing TournamentsAPIService
 
 */
 
@@ -17,16 +17,16 @@ import (
 	openapiclient "github.com/fanscontest/platform-sdk-go"
 )
 
-func Test_platform_SponsorV2APIService(t *testing.T) {
+func Test_platform_TournamentsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SponsorV2APIService CreateSponsors", func(t *testing.T) {
+	t.Run("Test TournamentsAPIService CreateTournaments", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.SponsorV2API.CreateSponsors(context.Background()).Execute()
+		resp, httpRes, err := apiClient.TournamentsAPI.CreateTournaments(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,25 +34,13 @@ func Test_platform_SponsorV2APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SponsorV2APIService GetSponsors", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.SponsorV2API.GetSponsors(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test SponsorV2APIService GetSponsorsById", func(t *testing.T) {
+	t.Run("Test TournamentsAPIService GetChannelsByIdTournamentConfiguration", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.SponsorV2API.GetSponsorsById(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.TournamentsAPI.GetChannelsByIdTournamentConfiguration(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -60,13 +48,27 @@ func Test_platform_SponsorV2APIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SponsorV2APIService GetSponsorsByIdSponsorships", func(t *testing.T) {
+	t.Run("Test TournamentsAPIService GetChannelsByIdTournaments", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.SponsorV2API.GetSponsorsByIdSponsorships(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.TournamentsAPI.GetChannelsByIdTournaments(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test TournamentsAPIService GetTournamentsById", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.TournamentsAPI.GetTournamentsById(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

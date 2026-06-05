@@ -1,11 +1,11 @@
-# \FeedAPI
+# \FeedsAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetIdentitiesByPiidFeedPersonalized**](FeedAPI.md#GetIdentitiesByPiidFeedPersonalized) | **Get** /v2/identities/{piid}/feed-personalized | Get the personalized feed for a platform identity
-[**GetPublicFeed**](FeedAPI.md#GetPublicFeed) | **Get** /v2/public/feed | Get the public feed (trending content, unauthenticated)
+[**GetIdentitiesByPiidFeedPersonalized**](FeedsAPI.md#GetIdentitiesByPiidFeedPersonalized) | **Get** /v2/identities/{piid}/feed-personalized | Get the personalized feed for a platform identity
+[**GetPublicFeed**](FeedsAPI.md#GetPublicFeed) | **Get** /v2/public/feed | Get the public feed (trending content, unauthenticated)
 
 
 
@@ -36,13 +36,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeedAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Limit(limit).Cursor(cursor).Execute()
+	resp, r, err := apiClient.FeedsAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Limit(limit).Cursor(cursor).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FeedAPI.GetIdentitiesByPiidFeedPersonalized``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FeedsAPI.GetIdentitiesByPiidFeedPersonalized``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetIdentitiesByPiidFeedPersonalized`: []DomainFeedItem
-	fmt.Fprintf(os.Stdout, "Response from `FeedAPI.GetIdentitiesByPiidFeedPersonalized`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `FeedsAPI.GetIdentitiesByPiidFeedPersonalized`: %v\n", resp)
 }
 ```
 
@@ -108,13 +108,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeedAPI.GetPublicFeed(context.Background()).Limit(limit).Cursor(cursor).Region(region).Execute()
+	resp, r, err := apiClient.FeedsAPI.GetPublicFeed(context.Background()).Limit(limit).Cursor(cursor).Region(region).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FeedAPI.GetPublicFeed``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FeedsAPI.GetPublicFeed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetPublicFeed`: []DomainFeedItem
-	fmt.Fprintf(os.Stdout, "Response from `FeedAPI.GetPublicFeed`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `FeedsAPI.GetPublicFeed`: %v\n", resp)
 }
 ```
 
