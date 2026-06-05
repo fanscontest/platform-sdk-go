@@ -20,7 +20,7 @@ var _ MappedNullable = &RankingsResponse{}
 
 // RankingsResponse Per-contest leaderboard. ContestView renders the entries through rankings.json.
 type RankingsResponse struct {
-	Rankings []map[string]interface{} `json:"rankings,omitempty"`
+	Data []map[string]interface{} `json:"data,omitempty"`
 }
 
 // NewRankingsResponse instantiates a new RankingsResponse object
@@ -40,36 +40,36 @@ func NewRankingsResponseWithDefaults() *RankingsResponse {
 	return &this
 }
 
-// GetRankings returns the Rankings field value if set, zero value otherwise.
-func (o *RankingsResponse) GetRankings() []map[string]interface{} {
-	if o == nil || IsNil(o.Rankings) {
+// GetData returns the Data field value if set, zero value otherwise.
+func (o *RankingsResponse) GetData() []map[string]interface{} {
+	if o == nil || IsNil(o.Data) {
 		var ret []map[string]interface{}
 		return ret
 	}
-	return o.Rankings
+	return o.Data
 }
 
-// GetRankingsOk returns a tuple with the Rankings field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RankingsResponse) GetRankingsOk() ([]map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Rankings) {
+func (o *RankingsResponse) GetDataOk() ([]map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return o.Rankings, true
+	return o.Data, true
 }
 
-// HasRankings returns a boolean if a field has been set.
-func (o *RankingsResponse) HasRankings() bool {
-	if o != nil && !IsNil(o.Rankings) {
+// HasData returns a boolean if a field has been set.
+func (o *RankingsResponse) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
 		return true
 	}
 
 	return false
 }
 
-// SetRankings gets a reference to the given []map[string]interface{} and assigns it to the Rankings field.
-func (o *RankingsResponse) SetRankings(v []map[string]interface{}) {
-	o.Rankings = v
+// SetData gets a reference to the given []map[string]interface{} and assigns it to the Data field.
+func (o *RankingsResponse) SetData(v []map[string]interface{}) {
+	o.Data = v
 }
 
 func (o RankingsResponse) MarshalJSON() ([]byte, error) {
@@ -82,8 +82,8 @@ func (o RankingsResponse) MarshalJSON() ([]byte, error) {
 
 func (o RankingsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Rankings) {
-		toSerialize["rankings"] = o.Rankings
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
 	}
 	return toSerialize, nil
 }

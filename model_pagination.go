@@ -18,7 +18,7 @@ import (
 // checks if the Pagination type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Pagination{}
 
-// Pagination Cursor-based pagination envelope used by every v2 list response.
+// Pagination struct for Pagination
 type Pagination struct {
 	HasNext *bool `json:"has_next,omitempty"`
 	HasPrevious *bool `json:"has_previous,omitempty"`

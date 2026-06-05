@@ -43,7 +43,7 @@ func (r ApiCreateSponsorshipPackagesRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiCreateSponsorshipPackagesRequest) Execute() (*DomainSponsorshipPackage, *http.Response, error) {
+func (r ApiCreateSponsorshipPackagesRequest) Execute() (*CreateSponsorshipPackages201Response, *http.Response, error) {
 	return r.ApiService.CreateSponsorshipPackagesExecute(r)
 }
 
@@ -63,13 +63,13 @@ func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackages(ctx context.Co
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipPackage
-func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesExecute(r ApiCreateSponsorshipPackagesRequest) (*DomainSponsorshipPackage, *http.Response, error) {
+//  @return CreateSponsorshipPackages201Response
+func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesExecute(r ApiCreateSponsorshipPackagesRequest) (*CreateSponsorshipPackages201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipPackage
+		localVarReturnValue  *CreateSponsorshipPackages201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.CreateSponsorshipPackages")
@@ -179,7 +179,7 @@ func (r ApiCreateSponsorshipPackagesByIdCancelRequest) XTenantUserId(xTenantUser
 	return r
 }
 
-func (r ApiCreateSponsorshipPackagesByIdCancelRequest) Execute() (*DomainSponsorshipPackage, *http.Response, error) {
+func (r ApiCreateSponsorshipPackagesByIdCancelRequest) Execute() (*CreateSponsorshipPackages201Response, *http.Response, error) {
 	return r.ApiService.CreateSponsorshipPackagesByIdCancelExecute(r)
 }
 
@@ -201,13 +201,13 @@ func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesByIdCancel(ctx 
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipPackage
-func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesByIdCancelExecute(r ApiCreateSponsorshipPackagesByIdCancelRequest) (*DomainSponsorshipPackage, *http.Response, error) {
+//  @return CreateSponsorshipPackages201Response
+func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesByIdCancelExecute(r ApiCreateSponsorshipPackagesByIdCancelRequest) (*CreateSponsorshipPackages201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipPackage
+		localVarReturnValue  *CreateSponsorshipPackages201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.CreateSponsorshipPackagesByIdCancel")
@@ -325,7 +325,21 @@ func (a *SponsorshipPackagesAPIService) CreateSponsorshipPackagesByIdCancelExecu
 type ApiGetSponsorshipPackagesRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipPackagesAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page endpoint; see uman#132)
+func (r ApiGetSponsorshipPackagesRequest) Cursor(cursor string) ApiGetSponsorshipPackagesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page endpoint; see uman#132)
+func (r ApiGetSponsorshipPackagesRequest) Limit(limit int32) ApiGetSponsorshipPackagesRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -334,7 +348,7 @@ func (r ApiGetSponsorshipPackagesRequest) XTenantUserId(xTenantUserId string) Ap
 	return r
 }
 
-func (r ApiGetSponsorshipPackagesRequest) Execute() ([]DomainSponsorshipPackage, *http.Response, error) {
+func (r ApiGetSponsorshipPackagesRequest) Execute() (*GetSponsorshipPackages200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipPackagesExecute(r)
 }
 
@@ -354,13 +368,13 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackages(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []DomainSponsorshipPackage
-func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesExecute(r ApiGetSponsorshipPackagesRequest) ([]DomainSponsorshipPackage, *http.Response, error) {
+//  @return GetSponsorshipPackages200Response
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesExecute(r ApiGetSponsorshipPackagesRequest) (*GetSponsorshipPackages200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSponsorshipPackage
+		localVarReturnValue  *GetSponsorshipPackages200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackages")
@@ -374,6 +388,12 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesExecute(r ApiGetSp
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -457,6 +477,8 @@ type ApiGetSponsorshipPackagesAvailableRequest struct {
 	ApiService *SponsorshipPackagesAPIService
 	sponsorId *string
 	packageId *string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
 }
 
@@ -472,13 +494,25 @@ func (r ApiGetSponsorshipPackagesAvailableRequest) PackageId(packageId string) A
 	return r
 }
 
+// Opaque pagination cursor
+func (r ApiGetSponsorshipPackagesAvailableRequest) Cursor(cursor string) ApiGetSponsorshipPackagesAvailableRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetSponsorshipPackagesAvailableRequest) Limit(limit int32) ApiGetSponsorshipPackagesAvailableRequest {
+	r.limit = &limit
+	return r
+}
+
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
 func (r ApiGetSponsorshipPackagesAvailableRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorshipPackagesAvailableRequest {
 	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
-func (r ApiGetSponsorshipPackagesAvailableRequest) Execute() ([]DomainSponsorshipPackage, *http.Response, error) {
+func (r ApiGetSponsorshipPackagesAvailableRequest) Execute() (*GetSponsorshipPackages200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipPackagesAvailableExecute(r)
 }
 
@@ -498,13 +532,13 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesAvailable(ctx cont
 }
 
 // Execute executes the request
-//  @return []DomainSponsorshipPackage
-func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesAvailableExecute(r ApiGetSponsorshipPackagesAvailableRequest) ([]DomainSponsorshipPackage, *http.Response, error) {
+//  @return GetSponsorshipPackages200Response
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesAvailableExecute(r ApiGetSponsorshipPackagesAvailableRequest) (*GetSponsorshipPackages200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSponsorshipPackage
+		localVarReturnValue  *GetSponsorshipPackages200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackagesAvailable")
@@ -523,6 +557,12 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesAvailableExecute(r
 	}
 	if r.packageId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "package_id", r.packageId, "form", "")
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -615,7 +655,7 @@ func (r ApiGetSponsorshipPackagesByIdAgreementRequest) XTenantUserId(xTenantUser
 	return r
 }
 
-func (r ApiGetSponsorshipPackagesByIdAgreementRequest) Execute() (*DomainSponsorshipPackageAgreement, *http.Response, error) {
+func (r ApiGetSponsorshipPackagesByIdAgreementRequest) Execute() (*GetSponsorshipPackagesByIdAgreement200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipPackagesByIdAgreementExecute(r)
 }
 
@@ -637,13 +677,13 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdAgreement(ctx 
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipPackageAgreement
-func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdAgreementExecute(r ApiGetSponsorshipPackagesByIdAgreementRequest) (*DomainSponsorshipPackageAgreement, *http.Response, error) {
+//  @return GetSponsorshipPackagesByIdAgreement200Response
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdAgreementExecute(r ApiGetSponsorshipPackagesByIdAgreementRequest) (*GetSponsorshipPackagesByIdAgreement200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipPackageAgreement
+		localVarReturnValue  *GetSponsorshipPackagesByIdAgreement200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackagesByIdAgreement")
@@ -762,7 +802,21 @@ type ApiGetSponsorshipPackagesByIdSponsorshipsRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipPackagesAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) Cursor(cursor string) ApiGetSponsorshipPackagesByIdSponsorshipsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) Limit(limit int32) ApiGetSponsorshipPackagesByIdSponsorshipsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -771,7 +825,7 @@ func (r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) XTenantUserId(xTenantU
 	return r
 }
 
-func (r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) Execute() ([]DomainSponsorship, *http.Response, error) {
+func (r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) Execute() (*GetContestsByContestIdSponsorships200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipPackagesByIdSponsorshipsExecute(r)
 }
 
@@ -793,13 +847,13 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdSponsorships(c
 }
 
 // Execute executes the request
-//  @return []DomainSponsorship
-func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdSponsorshipsExecute(r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) ([]DomainSponsorship, *http.Response, error) {
+//  @return GetContestsByContestIdSponsorships200Response
+func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdSponsorshipsExecute(r ApiGetSponsorshipPackagesByIdSponsorshipsRequest) (*GetContestsByContestIdSponsorships200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSponsorship
+		localVarReturnValue  *GetContestsByContestIdSponsorships200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipPackagesAPIService.GetSponsorshipPackagesByIdSponsorships")
@@ -814,6 +868,12 @@ func (a *SponsorshipPackagesAPIService) GetSponsorshipPackagesByIdSponsorshipsEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

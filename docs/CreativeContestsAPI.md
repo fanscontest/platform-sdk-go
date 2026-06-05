@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**GetContestsByIdEntries**](CreativeContestsAPI.md#GetContestsByIdEntries) | **Get** /v2/contests/{id}/entries | Get entries for a contest
 [**GetContestsByIdJurors**](CreativeContestsAPI.md#GetContestsByIdJurors) | **Get** /v2/contests/{id}/jurors | Get jurors for a contest
 [**GetContestsByIdJurorsInvitations**](CreativeContestsAPI.md#GetContestsByIdJurorsInvitations) | **Get** /v2/contests/{id}/jurors/invitations | Get invitations for a contest
-[**GetJurorsAssignments**](CreativeContestsAPI.md#GetJurorsAssignments) | **Get** /v2/jurors/assignments | Get juror assignments
+[**GetJurorsAssignments**](CreativeContestsAPI.md#GetJurorsAssignments) | **Get** /v2/jurors/assignments | Get juror assignments (cursor-paginated)
 [**GetJurorsInvitations**](CreativeContestsAPI.md#GetJurorsInvitations) | **Get** /v2/jurors/invitations | Get my pending invitations
 [**UpdateContestsByIdEntriesByEntryIdScore**](CreativeContestsAPI.md#UpdateContestsByIdEntriesByEntryIdScore) | **Put** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## CreateContestsByIdEntries
 
-> DomainEntry CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateContestsByIdEntries200Response CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Submit entry for creative contest
 
@@ -53,7 +53,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdEntries`: DomainEntry
+	// response from `CreateContestsByIdEntries`: CreateContestsByIdEntries200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdEntries`: %v\n", resp)
 }
 ```
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainEntry**](DomainEntry.md)
+[**CreateContestsByIdEntries200Response**](CreateContestsByIdEntries200Response.md)
 
 ### Authorization
 
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdEntriesByEntryIdScore
 
-> DomainJurorScore CreateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
+> UpdateContestsByIdEntriesByEntryIdScore200Response CreateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Score an entry
 
@@ -128,7 +128,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdEntriesByEntryIdScore`: DomainJurorScore
+	// response from `CreateContestsByIdEntriesByEntryIdScore`: UpdateContestsByIdEntriesByEntryIdScore200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore`: %v\n", resp)
 }
 ```
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainJurorScore**](DomainJurorScore.md)
+[**UpdateContestsByIdEntriesByEntryIdScore200Response**](UpdateContestsByIdEntriesByEntryIdScore200Response.md)
 
 ### Authorization
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdForceProceed
 
-> HandlerStatusResponse CreateContestsByIdForceProceed(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByIdForceProceed(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Force proceed from paused state
 
@@ -203,7 +203,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdForceProceed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdForceProceed`: HandlerStatusResponse
+	// response from `CreateContestsByIdForceProceed`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdForceProceed`: %v\n", resp)
 }
 ```
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdJurorsInvite
 
-> HandlerStatusResponse CreateContestsByIdJurorsInvite(ctx, id).RequestInviteJurorsRequest(requestInviteJurorsRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByIdJurorsInvite(ctx, id).RequestInviteJurorsRequest(requestInviteJurorsRequest).XTenantUserId(xTenantUserId).Execute()
 
 Invite jurors to judge a contest
 
@@ -276,7 +276,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdJurorsInvite``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdJurorsInvite`: HandlerStatusResponse
+	// response from `CreateContestsByIdJurorsInvite`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdJurorsInvite`: %v\n", resp)
 }
 ```
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsInvitationsByInvitationIdAccept
 
-> DomainJurorAssignment CreateJurorsInvitationsByInvitationIdAccept(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
+> CreateJurorsInvitationsByInvitationIdAccept200Response CreateJurorsInvitationsByInvitationIdAccept(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
 
 Accept a juror invitation
 
@@ -349,7 +349,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateJurorsInvitationsByInvitationIdAccept`: DomainJurorAssignment
+	// response from `CreateJurorsInvitationsByInvitationIdAccept`: CreateJurorsInvitationsByInvitationIdAccept200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept`: %v\n", resp)
 }
 ```
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainJurorAssignment**](DomainJurorAssignment.md)
+[**CreateJurorsInvitationsByInvitationIdAccept200Response**](CreateJurorsInvitationsByInvitationIdAccept200Response.md)
 
 ### Authorization
 
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsInvitationsByInvitationIdDecline
 
-> HandlerStatusResponse CreateJurorsInvitationsByInvitationIdDecline(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateJurorsInvitationsByInvitationIdDecline(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
 
 Decline a juror invitation
 
@@ -421,7 +421,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateJurorsInvitationsByInvitationIdDecline`: HandlerStatusResponse
+	// response from `CreateJurorsInvitationsByInvitationIdDecline`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline`: %v\n", resp)
 }
 ```
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -464,7 +464,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsOptIn
 
-> DomainJuror CreateJurorsOptIn(ctx).RequestOptInJurorRequest(requestOptInJurorRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateJurorsOptIn200Response CreateJurorsOptIn(ctx).RequestOptInJurorRequest(requestOptInJurorRequest).XTenantUserId(xTenantUserId).Execute()
 
 Opt into jury pool
 
@@ -493,7 +493,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsOptIn``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateJurorsOptIn`: DomainJuror
+	// response from `CreateJurorsOptIn`: CreateJurorsOptIn200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateJurorsOptIn`: %v\n", resp)
 }
 ```
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainJuror**](DomainJuror.md)
+[**CreateJurorsOptIn200Response**](CreateJurorsOptIn200Response.md)
 
 ### Authorization
 
@@ -532,7 +532,7 @@ Name | Type | Description  | Notes
 
 ## DeleteContestsByIdEntries
 
-> HandlerStatusResponse DeleteContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response DeleteContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Withdraw entry from creative contest
 
@@ -561,7 +561,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.DeleteContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteContestsByIdEntries`: HandlerStatusResponse
+	// response from `DeleteContestsByIdEntries`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.DeleteContestsByIdEntries`: %v\n", resp)
 }
 ```
@@ -586,7 +586,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -604,7 +604,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdEntries
 
-> []DomainEntry GetContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdEntries200Response GetContestsByIdEntries(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get entries for a contest
 
@@ -624,16 +624,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdEntries(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdEntries(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdEntries`: []DomainEntry
+	// response from `GetContestsByIdEntries`: GetContestsByIdEntries200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetContestsByIdEntries`: %v\n", resp)
 }
 ```
@@ -654,11 +656,13 @@ Other parameters are passed through a pointer to a apiGetContestsByIdEntriesRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainEntry**](DomainEntry.md)
+[**GetContestsByIdEntries200Response**](GetContestsByIdEntries200Response.md)
 
 ### Authorization
 
@@ -676,7 +680,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdJurors
 
-> []DomainJuror GetContestsByIdJurors(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdJurors200Response GetContestsByIdJurors(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get jurors for a contest
 
@@ -696,16 +700,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page, derived) (optional)
+	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page, derived) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurors(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurors(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdJurors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdJurors`: []DomainJuror
+	// response from `GetContestsByIdJurors`: GetContestsByIdJurors200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetContestsByIdJurors`: %v\n", resp)
 }
 ```
@@ -726,11 +732,13 @@ Other parameters are passed through a pointer to a apiGetContestsByIdJurorsReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Accepted for shape uniformity; ignored (single-page, derived) | 
+ **limit** | **int32** | Accepted for shape uniformity; ignored (single-page, derived) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainJuror**](DomainJuror.md)
+[**GetContestsByIdJurors200Response**](GetContestsByIdJurors200Response.md)
 
 ### Authorization
 
@@ -748,7 +756,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdJurorsInvitations
 
-> []DomainJurorAssignment GetContestsByIdJurorsInvitations(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdJurorsInvitations200Response GetContestsByIdJurorsInvitations(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get invitations for a contest
 
@@ -768,16 +776,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurorsInvitations(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetContestsByIdJurorsInvitations(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdJurorsInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdJurorsInvitations`: []DomainJurorAssignment
+	// response from `GetContestsByIdJurorsInvitations`: GetContestsByIdJurorsInvitations200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetContestsByIdJurorsInvitations`: %v\n", resp)
 }
 ```
@@ -798,11 +808,13 @@ Other parameters are passed through a pointer to a apiGetContestsByIdJurorsInvit
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainJurorAssignment**](DomainJurorAssignment.md)
+[**GetContestsByIdJurorsInvitations200Response**](GetContestsByIdJurorsInvitations200Response.md)
 
 ### Authorization
 
@@ -820,9 +832,9 @@ Name | Type | Description  | Notes
 
 ## GetJurorsAssignments
 
-> []DomainJurorAssignment GetJurorsAssignments(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdJurorsInvitations200Response GetJurorsAssignments(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
-Get juror assignments
+Get juror assignments (cursor-paginated)
 
 
 
@@ -839,16 +851,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsAssignments(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsAssignments(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetJurorsAssignments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetJurorsAssignments`: []DomainJurorAssignment
+	// response from `GetJurorsAssignments`: GetContestsByIdJurorsInvitations200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetJurorsAssignments`: %v\n", resp)
 }
 ```
@@ -864,11 +878,13 @@ Other parameters are passed through a pointer to a apiGetJurorsAssignmentsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainJurorAssignment**](DomainJurorAssignment.md)
+[**GetContestsByIdJurorsInvitations200Response**](GetContestsByIdJurorsInvitations200Response.md)
 
 ### Authorization
 
@@ -886,7 +902,7 @@ Name | Type | Description  | Notes
 
 ## GetJurorsInvitations
 
-> []DomainJurorAssignment GetJurorsInvitations(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdJurorsInvitations200Response GetJurorsInvitations(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get my pending invitations
 
@@ -905,16 +921,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page, service-assembled) (optional)
+	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page, service-assembled) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsInvitations(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.GetJurorsInvitations(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetJurorsInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetJurorsInvitations`: []DomainJurorAssignment
+	// response from `GetJurorsInvitations`: GetContestsByIdJurorsInvitations200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetJurorsInvitations`: %v\n", resp)
 }
 ```
@@ -930,11 +948,13 @@ Other parameters are passed through a pointer to a apiGetJurorsInvitationsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Accepted for shape uniformity; ignored (single-page, service-assembled) | 
+ **limit** | **int32** | Accepted for shape uniformity; ignored (single-page, service-assembled) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainJurorAssignment**](DomainJurorAssignment.md)
+[**GetContestsByIdJurorsInvitations200Response**](GetContestsByIdJurorsInvitations200Response.md)
 
 ### Authorization
 
@@ -952,7 +972,7 @@ Name | Type | Description  | Notes
 
 ## UpdateContestsByIdEntriesByEntryIdScore
 
-> DomainJurorScore UpdateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
+> UpdateContestsByIdEntriesByEntryIdScore200Response UpdateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Score an entry
 
@@ -983,7 +1003,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateContestsByIdEntriesByEntryIdScore`: DomainJurorScore
+	// response from `UpdateContestsByIdEntriesByEntryIdScore`: UpdateContestsByIdEntriesByEntryIdScore200Response
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore`: %v\n", resp)
 }
 ```
@@ -1011,7 +1031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainJurorScore**](DomainJurorScore.md)
+[**UpdateContestsByIdEntriesByEntryIdScore200Response**](UpdateContestsByIdEntriesByEntryIdScore200Response.md)
 
 ### Authorization
 

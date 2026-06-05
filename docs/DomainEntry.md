@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContestId** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **string** | keyset pagination sort key (uman#132) | [optional] 
 **Duration** | Pointer to **int32** | nullable, for live recording (seconds) | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **MediaType** | Pointer to **string** | \&quot;image\&quot; or \&quot;video\&quot; | [optional] 
@@ -56,6 +57,31 @@ SetContestId sets ContestId field to given value.
 `func (o *DomainEntry) HasContestId() bool`
 
 HasContestId returns a boolean if a field has been set.
+
+### GetCreatedAt
+
+`func (o *DomainEntry) GetCreatedAt() string`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *DomainEntry) GetCreatedAtOk() (*string, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *DomainEntry) SetCreatedAt(v string)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *DomainEntry) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
 
 ### GetDuration
 

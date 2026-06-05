@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateTenants
 
-> DomainTenant CreateTenants(ctx).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateTenants201Response CreateTenants(ctx).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XTenantUserId(xTenantUserId).Execute()
 
 Apply to become a tenant (vetted-signup)
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenants``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTenants`: DomainTenant
+	// response from `CreateTenants`: CreateTenants201Response
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.CreateTenants`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainTenant**](DomainTenant.md)
+[**CreateTenants201Response**](CreateTenants201Response.md)
 
 ### Authorization
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## CreateTenantsByIdApiKeys
 
-> DomainTenantApiKey CreateTenantsByIdApiKeys(ctx, id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateTenantsByIdApiKeys201Response CreateTenantsByIdApiKeys(ctx, id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XTenantUserId(xTenantUserId).Execute()
 
 Mint an API key for an approved tenant
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenantsByIdApiKeys``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTenantsByIdApiKeys`: DomainTenantApiKey
+	// response from `CreateTenantsByIdApiKeys`: CreateTenantsByIdApiKeys201Response
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.CreateTenantsByIdApiKeys`: %v\n", resp)
 }
 ```
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainTenantApiKey**](DomainTenantApiKey.md)
+[**CreateTenantsByIdApiKeys201Response**](CreateTenantsByIdApiKeys201Response.md)
 
 ### Authorization
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## CreateTenantsByIdWebhookSubscriptions
 
-> DomainWebhookSubscriptionCreated CreateTenantsByIdWebhookSubscriptions(ctx, id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateTenantsByIdWebhookSubscriptions201Response CreateTenantsByIdWebhookSubscriptions(ctx, id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
 
 Register a webhook subscription for a tenant
 
@@ -186,7 +186,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenantsByIdWebhookSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTenantsByIdWebhookSubscriptions`: DomainWebhookSubscriptionCreated
+	// response from `CreateTenantsByIdWebhookSubscriptions`: CreateTenantsByIdWebhookSubscriptions201Response
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.CreateTenantsByIdWebhookSubscriptions`: %v\n", resp)
 }
 ```
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainWebhookSubscriptionCreated**](DomainWebhookSubscriptionCreated.md)
+[**CreateTenantsByIdWebhookSubscriptions201Response**](CreateTenantsByIdWebhookSubscriptions201Response.md)
 
 ### Authorization
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## GetTenantsByIdWebhookSubscriptions
 
-> []DomainWebhookSubscription GetTenantsByIdWebhookSubscriptions(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetTenantsByIdWebhookSubscriptions200Response GetTenantsByIdWebhookSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List a tenant's webhook subscriptions
 
@@ -323,16 +323,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Tenant ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TenantsAPI.GetTenantsByIdWebhookSubscriptions(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.TenantsAPI.GetTenantsByIdWebhookSubscriptions(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.GetTenantsByIdWebhookSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTenantsByIdWebhookSubscriptions`: []DomainWebhookSubscription
+	// response from `GetTenantsByIdWebhookSubscriptions`: GetTenantsByIdWebhookSubscriptions200Response
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.GetTenantsByIdWebhookSubscriptions`: %v\n", resp)
 }
 ```
@@ -353,11 +355,13 @@ Other parameters are passed through a pointer to a apiGetTenantsByIdWebhookSubsc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainWebhookSubscription**](DomainWebhookSubscription.md)
+[**GetTenantsByIdWebhookSubscriptions200Response**](GetTenantsByIdWebhookSubscriptions200Response.md)
 
 ### Authorization
 

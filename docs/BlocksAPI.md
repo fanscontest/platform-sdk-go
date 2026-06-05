@@ -6,13 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateBlocks**](BlocksAPI.md#CreateBlocks) | **Post** /v2/blocks | Create Block
 [**DeleteBlocksById**](BlocksAPI.md#DeleteBlocksById) | **Delete** /v2/blocks/{id} | Delete Block
-[**GetBlocks**](BlocksAPI.md#GetBlocks) | **Get** /v2/blocks | Get Blocked Members
+[**GetBlocks**](BlocksAPI.md#GetBlocks) | **Get** /v2/blocks | Get Blocked Members (cursor-paginated)
 
 
 
 ## CreateBlocks
 
-> DomainBlock CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateBlocks200Response CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Block
 
@@ -41,7 +41,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.CreateBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateBlocks`: DomainBlock
+	// response from `CreateBlocks`: CreateBlocks200Response
 	fmt.Fprintf(os.Stdout, "Response from `BlocksAPI.CreateBlocks`: %v\n", resp)
 }
 ```
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBlock**](DomainBlock.md)
+[**CreateBlocks200Response**](CreateBlocks200Response.md)
 
 ### Authorization
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DeleteBlocksById
 
-> bool DeleteBlocksById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DeleteBlocksById200Response DeleteBlocksById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Block
 
@@ -109,7 +109,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.DeleteBlocksById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteBlocksById`: bool
+	// response from `DeleteBlocksById`: DeleteBlocksById200Response
 	fmt.Fprintf(os.Stdout, "Response from `BlocksAPI.DeleteBlocksById`: %v\n", resp)
 }
 ```
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**bool**
+[**DeleteBlocksById200Response**](DeleteBlocksById200Response.md)
 
 ### Authorization
 
@@ -152,9 +152,9 @@ Name | Type | Description  | Notes
 
 ## GetBlocks
 
-> []DomainBlock GetBlocks(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetBlocks200Response GetBlocks(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
-Get Blocked Members
+Get Blocked Members (cursor-paginated)
 
 
 
@@ -171,16 +171,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.GetBlocks(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.BlocksAPI.GetBlocks(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.GetBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetBlocks`: []DomainBlock
+	// response from `GetBlocks`: GetBlocks200Response
 	fmt.Fprintf(os.Stdout, "Response from `BlocksAPI.GetBlocks`: %v\n", resp)
 }
 ```
@@ -196,11 +198,13 @@ Other parameters are passed through a pointer to a apiGetBlocksRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainBlock**](DomainBlock.md)
+[**GetBlocks200Response**](GetBlocks200Response.md)
 
 ### Authorization
 

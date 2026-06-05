@@ -11,9 +11,11 @@ Method | HTTP request | Description
 
 ## GetPublicCountries
 
-> []DomainCountry GetPublicCountries(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetPublicCountries200Response GetPublicCountries(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List enabled countries (sorted, with native names for non-English Accept-Language)
+
+
 
 ### Example
 
@@ -28,16 +30,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page reference data) (optional)
+	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page reference data) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CountriesAPI.GetPublicCountries(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.CountriesAPI.GetPublicCountries(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicCountries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicCountries`: []DomainCountry
+	// response from `GetPublicCountries`: GetPublicCountries200Response
 	fmt.Fprintf(os.Stdout, "Response from `CountriesAPI.GetPublicCountries`: %v\n", resp)
 }
 ```
@@ -53,11 +57,13 @@ Other parameters are passed through a pointer to a apiGetPublicCountriesRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Accepted for shape uniformity; ignored (single-page reference data) | 
+ **limit** | **int32** | Accepted for shape uniformity; ignored (single-page reference data) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainCountry**](DomainCountry.md)
+[**GetPublicCountries200Response**](GetPublicCountries200Response.md)
 
 ### Authorization
 
@@ -75,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicLocation
 
-> DomainCountry GetPublicLocation(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetPublicLocation200Response GetPublicLocation(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Resolve the caller's country by IP (CF-Ipcountry, then Maxmind)
 
@@ -101,7 +107,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicLocation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicLocation`: DomainCountry
+	// response from `GetPublicLocation`: GetPublicLocation200Response
 	fmt.Fprintf(os.Stdout, "Response from `CountriesAPI.GetPublicLocation`: %v\n", resp)
 }
 ```
@@ -121,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainCountry**](DomainCountry.md)
+[**GetPublicLocation200Response**](GetPublicLocation200Response.md)
 
 ### Authorization
 

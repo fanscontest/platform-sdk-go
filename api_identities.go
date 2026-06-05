@@ -43,7 +43,7 @@ func (r ApiCreateIdentitiesRequest) XTenantUserId(xTenantUserId string) ApiCreat
 	return r
 }
 
-func (r ApiCreateIdentitiesRequest) Execute() (*DomainPlatformIdentity, *http.Response, error) {
+func (r ApiCreateIdentitiesRequest) Execute() (*GetIdentities200Response, *http.Response, error) {
 	return r.ApiService.CreateIdentitiesExecute(r)
 }
 
@@ -65,13 +65,13 @@ func (a *IdentitiesAPIService) CreateIdentities(ctx context.Context) ApiCreateId
 }
 
 // Execute executes the request
-//  @return DomainPlatformIdentity
-func (a *IdentitiesAPIService) CreateIdentitiesExecute(r ApiCreateIdentitiesRequest) (*DomainPlatformIdentity, *http.Response, error) {
+//  @return GetIdentities200Response
+func (a *IdentitiesAPIService) CreateIdentitiesExecute(r ApiCreateIdentitiesRequest) (*GetIdentities200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainPlatformIdentity
+		localVarReturnValue  *GetIdentities200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IdentitiesAPIService.CreateIdentities")
@@ -347,7 +347,7 @@ func (r ApiGetIdentitiesRequest) XTenantUserId(xTenantUserId string) ApiGetIdent
 	return r
 }
 
-func (r ApiGetIdentitiesRequest) Execute() (*DomainPlatformIdentity, *http.Response, error) {
+func (r ApiGetIdentitiesRequest) Execute() (*GetIdentities200Response, *http.Response, error) {
 	return r.ApiService.GetIdentitiesExecute(r)
 }
 
@@ -370,13 +370,13 @@ func (a *IdentitiesAPIService) GetIdentities(ctx context.Context) ApiGetIdentiti
 }
 
 // Execute executes the request
-//  @return DomainPlatformIdentity
-func (a *IdentitiesAPIService) GetIdentitiesExecute(r ApiGetIdentitiesRequest) (*DomainPlatformIdentity, *http.Response, error) {
+//  @return GetIdentities200Response
+func (a *IdentitiesAPIService) GetIdentitiesExecute(r ApiGetIdentitiesRequest) (*GetIdentities200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainPlatformIdentity
+		localVarReturnValue  *GetIdentities200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IdentitiesAPIService.GetIdentities")
@@ -507,7 +507,7 @@ func (r ApiGetIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiGetI
 	return r
 }
 
-func (r ApiGetIdentitiesByIdRequest) Execute() (*DomainPlatformIdentity, *http.Response, error) {
+func (r ApiGetIdentitiesByIdRequest) Execute() (*GetIdentities200Response, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByIdExecute(r)
 }
 
@@ -530,13 +530,13 @@ func (a *IdentitiesAPIService) GetIdentitiesById(ctx context.Context, id string)
 }
 
 // Execute executes the request
-//  @return DomainPlatformIdentity
-func (a *IdentitiesAPIService) GetIdentitiesByIdExecute(r ApiGetIdentitiesByIdRequest) (*DomainPlatformIdentity, *http.Response, error) {
+//  @return GetIdentities200Response
+func (a *IdentitiesAPIService) GetIdentitiesByIdExecute(r ApiGetIdentitiesByIdRequest) (*GetIdentities200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainPlatformIdentity
+		localVarReturnValue  *GetIdentities200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IdentitiesAPIService.GetIdentitiesById")
@@ -660,7 +660,7 @@ func (r ApiUpdateIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiU
 	return r
 }
 
-func (r ApiUpdateIdentitiesByIdRequest) Execute() (*DomainPlatformIdentity, *http.Response, error) {
+func (r ApiUpdateIdentitiesByIdRequest) Execute() (*GetIdentities200Response, *http.Response, error) {
 	return r.ApiService.UpdateIdentitiesByIdExecute(r)
 }
 
@@ -685,13 +685,13 @@ func (a *IdentitiesAPIService) UpdateIdentitiesById(ctx context.Context, id stri
 }
 
 // Execute executes the request
-//  @return DomainPlatformIdentity
-func (a *IdentitiesAPIService) UpdateIdentitiesByIdExecute(r ApiUpdateIdentitiesByIdRequest) (*DomainPlatformIdentity, *http.Response, error) {
+//  @return GetIdentities200Response
+func (a *IdentitiesAPIService) UpdateIdentitiesByIdExecute(r ApiUpdateIdentitiesByIdRequest) (*GetIdentities200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainPlatformIdentity
+		localVarReturnValue  *GetIdentities200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IdentitiesAPIService.UpdateIdentitiesById")

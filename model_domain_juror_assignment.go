@@ -22,6 +22,8 @@ var _ MappedNullable = &DomainJurorAssignment{}
 type DomainJurorAssignment struct {
 	AssignedAt *string `json:"assigned_at,omitempty"`
 	ContestId *string `json:"contest_id,omitempty"`
+	// keyset pagination sort key (uman#132)
+	CreatedAt *string `json:"created_at,omitempty"`
 	Id *string `json:"id,omitempty"`
 	JurorId *string `json:"juror_id,omitempty"`
 	// Use JurorAssignmentSourceRandom or JurorAssignmentSourceInvited
@@ -109,6 +111,38 @@ func (o *DomainJurorAssignment) HasContestId() bool {
 // SetContestId gets a reference to the given string and assigns it to the ContestId field.
 func (o *DomainJurorAssignment) SetContestId(v string) {
 	o.ContestId = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *DomainJurorAssignment) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainJurorAssignment) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *DomainJurorAssignment) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *DomainJurorAssignment) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -254,6 +288,9 @@ func (o DomainJurorAssignment) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ContestId) {
 		toSerialize["contest_id"] = o.ContestId
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

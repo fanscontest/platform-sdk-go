@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **CanView** | Pointer to **bool** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **ContestId** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **string** | keyset pagination sort key (uman#132) | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **IdentityPolicy** | Pointer to **string** |  | [optional] 
 **InvitedByTenantId** | Pointer to **string** |  | [optional] 
@@ -133,6 +134,31 @@ SetContestId sets ContestId field to given value.
 `func (o *DomainContestHosting) HasContestId() bool`
 
 HasContestId returns a boolean if a field has been set.
+
+### GetCreatedAt
+
+`func (o *DomainContestHosting) GetCreatedAt() string`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *DomainContestHosting) GetCreatedAtOk() (*string, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *DomainContestHosting) SetCreatedAt(v string)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *DomainContestHosting) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
 
 ### GetId
 

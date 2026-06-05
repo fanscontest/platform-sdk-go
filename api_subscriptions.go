@@ -43,7 +43,7 @@ func (r ApiCreateSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiCr
 	return r
 }
 
-func (r ApiCreateSubscriptionsRequest) Execute() (*DomainSubscription, *http.Response, error) {
+func (r ApiCreateSubscriptionsRequest) Execute() (*CreateSubscriptions200Response, *http.Response, error) {
 	return r.ApiService.CreateSubscriptionsExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *SubscriptionsAPIService) CreateSubscriptions(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return DomainSubscription
-func (a *SubscriptionsAPIService) CreateSubscriptionsExecute(r ApiCreateSubscriptionsRequest) (*DomainSubscription, *http.Response, error) {
+//  @return CreateSubscriptions200Response
+func (a *SubscriptionsAPIService) CreateSubscriptionsExecute(r ApiCreateSubscriptionsRequest) (*CreateSubscriptions200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSubscription
+		localVarReturnValue  *CreateSubscriptions200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.CreateSubscriptions")
@@ -291,7 +291,21 @@ type ApiGetChannelsByIdSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetChannelsByIdSubscriptionsRequest) Cursor(cursor string) ApiGetChannelsByIdSubscriptionsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetChannelsByIdSubscriptionsRequest) Limit(limit int32) ApiGetChannelsByIdSubscriptionsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -300,14 +314,18 @@ func (r ApiGetChannelsByIdSubscriptionsRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiGetChannelsByIdSubscriptionsRequest) Execute() ([]DomainSubscription, *http.Response, error) {
+func (r ApiGetChannelsByIdSubscriptionsRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdSubscriptionsExecute(r)
 }
 
 /*
-GetChannelsByIdSubscriptions Get channel subscribers
+GetChannelsByIdSubscriptions List channel subscriptions (cursor-paginated)
 
-Mounted twice (authed + public) with identical semantics.
+Mounted twice (authed + public) with identical semantics. The
+channel owner additionally sees pending requests; non-owners see
+only approved subscriptions. Each item carries its `status`
+(uman#132 flattened the former {subscribers, pending_request}
+object into the declared Domain.Subscription array).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Channel ID
@@ -322,13 +340,13 @@ func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptions(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []DomainSubscription
-func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptionsExecute(r ApiGetChannelsByIdSubscriptionsRequest) ([]DomainSubscription, *http.Response, error) {
+//  @return GetChannelsByIdSubscriptions200Response
+func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptionsExecute(r ApiGetChannelsByIdSubscriptionsRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSubscription
+		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetChannelsByIdSubscriptions")
@@ -343,6 +361,12 @@ func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptionsExecute(r ApiGetCh
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -448,7 +472,7 @@ func (r ApiGetIdentitiesByPiidSubscriptionsRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidSubscriptionsRequest) Execute() ([]DomainSubscription, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidSubscriptionsRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidSubscriptionsExecute(r)
 }
 
@@ -470,13 +494,13 @@ func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptions(ctx context.C
 }
 
 // Execute executes the request
-//  @return []DomainSubscription
-func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptionsExecute(r ApiGetIdentitiesByPiidSubscriptionsRequest) ([]DomainSubscription, *http.Response, error) {
+//  @return GetChannelsByIdSubscriptions200Response
+func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptionsExecute(r ApiGetIdentitiesByPiidSubscriptionsRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSubscription
+		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetIdentitiesByPiidSubscriptions")
@@ -579,7 +603,21 @@ type ApiGetPublicChannelsByIdSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Cursor(cursor string) ApiGetPublicChannelsByIdSubscriptionsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Limit(limit int32) ApiGetPublicChannelsByIdSubscriptionsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -588,14 +626,18 @@ func (r ApiGetPublicChannelsByIdSubscriptionsRequest) XTenantUserId(xTenantUserI
 	return r
 }
 
-func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Execute() ([]DomainSubscription, *http.Response, error) {
+func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	return r.ApiService.GetPublicChannelsByIdSubscriptionsExecute(r)
 }
 
 /*
-GetPublicChannelsByIdSubscriptions Get channel subscribers
+GetPublicChannelsByIdSubscriptions List channel subscriptions (cursor-paginated)
 
-Mounted twice (authed + public) with identical semantics.
+Mounted twice (authed + public) with identical semantics. The
+channel owner additionally sees pending requests; non-owners see
+only approved subscriptions. Each item carries its `status`
+(uman#132 flattened the former {subscribers, pending_request}
+object into the declared Domain.Subscription array).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Channel ID
@@ -610,13 +652,13 @@ func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptions(ctx context
 }
 
 // Execute executes the request
-//  @return []DomainSubscription
-func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptionsExecute(r ApiGetPublicChannelsByIdSubscriptionsRequest) ([]DomainSubscription, *http.Response, error) {
+//  @return GetChannelsByIdSubscriptions200Response
+func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptionsExecute(r ApiGetPublicChannelsByIdSubscriptionsRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSubscription
+		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetPublicChannelsByIdSubscriptions")
@@ -631,6 +673,12 @@ func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptionsExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -713,7 +761,21 @@ type ApiGetSubscriptionsByIdLogsRequest struct {
 	ctx context.Context
 	ApiService *SubscriptionsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetSubscriptionsByIdLogsRequest) Cursor(cursor string) ApiGetSubscriptionsByIdLogsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetSubscriptionsByIdLogsRequest) Limit(limit int32) ApiGetSubscriptionsByIdLogsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -722,7 +784,7 @@ func (r ApiGetSubscriptionsByIdLogsRequest) XTenantUserId(xTenantUserId string) 
 	return r
 }
 
-func (r ApiGetSubscriptionsByIdLogsRequest) Execute() ([]DomainParticipation, *http.Response, error) {
+func (r ApiGetSubscriptionsByIdLogsRequest) Execute() (*GetContestsByIdParticipation200Response, *http.Response, error) {
 	return r.ApiService.GetSubscriptionsByIdLogsExecute(r)
 }
 
@@ -742,13 +804,13 @@ func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogs(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return []DomainParticipation
-func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogsExecute(r ApiGetSubscriptionsByIdLogsRequest) ([]DomainParticipation, *http.Response, error) {
+//  @return GetContestsByIdParticipation200Response
+func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogsExecute(r ApiGetSubscriptionsByIdLogsRequest) (*GetContestsByIdParticipation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainParticipation
+		localVarReturnValue  *GetContestsByIdParticipation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetSubscriptionsByIdLogs")
@@ -763,6 +825,12 @@ func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogsExecute(r ApiGetSubscr
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -868,7 +936,7 @@ func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) XTenantUserId(xTenantU
 	return r
 }
 
-func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) Execute() ([]DomainSubscription, *http.Response, error) {
+func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	return r.ApiService.GetSubscriptionsSearchKeywordByKeywordExecute(r)
 }
 
@@ -888,13 +956,13 @@ func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeyword(ctx con
 }
 
 // Execute executes the request
-//  @return []DomainSubscription
-func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeywordExecute(r ApiGetSubscriptionsSearchKeywordByKeywordRequest) ([]DomainSubscription, *http.Response, error) {
+//  @return GetChannelsByIdSubscriptions200Response
+func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeywordExecute(r ApiGetSubscriptionsSearchKeywordByKeywordRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSubscription
+		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetSubscriptionsSearchKeywordByKeyword")

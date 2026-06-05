@@ -43,7 +43,7 @@ func (r ApiCreateChannelsRequest) XTenantUserId(xTenantUserId string) ApiCreateC
 	return r
 }
 
-func (r ApiCreateChannelsRequest) Execute() (*DomainChannel, *http.Response, error) {
+func (r ApiCreateChannelsRequest) Execute() (*CreateChannels201Response, *http.Response, error) {
 	return r.ApiService.CreateChannelsExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *ChannelsAPIService) CreateChannels(ctx context.Context) ApiCreateChanne
 }
 
 // Execute executes the request
-//  @return DomainChannel
-func (a *ChannelsAPIService) CreateChannelsExecute(r ApiCreateChannelsRequest) (*DomainChannel, *http.Response, error) {
+//  @return CreateChannels201Response
+func (a *ChannelsAPIService) CreateChannelsExecute(r ApiCreateChannelsRequest) (*CreateChannels201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainChannel
+		localVarReturnValue  *CreateChannels201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.CreateChannels")
@@ -177,7 +177,7 @@ func (r ApiCreateChannelsByIdReportRequest) XTenantUserId(xTenantUserId string) 
 	return r
 }
 
-func (r ApiCreateChannelsByIdReportRequest) Execute() (string, *http.Response, error) {
+func (r ApiCreateChannelsByIdReportRequest) Execute() (*CreateChannelsByIdReport200Response, *http.Response, error) {
 	return r.ApiService.CreateChannelsByIdReportExecute(r)
 }
 
@@ -199,13 +199,13 @@ func (a *ChannelsAPIService) CreateChannelsByIdReport(ctx context.Context, id st
 }
 
 // Execute executes the request
-//  @return string
-func (a *ChannelsAPIService) CreateChannelsByIdReportExecute(r ApiCreateChannelsByIdReportRequest) (string, *http.Response, error) {
+//  @return CreateChannelsByIdReport200Response
+func (a *ChannelsAPIService) CreateChannelsByIdReportExecute(r ApiCreateChannelsByIdReportRequest) (*CreateChannelsByIdReport200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  string
+		localVarReturnValue  *CreateChannelsByIdReport200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.CreateChannelsByIdReport")
@@ -318,7 +318,7 @@ func (r ApiCreateChannelsByIdTeamSetsRequest) XTenantUserId(xTenantUserId string
 	return r
 }
 
-func (r ApiCreateChannelsByIdTeamSetsRequest) Execute() (*DomainTeamSet, *http.Response, error) {
+func (r ApiCreateChannelsByIdTeamSetsRequest) Execute() (*CreateChannelsByIdTeamSets201Response, *http.Response, error) {
 	return r.ApiService.CreateChannelsByIdTeamSetsExecute(r)
 }
 
@@ -338,13 +338,13 @@ func (a *ChannelsAPIService) CreateChannelsByIdTeamSets(ctx context.Context, id 
 }
 
 // Execute executes the request
-//  @return DomainTeamSet
-func (a *ChannelsAPIService) CreateChannelsByIdTeamSetsExecute(r ApiCreateChannelsByIdTeamSetsRequest) (*DomainTeamSet, *http.Response, error) {
+//  @return CreateChannelsByIdTeamSets201Response
+func (a *ChannelsAPIService) CreateChannelsByIdTeamSetsExecute(r ApiCreateChannelsByIdTeamSetsRequest) (*CreateChannelsByIdTeamSets201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTeamSet
+		localVarReturnValue  *CreateChannelsByIdTeamSets201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.CreateChannelsByIdTeamSets")
@@ -484,7 +484,7 @@ func (r ApiCreateChannelsByIdValidateAccessCodeRequest) XTenantUserId(xTenantUse
 	return r
 }
 
-func (r ApiCreateChannelsByIdValidateAccessCodeRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateChannelsByIdValidateAccessCodeRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateChannelsByIdValidateAccessCodeExecute(r)
 }
 
@@ -504,13 +504,13 @@ func (a *ChannelsAPIService) CreateChannelsByIdValidateAccessCode(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *ChannelsAPIService) CreateChannelsByIdValidateAccessCodeExecute(r ApiCreateChannelsByIdValidateAccessCodeRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *ChannelsAPIService) CreateChannelsByIdValidateAccessCodeExecute(r ApiCreateChannelsByIdValidateAccessCodeRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.CreateChannelsByIdValidateAccessCode")
@@ -632,7 +632,7 @@ func (r ApiDeleteChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiDel
 	return r
 }
 
-func (r ApiDeleteChannelsByIdRequest) Execute() (*DomainChannel, *http.Response, error) {
+func (r ApiDeleteChannelsByIdRequest) Execute() (*CreateChannels201Response, *http.Response, error) {
 	return r.ApiService.DeleteChannelsByIdExecute(r)
 }
 
@@ -654,13 +654,13 @@ func (a *ChannelsAPIService) DeleteChannelsById(ctx context.Context, id string) 
 }
 
 // Execute executes the request
-//  @return DomainChannel
-func (a *ChannelsAPIService) DeleteChannelsByIdExecute(r ApiDeleteChannelsByIdRequest) (*DomainChannel, *http.Response, error) {
+//  @return CreateChannels201Response
+func (a *ChannelsAPIService) DeleteChannelsByIdExecute(r ApiDeleteChannelsByIdRequest) (*CreateChannels201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainChannel
+		localVarReturnValue  *CreateChannels201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.DeleteChannelsById")
@@ -779,7 +779,7 @@ func (r ApiGetChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetChannel
 	return r
 }
 
-func (r ApiGetChannelsRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetChannelsRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsExecute(r)
 }
 
@@ -797,13 +797,13 @@ func (a *ChannelsAPIService) GetChannels(ctx context.Context) ApiGetChannelsRequ
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetChannelsExecute(r ApiGetChannelsRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetChannelsExecute(r ApiGetChannelsRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetChannels")
@@ -914,7 +914,7 @@ func (r ApiGetChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetCha
 	return r
 }
 
-func (r ApiGetChannelsByIdRequest) Execute() (*DomainChannel, *http.Response, error) {
+func (r ApiGetChannelsByIdRequest) Execute() (*CreateChannels201Response, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdExecute(r)
 }
 
@@ -936,13 +936,13 @@ func (a *ChannelsAPIService) GetChannelsById(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return DomainChannel
-func (a *ChannelsAPIService) GetChannelsByIdExecute(r ApiGetChannelsByIdRequest) (*DomainChannel, *http.Response, error) {
+//  @return CreateChannels201Response
+func (a *ChannelsAPIService) GetChannelsByIdExecute(r ApiGetChannelsByIdRequest) (*CreateChannels201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainChannel
+		localVarReturnValue  *CreateChannels201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetChannelsById")
@@ -1050,7 +1050,21 @@ type ApiGetChannelsByIdTeamSetsRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page, name-sorted)
+func (r ApiGetChannelsByIdTeamSetsRequest) Cursor(cursor string) ApiGetChannelsByIdTeamSetsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page, name-sorted)
+func (r ApiGetChannelsByIdTeamSetsRequest) Limit(limit int32) ApiGetChannelsByIdTeamSetsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -1059,12 +1073,16 @@ func (r ApiGetChannelsByIdTeamSetsRequest) XTenantUserId(xTenantUserId string) A
 	return r
 }
 
-func (r ApiGetChannelsByIdTeamSetsRequest) Execute() ([]DomainTeamSet, *http.Response, error) {
+func (r ApiGetChannelsByIdTeamSetsRequest) Execute() (*GetChannelsByIdTeamSets200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdTeamSetsExecute(r)
 }
 
 /*
 GetChannelsByIdTeamSets List team sets owned by a channel
+
+Bounded set sorted by name (not a keyset list); per uman#132 it
+carries an inert pagination block (has_next:false) and ignores
+cursor/limit.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Channel ID
@@ -1079,13 +1097,13 @@ func (a *ChannelsAPIService) GetChannelsByIdTeamSets(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return []DomainTeamSet
-func (a *ChannelsAPIService) GetChannelsByIdTeamSetsExecute(r ApiGetChannelsByIdTeamSetsRequest) ([]DomainTeamSet, *http.Response, error) {
+//  @return GetChannelsByIdTeamSets200Response
+func (a *ChannelsAPIService) GetChannelsByIdTeamSetsExecute(r ApiGetChannelsByIdTeamSetsRequest) (*GetChannelsByIdTeamSets200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainTeamSet
+		localVarReturnValue  *GetChannelsByIdTeamSets200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetChannelsByIdTeamSets")
@@ -1100,6 +1118,12 @@ func (a *ChannelsAPIService) GetChannelsByIdTeamSetsExecute(r ApiGetChannelsById
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1215,7 +1239,7 @@ func (r ApiGetChannelsSearchRequest) XTenantUserId(xTenantUserId string) ApiGetC
 	return r
 }
 
-func (r ApiGetChannelsSearchRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetChannelsSearchRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsSearchExecute(r)
 }
 
@@ -1233,13 +1257,13 @@ func (a *ChannelsAPIService) GetChannelsSearch(ctx context.Context) ApiGetChanne
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetChannelsSearchExecute(r ApiGetChannelsSearchRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetChannelsSearchExecute(r ApiGetChannelsSearchRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetChannelsSearch")
@@ -1364,7 +1388,7 @@ func (r ApiGetChannelsSearchKeywordByKeywordRequest) XTenantUserId(xTenantUserId
 	return r
 }
 
-func (r ApiGetChannelsSearchKeywordByKeywordRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetChannelsSearchKeywordByKeywordRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsSearchKeywordByKeywordExecute(r)
 }
 
@@ -1386,13 +1410,13 @@ func (a *ChannelsAPIService) GetChannelsSearchKeywordByKeyword(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetChannelsSearchKeywordByKeywordExecute(r ApiGetChannelsSearchKeywordByKeywordRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetChannelsSearchKeywordByKeywordExecute(r ApiGetChannelsSearchKeywordByKeywordRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetChannelsSearchKeywordByKeyword")
@@ -1518,7 +1542,7 @@ func (r ApiGetIdentitiesByPiidChannelsRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidChannelsRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidChannelsRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidChannelsExecute(r)
 }
 
@@ -1540,13 +1564,13 @@ func (a *ChannelsAPIService) GetIdentitiesByPiidChannels(ctx context.Context, pi
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetIdentitiesByPiidChannelsExecute(r ApiGetIdentitiesByPiidChannelsRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetIdentitiesByPiidChannelsExecute(r ApiGetIdentitiesByPiidChannelsRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetIdentitiesByPiidChannels")
@@ -1678,7 +1702,7 @@ func (r ApiGetPublicChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetP
 	return r
 }
 
-func (r ApiGetPublicChannelsRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetPublicChannelsRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetPublicChannelsExecute(r)
 }
 
@@ -1698,13 +1722,13 @@ func (a *ChannelsAPIService) GetPublicChannels(ctx context.Context) ApiGetPublic
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetPublicChannelsExecute(r ApiGetPublicChannelsRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetPublicChannelsExecute(r ApiGetPublicChannelsRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicChannels")
@@ -1819,7 +1843,7 @@ func (r ApiGetPublicChannelsByIdRequest) XTenantUserId(xTenantUserId string) Api
 	return r
 }
 
-func (r ApiGetPublicChannelsByIdRequest) Execute() (*DomainChannel, *http.Response, error) {
+func (r ApiGetPublicChannelsByIdRequest) Execute() (*CreateChannels201Response, *http.Response, error) {
 	return r.ApiService.GetPublicChannelsByIdExecute(r)
 }
 
@@ -1841,13 +1865,13 @@ func (a *ChannelsAPIService) GetPublicChannelsById(ctx context.Context, id strin
 }
 
 // Execute executes the request
-//  @return DomainChannel
-func (a *ChannelsAPIService) GetPublicChannelsByIdExecute(r ApiGetPublicChannelsByIdRequest) (*DomainChannel, *http.Response, error) {
+//  @return CreateChannels201Response
+func (a *ChannelsAPIService) GetPublicChannelsByIdExecute(r ApiGetPublicChannelsByIdRequest) (*CreateChannels201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainChannel
+		localVarReturnValue  *CreateChannels201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicChannelsById")
@@ -1978,7 +2002,7 @@ func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetPublicChannelsSearchKeywordByKeywordExecute(r)
 }
 
@@ -2000,13 +2024,13 @@ func (a *ChannelsAPIService) GetPublicChannelsSearchKeywordByKeyword(ctx context
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetPublicChannelsSearchKeywordByKeywordExecute(r ApiGetPublicChannelsSearchKeywordByKeywordRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetPublicChannelsSearchKeywordByKeywordExecute(r ApiGetPublicChannelsSearchKeywordByKeywordRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicChannelsSearchKeywordByKeyword")
@@ -2132,7 +2156,7 @@ func (r ApiGetPublicIdentitiesByPiidChannelsRequest) XTenantUserId(xTenantUserId
 	return r
 }
 
-func (r ApiGetPublicIdentitiesByPiidChannelsRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetPublicIdentitiesByPiidChannelsRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetPublicIdentitiesByPiidChannelsExecute(r)
 }
 
@@ -2154,13 +2178,13 @@ func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannels(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannelsExecute(r ApiGetPublicIdentitiesByPiidChannelsRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannelsExecute(r ApiGetPublicIdentitiesByPiidChannelsRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicIdentitiesByPiidChannels")
@@ -2262,7 +2286,21 @@ func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannelsExecute(r ApiGetPu
 type ApiGetPublicTeamSetsSystemRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page, name-sorted)
+func (r ApiGetPublicTeamSetsSystemRequest) Cursor(cursor string) ApiGetPublicTeamSetsSystemRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page, name-sorted)
+func (r ApiGetPublicTeamSetsSystemRequest) Limit(limit int32) ApiGetPublicTeamSetsSystemRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -2271,7 +2309,7 @@ func (r ApiGetPublicTeamSetsSystemRequest) XTenantUserId(xTenantUserId string) A
 	return r
 }
 
-func (r ApiGetPublicTeamSetsSystemRequest) Execute() ([]DomainTeamSet, *http.Response, error) {
+func (r ApiGetPublicTeamSetsSystemRequest) Execute() (*GetChannelsByIdTeamSets200Response, *http.Response, error) {
 	return r.ApiService.GetPublicTeamSetsSystemExecute(r)
 }
 
@@ -2279,7 +2317,9 @@ func (r ApiGetPublicTeamSetsSystemRequest) Execute() ([]DomainTeamSet, *http.Res
 GetPublicTeamSetsSystem List platform-defined system team sets
 
 Mounted twice: under tenant auth at /team-sets/system and
-unauthenticated at /public/team-sets/system.
+unauthenticated at /public/team-sets/system. This is a bounded set
+sorted by name (not a keyset list); per uman#132 it carries an inert
+pagination block (has_next:false) and ignores cursor/limit.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPublicTeamSetsSystemRequest
@@ -2292,13 +2332,13 @@ func (a *ChannelsAPIService) GetPublicTeamSetsSystem(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return []DomainTeamSet
-func (a *ChannelsAPIService) GetPublicTeamSetsSystemExecute(r ApiGetPublicTeamSetsSystemRequest) ([]DomainTeamSet, *http.Response, error) {
+//  @return GetChannelsByIdTeamSets200Response
+func (a *ChannelsAPIService) GetPublicTeamSetsSystemExecute(r ApiGetPublicTeamSetsSystemRequest) (*GetChannelsByIdTeamSets200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainTeamSet
+		localVarReturnValue  *GetChannelsByIdTeamSets200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicTeamSetsSystem")
@@ -2312,6 +2352,12 @@ func (a *ChannelsAPIService) GetPublicTeamSetsSystemExecute(r ApiGetPublicTeamSe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2382,7 +2428,21 @@ func (a *ChannelsAPIService) GetPublicTeamSetsSystemExecute(r ApiGetPublicTeamSe
 type ApiGetTeamSetsSystemRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page, name-sorted)
+func (r ApiGetTeamSetsSystemRequest) Cursor(cursor string) ApiGetTeamSetsSystemRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page, name-sorted)
+func (r ApiGetTeamSetsSystemRequest) Limit(limit int32) ApiGetTeamSetsSystemRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -2391,7 +2451,7 @@ func (r ApiGetTeamSetsSystemRequest) XTenantUserId(xTenantUserId string) ApiGetT
 	return r
 }
 
-func (r ApiGetTeamSetsSystemRequest) Execute() ([]DomainTeamSet, *http.Response, error) {
+func (r ApiGetTeamSetsSystemRequest) Execute() (*GetChannelsByIdTeamSets200Response, *http.Response, error) {
 	return r.ApiService.GetTeamSetsSystemExecute(r)
 }
 
@@ -2399,7 +2459,9 @@ func (r ApiGetTeamSetsSystemRequest) Execute() ([]DomainTeamSet, *http.Response,
 GetTeamSetsSystem List platform-defined system team sets
 
 Mounted twice: under tenant auth at /team-sets/system and
-unauthenticated at /public/team-sets/system.
+unauthenticated at /public/team-sets/system. This is a bounded set
+sorted by name (not a keyset list); per uman#132 it carries an inert
+pagination block (has_next:false) and ignores cursor/limit.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTeamSetsSystemRequest
@@ -2412,13 +2474,13 @@ func (a *ChannelsAPIService) GetTeamSetsSystem(ctx context.Context) ApiGetTeamSe
 }
 
 // Execute executes the request
-//  @return []DomainTeamSet
-func (a *ChannelsAPIService) GetTeamSetsSystemExecute(r ApiGetTeamSetsSystemRequest) ([]DomainTeamSet, *http.Response, error) {
+//  @return GetChannelsByIdTeamSets200Response
+func (a *ChannelsAPIService) GetTeamSetsSystemExecute(r ApiGetTeamSetsSystemRequest) (*GetChannelsByIdTeamSets200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainTeamSet
+		localVarReturnValue  *GetChannelsByIdTeamSets200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetTeamSetsSystem")
@@ -2432,6 +2494,12 @@ func (a *ChannelsAPIService) GetTeamSetsSystemExecute(r ApiGetTeamSetsSystemRequ
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2519,7 +2587,7 @@ func (r ApiPatchChannelsByIdAccessCodeRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiPatchChannelsByIdAccessCodeRequest) Execute() (*DomainChannel, *http.Response, error) {
+func (r ApiPatchChannelsByIdAccessCodeRequest) Execute() (*CreateChannels201Response, *http.Response, error) {
 	return r.ApiService.PatchChannelsByIdAccessCodeExecute(r)
 }
 
@@ -2541,13 +2609,13 @@ func (a *ChannelsAPIService) PatchChannelsByIdAccessCode(ctx context.Context, id
 }
 
 // Execute executes the request
-//  @return DomainChannel
-func (a *ChannelsAPIService) PatchChannelsByIdAccessCodeExecute(r ApiPatchChannelsByIdAccessCodeRequest) (*DomainChannel, *http.Response, error) {
+//  @return CreateChannels201Response
+func (a *ChannelsAPIService) PatchChannelsByIdAccessCodeExecute(r ApiPatchChannelsByIdAccessCodeRequest) (*CreateChannels201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainChannel
+		localVarReturnValue  *CreateChannels201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.PatchChannelsByIdAccessCode")
@@ -2665,7 +2733,7 @@ func (r ApiUpdateChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateChannelsByIdRequest) Execute() (*DomainChannel, *http.Response, error) {
+func (r ApiUpdateChannelsByIdRequest) Execute() (*CreateChannels201Response, *http.Response, error) {
 	return r.ApiService.UpdateChannelsByIdExecute(r)
 }
 
@@ -2687,13 +2755,13 @@ func (a *ChannelsAPIService) UpdateChannelsById(ctx context.Context, id string) 
 }
 
 // Execute executes the request
-//  @return DomainChannel
-func (a *ChannelsAPIService) UpdateChannelsByIdExecute(r ApiUpdateChannelsByIdRequest) (*DomainChannel, *http.Response, error) {
+//  @return CreateChannels201Response
+func (a *ChannelsAPIService) UpdateChannelsByIdExecute(r ApiUpdateChannelsByIdRequest) (*CreateChannels201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainChannel
+		localVarReturnValue  *CreateChannels201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.UpdateChannelsById")
@@ -2812,7 +2880,7 @@ func (r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) XTenantUserId(xTenantUs
 	return r
 }
 
-func (r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) Execute() (*DomainTeamSet, *http.Response, error) {
+func (r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) Execute() (*CreateChannelsByIdTeamSets201Response, *http.Response, error) {
 	return r.ApiService.UpdateChannelsByIdTeamSetsByTeamSetIdExecute(r)
 }
 
@@ -2837,13 +2905,13 @@ func (a *ChannelsAPIService) UpdateChannelsByIdTeamSetsByTeamSetId(ctx context.C
 }
 
 // Execute executes the request
-//  @return DomainTeamSet
-func (a *ChannelsAPIService) UpdateChannelsByIdTeamSetsByTeamSetIdExecute(r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) (*DomainTeamSet, *http.Response, error) {
+//  @return CreateChannelsByIdTeamSets201Response
+func (a *ChannelsAPIService) UpdateChannelsByIdTeamSetsByTeamSetIdExecute(r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) (*CreateChannelsByIdTeamSets201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTeamSet
+		localVarReturnValue  *CreateChannelsByIdTeamSets201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.UpdateChannelsByIdTeamSetsByTeamSetId")

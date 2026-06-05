@@ -43,7 +43,7 @@ func (r ApiCreateVenuesRequest) XTenantUserId(xTenantUserId string) ApiCreateVen
 	return r
 }
 
-func (r ApiCreateVenuesRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateVenuesRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateVenuesExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *VenuesAPIService) CreateVenues(ctx context.Context) ApiCreateVenuesRequ
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *VenuesAPIService) CreateVenuesExecute(r ApiCreateVenuesRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *VenuesAPIService) CreateVenuesExecute(r ApiCreateVenuesRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VenuesAPIService.CreateVenues")
@@ -195,7 +195,7 @@ func (r ApiCreateVenuesByVenueIdChannelsRequest) XTenantUserId(xTenantUserId str
 	return r
 }
 
-func (r ApiCreateVenuesByVenueIdChannelsRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateVenuesByVenueIdChannelsRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateVenuesByVenueIdChannelsExecute(r)
 }
 
@@ -215,13 +215,13 @@ func (a *VenuesAPIService) CreateVenuesByVenueIdChannels(ctx context.Context, ve
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *VenuesAPIService) CreateVenuesByVenueIdChannelsExecute(r ApiCreateVenuesByVenueIdChannelsRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *VenuesAPIService) CreateVenuesByVenueIdChannelsExecute(r ApiCreateVenuesByVenueIdChannelsRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VenuesAPIService.CreateVenuesByVenueIdChannels")
@@ -344,7 +344,21 @@ func (a *VenuesAPIService) CreateVenuesByVenueIdChannelsExecute(r ApiCreateVenue
 type ApiGetVenuesRequest struct {
 	ctx context.Context
 	ApiService *VenuesAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetVenuesRequest) Cursor(cursor string) ApiGetVenuesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetVenuesRequest) Limit(limit int32) ApiGetVenuesRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -353,7 +367,7 @@ func (r ApiGetVenuesRequest) XTenantUserId(xTenantUserId string) ApiGetVenuesReq
 	return r
 }
 
-func (r ApiGetVenuesRequest) Execute() ([]DomainVenue, *http.Response, error) {
+func (r ApiGetVenuesRequest) Execute() (*GetVenues200Response, *http.Response, error) {
 	return r.ApiService.GetVenuesExecute(r)
 }
 
@@ -371,13 +385,13 @@ func (a *VenuesAPIService) GetVenues(ctx context.Context) ApiGetVenuesRequest {
 }
 
 // Execute executes the request
-//  @return []DomainVenue
-func (a *VenuesAPIService) GetVenuesExecute(r ApiGetVenuesRequest) ([]DomainVenue, *http.Response, error) {
+//  @return GetVenues200Response
+func (a *VenuesAPIService) GetVenuesExecute(r ApiGetVenuesRequest) (*GetVenues200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainVenue
+		localVarReturnValue  *GetVenues200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VenuesAPIService.GetVenues")
@@ -391,6 +405,12 @@ func (a *VenuesAPIService) GetVenuesExecute(r ApiGetVenuesRequest) ([]DomainVenu
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -473,7 +493,21 @@ type ApiGetVenuesByVenueIdChannelsRequest struct {
 	ctx context.Context
 	ApiService *VenuesAPIService
 	venueId string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetVenuesByVenueIdChannelsRequest) Cursor(cursor string) ApiGetVenuesByVenueIdChannelsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetVenuesByVenueIdChannelsRequest) Limit(limit int32) ApiGetVenuesByVenueIdChannelsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -482,7 +516,7 @@ func (r ApiGetVenuesByVenueIdChannelsRequest) XTenantUserId(xTenantUserId string
 	return r
 }
 
-func (r ApiGetVenuesByVenueIdChannelsRequest) Execute() ([]DomainChannel, *http.Response, error) {
+func (r ApiGetVenuesByVenueIdChannelsRequest) Execute() (*GetChannels200Response, *http.Response, error) {
 	return r.ApiService.GetVenuesByVenueIdChannelsExecute(r)
 }
 
@@ -502,13 +536,13 @@ func (a *VenuesAPIService) GetVenuesByVenueIdChannels(ctx context.Context, venue
 }
 
 // Execute executes the request
-//  @return []DomainChannel
-func (a *VenuesAPIService) GetVenuesByVenueIdChannelsExecute(r ApiGetVenuesByVenueIdChannelsRequest) ([]DomainChannel, *http.Response, error) {
+//  @return GetChannels200Response
+func (a *VenuesAPIService) GetVenuesByVenueIdChannelsExecute(r ApiGetVenuesByVenueIdChannelsRequest) (*GetChannels200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainChannel
+		localVarReturnValue  *GetChannels200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VenuesAPIService.GetVenuesByVenueIdChannels")
@@ -523,6 +557,12 @@ func (a *VenuesAPIService) GetVenuesByVenueIdChannelsExecute(r ApiGetVenuesByVen
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

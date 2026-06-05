@@ -44,7 +44,7 @@ func (r ApiCreateContestsByIdEntriesRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiCreateContestsByIdEntriesRequest) Execute() (*DomainEntry, *http.Response, error) {
+func (r ApiCreateContestsByIdEntriesRequest) Execute() (*CreateContestsByIdEntries200Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdEntriesExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdEntries(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return DomainEntry
-func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreateContestsByIdEntriesRequest) (*DomainEntry, *http.Response, error) {
+//  @return CreateContestsByIdEntries200Response
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreateContestsByIdEntriesRequest) (*CreateContestsByIdEntries200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainEntry
+		localVarReturnValue  *CreateContestsByIdEntries200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdEntries")
@@ -191,7 +191,7 @@ func (r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*DomainJurorScore, *http.Response, error) {
+func (r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdEntriesByEntryIdScoreExecute(r)
 }
 
@@ -215,13 +215,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScore(ctx
 }
 
 // Execute executes the request
-//  @return DomainJurorScore
-func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScoreExecute(r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScore, *http.Response, error) {
+//  @return UpdateContestsByIdEntriesByEntryIdScore200Response
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScoreExecute(r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainJurorScore
+		localVarReturnValue  *UpdateContestsByIdEntriesByEntryIdScore200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdEntriesByEntryIdScore")
@@ -333,7 +333,7 @@ func (r ApiCreateContestsByIdForceProceedRequest) XTenantUserId(xTenantUserId st
 	return r
 }
 
-func (r ApiCreateContestsByIdForceProceedRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateContestsByIdForceProceedRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdForceProceedExecute(r)
 }
 
@@ -355,13 +355,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdForceProceed(ctx context.
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *CreativeContestsAPIService) CreateContestsByIdForceProceedExecute(r ApiCreateContestsByIdForceProceedRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *CreativeContestsAPIService) CreateContestsByIdForceProceedExecute(r ApiCreateContestsByIdForceProceedRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdForceProceed")
@@ -474,7 +474,7 @@ func (r ApiCreateContestsByIdJurorsInviteRequest) XTenantUserId(xTenantUserId st
 	return r
 }
 
-func (r ApiCreateContestsByIdJurorsInviteRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateContestsByIdJurorsInviteRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdJurorsInviteExecute(r)
 }
 
@@ -496,13 +496,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInvite(ctx context.
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInviteExecute(r ApiCreateContestsByIdJurorsInviteRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInviteExecute(r ApiCreateContestsByIdJurorsInviteRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdJurorsInvite")
@@ -624,7 +624,7 @@ func (r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) XTenantUserId(xTe
 	return r
 }
 
-func (r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) Execute() (*DomainJurorAssignment, *http.Response, error) {
+func (r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) Execute() (*CreateJurorsInvitationsByInvitationIdAccept200Response, *http.Response, error) {
 	return r.ApiService.CreateJurorsInvitationsByInvitationIdAcceptExecute(r)
 }
 
@@ -646,13 +646,13 @@ func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAccept
 }
 
 // Execute executes the request
-//  @return DomainJurorAssignment
-func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAcceptExecute(r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) (*DomainJurorAssignment, *http.Response, error) {
+//  @return CreateJurorsInvitationsByInvitationIdAccept200Response
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAcceptExecute(r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) (*CreateJurorsInvitationsByInvitationIdAccept200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainJurorAssignment
+		localVarReturnValue  *CreateJurorsInvitationsByInvitationIdAccept200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsInvitationsByInvitationIdAccept")
@@ -780,7 +780,7 @@ func (r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) XTenantUserId(xT
 	return r
 }
 
-func (r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateJurorsInvitationsByInvitationIdDeclineExecute(r)
 }
 
@@ -802,13 +802,13 @@ func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclin
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclineExecute(r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclineExecute(r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsInvitationsByInvitationIdDecline")
@@ -942,7 +942,7 @@ func (r ApiCreateJurorsOptInRequest) XTenantUserId(xTenantUserId string) ApiCrea
 	return r
 }
 
-func (r ApiCreateJurorsOptInRequest) Execute() (*DomainJuror, *http.Response, error) {
+func (r ApiCreateJurorsOptInRequest) Execute() (*CreateJurorsOptIn200Response, *http.Response, error) {
 	return r.ApiService.CreateJurorsOptInExecute(r)
 }
 
@@ -962,13 +962,13 @@ func (a *CreativeContestsAPIService) CreateJurorsOptIn(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return DomainJuror
-func (a *CreativeContestsAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOptInRequest) (*DomainJuror, *http.Response, error) {
+//  @return CreateJurorsOptIn200Response
+func (a *CreativeContestsAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOptInRequest) (*CreateJurorsOptIn200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainJuror
+		localVarReturnValue  *CreateJurorsOptIn200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsOptIn")
@@ -1078,7 +1078,7 @@ func (r ApiDeleteContestsByIdEntriesRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiDeleteContestsByIdEntriesRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiDeleteContestsByIdEntriesRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.DeleteContestsByIdEntriesExecute(r)
 }
 
@@ -1100,13 +1100,13 @@ func (a *CreativeContestsAPIService) DeleteContestsByIdEntries(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *CreativeContestsAPIService) DeleteContestsByIdEntriesExecute(r ApiDeleteContestsByIdEntriesRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *CreativeContestsAPIService) DeleteContestsByIdEntriesExecute(r ApiDeleteContestsByIdEntriesRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.DeleteContestsByIdEntries")
@@ -1214,7 +1214,21 @@ type ApiGetContestsByIdEntriesRequest struct {
 	ctx context.Context
 	ApiService *CreativeContestsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsByIdEntriesRequest) Cursor(cursor string) ApiGetContestsByIdEntriesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetContestsByIdEntriesRequest) Limit(limit int32) ApiGetContestsByIdEntriesRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -1223,7 +1237,7 @@ func (r ApiGetContestsByIdEntriesRequest) XTenantUserId(xTenantUserId string) Ap
 	return r
 }
 
-func (r ApiGetContestsByIdEntriesRequest) Execute() ([]DomainEntry, *http.Response, error) {
+func (r ApiGetContestsByIdEntriesRequest) Execute() (*GetContestsByIdEntries200Response, *http.Response, error) {
 	return r.ApiService.GetContestsByIdEntriesExecute(r)
 }
 
@@ -1245,13 +1259,13 @@ func (a *CreativeContestsAPIService) GetContestsByIdEntries(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return []DomainEntry
-func (a *CreativeContestsAPIService) GetContestsByIdEntriesExecute(r ApiGetContestsByIdEntriesRequest) ([]DomainEntry, *http.Response, error) {
+//  @return GetContestsByIdEntries200Response
+func (a *CreativeContestsAPIService) GetContestsByIdEntriesExecute(r ApiGetContestsByIdEntriesRequest) (*GetContestsByIdEntries200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainEntry
+		localVarReturnValue  *GetContestsByIdEntries200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdEntries")
@@ -1266,6 +1280,12 @@ func (a *CreativeContestsAPIService) GetContestsByIdEntriesExecute(r ApiGetConte
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1348,7 +1368,21 @@ type ApiGetContestsByIdJurorsRequest struct {
 	ctx context.Context
 	ApiService *CreativeContestsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page, derived)
+func (r ApiGetContestsByIdJurorsRequest) Cursor(cursor string) ApiGetContestsByIdJurorsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page, derived)
+func (r ApiGetContestsByIdJurorsRequest) Limit(limit int32) ApiGetContestsByIdJurorsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -1357,14 +1391,17 @@ func (r ApiGetContestsByIdJurorsRequest) XTenantUserId(xTenantUserId string) Api
 	return r
 }
 
-func (r ApiGetContestsByIdJurorsRequest) Execute() ([]DomainJuror, *http.Response, error) {
+func (r ApiGetContestsByIdJurorsRequest) Execute() (*GetContestsByIdJurors200Response, *http.Response, error) {
 	return r.ApiService.GetContestsByIdJurorsExecute(r)
 }
 
 /*
 GetContestsByIdJurors Get jurors for a contest
 
-Get public list of jurors for a contest (visible after contest ends)
+Get public list of jurors for a contest (visible after contest ends).
+This list is derived from confirmed assignments (a compound query),
+not a single keyset; per uman#132 it returns the full bounded set as
+one page with an inert pagination block (has_next:false).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Contest ID
@@ -1379,13 +1416,13 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurors(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return []DomainJuror
-func (a *CreativeContestsAPIService) GetContestsByIdJurorsExecute(r ApiGetContestsByIdJurorsRequest) ([]DomainJuror, *http.Response, error) {
+//  @return GetContestsByIdJurors200Response
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsExecute(r ApiGetContestsByIdJurorsRequest) (*GetContestsByIdJurors200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainJuror
+		localVarReturnValue  *GetContestsByIdJurors200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdJurors")
@@ -1400,6 +1437,12 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurorsExecute(r ApiGetContes
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1482,7 +1525,21 @@ type ApiGetContestsByIdJurorsInvitationsRequest struct {
 	ctx context.Context
 	ApiService *CreativeContestsAPIService
 	id string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsByIdJurorsInvitationsRequest) Cursor(cursor string) ApiGetContestsByIdJurorsInvitationsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetContestsByIdJurorsInvitationsRequest) Limit(limit int32) ApiGetContestsByIdJurorsInvitationsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -1491,7 +1548,7 @@ func (r ApiGetContestsByIdJurorsInvitationsRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetContestsByIdJurorsInvitationsRequest) Execute() ([]DomainJurorAssignment, *http.Response, error) {
+func (r ApiGetContestsByIdJurorsInvitationsRequest) Execute() (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
 	return r.ApiService.GetContestsByIdJurorsInvitationsExecute(r)
 }
 
@@ -1513,13 +1570,13 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitations(ctx contex
 }
 
 // Execute executes the request
-//  @return []DomainJurorAssignment
-func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r ApiGetContestsByIdJurorsInvitationsRequest) ([]DomainJurorAssignment, *http.Response, error) {
+//  @return GetContestsByIdJurorsInvitations200Response
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r ApiGetContestsByIdJurorsInvitationsRequest) (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainJurorAssignment
+		localVarReturnValue  *GetContestsByIdJurorsInvitations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdJurorsInvitations")
@@ -1534,6 +1591,12 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1626,7 +1689,21 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r A
 type ApiGetJurorsAssignmentsRequest struct {
 	ctx context.Context
 	ApiService *CreativeContestsAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetJurorsAssignmentsRequest) Cursor(cursor string) ApiGetJurorsAssignmentsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetJurorsAssignmentsRequest) Limit(limit int32) ApiGetJurorsAssignmentsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -1635,12 +1712,12 @@ func (r ApiGetJurorsAssignmentsRequest) XTenantUserId(xTenantUserId string) ApiG
 	return r
 }
 
-func (r ApiGetJurorsAssignmentsRequest) Execute() ([]DomainJurorAssignment, *http.Response, error) {
+func (r ApiGetJurorsAssignmentsRequest) Execute() (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
 	return r.ApiService.GetJurorsAssignmentsExecute(r)
 }
 
 /*
-GetJurorsAssignments Get juror assignments
+GetJurorsAssignments Get juror assignments (cursor-paginated)
 
 Get all contest assignments for the current juror
 
@@ -1655,13 +1732,13 @@ func (a *CreativeContestsAPIService) GetJurorsAssignments(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return []DomainJurorAssignment
-func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAssignmentsRequest) ([]DomainJurorAssignment, *http.Response, error) {
+//  @return GetContestsByIdJurorsInvitations200Response
+func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAssignmentsRequest) (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainJurorAssignment
+		localVarReturnValue  *GetContestsByIdJurorsInvitations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetJurorsAssignments")
@@ -1675,6 +1752,12 @@ func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsA
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1756,7 +1839,21 @@ func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsA
 type ApiGetJurorsInvitationsRequest struct {
 	ctx context.Context
 	ApiService *CreativeContestsAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page, service-assembled)
+func (r ApiGetJurorsInvitationsRequest) Cursor(cursor string) ApiGetJurorsInvitationsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page, service-assembled)
+func (r ApiGetJurorsInvitationsRequest) Limit(limit int32) ApiGetJurorsInvitationsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -1765,14 +1862,17 @@ func (r ApiGetJurorsInvitationsRequest) XTenantUserId(xTenantUserId string) ApiG
 	return r
 }
 
-func (r ApiGetJurorsInvitationsRequest) Execute() ([]DomainJurorAssignment, *http.Response, error) {
+func (r ApiGetJurorsInvitationsRequest) Execute() (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
 	return r.ApiService.GetJurorsInvitationsExecute(r)
 }
 
 /*
 GetJurorsInvitations Get my pending invitations
 
-Get all pending invitations for the current user
+Get all pending invitations for the current user. This list is
+assembled in the service layer (filtered), not a single keyset; per
+uman#132 it returns the full set as one page with an inert
+pagination block (has_next:false).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetJurorsInvitationsRequest
@@ -1785,13 +1885,13 @@ func (a *CreativeContestsAPIService) GetJurorsInvitations(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return []DomainJurorAssignment
-func (a *CreativeContestsAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsInvitationsRequest) ([]DomainJurorAssignment, *http.Response, error) {
+//  @return GetContestsByIdJurorsInvitations200Response
+func (a *CreativeContestsAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsInvitationsRequest) (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainJurorAssignment
+		localVarReturnValue  *GetContestsByIdJurorsInvitations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetJurorsInvitations")
@@ -1805,6 +1905,12 @@ func (a *CreativeContestsAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1893,7 +1999,7 @@ func (r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*DomainJurorScore, *http.Response, error) {
+func (r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
 	return r.ApiService.UpdateContestsByIdEntriesByEntryIdScoreExecute(r)
 }
 
@@ -1917,13 +2023,13 @@ func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScore(ctx
 }
 
 // Execute executes the request
-//  @return DomainJurorScore
-func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecute(r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScore, *http.Response, error) {
+//  @return UpdateContestsByIdEntriesByEntryIdScore200Response
+func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecute(r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainJurorScore
+		localVarReturnValue  *UpdateContestsByIdEntriesByEntryIdScore200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.UpdateContestsByIdEntriesByEntryIdScore")

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipPackages
 
-> DomainSponsorshipPackage CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsorshipPackages201Response CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Package (v2)
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipPackages`: DomainSponsorshipPackage
+	// response from `CreateSponsorshipPackages`: CreateSponsorshipPackages201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.CreateSponsorshipPackages`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipPackage**](DomainSponsorshipPackage.md)
+[**CreateSponsorshipPackages201Response**](CreateSponsorshipPackages201Response.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## CreateSponsorshipPackagesByIdCancel
 
-> DomainSponsorshipPackage CreateSponsorshipPackagesByIdCancel(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsorshipPackages201Response CreateSponsorshipPackagesByIdCancel(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Cancel Sponsorship Package (v2)
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipPackagesByIdCancel`: DomainSponsorshipPackage
+	// response from `CreateSponsorshipPackagesByIdCancel`: CreateSponsorshipPackages201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel`: %v\n", resp)
 }
 ```
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipPackage**](DomainSponsorshipPackage.md)
+[**CreateSponsorshipPackages201Response**](CreateSponsorshipPackages201Response.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackages
 
-> []DomainSponsorshipPackage GetSponsorshipPackages(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetSponsorshipPackages200Response GetSponsorshipPackages(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Packages (v2)
 
@@ -174,16 +174,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) (optional)
+	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackages`: []DomainSponsorshipPackage
+	// response from `GetSponsorshipPackages`: GetSponsorshipPackages200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackages`: %v\n", resp)
 }
 ```
@@ -199,11 +201,13 @@ Other parameters are passed through a pointer to a apiGetSponsorshipPackagesRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) | 
+ **limit** | **int32** | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorshipPackage**](DomainSponsorshipPackage.md)
+[**GetSponsorshipPackages200Response**](GetSponsorshipPackages200Response.md)
 
 ### Authorization
 
@@ -221,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesAvailable
 
-> []DomainSponsorshipPackage GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).XTenantUserId(xTenantUserId).Execute()
+> GetSponsorshipPackages200Response GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Available Packages (v2)
 
@@ -242,16 +246,18 @@ import (
 func main() {
 	sponsorId := "sponsorId_example" // string | Filter by sponsor ID (optional)
 	packageId := "packageId_example" // string | Get specific package by ID (optional)
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackagesAvailable`: []DomainSponsorshipPackage
+	// response from `GetSponsorshipPackagesAvailable`: GetSponsorshipPackages200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable`: %v\n", resp)
 }
 ```
@@ -269,11 +275,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sponsorId** | **string** | Filter by sponsor ID | 
  **packageId** | **string** | Get specific package by ID | 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorshipPackage**](DomainSponsorshipPackage.md)
+[**GetSponsorshipPackages200Response**](GetSponsorshipPackages200Response.md)
 
 ### Authorization
 
@@ -291,7 +299,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdAgreement
 
-> DomainSponsorshipPackageAgreement GetSponsorshipPackagesByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetSponsorshipPackagesByIdAgreement200Response GetSponsorshipPackagesByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Package Agreement (v2)
 
@@ -320,7 +328,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackagesByIdAgreement`: DomainSponsorshipPackageAgreement
+	// response from `GetSponsorshipPackagesByIdAgreement`: GetSponsorshipPackagesByIdAgreement200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement`: %v\n", resp)
 }
 ```
@@ -345,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipPackageAgreement**](DomainSponsorshipPackageAgreement.md)
+[**GetSponsorshipPackagesByIdAgreement200Response**](GetSponsorshipPackagesByIdAgreement200Response.md)
 
 ### Authorization
 
@@ -363,7 +371,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdSponsorships
 
-> []DomainSponsorship GetSponsorshipPackagesByIdSponsorships(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdSponsorships200Response GetSponsorshipPackagesByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Package Sponsorships (v2)
 
@@ -383,16 +391,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Package ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackagesByIdSponsorships`: []DomainSponsorship
+	// response from `GetSponsorshipPackagesByIdSponsorships`: GetContestsByContestIdSponsorships200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships`: %v\n", resp)
 }
 ```
@@ -413,11 +423,13 @@ Other parameters are passed through a pointer to a apiGetSponsorshipPackagesById
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorship**](DomainSponsorship.md)
+[**GetContestsByContestIdSponsorships200Response**](GetContestsByContestIdSponsorships200Response.md)
 
 ### Authorization
 

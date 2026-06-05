@@ -20,6 +20,8 @@ var _ MappedNullable = &DomainVenue{}
 
 // DomainVenue struct for DomainVenue
 type DomainVenue struct {
+	// keyset pagination sort key (uman#132)
+	CreatedAt *string `json:"created_at,omitempty"`
 	ExternalRef *string `json:"external_ref,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -42,6 +44,38 @@ func NewDomainVenue() *DomainVenue {
 func NewDomainVenueWithDefaults() *DomainVenue {
 	this := DomainVenue{}
 	return &this
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *DomainVenue) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainVenue) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *DomainVenue) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *DomainVenue) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetExternalRef returns the ExternalRef field value if set, zero value otherwise.
@@ -214,6 +248,9 @@ func (o DomainVenue) MarshalJSON() ([]byte, error) {
 
 func (o DomainVenue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
+	}
 	if !IsNil(o.ExternalRef) {
 		toSerialize["external_ref"] = o.ExternalRef
 	}

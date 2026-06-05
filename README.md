@@ -84,7 +84,7 @@ Class | Method | HTTP request | Description
 *AnalyticsAPI* | [**GetAnalyticsOverview**](docs/AnalyticsAPI.md#getanalyticsoverview) | **Get** /v2/analytics/overview | Get the caller&#39;s analytics overview
 *BlocksAPI* | [**CreateBlocks**](docs/BlocksAPI.md#createblocks) | **Post** /v2/blocks | Create Block
 *BlocksAPI* | [**DeleteBlocksById**](docs/BlocksAPI.md#deleteblocksbyid) | **Delete** /v2/blocks/{id} | Delete Block
-*BlocksAPI* | [**GetBlocks**](docs/BlocksAPI.md#getblocks) | **Get** /v2/blocks | Get Blocked Members
+*BlocksAPI* | [**GetBlocks**](docs/BlocksAPI.md#getblocks) | **Get** /v2/blocks | Get Blocked Members (cursor-paginated)
 *ChannelsAPI* | [**CreateChannels**](docs/ChannelsAPI.md#createchannels) | **Post** /v2/channels | Create a channel
 *ChannelsAPI* | [**CreateChannelsByIdReport**](docs/ChannelsAPI.md#createchannelsbyidreport) | **Post** /v2/channels/{id}/report | Report a channel
 *ChannelsAPI* | [**CreateChannelsByIdTeamSets**](docs/ChannelsAPI.md#createchannelsbyidteamsets) | **Post** /v2/channels/{id}/team-sets | Create a channel-owned team set
@@ -154,7 +154,7 @@ Class | Method | HTTP request | Description
 *CreativeContestsAPI* | [**GetContestsByIdEntries**](docs/CreativeContestsAPI.md#getcontestsbyidentries) | **Get** /v2/contests/{id}/entries | Get entries for a contest
 *CreativeContestsAPI* | [**GetContestsByIdJurors**](docs/CreativeContestsAPI.md#getcontestsbyidjurors) | **Get** /v2/contests/{id}/jurors | Get jurors for a contest
 *CreativeContestsAPI* | [**GetContestsByIdJurorsInvitations**](docs/CreativeContestsAPI.md#getcontestsbyidjurorsinvitations) | **Get** /v2/contests/{id}/jurors/invitations | Get invitations for a contest
-*CreativeContestsAPI* | [**GetJurorsAssignments**](docs/CreativeContestsAPI.md#getjurorsassignments) | **Get** /v2/jurors/assignments | Get juror assignments
+*CreativeContestsAPI* | [**GetJurorsAssignments**](docs/CreativeContestsAPI.md#getjurorsassignments) | **Get** /v2/jurors/assignments | Get juror assignments (cursor-paginated)
 *CreativeContestsAPI* | [**GetJurorsInvitations**](docs/CreativeContestsAPI.md#getjurorsinvitations) | **Get** /v2/jurors/invitations | Get my pending invitations
 *CreativeContestsAPI* | [**UpdateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestsAPI.md#updatecontestsbyidentriesbyentryidscore) | **Put** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 *EventsAPI* | [**PuzzleWebV2EventControllerApproveResult**](docs/EventsAPI.md#puzzlewebv2eventcontrollerapproveresult) | **Post** /v2/events/{id}/approve | Approve event result
@@ -243,9 +243,9 @@ Class | Method | HTTP request | Description
 *StansAPI* | [**GetStans**](docs/StansAPI.md#getstans) | **Get** /v2/stans | Get Celeb Stans
 *SubscriptionsAPI* | [**CreateSubscriptions**](docs/SubscriptionsAPI.md#createsubscriptions) | **Post** /v2/subscriptions | Subscribe the caller to a channel
 *SubscriptionsAPI* | [**DeleteSubscriptionsById**](docs/SubscriptionsAPI.md#deletesubscriptionsbyid) | **Delete** /v2/subscriptions/{id} | Unsubscribe from Channel
-*SubscriptionsAPI* | [**GetChannelsByIdSubscriptions**](docs/SubscriptionsAPI.md#getchannelsbyidsubscriptions) | **Get** /v2/channels/{id}/subscriptions | Get channel subscribers
+*SubscriptionsAPI* | [**GetChannelsByIdSubscriptions**](docs/SubscriptionsAPI.md#getchannelsbyidsubscriptions) | **Get** /v2/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 *SubscriptionsAPI* | [**GetIdentitiesByPiidSubscriptions**](docs/SubscriptionsAPI.md#getidentitiesbypiidsubscriptions) | **Get** /v2/identities/{piid}/subscriptions | Get a platform identity&#39;s channel subscriptions (v2)
-*SubscriptionsAPI* | [**GetPublicChannelsByIdSubscriptions**](docs/SubscriptionsAPI.md#getpublicchannelsbyidsubscriptions) | **Get** /v2/public/channels/{id}/subscriptions | Get channel subscribers
+*SubscriptionsAPI* | [**GetPublicChannelsByIdSubscriptions**](docs/SubscriptionsAPI.md#getpublicchannelsbyidsubscriptions) | **Get** /v2/public/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 *SubscriptionsAPI* | [**GetSubscriptionsByIdLogs**](docs/SubscriptionsAPI.md#getsubscriptionsbyidlogs) | **Get** /v2/subscriptions/{id}/logs | Get the participation log for a subscription
 *SubscriptionsAPI* | [**GetSubscriptionsSearchKeywordByKeyword**](docs/SubscriptionsAPI.md#getsubscriptionssearchkeywordbykeyword) | **Get** /v2/subscriptions/searchKeyword/{keyword} | Search subscriptions by keyword (cursor-paginated)
 *SubscriptionsAPI* | [**UpdateSubscriptionsByIdStatus**](docs/SubscriptionsAPI.md#updatesubscriptionsbyidstatus) | **Put** /v2/subscriptions/{id}/status | Approve or deny subscription
@@ -286,13 +286,35 @@ Class | Method | HTTP request | Description
  - [ContestStatusResponseData](docs/ContestStatusResponseData.md)
  - [CreateAdhocCommunitySheetRequest](docs/CreateAdhocCommunitySheetRequest.md)
  - [CreateAdhocUserSheetRequest](docs/CreateAdhocUserSheetRequest.md)
+ - [CreateAnalyticsImpression200Response](docs/CreateAnalyticsImpression200Response.md)
+ - [CreateBlocks200Response](docs/CreateBlocks200Response.md)
+ - [CreateCelebs200Response](docs/CreateCelebs200Response.md)
+ - [CreateChannels201Response](docs/CreateChannels201Response.md)
+ - [CreateChannelsByIdReport200Response](docs/CreateChannelsByIdReport200Response.md)
+ - [CreateChannelsByIdTeamSets201Response](docs/CreateChannelsByIdTeamSets201Response.md)
+ - [CreateContests201Response](docs/CreateContests201Response.md)
+ - [CreateContestsByContestIdBuddyBoards200Response](docs/CreateContestsByContestIdBuddyBoards200Response.md)
+ - [CreateContestsByContestIdSponsorships201Response](docs/CreateContestsByContestIdSponsorships201Response.md)
+ - [CreateContestsByIdEnrollment200Response](docs/CreateContestsByIdEnrollment200Response.md)
+ - [CreateContestsByIdEntries200Response](docs/CreateContestsByIdEntries200Response.md)
+ - [CreateJurorsInvitationsByInvitationIdAccept200Response](docs/CreateJurorsInvitationsByInvitationIdAccept200Response.md)
+ - [CreateJurorsOptIn200Response](docs/CreateJurorsOptIn200Response.md)
  - [CreatePredictionSlipRequest](docs/CreatePredictionSlipRequest.md)
  - [CreatePredictionSlipRequestEventsInner](docs/CreatePredictionSlipRequestEventsInner.md)
  - [CreatePredictionSlipRequestEventsInnerItemsInner](docs/CreatePredictionSlipRequestEventsInnerItemsInner.md)
  - [CreatePredictionSlipRequestEventsInnerItemsInnerConfiguration](docs/CreatePredictionSlipRequestEventsInnerItemsInnerConfiguration.md)
  - [CreatePuzzleRequest](docs/CreatePuzzleRequest.md)
  - [CreatePuzzleSheetRequest](docs/CreatePuzzleSheetRequest.md)
+ - [CreateSponsors201Response](docs/CreateSponsors201Response.md)
+ - [CreateSponsorshipPackages201Response](docs/CreateSponsorshipPackages201Response.md)
+ - [CreateSponsorshipTerms201Response](docs/CreateSponsorshipTerms201Response.md)
+ - [CreateSubscriptions200Response](docs/CreateSubscriptions200Response.md)
+ - [CreateTenants201Response](docs/CreateTenants201Response.md)
+ - [CreateTenantsByIdApiKeys201Response](docs/CreateTenantsByIdApiKeys201Response.md)
+ - [CreateTenantsByIdWebhookSubscriptions201Response](docs/CreateTenantsByIdWebhookSubscriptions201Response.md)
+ - [CreateTournaments201Response](docs/CreateTournaments201Response.md)
  - [CreateUserEventRequest](docs/CreateUserEventRequest.md)
+ - [DeleteBlocksById200Response](docs/DeleteBlocksById200Response.md)
  - [DomainAmount](docs/DomainAmount.md)
  - [DomainBlock](docs/DomainBlock.md)
  - [DomainBuddyBoard](docs/DomainBuddyBoard.md)
@@ -365,6 +387,45 @@ Class | Method | HTTP request | Description
  - [EventTemplateItem](docs/EventTemplateItem.md)
  - [EventTemplatesListResponse](docs/EventTemplatesListResponse.md)
  - [EventsListResponse](docs/EventsListResponse.md)
+ - [GetAnalyticsOverview200Response](docs/GetAnalyticsOverview200Response.md)
+ - [GetBlocks200Response](docs/GetBlocks200Response.md)
+ - [GetCelebs200Response](docs/GetCelebs200Response.md)
+ - [GetChannels200Response](docs/GetChannels200Response.md)
+ - [GetChannelsByIdContests200Response](docs/GetChannelsByIdContests200Response.md)
+ - [GetChannelsByIdSubscriptions200Response](docs/GetChannelsByIdSubscriptions200Response.md)
+ - [GetChannelsByIdTeamSets200Response](docs/GetChannelsByIdTeamSets200Response.md)
+ - [GetChannelsByIdTournamentConfiguration200Response](docs/GetChannelsByIdTournamentConfiguration200Response.md)
+ - [GetChannelsByIdTournaments200Response](docs/GetChannelsByIdTournaments200Response.md)
+ - [GetContestsByContestIdBuddyBoardsByBoardId200Response](docs/GetContestsByContestIdBuddyBoardsByBoardId200Response.md)
+ - [GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response](docs/GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response.md)
+ - [GetContestsByContestIdParticipantsByMemberIdResult200Response](docs/GetContestsByContestIdParticipantsByMemberIdResult200Response.md)
+ - [GetContestsByContestIdSponsorships200Response](docs/GetContestsByContestIdSponsorships200Response.md)
+ - [GetContestsByIdEntries200Response](docs/GetContestsByIdEntries200Response.md)
+ - [GetContestsByIdHostings200Response](docs/GetContestsByIdHostings200Response.md)
+ - [GetContestsByIdJurors200Response](docs/GetContestsByIdJurors200Response.md)
+ - [GetContestsByIdJurorsInvitations200Response](docs/GetContestsByIdJurorsInvitations200Response.md)
+ - [GetContestsByIdParticipation200Response](docs/GetContestsByIdParticipation200Response.md)
+ - [GetContestsByIdQuestionStats200Response](docs/GetContestsByIdQuestionStats200Response.md)
+ - [GetContestsByIdScoreboard200Response](docs/GetContestsByIdScoreboard200Response.md)
+ - [GetIdentities200Response](docs/GetIdentities200Response.md)
+ - [GetIdentitiesByPiidBuddyBoardInvites200Response](docs/GetIdentitiesByPiidBuddyBoardInvites200Response.md)
+ - [GetIdentitiesByPiidFeedPersonalized200Response](docs/GetIdentitiesByPiidFeedPersonalized200Response.md)
+ - [GetPublicContestsByIdGroupedScoreboard200Response](docs/GetPublicContestsByIdGroupedScoreboard200Response.md)
+ - [GetPublicContestsByIdGroups200Response](docs/GetPublicContestsByIdGroups200Response.md)
+ - [GetPublicContestsByIdSubmissionFeed200Response](docs/GetPublicContestsByIdSubmissionFeed200Response.md)
+ - [GetPublicCountries200Response](docs/GetPublicCountries200Response.md)
+ - [GetPublicLocation200Response](docs/GetPublicLocation200Response.md)
+ - [GetPublicOgChannelByChannelId200Response](docs/GetPublicOgChannelByChannelId200Response.md)
+ - [GetPublicOgContestByContestId200Response](docs/GetPublicOgContestByContestId200Response.md)
+ - [GetPublicOgScoreboardByContestId200Response](docs/GetPublicOgScoreboardByContestId200Response.md)
+ - [GetPublicOgSubmissionsByParticipationId200Response](docs/GetPublicOgSubmissionsByParticipationId200Response.md)
+ - [GetSponsors200Response](docs/GetSponsors200Response.md)
+ - [GetSponsorshipPackages200Response](docs/GetSponsorshipPackages200Response.md)
+ - [GetSponsorshipPackagesByIdAgreement200Response](docs/GetSponsorshipPackagesByIdAgreement200Response.md)
+ - [GetSponsorshipTerms200Response](docs/GetSponsorshipTerms200Response.md)
+ - [GetSponsorshipsByIdAgreement200Response](docs/GetSponsorshipsByIdAgreement200Response.md)
+ - [GetTenantsByIdWebhookSubscriptions200Response](docs/GetTenantsByIdWebhookSubscriptions200Response.md)
+ - [GetVenues200Response](docs/GetVenues200Response.md)
  - [HandlerCreateApiKeyRequest](docs/HandlerCreateApiKeyRequest.md)
  - [HandlerCreateBlockRequest](docs/HandlerCreateBlockRequest.md)
  - [HandlerCreatePlatformChannelRequest](docs/HandlerCreatePlatformChannelRequest.md)
@@ -390,6 +451,7 @@ Class | Method | HTTP request | Description
  - [MessageResponseData](docs/MessageResponseData.md)
  - [OpenPredictionSlipResponse](docs/OpenPredictionSlipResponse.md)
  - [Pagination](docs/Pagination.md)
+ - [PatchParticipationByParticipationIdGroup200Response](docs/PatchParticipationByParticipationIdGroup200Response.md)
  - [PredictionEvent](docs/PredictionEvent.md)
  - [PredictionItem](docs/PredictionItem.md)
  - [PredictionItemConfiguration](docs/PredictionItemConfiguration.md)
@@ -438,6 +500,7 @@ Class | Method | HTTP request | Description
  - [TopicConfigurationResponse](docs/TopicConfigurationResponse.md)
  - [TopicConfigurationResponseData](docs/TopicConfigurationResponseData.md)
  - [TopicConfigurationResponseDataDifficultySettingsInner](docs/TopicConfigurationResponseDataDifficultySettingsInner.md)
+ - [UpdateContestsByIdEntriesByEntryIdScore200Response](docs/UpdateContestsByIdEntriesByEntryIdScore200Response.md)
  - [UpdatePredictionSlipRequest](docs/UpdatePredictionSlipRequest.md)
  - [UpdatePuzzleRequest](docs/UpdatePuzzleRequest.md)
  - [UpdateUserEventRequest](docs/UpdateUserEventRequest.md)

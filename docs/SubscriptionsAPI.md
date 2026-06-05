@@ -6,9 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateSubscriptions**](SubscriptionsAPI.md#CreateSubscriptions) | **Post** /v2/subscriptions | Subscribe the caller to a channel
 [**DeleteSubscriptionsById**](SubscriptionsAPI.md#DeleteSubscriptionsById) | **Delete** /v2/subscriptions/{id} | Unsubscribe from Channel
-[**GetChannelsByIdSubscriptions**](SubscriptionsAPI.md#GetChannelsByIdSubscriptions) | **Get** /v2/channels/{id}/subscriptions | Get channel subscribers
+[**GetChannelsByIdSubscriptions**](SubscriptionsAPI.md#GetChannelsByIdSubscriptions) | **Get** /v2/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 [**GetIdentitiesByPiidSubscriptions**](SubscriptionsAPI.md#GetIdentitiesByPiidSubscriptions) | **Get** /v2/identities/{piid}/subscriptions | Get a platform identity&#39;s channel subscriptions (v2)
-[**GetPublicChannelsByIdSubscriptions**](SubscriptionsAPI.md#GetPublicChannelsByIdSubscriptions) | **Get** /v2/public/channels/{id}/subscriptions | Get channel subscribers
+[**GetPublicChannelsByIdSubscriptions**](SubscriptionsAPI.md#GetPublicChannelsByIdSubscriptions) | **Get** /v2/public/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 [**GetSubscriptionsByIdLogs**](SubscriptionsAPI.md#GetSubscriptionsByIdLogs) | **Get** /v2/subscriptions/{id}/logs | Get the participation log for a subscription
 [**GetSubscriptionsSearchKeywordByKeyword**](SubscriptionsAPI.md#GetSubscriptionsSearchKeywordByKeyword) | **Get** /v2/subscriptions/searchKeyword/{keyword} | Search subscriptions by keyword (cursor-paginated)
 [**UpdateSubscriptionsByIdStatus**](SubscriptionsAPI.md#UpdateSubscriptionsByIdStatus) | **Put** /v2/subscriptions/{id}/status | Approve or deny subscription
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## CreateSubscriptions
 
-> DomainSubscription CreateSubscriptions(ctx).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateSubscriptions200Response CreateSubscriptions(ctx).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
 
 Subscribe the caller to a channel
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.CreateSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSubscriptions`: DomainSubscription
+	// response from `CreateSubscriptions`: CreateSubscriptions200Response
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.CreateSubscriptions`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSubscription**](DomainSubscription.md)
+[**CreateSubscriptions200Response**](CreateSubscriptions200Response.md)
 
 ### Authorization
 
@@ -153,9 +153,9 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdSubscriptions
 
-> []DomainSubscription GetChannelsByIdSubscriptions(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdSubscriptions200Response GetChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
-Get channel subscribers
+List channel subscriptions (cursor-paginated)
 
 
 
@@ -173,16 +173,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetChannelsByIdSubscriptions(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetChannelsByIdSubscriptions(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetChannelsByIdSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsByIdSubscriptions`: []DomainSubscription
+	// response from `GetChannelsByIdSubscriptions`: GetChannelsByIdSubscriptions200Response
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetChannelsByIdSubscriptions`: %v\n", resp)
 }
 ```
@@ -203,11 +205,13 @@ Other parameters are passed through a pointer to a apiGetChannelsByIdSubscriptio
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSubscription**](DomainSubscription.md)
+[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
 
 ### Authorization
 
@@ -225,7 +229,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidSubscriptions
 
-> []DomainSubscription GetIdentitiesByPiidSubscriptions(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdSubscriptions200Response GetIdentitiesByPiidSubscriptions(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get a platform identity's channel subscriptions (v2)
 
@@ -256,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetIdentitiesByPiidSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidSubscriptions`: []DomainSubscription
+	// response from `GetIdentitiesByPiidSubscriptions`: GetChannelsByIdSubscriptions200Response
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetIdentitiesByPiidSubscriptions`: %v\n", resp)
 }
 ```
@@ -283,7 +287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainSubscription**](DomainSubscription.md)
+[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
 
 ### Authorization
 
@@ -301,9 +305,9 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsByIdSubscriptions
 
-> []DomainSubscription GetPublicChannelsByIdSubscriptions(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdSubscriptions200Response GetPublicChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
-Get channel subscribers
+List channel subscriptions (cursor-paginated)
 
 
 
@@ -321,16 +325,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Channel ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetPublicChannelsByIdSubscriptions(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetPublicChannelsByIdSubscriptions(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicChannelsByIdSubscriptions`: []DomainSubscription
+	// response from `GetPublicChannelsByIdSubscriptions`: GetChannelsByIdSubscriptions200Response
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions`: %v\n", resp)
 }
 ```
@@ -351,11 +357,13 @@ Other parameters are passed through a pointer to a apiGetPublicChannelsByIdSubsc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSubscription**](DomainSubscription.md)
+[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
 
 ### Authorization
 
@@ -373,7 +381,7 @@ Name | Type | Description  | Notes
 
 ## GetSubscriptionsByIdLogs
 
-> []DomainParticipation GetSubscriptionsByIdLogs(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdParticipation200Response GetSubscriptionsByIdLogs(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get the participation log for a subscription
 
@@ -391,16 +399,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Subscription ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetSubscriptionsByIdLogs(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SubscriptionsAPI.GetSubscriptionsByIdLogs(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetSubscriptionsByIdLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSubscriptionsByIdLogs`: []DomainParticipation
+	// response from `GetSubscriptionsByIdLogs`: GetContestsByIdParticipation200Response
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetSubscriptionsByIdLogs`: %v\n", resp)
 }
 ```
@@ -421,11 +431,13 @@ Other parameters are passed through a pointer to a apiGetSubscriptionsByIdLogsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainParticipation**](DomainParticipation.md)
+[**GetContestsByIdParticipation200Response**](GetContestsByIdParticipation200Response.md)
 
 ### Authorization
 
@@ -443,7 +455,7 @@ Name | Type | Description  | Notes
 
 ## GetSubscriptionsSearchKeywordByKeyword
 
-> []DomainSubscription GetSubscriptionsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdSubscriptions200Response GetSubscriptionsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search subscriptions by keyword (cursor-paginated)
 
@@ -472,7 +484,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSubscriptionsSearchKeywordByKeyword`: []DomainSubscription
+	// response from `GetSubscriptionsSearchKeywordByKeyword`: GetChannelsByIdSubscriptions200Response
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword`: %v\n", resp)
 }
 ```
@@ -499,7 +511,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainSubscription**](DomainSubscription.md)
+[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
 
 ### Authorization
 

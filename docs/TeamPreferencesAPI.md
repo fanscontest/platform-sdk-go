@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## UpdateTeamPreferenceByTeamSetId
 
-> HandlerStatusResponse UpdateTeamPreferenceByTeamSetId(ctx, teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response UpdateTeamPreferenceByTeamSetId(ctx, teamSetId).RequestUpsertTeamPreferenceRequest(requestUpsertTeamPreferenceRequest).XTenantUserId(xTenantUserId).Execute()
 
 Set the caller's default team for a logical team set
 
@@ -38,7 +38,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateTeamPreferenceByTeamSetId`: HandlerStatusResponse
+	// response from `UpdateTeamPreferenceByTeamSetId`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `TeamPreferencesAPI.UpdateTeamPreferenceByTeamSetId`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 

@@ -43,7 +43,7 @@ func (r ApiCreateSponsorshipTermsRequest) XTenantUserId(xTenantUserId string) Ap
 	return r
 }
 
-func (r ApiCreateSponsorshipTermsRequest) Execute() (*DomainSponsorshipTerm, *http.Response, error) {
+func (r ApiCreateSponsorshipTermsRequest) Execute() (*CreateSponsorshipTerms201Response, *http.Response, error) {
 	return r.ApiService.CreateSponsorshipTermsExecute(r)
 }
 
@@ -63,13 +63,13 @@ func (a *SponsorshipTermsAPIService) CreateSponsorshipTerms(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipTerm
-func (a *SponsorshipTermsAPIService) CreateSponsorshipTermsExecute(r ApiCreateSponsorshipTermsRequest) (*DomainSponsorshipTerm, *http.Response, error) {
+//  @return CreateSponsorshipTerms201Response
+func (a *SponsorshipTermsAPIService) CreateSponsorshipTermsExecute(r ApiCreateSponsorshipTermsRequest) (*CreateSponsorshipTerms201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipTerm
+		localVarReturnValue  *CreateSponsorshipTerms201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.CreateSponsorshipTerms")
@@ -179,7 +179,7 @@ func (r ApiDeleteSponsorshipTermsByIdRequest) XTenantUserId(xTenantUserId string
 	return r
 }
 
-func (r ApiDeleteSponsorshipTermsByIdRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiDeleteSponsorshipTermsByIdRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.DeleteSponsorshipTermsByIdExecute(r)
 }
 
@@ -201,13 +201,13 @@ func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsById(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsByIdExecute(r ApiDeleteSponsorshipTermsByIdRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsByIdExecute(r ApiDeleteSponsorshipTermsByIdRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.DeleteSponsorshipTermsById")
@@ -325,7 +325,21 @@ func (a *SponsorshipTermsAPIService) DeleteSponsorshipTermsByIdExecute(r ApiDele
 type ApiGetSponsorshipTermsRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page endpoint; see uman#132)
+func (r ApiGetSponsorshipTermsRequest) Cursor(cursor string) ApiGetSponsorshipTermsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page endpoint; see uman#132)
+func (r ApiGetSponsorshipTermsRequest) Limit(limit int32) ApiGetSponsorshipTermsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -334,7 +348,7 @@ func (r ApiGetSponsorshipTermsRequest) XTenantUserId(xTenantUserId string) ApiGe
 	return r
 }
 
-func (r ApiGetSponsorshipTermsRequest) Execute() ([]DomainSponsorshipTerm, *http.Response, error) {
+func (r ApiGetSponsorshipTermsRequest) Execute() (*GetSponsorshipTerms200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipTermsExecute(r)
 }
 
@@ -354,13 +368,13 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTerms(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return []DomainSponsorshipTerm
-func (a *SponsorshipTermsAPIService) GetSponsorshipTermsExecute(r ApiGetSponsorshipTermsRequest) ([]DomainSponsorshipTerm, *http.Response, error) {
+//  @return GetSponsorshipTerms200Response
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsExecute(r ApiGetSponsorshipTermsRequest) (*GetSponsorshipTerms200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSponsorshipTerm
+		localVarReturnValue  *GetSponsorshipTerms200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.GetSponsorshipTerms")
@@ -374,6 +388,12 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsExecute(r ApiGetSponsors
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -465,7 +485,7 @@ func (r ApiGetSponsorshipTermsByIdRequest) XTenantUserId(xTenantUserId string) A
 	return r
 }
 
-func (r ApiGetSponsorshipTermsByIdRequest) Execute() (*DomainSponsorshipTerm, *http.Response, error) {
+func (r ApiGetSponsorshipTermsByIdRequest) Execute() (*CreateSponsorshipTerms201Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipTermsByIdExecute(r)
 }
 
@@ -487,13 +507,13 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsById(ctx context.Context
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipTerm
-func (a *SponsorshipTermsAPIService) GetSponsorshipTermsByIdExecute(r ApiGetSponsorshipTermsByIdRequest) (*DomainSponsorshipTerm, *http.Response, error) {
+//  @return CreateSponsorshipTerms201Response
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsByIdExecute(r ApiGetSponsorshipTermsByIdRequest) (*CreateSponsorshipTerms201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipTerm
+		localVarReturnValue  *CreateSponsorshipTerms201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.GetSponsorshipTermsById")
@@ -600,7 +620,21 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsByIdExecute(r ApiGetSpon
 type ApiGetSponsorshipTermsPlatformRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipTermsAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetSponsorshipTermsPlatformRequest) Cursor(cursor string) ApiGetSponsorshipTermsPlatformRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetSponsorshipTermsPlatformRequest) Limit(limit int32) ApiGetSponsorshipTermsPlatformRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -609,7 +643,7 @@ func (r ApiGetSponsorshipTermsPlatformRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetSponsorshipTermsPlatformRequest) Execute() ([]DomainSponsorshipTerm, *http.Response, error) {
+func (r ApiGetSponsorshipTermsPlatformRequest) Execute() (*GetSponsorshipTerms200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipTermsPlatformExecute(r)
 }
 
@@ -629,13 +663,13 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatform(ctx context.Con
 }
 
 // Execute executes the request
-//  @return []DomainSponsorshipTerm
-func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatformExecute(r ApiGetSponsorshipTermsPlatformRequest) ([]DomainSponsorshipTerm, *http.Response, error) {
+//  @return GetSponsorshipTerms200Response
+func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatformExecute(r ApiGetSponsorshipTermsPlatformRequest) (*GetSponsorshipTerms200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSponsorshipTerm
+		localVarReturnValue  *GetSponsorshipTerms200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.GetSponsorshipTermsPlatform")
@@ -649,6 +683,12 @@ func (a *SponsorshipTermsAPIService) GetSponsorshipTermsPlatformExecute(r ApiGet
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -747,7 +787,7 @@ func (r ApiUpdateSponsorshipTermsByIdRequest) XTenantUserId(xTenantUserId string
 	return r
 }
 
-func (r ApiUpdateSponsorshipTermsByIdRequest) Execute() (*DomainSponsorshipTerm, *http.Response, error) {
+func (r ApiUpdateSponsorshipTermsByIdRequest) Execute() (*CreateSponsorshipTerms201Response, *http.Response, error) {
 	return r.ApiService.UpdateSponsorshipTermsByIdExecute(r)
 }
 
@@ -769,13 +809,13 @@ func (a *SponsorshipTermsAPIService) UpdateSponsorshipTermsById(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipTerm
-func (a *SponsorshipTermsAPIService) UpdateSponsorshipTermsByIdExecute(r ApiUpdateSponsorshipTermsByIdRequest) (*DomainSponsorshipTerm, *http.Response, error) {
+//  @return CreateSponsorshipTerms201Response
+func (a *SponsorshipTermsAPIService) UpdateSponsorshipTermsByIdExecute(r ApiUpdateSponsorshipTermsByIdRequest) (*CreateSponsorshipTerms201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipTerm
+		localVarReturnValue  *CreateSponsorshipTerms201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipTermsAPIService.UpdateSponsorshipTermsById")

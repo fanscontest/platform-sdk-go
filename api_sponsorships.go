@@ -44,7 +44,7 @@ func (r ApiCreateContestsByContestIdSponsorshipsRequest) XTenantUserId(xTenantUs
 	return r
 }
 
-func (r ApiCreateContestsByContestIdSponsorshipsRequest) Execute() (*DomainSponsorship, *http.Response, error) {
+func (r ApiCreateContestsByContestIdSponsorshipsRequest) Execute() (*CreateContestsByContestIdSponsorships201Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByContestIdSponsorshipsExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *SponsorshipsAPIService) CreateContestsByContestIdSponsorships(ctx conte
 }
 
 // Execute executes the request
-//  @return DomainSponsorship
-func (a *SponsorshipsAPIService) CreateContestsByContestIdSponsorshipsExecute(r ApiCreateContestsByContestIdSponsorshipsRequest) (*DomainSponsorship, *http.Response, error) {
+//  @return CreateContestsByContestIdSponsorships201Response
+func (a *SponsorshipsAPIService) CreateContestsByContestIdSponsorshipsExecute(r ApiCreateContestsByContestIdSponsorshipsRequest) (*CreateContestsByContestIdSponsorships201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorship
+		localVarReturnValue  *CreateContestsByContestIdSponsorships201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.CreateContestsByContestIdSponsorships")
@@ -183,7 +183,7 @@ func (r ApiCreateSponsorshipsByIdAcceptRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiCreateSponsorshipsByIdAcceptRequest) Execute() (*DomainSponsorship, *http.Response, error) {
+func (r ApiCreateSponsorshipsByIdAcceptRequest) Execute() (*CreateContestsByContestIdSponsorships201Response, *http.Response, error) {
 	return r.ApiService.CreateSponsorshipsByIdAcceptExecute(r)
 }
 
@@ -205,13 +205,13 @@ func (a *SponsorshipsAPIService) CreateSponsorshipsByIdAccept(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return DomainSponsorship
-func (a *SponsorshipsAPIService) CreateSponsorshipsByIdAcceptExecute(r ApiCreateSponsorshipsByIdAcceptRequest) (*DomainSponsorship, *http.Response, error) {
+//  @return CreateContestsByContestIdSponsorships201Response
+func (a *SponsorshipsAPIService) CreateSponsorshipsByIdAcceptExecute(r ApiCreateSponsorshipsByIdAcceptRequest) (*CreateContestsByContestIdSponsorships201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorship
+		localVarReturnValue  *CreateContestsByContestIdSponsorships201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.CreateSponsorshipsByIdAccept")
@@ -317,7 +317,7 @@ func (r ApiCreateSponsorshipsByIdRejectRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiCreateSponsorshipsByIdRejectRequest) Execute() (*DomainSponsorship, *http.Response, error) {
+func (r ApiCreateSponsorshipsByIdRejectRequest) Execute() (*CreateContestsByContestIdSponsorships201Response, *http.Response, error) {
 	return r.ApiService.CreateSponsorshipsByIdRejectExecute(r)
 }
 
@@ -339,13 +339,13 @@ func (a *SponsorshipsAPIService) CreateSponsorshipsByIdReject(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return DomainSponsorship
-func (a *SponsorshipsAPIService) CreateSponsorshipsByIdRejectExecute(r ApiCreateSponsorshipsByIdRejectRequest) (*DomainSponsorship, *http.Response, error) {
+//  @return CreateContestsByContestIdSponsorships201Response
+func (a *SponsorshipsAPIService) CreateSponsorshipsByIdRejectExecute(r ApiCreateSponsorshipsByIdRejectRequest) (*CreateContestsByContestIdSponsorships201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorship
+		localVarReturnValue  *CreateContestsByContestIdSponsorships201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.CreateSponsorshipsByIdReject")
@@ -442,7 +442,21 @@ type ApiGetContestsByContestIdSponsorshipsRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipsAPIService
 	contestId string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsByContestIdSponsorshipsRequest) Cursor(cursor string) ApiGetContestsByContestIdSponsorshipsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetContestsByContestIdSponsorshipsRequest) Limit(limit int32) ApiGetContestsByContestIdSponsorshipsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -451,7 +465,7 @@ func (r ApiGetContestsByContestIdSponsorshipsRequest) XTenantUserId(xTenantUserI
 	return r
 }
 
-func (r ApiGetContestsByContestIdSponsorshipsRequest) Execute() ([]DomainSponsorship, *http.Response, error) {
+func (r ApiGetContestsByContestIdSponsorshipsRequest) Execute() (*GetContestsByContestIdSponsorships200Response, *http.Response, error) {
 	return r.ApiService.GetContestsByContestIdSponsorshipsExecute(r)
 }
 
@@ -473,13 +487,13 @@ func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorships(ctx context.
 }
 
 // Execute executes the request
-//  @return []DomainSponsorship
-func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorshipsExecute(r ApiGetContestsByContestIdSponsorshipsRequest) ([]DomainSponsorship, *http.Response, error) {
+//  @return GetContestsByContestIdSponsorships200Response
+func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorshipsExecute(r ApiGetContestsByContestIdSponsorshipsRequest) (*GetContestsByContestIdSponsorships200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainSponsorship
+		localVarReturnValue  *GetContestsByContestIdSponsorships200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.GetContestsByContestIdSponsorships")
@@ -494,6 +508,12 @@ func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorshipsExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -585,7 +605,7 @@ func (r ApiGetSponsorshipsByIdAgreementRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiGetSponsorshipsByIdAgreementRequest) Execute() (*DomainSponsorshipAgreement, *http.Response, error) {
+func (r ApiGetSponsorshipsByIdAgreementRequest) Execute() (*GetSponsorshipsByIdAgreement200Response, *http.Response, error) {
 	return r.ApiService.GetSponsorshipsByIdAgreementExecute(r)
 }
 
@@ -607,13 +627,13 @@ func (a *SponsorshipsAPIService) GetSponsorshipsByIdAgreement(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return DomainSponsorshipAgreement
-func (a *SponsorshipsAPIService) GetSponsorshipsByIdAgreementExecute(r ApiGetSponsorshipsByIdAgreementRequest) (*DomainSponsorshipAgreement, *http.Response, error) {
+//  @return GetSponsorshipsByIdAgreement200Response
+func (a *SponsorshipsAPIService) GetSponsorshipsByIdAgreementExecute(r ApiGetSponsorshipsByIdAgreementRequest) (*GetSponsorshipsByIdAgreement200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSponsorshipAgreement
+		localVarReturnValue  *GetSponsorshipsByIdAgreement200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorshipsAPIService.GetSponsorshipsByIdAgreement")

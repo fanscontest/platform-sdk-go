@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateAnalyticsImpression
 
-> HandlerStatusResponse CreateAnalyticsImpression(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateAnalyticsImpression(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
 
 Record a click/impression event
 
@@ -41,7 +41,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalyticsAPI.CreateAnalyticsImpression``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateAnalyticsImpression`: HandlerStatusResponse
+	// response from `CreateAnalyticsImpression`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `AnalyticsAPI.CreateAnalyticsImpression`: %v\n", resp)
 }
 ```
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## CreateTrackerClick
 
-> HandlerStatusResponse CreateTrackerClick(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateTrackerClick(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
 
 Record a click/impression event
 
@@ -109,7 +109,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalyticsAPI.CreateTrackerClick``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTrackerClick`: HandlerStatusResponse
+	// response from `CreateTrackerClick`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `AnalyticsAPI.CreateTrackerClick`: %v\n", resp)
 }
 ```
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalyticsOverview
 
-> DomainStatsOverview GetAnalyticsOverview(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetAnalyticsOverview200Response GetAnalyticsOverview(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Get the caller's analytics overview
 
@@ -174,7 +174,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalyticsAPI.GetAnalyticsOverview``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAnalyticsOverview`: DomainStatsOverview
+	// response from `GetAnalyticsOverview`: GetAnalyticsOverview200Response
 	fmt.Fprintf(os.Stdout, "Response from `AnalyticsAPI.GetAnalyticsOverview`: %v\n", resp)
 }
 ```
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainStatsOverview**](DomainStatsOverview.md)
+[**GetAnalyticsOverview200Response**](GetAnalyticsOverview200Response.md)
 
 ### Authorization
 

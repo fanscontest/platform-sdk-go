@@ -43,7 +43,7 @@ func (r ApiCreateBlocksRequest) XTenantUserId(xTenantUserId string) ApiCreateBlo
 	return r
 }
 
-func (r ApiCreateBlocksRequest) Execute() (*DomainBlock, *http.Response, error) {
+func (r ApiCreateBlocksRequest) Execute() (*CreateBlocks200Response, *http.Response, error) {
 	return r.ApiService.CreateBlocksExecute(r)
 }
 
@@ -68,13 +68,13 @@ func (a *BlocksAPIService) CreateBlocks(ctx context.Context) ApiCreateBlocksRequ
 }
 
 // Execute executes the request
-//  @return DomainBlock
-func (a *BlocksAPIService) CreateBlocksExecute(r ApiCreateBlocksRequest) (*DomainBlock, *http.Response, error) {
+//  @return CreateBlocks200Response
+func (a *BlocksAPIService) CreateBlocksExecute(r ApiCreateBlocksRequest) (*CreateBlocks200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainBlock
+		localVarReturnValue  *CreateBlocks200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BlocksAPIService.CreateBlocks")
@@ -195,7 +195,7 @@ func (r ApiDeleteBlocksByIdRequest) XTenantUserId(xTenantUserId string) ApiDelet
 	return r
 }
 
-func (r ApiDeleteBlocksByIdRequest) Execute() (bool, *http.Response, error) {
+func (r ApiDeleteBlocksByIdRequest) Execute() (*DeleteBlocksById200Response, *http.Response, error) {
 	return r.ApiService.DeleteBlocksByIdExecute(r)
 }
 
@@ -217,13 +217,13 @@ func (a *BlocksAPIService) DeleteBlocksById(ctx context.Context, id string) ApiD
 }
 
 // Execute executes the request
-//  @return bool
-func (a *BlocksAPIService) DeleteBlocksByIdExecute(r ApiDeleteBlocksByIdRequest) (bool, *http.Response, error) {
+//  @return DeleteBlocksById200Response
+func (a *BlocksAPIService) DeleteBlocksByIdExecute(r ApiDeleteBlocksByIdRequest) (*DeleteBlocksById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  bool
+		localVarReturnValue  *DeleteBlocksById200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BlocksAPIService.DeleteBlocksById")
@@ -319,7 +319,21 @@ func (a *BlocksAPIService) DeleteBlocksByIdExecute(r ApiDeleteBlocksByIdRequest)
 type ApiGetBlocksRequest struct {
 	ctx context.Context
 	ApiService *BlocksAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetBlocksRequest) Cursor(cursor string) ApiGetBlocksRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetBlocksRequest) Limit(limit int32) ApiGetBlocksRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -328,12 +342,12 @@ func (r ApiGetBlocksRequest) XTenantUserId(xTenantUserId string) ApiGetBlocksReq
 	return r
 }
 
-func (r ApiGetBlocksRequest) Execute() ([]DomainBlock, *http.Response, error) {
+func (r ApiGetBlocksRequest) Execute() (*GetBlocks200Response, *http.Response, error) {
 	return r.ApiService.GetBlocksExecute(r)
 }
 
 /*
-GetBlocks Get Blocked Members
+GetBlocks Get Blocked Members (cursor-paginated)
 
 Get Blocked Members
 
@@ -348,13 +362,13 @@ func (a *BlocksAPIService) GetBlocks(ctx context.Context) ApiGetBlocksRequest {
 }
 
 // Execute executes the request
-//  @return []DomainBlock
-func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) ([]DomainBlock, *http.Response, error) {
+//  @return GetBlocks200Response
+func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) (*GetBlocks200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainBlock
+		localVarReturnValue  *GetBlocks200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BlocksAPIService.GetBlocks")
@@ -368,6 +382,12 @@ func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) ([]DomainBloc
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

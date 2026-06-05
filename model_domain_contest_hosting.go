@@ -24,6 +24,8 @@ type DomainContestHosting struct {
 	CanView *bool `json:"can_view,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
 	ContestId *string `json:"contest_id,omitempty"`
+	// keyset pagination sort key (uman#132)
+	CreatedAt *string `json:"created_at,omitempty"`
 	Id *string `json:"id,omitempty"`
 	IdentityPolicy *string `json:"identity_policy,omitempty"`
 	InvitedByTenantId *string `json:"invited_by_tenant_id,omitempty"`
@@ -175,6 +177,38 @@ func (o *DomainContestHosting) HasContestId() bool {
 // SetContestId gets a reference to the given string and assigns it to the ContestId field.
 func (o *DomainContestHosting) SetContestId(v string) {
 	o.ContestId = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *DomainContestHosting) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainContestHosting) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *DomainContestHosting) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *DomainContestHosting) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -390,6 +424,9 @@ func (o DomainContestHosting) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ContestId) {
 		toSerialize["contest_id"] = o.ContestId
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

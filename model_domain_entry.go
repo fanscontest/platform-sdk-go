@@ -21,6 +21,8 @@ var _ MappedNullable = &DomainEntry{}
 // DomainEntry struct for DomainEntry
 type DomainEntry struct {
 	ContestId *string `json:"contest_id,omitempty"`
+	// keyset pagination sort key (uman#132)
+	CreatedAt *string `json:"created_at,omitempty"`
 	// nullable, for live recording (seconds)
 	Duration *int32 `json:"duration,omitempty"`
 	Id *string `json:"id,omitempty"`
@@ -80,6 +82,38 @@ func (o *DomainEntry) HasContestId() bool {
 // SetContestId gets a reference to the given string and assigns it to the ContestId field.
 func (o *DomainEntry) SetContestId(v string) {
 	o.ContestId = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *DomainEntry) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainEntry) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *DomainEntry) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *DomainEntry) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetDuration returns the Duration field value if set, zero value otherwise.
@@ -318,6 +352,9 @@ func (o DomainEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ContestId) {
 		toSerialize["contest_id"] = o.ContestId
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
 	}
 	if !IsNil(o.Duration) {
 		toSerialize["duration"] = o.Duration

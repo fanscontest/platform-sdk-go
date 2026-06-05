@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateTournaments
 
-> DomainTournament CreateTournaments(ctx).XTenantUserId(xTenantUserId).Execute()
+> CreateTournaments201Response CreateTournaments(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Create tournament
 
@@ -41,7 +41,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.CreateTournaments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTournaments`: DomainTournament
+	// response from `CreateTournaments`: CreateTournaments201Response
 	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.CreateTournaments`: %v\n", resp)
 }
 ```
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainTournament**](DomainTournament.md)
+[**CreateTournaments201Response**](CreateTournaments201Response.md)
 
 ### Authorization
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdTournamentConfiguration
 
-> DomainTournamentConfiguration GetChannelsByIdTournamentConfiguration(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdTournamentConfiguration200Response GetChannelsByIdTournamentConfiguration(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get tournament configuration templates
 
@@ -108,7 +108,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetChannelsByIdTournamentConfiguration``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsByIdTournamentConfiguration`: DomainTournamentConfiguration
+	// response from `GetChannelsByIdTournamentConfiguration`: GetChannelsByIdTournamentConfiguration200Response
 	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.GetChannelsByIdTournamentConfiguration`: %v\n", resp)
 }
 ```
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainTournamentConfiguration**](DomainTournamentConfiguration.md)
+[**GetChannelsByIdTournamentConfiguration200Response**](GetChannelsByIdTournamentConfiguration200Response.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdTournaments
 
-> []DomainTournament GetChannelsByIdTournaments(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdTournaments200Response GetChannelsByIdTournaments(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channel tournaments (cursor-paginated)
 
@@ -180,7 +180,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetChannelsByIdTournaments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsByIdTournaments`: []DomainTournament
+	// response from `GetChannelsByIdTournaments`: GetChannelsByIdTournaments200Response
 	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.GetChannelsByIdTournaments`: %v\n", resp)
 }
 ```
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainTournament**](DomainTournament.md)
+[**GetChannelsByIdTournaments200Response**](GetChannelsByIdTournaments200Response.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetTournamentsById
 
-> DomainTournament GetTournamentsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateTournaments201Response GetTournamentsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get tournament
 
@@ -254,7 +254,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TournamentsAPI.GetTournamentsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTournamentsById`: DomainTournament
+	// response from `GetTournamentsById`: CreateTournaments201Response
 	fmt.Fprintf(os.Stdout, "Response from `TournamentsAPI.GetTournamentsById`: %v\n", resp)
 }
 ```
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainTournament**](DomainTournament.md)
+[**CreateTournaments201Response**](CreateTournaments201Response.md)
 
 ### Authorization
 

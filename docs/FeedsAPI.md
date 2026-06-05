@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetIdentitiesByPiidFeedPersonalized
 
-> []DomainFeedItem GetIdentitiesByPiidFeedPersonalized(ctx, piid).Limit(limit).Cursor(cursor).XTenantUserId(xTenantUserId).Execute()
+> GetIdentitiesByPiidFeedPersonalized200Response GetIdentitiesByPiidFeedPersonalized(ctx, piid).Limit(limit).Cursor(cursor).XTenantUserId(xTenantUserId).Execute()
 
 Get the personalized feed for a platform identity
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeedsAPI.GetIdentitiesByPiidFeedPersonalized``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidFeedPersonalized`: []DomainFeedItem
+	// response from `GetIdentitiesByPiidFeedPersonalized`: GetIdentitiesByPiidFeedPersonalized200Response
 	fmt.Fprintf(os.Stdout, "Response from `FeedsAPI.GetIdentitiesByPiidFeedPersonalized`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainFeedItem**](DomainFeedItem.md)
+[**GetIdentitiesByPiidFeedPersonalized200Response**](GetIdentitiesByPiidFeedPersonalized200Response.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicFeed
 
-> []DomainFeedItem GetPublicFeed(ctx).Limit(limit).Cursor(cursor).Region(region).XTenantUserId(xTenantUserId).Execute()
+> GetIdentitiesByPiidFeedPersonalized200Response GetPublicFeed(ctx).Limit(limit).Cursor(cursor).Region(region).XTenantUserId(xTenantUserId).Execute()
 
 Get the public feed (trending content, unauthenticated)
 
@@ -116,7 +116,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeedsAPI.GetPublicFeed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicFeed`: []DomainFeedItem
+	// response from `GetPublicFeed`: GetIdentitiesByPiidFeedPersonalized200Response
 	fmt.Fprintf(os.Stdout, "Response from `FeedsAPI.GetPublicFeed`: %v\n", resp)
 }
 ```
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainFeedItem**](DomainFeedItem.md)
+[**GetIdentitiesByPiidFeedPersonalized200Response**](GetIdentitiesByPiidFeedPersonalized200Response.md)
 
 ### Authorization
 

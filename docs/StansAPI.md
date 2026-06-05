@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateCelebs
 
-> DomainStan CreateCelebs(ctx).Body(body).XTenantUserId(xTenantUserId).Execute()
+> CreateCelebs200Response CreateCelebs(ctx).Body(body).XTenantUserId(xTenantUserId).Execute()
 
 Create Member Stan
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.CreateCelebs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateCelebs`: DomainStan
+	// response from `CreateCelebs`: CreateCelebs200Response
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.CreateCelebs`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainStan**](DomainStan.md)
+[**CreateCelebs200Response**](CreateCelebs200Response.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCelebsById
 
-> bool DeleteCelebsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DeleteBlocksById200Response DeleteCelebsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Member Stan
 
@@ -110,7 +110,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.DeleteCelebsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteCelebsById`: bool
+	// response from `DeleteCelebsById`: DeleteBlocksById200Response
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.DeleteCelebsById`: %v\n", resp)
 }
 ```
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**bool**
+[**DeleteBlocksById200Response**](DeleteBlocksById200Response.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## GetCelebs
 
-> []DomainStan GetCelebs(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetCelebs200Response GetCelebs(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Member Celebs
 
@@ -172,16 +172,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.StansAPI.GetCelebs(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.StansAPI.GetCelebs(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.GetCelebs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCelebs`: []DomainStan
+	// response from `GetCelebs`: GetCelebs200Response
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.GetCelebs`: %v\n", resp)
 }
 ```
@@ -197,11 +199,13 @@ Other parameters are passed through a pointer to a apiGetCelebsRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainStan**](DomainStan.md)
+[**GetCelebs200Response**](GetCelebs200Response.md)
 
 ### Authorization
 
@@ -219,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetStans
 
-> []DomainStan GetStans(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetCelebs200Response GetStans(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Celeb Stans
 
@@ -238,16 +242,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.StansAPI.GetStans(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.StansAPI.GetStans(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.GetStans``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetStans`: []DomainStan
+	// response from `GetStans`: GetCelebs200Response
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.GetStans`: %v\n", resp)
 }
 ```
@@ -263,11 +269,13 @@ Other parameters are passed through a pointer to a apiGetStansRequest struct via
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainStan**](DomainStan.md)
+[**GetCelebs200Response**](GetCelebs200Response.md)
 
 ### Authorization
 

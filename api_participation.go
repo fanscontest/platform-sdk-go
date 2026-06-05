@@ -37,7 +37,7 @@ func (r ApiCreateContestsByIdEnrollmentRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiCreateContestsByIdEnrollmentRequest) Execute() (*DomainParticipation, *http.Response, error) {
+func (r ApiCreateContestsByIdEnrollmentRequest) Execute() (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdEnrollmentExecute(r)
 }
 
@@ -59,13 +59,13 @@ func (a *ParticipationAPIService) CreateContestsByIdEnrollment(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return DomainParticipation
-func (a *ParticipationAPIService) CreateContestsByIdEnrollmentExecute(r ApiCreateContestsByIdEnrollmentRequest) (*DomainParticipation, *http.Response, error) {
+//  @return CreateContestsByIdEnrollment200Response
+func (a *ParticipationAPIService) CreateContestsByIdEnrollmentExecute(r ApiCreateContestsByIdEnrollmentRequest) (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainParticipation
+		localVarReturnValue  *CreateContestsByIdEnrollment200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.CreateContestsByIdEnrollment")
@@ -171,7 +171,7 @@ func (r ApiCreateContestsByIdParticipateRequest) XTenantUserId(xTenantUserId str
 	return r
 }
 
-func (r ApiCreateContestsByIdParticipateRequest) Execute() (*DomainParticipation, *http.Response, error) {
+func (r ApiCreateContestsByIdParticipateRequest) Execute() (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdParticipateExecute(r)
 }
 
@@ -193,13 +193,13 @@ func (a *ParticipationAPIService) CreateContestsByIdParticipate(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return DomainParticipation
-func (a *ParticipationAPIService) CreateContestsByIdParticipateExecute(r ApiCreateContestsByIdParticipateRequest) (*DomainParticipation, *http.Response, error) {
+//  @return CreateContestsByIdEnrollment200Response
+func (a *ParticipationAPIService) CreateContestsByIdParticipateExecute(r ApiCreateContestsByIdParticipateRequest) (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainParticipation
+		localVarReturnValue  *CreateContestsByIdEnrollment200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.CreateContestsByIdParticipate")
@@ -305,7 +305,7 @@ func (r ApiCreateParticipationByIdStartRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiCreateParticipationByIdStartRequest) Execute() (*HandlerStatusResponse, *http.Response, error) {
+func (r ApiCreateParticipationByIdStartRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	return r.ApiService.CreateParticipationByIdStartExecute(r)
 }
 
@@ -325,13 +325,13 @@ func (a *ParticipationAPIService) CreateParticipationByIdStart(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HandlerStatusResponse
-func (a *ParticipationAPIService) CreateParticipationByIdStartExecute(r ApiCreateParticipationByIdStartRequest) (*HandlerStatusResponse, *http.Response, error) {
+//  @return CreateAnalyticsImpression200Response
+func (a *ParticipationAPIService) CreateParticipationByIdStartExecute(r ApiCreateParticipationByIdStartRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HandlerStatusResponse
+		localVarReturnValue  *CreateAnalyticsImpression200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.CreateParticipationByIdStart")
@@ -558,7 +558,7 @@ func (r ApiGetContestsByIdScoreboardRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiGetContestsByIdScoreboardRequest) Execute() (*DomainScoreBoard, *http.Response, error) {
+func (r ApiGetContestsByIdScoreboardRequest) Execute() (*GetContestsByIdScoreboard200Response, *http.Response, error) {
 	return r.ApiService.GetContestsByIdScoreboardExecute(r)
 }
 
@@ -582,14 +582,14 @@ func (a *ParticipationAPIService) GetContestsByIdScoreboard(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return DomainScoreBoard
+//  @return GetContestsByIdScoreboard200Response
 // Deprecated
-func (a *ParticipationAPIService) GetContestsByIdScoreboardExecute(r ApiGetContestsByIdScoreboardRequest) (*DomainScoreBoard, *http.Response, error) {
+func (a *ParticipationAPIService) GetContestsByIdScoreboardExecute(r ApiGetContestsByIdScoreboardRequest) (*GetContestsByIdScoreboard200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainScoreBoard
+		localVarReturnValue  *GetContestsByIdScoreboard200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetContestsByIdScoreboard")
@@ -716,7 +716,7 @@ func (r ApiGetIdentitiesByPiidParticipationRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidParticipationRequest) Execute() ([]DomainParticipation, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidParticipationRequest) Execute() (*GetContestsByIdParticipation200Response, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidParticipationExecute(r)
 }
 
@@ -739,13 +739,13 @@ func (a *ParticipationAPIService) GetIdentitiesByPiidParticipation(ctx context.C
 }
 
 // Execute executes the request
-//  @return []DomainParticipation
-func (a *ParticipationAPIService) GetIdentitiesByPiidParticipationExecute(r ApiGetIdentitiesByPiidParticipationRequest) ([]DomainParticipation, *http.Response, error) {
+//  @return GetContestsByIdParticipation200Response
+func (a *ParticipationAPIService) GetIdentitiesByPiidParticipationExecute(r ApiGetIdentitiesByPiidParticipationRequest) (*GetContestsByIdParticipation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainParticipation
+		localVarReturnValue  *GetContestsByIdParticipation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetIdentitiesByPiidParticipation")
@@ -862,7 +862,21 @@ type ApiGetIdentitiesByPiidScheduleRequest struct {
 	ctx context.Context
 	ApiService *ParticipationAPIService
 	piid string
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page derived data)
+func (r ApiGetIdentitiesByPiidScheduleRequest) Cursor(cursor string) ApiGetIdentitiesByPiidScheduleRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page derived data)
+func (r ApiGetIdentitiesByPiidScheduleRequest) Limit(limit int32) ApiGetIdentitiesByPiidScheduleRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -871,7 +885,7 @@ func (r ApiGetIdentitiesByPiidScheduleRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidScheduleRequest) Execute() ([]DomainParticipation, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidScheduleRequest) Execute() (*GetContestsByIdParticipation200Response, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidScheduleExecute(r)
 }
 
@@ -879,7 +893,9 @@ func (r ApiGetIdentitiesByPiidScheduleRequest) Execute() ([]DomainParticipation,
 GetIdentitiesByPiidSchedule Get a platform identity's contest schedule (cached read model)
 
 Upcoming + started + recently-finished contests. PI-existence
-gate is tenant-scoped (ADR 0018).
+gate is tenant-scoped (ADR 0018). This is a derived schedule, not
+a keyset list; per uman#132 it carries an inert pagination block
+(has_next:false) for shape uniformity and ignores cursor/limit.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param piid Platform Identity ID
@@ -894,13 +910,13 @@ func (a *ParticipationAPIService) GetIdentitiesByPiidSchedule(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return []DomainParticipation
-func (a *ParticipationAPIService) GetIdentitiesByPiidScheduleExecute(r ApiGetIdentitiesByPiidScheduleRequest) ([]DomainParticipation, *http.Response, error) {
+//  @return GetContestsByIdParticipation200Response
+func (a *ParticipationAPIService) GetIdentitiesByPiidScheduleExecute(r ApiGetIdentitiesByPiidScheduleRequest) (*GetContestsByIdParticipation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainParticipation
+		localVarReturnValue  *GetContestsByIdParticipation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetIdentitiesByPiidSchedule")
@@ -915,6 +931,12 @@ func (a *ParticipationAPIService) GetIdentitiesByPiidScheduleExecute(r ApiGetIde
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1006,7 +1028,7 @@ func (r ApiGetParticipationByIdRequest) XTenantUserId(xTenantUserId string) ApiG
 	return r
 }
 
-func (r ApiGetParticipationByIdRequest) Execute() (*DomainParticipation, *http.Response, error) {
+func (r ApiGetParticipationByIdRequest) Execute() (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	return r.ApiService.GetParticipationByIdExecute(r)
 }
 
@@ -1028,13 +1050,13 @@ func (a *ParticipationAPIService) GetParticipationById(ctx context.Context, id s
 }
 
 // Execute executes the request
-//  @return DomainParticipation
-func (a *ParticipationAPIService) GetParticipationByIdExecute(r ApiGetParticipationByIdRequest) (*DomainParticipation, *http.Response, error) {
+//  @return CreateContestsByIdEnrollment200Response
+func (a *ParticipationAPIService) GetParticipationByIdExecute(r ApiGetParticipationByIdRequest) (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainParticipation
+		localVarReturnValue  *CreateContestsByIdEnrollment200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetParticipationById")
@@ -1140,7 +1162,7 @@ func (r ApiGetParticipationContestByIdRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetParticipationContestByIdRequest) Execute() (*DomainParticipation, *http.Response, error) {
+func (r ApiGetParticipationContestByIdRequest) Execute() (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	return r.ApiService.GetParticipationContestByIdExecute(r)
 }
 
@@ -1162,13 +1184,13 @@ func (a *ParticipationAPIService) GetParticipationContestById(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return DomainParticipation
-func (a *ParticipationAPIService) GetParticipationContestByIdExecute(r ApiGetParticipationContestByIdRequest) (*DomainParticipation, *http.Response, error) {
+//  @return CreateContestsByIdEnrollment200Response
+func (a *ParticipationAPIService) GetParticipationContestByIdExecute(r ApiGetParticipationContestByIdRequest) (*CreateContestsByIdEnrollment200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainParticipation
+		localVarReturnValue  *CreateContestsByIdEnrollment200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetParticipationContestById")
@@ -1274,7 +1296,7 @@ func (r ApiGetPublicContestsByIdGroupedScoreboardRequest) XTenantUserId(xTenantU
 	return r
 }
 
-func (r ApiGetPublicContestsByIdGroupedScoreboardRequest) Execute() (*DomainGroupedScoreBoard, *http.Response, error) {
+func (r ApiGetPublicContestsByIdGroupedScoreboardRequest) Execute() (*GetPublicContestsByIdGroupedScoreboard200Response, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByIdGroupedScoreboardExecute(r)
 }
 
@@ -1296,13 +1318,13 @@ func (a *ParticipationAPIService) GetPublicContestsByIdGroupedScoreboard(ctx con
 }
 
 // Execute executes the request
-//  @return DomainGroupedScoreBoard
-func (a *ParticipationAPIService) GetPublicContestsByIdGroupedScoreboardExecute(r ApiGetPublicContestsByIdGroupedScoreboardRequest) (*DomainGroupedScoreBoard, *http.Response, error) {
+//  @return GetPublicContestsByIdGroupedScoreboard200Response
+func (a *ParticipationAPIService) GetPublicContestsByIdGroupedScoreboardExecute(r ApiGetPublicContestsByIdGroupedScoreboardRequest) (*GetPublicContestsByIdGroupedScoreboard200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainGroupedScoreBoard
+		localVarReturnValue  *GetPublicContestsByIdGroupedScoreboard200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetPublicContestsByIdGroupedScoreboard")
@@ -1408,7 +1430,7 @@ func (r ApiGetPublicContestsByIdLiveRankingRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetPublicContestsByIdLiveRankingRequest) Execute() (*DomainGroupedScoreBoard, *http.Response, error) {
+func (r ApiGetPublicContestsByIdLiveRankingRequest) Execute() (*GetPublicContestsByIdGroupedScoreboard200Response, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByIdLiveRankingExecute(r)
 }
 
@@ -1430,13 +1452,13 @@ func (a *ParticipationAPIService) GetPublicContestsByIdLiveRanking(ctx context.C
 }
 
 // Execute executes the request
-//  @return DomainGroupedScoreBoard
-func (a *ParticipationAPIService) GetPublicContestsByIdLiveRankingExecute(r ApiGetPublicContestsByIdLiveRankingRequest) (*DomainGroupedScoreBoard, *http.Response, error) {
+//  @return GetPublicContestsByIdGroupedScoreboard200Response
+func (a *ParticipationAPIService) GetPublicContestsByIdLiveRankingExecute(r ApiGetPublicContestsByIdLiveRankingRequest) (*GetPublicContestsByIdGroupedScoreboard200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainGroupedScoreBoard
+		localVarReturnValue  *GetPublicContestsByIdGroupedScoreboard200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetPublicContestsByIdLiveRanking")
@@ -1531,7 +1553,7 @@ func (r ApiGetPublicContestsByIdScoreboardRequest) XTenantUserId(xTenantUserId s
 	return r
 }
 
-func (r ApiGetPublicContestsByIdScoreboardRequest) Execute() (*DomainScoreBoard, *http.Response, error) {
+func (r ApiGetPublicContestsByIdScoreboardRequest) Execute() (*GetContestsByIdScoreboard200Response, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByIdScoreboardExecute(r)
 }
 
@@ -1555,14 +1577,14 @@ func (a *ParticipationAPIService) GetPublicContestsByIdScoreboard(ctx context.Co
 }
 
 // Execute executes the request
-//  @return DomainScoreBoard
+//  @return GetContestsByIdScoreboard200Response
 // Deprecated
-func (a *ParticipationAPIService) GetPublicContestsByIdScoreboardExecute(r ApiGetPublicContestsByIdScoreboardRequest) (*DomainScoreBoard, *http.Response, error) {
+func (a *ParticipationAPIService) GetPublicContestsByIdScoreboardExecute(r ApiGetPublicContestsByIdScoreboardRequest) (*GetContestsByIdScoreboard200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainScoreBoard
+		localVarReturnValue  *GetContestsByIdScoreboard200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.GetPublicContestsByIdScoreboard")
@@ -1675,7 +1697,7 @@ func (r ApiPatchParticipationByParticipationIdGroupRequest) XTenantUserId(xTenan
 	return r
 }
 
-func (r ApiPatchParticipationByParticipationIdGroupRequest) Execute() (*DomainSelectGroupResponse, *http.Response, error) {
+func (r ApiPatchParticipationByParticipationIdGroupRequest) Execute() (*PatchParticipationByParticipationIdGroup200Response, *http.Response, error) {
 	return r.ApiService.PatchParticipationByParticipationIdGroupExecute(r)
 }
 
@@ -1697,13 +1719,13 @@ func (a *ParticipationAPIService) PatchParticipationByParticipationIdGroup(ctx c
 }
 
 // Execute executes the request
-//  @return DomainSelectGroupResponse
-func (a *ParticipationAPIService) PatchParticipationByParticipationIdGroupExecute(r ApiPatchParticipationByParticipationIdGroupRequest) (*DomainSelectGroupResponse, *http.Response, error) {
+//  @return PatchParticipationByParticipationIdGroup200Response
+func (a *ParticipationAPIService) PatchParticipationByParticipationIdGroupExecute(r ApiPatchParticipationByParticipationIdGroupRequest) (*PatchParticipationByParticipationIdGroup200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainSelectGroupResponse
+		localVarReturnValue  *PatchParticipationByParticipationIdGroup200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParticipationAPIService.PatchParticipationByParticipationIdGroup")

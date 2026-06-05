@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipTerms
 
-> DomainSponsorshipTerm CreateSponsorshipTerms(ctx).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsorshipTerms201Response CreateSponsorshipTerms(ctx).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Term (v2)
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.CreateSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipTerms`: DomainSponsorshipTerm
+	// response from `CreateSponsorshipTerms`: CreateSponsorshipTerms201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.CreateSponsorshipTerms`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipTerm**](DomainSponsorshipTerm.md)
+[**CreateSponsorshipTerms201Response**](CreateSponsorshipTerms201Response.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSponsorshipTermsById
 
-> HandlerStatusResponse DeleteSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response DeleteSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Deactivate Sponsorship Term (v2)
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.DeleteSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteSponsorshipTermsById`: HandlerStatusResponse
+	// response from `DeleteSponsorshipTermsById`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.DeleteSponsorshipTermsById`: %v\n", resp)
 }
 ```
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTerms
 
-> []DomainSponsorshipTerm GetSponsorshipTerms(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetSponsorshipTerms200Response GetSponsorshipTerms(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Terms (v2)
 
@@ -174,16 +174,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) (optional)
+	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTerms(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTerms(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipTerms`: []DomainSponsorshipTerm
+	// response from `GetSponsorshipTerms`: GetSponsorshipTerms200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTerms`: %v\n", resp)
 }
 ```
@@ -199,11 +201,13 @@ Other parameters are passed through a pointer to a apiGetSponsorshipTermsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) | 
+ **limit** | **int32** | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorshipTerm**](DomainSponsorshipTerm.md)
+[**GetSponsorshipTerms200Response**](GetSponsorshipTerms200Response.md)
 
 ### Authorization
 
@@ -221,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTermsById
 
-> DomainSponsorshipTerm GetSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsorshipTerms201Response GetSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Term (v2)
 
@@ -250,7 +254,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipTermsById`: DomainSponsorshipTerm
+	// response from `GetSponsorshipTermsById`: CreateSponsorshipTerms201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTermsById`: %v\n", resp)
 }
 ```
@@ -275,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipTerm**](DomainSponsorshipTerm.md)
+[**CreateSponsorshipTerms201Response**](CreateSponsorshipTerms201Response.md)
 
 ### Authorization
 
@@ -293,7 +297,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTermsPlatform
 
-> []DomainSponsorshipTerm GetSponsorshipTermsPlatform(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetSponsorshipTerms200Response GetSponsorshipTermsPlatform(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Platform Terms (v2)
 
@@ -312,16 +316,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsPlatform(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipTermsAPI.GetSponsorshipTermsPlatform(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsPlatform``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipTermsPlatform`: []DomainSponsorshipTerm
+	// response from `GetSponsorshipTermsPlatform`: GetSponsorshipTerms200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTermsPlatform`: %v\n", resp)
 }
 ```
@@ -337,11 +343,13 @@ Other parameters are passed through a pointer to a apiGetSponsorshipTermsPlatfor
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorshipTerm**](DomainSponsorshipTerm.md)
+[**GetSponsorshipTerms200Response**](GetSponsorshipTerms200Response.md)
 
 ### Authorization
 
@@ -359,7 +367,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSponsorshipTermsById
 
-> DomainSponsorshipTerm UpdateSponsorshipTermsById(ctx, id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsorshipTerms201Response UpdateSponsorshipTermsById(ctx, id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Sponsorship Term (v2)
 
@@ -389,7 +397,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.UpdateSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateSponsorshipTermsById`: DomainSponsorshipTerm
+	// response from `UpdateSponsorshipTermsById`: CreateSponsorshipTerms201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.UpdateSponsorshipTermsById`: %v\n", resp)
 }
 ```
@@ -415,7 +423,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipTerm**](DomainSponsorshipTerm.md)
+[**CreateSponsorshipTerms201Response**](CreateSponsorshipTerms201Response.md)
 
 ### Authorization
 

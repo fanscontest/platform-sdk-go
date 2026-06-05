@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssignedAt** | Pointer to **string** |  | [optional] 
 **ContestId** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **string** | keyset pagination sort key (uman#132) | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **JurorId** | Pointer to **string** |  | [optional] 
 **Source** | Pointer to **string** | Use JurorAssignmentSourceRandom or JurorAssignmentSourceInvited | [optional] 
@@ -79,6 +80,31 @@ SetContestId sets ContestId field to given value.
 `func (o *DomainJurorAssignment) HasContestId() bool`
 
 HasContestId returns a boolean if a field has been set.
+
+### GetCreatedAt
+
+`func (o *DomainJurorAssignment) GetCreatedAt() string`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *DomainJurorAssignment) GetCreatedAtOk() (*string, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *DomainJurorAssignment) SetCreatedAt(v string)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *DomainJurorAssignment) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
 
 ### GetId
 

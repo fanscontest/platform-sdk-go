@@ -36,7 +36,7 @@ func (r ApiCreateTournamentsRequest) XTenantUserId(xTenantUserId string) ApiCrea
 	return r
 }
 
-func (r ApiCreateTournamentsRequest) Execute() (*DomainTournament, *http.Response, error) {
+func (r ApiCreateTournamentsRequest) Execute() (*CreateTournaments201Response, *http.Response, error) {
 	return r.ApiService.CreateTournamentsExecute(r)
 }
 
@@ -56,13 +56,13 @@ func (a *TournamentsAPIService) CreateTournaments(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return DomainTournament
-func (a *TournamentsAPIService) CreateTournamentsExecute(r ApiCreateTournamentsRequest) (*DomainTournament, *http.Response, error) {
+//  @return CreateTournaments201Response
+func (a *TournamentsAPIService) CreateTournamentsExecute(r ApiCreateTournamentsRequest) (*CreateTournaments201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTournament
+		localVarReturnValue  *CreateTournaments201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentsAPIService.CreateTournaments")
@@ -167,7 +167,7 @@ func (r ApiGetChannelsByIdTournamentConfigurationRequest) XTenantUserId(xTenantU
 	return r
 }
 
-func (r ApiGetChannelsByIdTournamentConfigurationRequest) Execute() (*DomainTournamentConfiguration, *http.Response, error) {
+func (r ApiGetChannelsByIdTournamentConfigurationRequest) Execute() (*GetChannelsByIdTournamentConfiguration200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdTournamentConfigurationExecute(r)
 }
 
@@ -189,13 +189,13 @@ func (a *TournamentsAPIService) GetChannelsByIdTournamentConfiguration(ctx conte
 }
 
 // Execute executes the request
-//  @return DomainTournamentConfiguration
-func (a *TournamentsAPIService) GetChannelsByIdTournamentConfigurationExecute(r ApiGetChannelsByIdTournamentConfigurationRequest) (*DomainTournamentConfiguration, *http.Response, error) {
+//  @return GetChannelsByIdTournamentConfiguration200Response
+func (a *TournamentsAPIService) GetChannelsByIdTournamentConfigurationExecute(r ApiGetChannelsByIdTournamentConfigurationRequest) (*GetChannelsByIdTournamentConfiguration200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTournamentConfiguration
+		localVarReturnValue  *GetChannelsByIdTournamentConfiguration200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentsAPIService.GetChannelsByIdTournamentConfiguration")
@@ -315,7 +315,7 @@ func (r ApiGetChannelsByIdTournamentsRequest) XTenantUserId(xTenantUserId string
 	return r
 }
 
-func (r ApiGetChannelsByIdTournamentsRequest) Execute() ([]DomainTournament, *http.Response, error) {
+func (r ApiGetChannelsByIdTournamentsRequest) Execute() (*GetChannelsByIdTournaments200Response, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdTournamentsExecute(r)
 }
 
@@ -335,13 +335,13 @@ func (a *TournamentsAPIService) GetChannelsByIdTournaments(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return []DomainTournament
-func (a *TournamentsAPIService) GetChannelsByIdTournamentsExecute(r ApiGetChannelsByIdTournamentsRequest) ([]DomainTournament, *http.Response, error) {
+//  @return GetChannelsByIdTournaments200Response
+func (a *TournamentsAPIService) GetChannelsByIdTournamentsExecute(r ApiGetChannelsByIdTournamentsRequest) (*GetChannelsByIdTournaments200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainTournament
+		localVarReturnValue  *GetChannelsByIdTournaments200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentsAPIService.GetChannelsByIdTournaments")
@@ -453,7 +453,7 @@ func (r ApiGetTournamentsByIdRequest) XTenantUserId(xTenantUserId string) ApiGet
 	return r
 }
 
-func (r ApiGetTournamentsByIdRequest) Execute() (*DomainTournament, *http.Response, error) {
+func (r ApiGetTournamentsByIdRequest) Execute() (*CreateTournaments201Response, *http.Response, error) {
 	return r.ApiService.GetTournamentsByIdExecute(r)
 }
 
@@ -475,13 +475,13 @@ func (a *TournamentsAPIService) GetTournamentsById(ctx context.Context, id strin
 }
 
 // Execute executes the request
-//  @return DomainTournament
-func (a *TournamentsAPIService) GetTournamentsByIdExecute(r ApiGetTournamentsByIdRequest) (*DomainTournament, *http.Response, error) {
+//  @return CreateTournaments201Response
+func (a *TournamentsAPIService) GetTournamentsByIdExecute(r ApiGetTournamentsByIdRequest) (*CreateTournaments201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainTournament
+		localVarReturnValue  *CreateTournaments201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TournamentsAPIService.GetTournamentsById")

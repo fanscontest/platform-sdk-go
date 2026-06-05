@@ -26,7 +26,21 @@ type CountriesAPIService service
 type ApiGetPublicCountriesRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Accepted for shape uniformity; ignored (single-page reference data)
+func (r ApiGetPublicCountriesRequest) Cursor(cursor string) ApiGetPublicCountriesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Accepted for shape uniformity; ignored (single-page reference data)
+func (r ApiGetPublicCountriesRequest) Limit(limit int32) ApiGetPublicCountriesRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -35,12 +49,17 @@ func (r ApiGetPublicCountriesRequest) XTenantUserId(xTenantUserId string) ApiGet
 	return r
 }
 
-func (r ApiGetPublicCountriesRequest) Execute() ([]DomainCountry, *http.Response, error) {
+func (r ApiGetPublicCountriesRequest) Execute() (*GetPublicCountries200Response, *http.Response, error) {
 	return r.ApiService.GetPublicCountriesExecute(r)
 }
 
 /*
 GetPublicCountries List enabled countries (sorted, with native names for non-English Accept-Language)
+
+Returns the full enabled-countries reference set, sorted by name.
+This is bounded reference data, not a keyset list; per uman#132 it
+carries an inert pagination block (has_next:false) for a uniform
+response shape, and the cursor/limit params are accepted but ignored.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPublicCountriesRequest
@@ -53,13 +72,13 @@ func (a *CountriesAPIService) GetPublicCountries(ctx context.Context) ApiGetPubl
 }
 
 // Execute executes the request
-//  @return []DomainCountry
-func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesRequest) ([]DomainCountry, *http.Response, error) {
+//  @return GetPublicCountries200Response
+func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesRequest) (*GetPublicCountries200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainCountry
+		localVarReturnValue  *GetPublicCountries200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountriesAPIService.GetPublicCountries")
@@ -73,6 +92,12 @@ func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -152,7 +177,7 @@ func (r ApiGetPublicLocationRequest) XTenantUserId(xTenantUserId string) ApiGetP
 	return r
 }
 
-func (r ApiGetPublicLocationRequest) Execute() (*DomainCountry, *http.Response, error) {
+func (r ApiGetPublicLocationRequest) Execute() (*GetPublicLocation200Response, *http.Response, error) {
 	return r.ApiService.GetPublicLocationExecute(r)
 }
 
@@ -170,13 +195,13 @@ func (a *CountriesAPIService) GetPublicLocation(ctx context.Context) ApiGetPubli
 }
 
 // Execute executes the request
-//  @return DomainCountry
-func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationRequest) (*DomainCountry, *http.Response, error) {
+//  @return GetPublicLocation200Response
+func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationRequest) (*GetPublicLocation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainCountry
+		localVarReturnValue  *GetPublicLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountriesAPIService.GetPublicLocation")

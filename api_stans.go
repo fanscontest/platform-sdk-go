@@ -43,7 +43,7 @@ func (r ApiCreateCelebsRequest) XTenantUserId(xTenantUserId string) ApiCreateCel
 	return r
 }
 
-func (r ApiCreateCelebsRequest) Execute() (*DomainStan, *http.Response, error) {
+func (r ApiCreateCelebsRequest) Execute() (*CreateCelebs200Response, *http.Response, error) {
 	return r.ApiService.CreateCelebsExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *StansAPIService) CreateCelebs(ctx context.Context) ApiCreateCelebsReque
 }
 
 // Execute executes the request
-//  @return DomainStan
-func (a *StansAPIService) CreateCelebsExecute(r ApiCreateCelebsRequest) (*DomainStan, *http.Response, error) {
+//  @return CreateCelebs200Response
+func (a *StansAPIService) CreateCelebsExecute(r ApiCreateCelebsRequest) (*CreateCelebs200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainStan
+		localVarReturnValue  *CreateCelebs200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.CreateCelebs")
@@ -193,7 +193,7 @@ func (r ApiDeleteCelebsByIdRequest) XTenantUserId(xTenantUserId string) ApiDelet
 	return r
 }
 
-func (r ApiDeleteCelebsByIdRequest) Execute() (bool, *http.Response, error) {
+func (r ApiDeleteCelebsByIdRequest) Execute() (*DeleteBlocksById200Response, *http.Response, error) {
 	return r.ApiService.DeleteCelebsByIdExecute(r)
 }
 
@@ -215,13 +215,13 @@ func (a *StansAPIService) DeleteCelebsById(ctx context.Context, id string) ApiDe
 }
 
 // Execute executes the request
-//  @return bool
-func (a *StansAPIService) DeleteCelebsByIdExecute(r ApiDeleteCelebsByIdRequest) (bool, *http.Response, error) {
+//  @return DeleteBlocksById200Response
+func (a *StansAPIService) DeleteCelebsByIdExecute(r ApiDeleteCelebsByIdRequest) (*DeleteBlocksById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  bool
+		localVarReturnValue  *DeleteBlocksById200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.DeleteCelebsById")
@@ -317,7 +317,21 @@ func (a *StansAPIService) DeleteCelebsByIdExecute(r ApiDeleteCelebsByIdRequest) 
 type ApiGetCelebsRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetCelebsRequest) Cursor(cursor string) ApiGetCelebsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetCelebsRequest) Limit(limit int32) ApiGetCelebsRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -326,7 +340,7 @@ func (r ApiGetCelebsRequest) XTenantUserId(xTenantUserId string) ApiGetCelebsReq
 	return r
 }
 
-func (r ApiGetCelebsRequest) Execute() ([]DomainStan, *http.Response, error) {
+func (r ApiGetCelebsRequest) Execute() (*GetCelebs200Response, *http.Response, error) {
 	return r.ApiService.GetCelebsExecute(r)
 }
 
@@ -346,13 +360,13 @@ func (a *StansAPIService) GetCelebs(ctx context.Context) ApiGetCelebsRequest {
 }
 
 // Execute executes the request
-//  @return []DomainStan
-func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) ([]DomainStan, *http.Response, error) {
+//  @return GetCelebs200Response
+func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) (*GetCelebs200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainStan
+		localVarReturnValue  *GetCelebs200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.GetCelebs")
@@ -366,6 +380,12 @@ func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) ([]DomainStan,
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -447,7 +467,21 @@ func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) ([]DomainStan,
 type ApiGetStansRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
+	cursor *string
+	limit *int32
 	xTenantUserId *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetStansRequest) Cursor(cursor string) ApiGetStansRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetStansRequest) Limit(limit int32) ApiGetStansRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
@@ -456,7 +490,7 @@ func (r ApiGetStansRequest) XTenantUserId(xTenantUserId string) ApiGetStansReque
 	return r
 }
 
-func (r ApiGetStansRequest) Execute() ([]DomainStan, *http.Response, error) {
+func (r ApiGetStansRequest) Execute() (*GetCelebs200Response, *http.Response, error) {
 	return r.ApiService.GetStansExecute(r)
 }
 
@@ -476,13 +510,13 @@ func (a *StansAPIService) GetStans(ctx context.Context) ApiGetStansRequest {
 }
 
 // Execute executes the request
-//  @return []DomainStan
-func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) ([]DomainStan, *http.Response, error) {
+//  @return GetCelebs200Response
+func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) (*GetCelebs200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DomainStan
+		localVarReturnValue  *GetCelebs200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.GetStans")
@@ -496,6 +530,12 @@ func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) ([]DomainStan, *
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

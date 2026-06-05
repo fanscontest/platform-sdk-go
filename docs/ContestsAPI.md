@@ -42,7 +42,7 @@ Method | HTTP request | Description
 
 ## CreateContests
 
-> DomainContest CreateContests(ctx).RequestCreateContestRequest(requestCreateContestRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateContests201Response CreateContests(ctx).RequestCreateContestRequest(requestCreateContestRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a contest
 
@@ -69,7 +69,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContests`: DomainContest
+	// response from `CreateContests`: CreateContests201Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContests`: %v\n", resp)
 }
 ```
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContest**](DomainContest.md)
+[**CreateContests201Response**](CreateContests201Response.md)
 
 ### Authorization
 
@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByContestIdBuddyBoards
 
-> DomainBuddyBoard CreateContestsByContestIdBuddyBoards(ctx, contestId).RequestCreateBuddyBoardRequest(requestCreateBuddyBoardRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateContestsByContestIdBuddyBoards200Response CreateContestsByContestIdBuddyBoards(ctx, contestId).RequestCreateBuddyBoardRequest(requestCreateBuddyBoardRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a buddy board on a contest (owner = caller)
 
@@ -136,7 +136,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByContestIdBuddyBoards``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByContestIdBuddyBoards`: DomainBuddyBoard
+	// response from `CreateContestsByContestIdBuddyBoards`: CreateContestsByContestIdBuddyBoards200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByContestIdBuddyBoards`: %v\n", resp)
 }
 ```
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBuddyBoard**](DomainBuddyBoard.md)
+[**CreateContestsByContestIdBuddyBoards200Response**](CreateContestsByContestIdBuddyBoards200Response.md)
 
 ### Authorization
 
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept
 
-> HandlerStatusResponse CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
 
 Accept a pending buddy board invite (invitee only)
 
@@ -210,7 +210,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept`: HandlerStatusResponse
+	// response from `CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept`: %v\n", resp)
 }
 ```
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline
 
-> HandlerStatusResponse CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
 
 Decline a pending buddy board invite (invitee only)
 
@@ -283,7 +283,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline`: HandlerStatusResponse
+	// response from `CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline`: %v\n", resp)
 }
 ```
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -328,7 +328,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByContestIdBuddyBoardsByBoardIdMembers
 
-> HandlerStatusResponse CreateContestsByContestIdBuddyBoardsByBoardIdMembers(ctx, contestId, boardId).RequestAddBuddyBoardMembersRequest(requestAddBuddyBoardMembersRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByContestIdBuddyBoardsByBoardIdMembers(ctx, contestId, boardId).RequestAddBuddyBoardMembersRequest(requestAddBuddyBoardMembersRequest).XTenantUserId(xTenantUserId).Execute()
 
 Invite members to a buddy board (owner only)
 
@@ -359,7 +359,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByContestIdBuddyBoardsByBoardIdMembers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByContestIdBuddyBoardsByBoardIdMembers`: HandlerStatusResponse
+	// response from `CreateContestsByContestIdBuddyBoardsByBoardIdMembers`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByContestIdBuddyBoardsByBoardIdMembers`: %v\n", resp)
 }
 ```
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdHostings
 
-> HandlerStatusResponse CreateContestsByIdHostings(ctx, id).HandlerCreatePlatformContestHostingRequest(handlerCreatePlatformContestHostingRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByIdHostings(ctx, id).HandlerCreatePlatformContestHostingRequest(handlerCreatePlatformContestHostingRequest).XTenantUserId(xTenantUserId).Execute()
 
 Invite another venue/channel to host a contest
 
@@ -435,7 +435,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByIdHostings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdHostings`: HandlerStatusResponse
+	// response from `CreateContestsByIdHostings`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByIdHostings`: %v\n", resp)
 }
 ```
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdHostingsByHostingIdAccept
 
-> HandlerStatusResponse CreateContestsByIdHostingsByHostingIdAccept(ctx, id, hostingId).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByIdHostingsByHostingIdAccept(ctx, id, hostingId).XTenantUserId(xTenantUserId).Execute()
 
 Accept a contest hosting invitation
 
@@ -509,7 +509,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByIdHostingsByHostingIdAccept``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdHostingsByHostingIdAccept`: HandlerStatusResponse
+	// response from `CreateContestsByIdHostingsByHostingIdAccept`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByIdHostingsByHostingIdAccept`: %v\n", resp)
 }
 ```
@@ -536,7 +536,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -554,7 +554,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdHostingsByHostingIdDecline
 
-> HandlerStatusResponse CreateContestsByIdHostingsByHostingIdDecline(ctx, id, hostingId).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByIdHostingsByHostingIdDecline(ctx, id, hostingId).XTenantUserId(xTenantUserId).Execute()
 
 Decline a contest hosting invitation
 
@@ -584,7 +584,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByIdHostingsByHostingIdDecline``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdHostingsByHostingIdDecline`: HandlerStatusResponse
+	// response from `CreateContestsByIdHostingsByHostingIdDecline`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByIdHostingsByHostingIdDecline`: %v\n", resp)
 }
 ```
@@ -611,7 +611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -629,7 +629,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdParticipations
 
-> HandlerStatusResponse CreateContestsByIdParticipations(ctx, id).HandlerCreatePlatformParticipationRequest(handlerCreatePlatformParticipationRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateAnalyticsImpression200Response CreateContestsByIdParticipations(ctx, id).HandlerCreatePlatformParticipationRequest(handlerCreatePlatformParticipationRequest).XTenantUserId(xTenantUserId).Execute()
 
 Submit a participation on behalf of a tenant-side fan
 
@@ -659,7 +659,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContestsByIdParticipations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdParticipations`: HandlerStatusResponse
+	// response from `CreateContestsByIdParticipations`: CreateAnalyticsImpression200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateContestsByIdParticipations`: %v\n", resp)
 }
 ```
@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HandlerStatusResponse**](HandlerStatusResponse.md)
+[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
 
 ### Authorization
 
@@ -703,7 +703,7 @@ Name | Type | Description  | Notes
 
 ## CreateTournamentsByIdContest
 
-> DomainContest CreateTournamentsByIdContest(ctx, id).RequestCreateContestRequest(requestCreateContestRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateContests201Response CreateTournamentsByIdContest(ctx, id).RequestCreateContestRequest(requestCreateContestRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a contest for the next pending round in a tournament
 
@@ -731,7 +731,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateTournamentsByIdContest``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTournamentsByIdContest`: DomainContest
+	// response from `CreateTournamentsByIdContest`: CreateContests201Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.CreateTournamentsByIdContest`: %v\n", resp)
 }
 ```
@@ -757,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContest**](DomainContest.md)
+[**CreateContests201Response**](CreateContests201Response.md)
 
 ### Authorization
 
@@ -775,7 +775,7 @@ Name | Type | Description  | Notes
 
 ## DeleteContestsById
 
-> string DeleteContestsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateChannelsByIdReport200Response DeleteContestsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Contest
 
@@ -804,7 +804,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.DeleteContestsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteContestsById`: string
+	// response from `DeleteContestsById`: CreateChannelsByIdReport200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.DeleteContestsById`: %v\n", resp)
 }
 ```
@@ -829,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**CreateChannelsByIdReport200Response**](CreateChannelsByIdReport200Response.md)
 
 ### Authorization
 
@@ -847,7 +847,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdContests
 
-> []DomainContest GetChannelsByIdContests(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetChannelsByIdContests(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get channel contests (cursor-paginated)
 
@@ -878,7 +878,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetChannelsByIdContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsByIdContests`: []DomainContest
+	// response from `GetChannelsByIdContests`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetChannelsByIdContests`: %v\n", resp)
 }
 ```
@@ -905,7 +905,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -923,7 +923,7 @@ Name | Type | Description  | Notes
 
 ## GetContests
 
-> []DomainContest GetContests(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetContests(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List the caller's contests (cursor-paginated)
 
@@ -951,7 +951,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContests`: []DomainContest
+	// response from `GetContests`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContests`: %v\n", resp)
 }
 ```
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -991,7 +991,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByContestIdBuddyBoardsByBoardId
 
-> DomainBuddyBoardView GetContestsByContestIdBuddyBoardsByBoardId(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdBuddyBoardsByBoardId200Response GetContestsByContestIdBuddyBoardsByBoardId(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
 
 Get buddy board view (metadata + scores filtered to board members)
 
@@ -1021,7 +1021,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsByContestIdBuddyBoardsByBoardId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByContestIdBuddyBoardsByBoardId`: DomainBuddyBoardView
+	// response from `GetContestsByContestIdBuddyBoardsByBoardId`: GetContestsByContestIdBuddyBoardsByBoardId200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsByContestIdBuddyBoardsByBoardId`: %v\n", resp)
 }
 ```
@@ -1048,7 +1048,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBuddyBoardView**](DomainBuddyBoardView.md)
+[**GetContestsByContestIdBuddyBoardsByBoardId200Response**](GetContestsByContestIdBuddyBoardsByBoardId200Response.md)
 
 ### Authorization
 
@@ -1066,7 +1066,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByContestIdBuddyBoardsByBoardIdMembers
 
-> DomainBuddyBoardMembersResponse GetContestsByContestIdBuddyBoardsByBoardIdMembers(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response GetContestsByContestIdBuddyBoardsByBoardIdMembers(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
 
 List buddy board members (public or authed)
 
@@ -1096,7 +1096,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsByContestIdBuddyBoardsByBoardIdMembers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByContestIdBuddyBoardsByBoardIdMembers`: DomainBuddyBoardMembersResponse
+	// response from `GetContestsByContestIdBuddyBoardsByBoardIdMembers`: GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsByContestIdBuddyBoardsByBoardIdMembers`: %v\n", resp)
 }
 ```
@@ -1123,7 +1123,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBuddyBoardMembersResponse**](DomainBuddyBoardMembersResponse.md)
+[**GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response**](GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response.md)
 
 ### Authorization
 
@@ -1141,7 +1141,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByContestIdParticipantsByMemberIdResult
 
-> DomainMemberResult GetContestsByContestIdParticipantsByMemberIdResult(ctx, contestId, memberId).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdParticipantsByMemberIdResult200Response GetContestsByContestIdParticipantsByMemberIdResult(ctx, contestId, memberId).XTenantUserId(xTenantUserId).Execute()
 
 Get participant result for a contest
 
@@ -1171,7 +1171,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsByContestIdParticipantsByMemberIdResult``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByContestIdParticipantsByMemberIdResult`: DomainMemberResult
+	// response from `GetContestsByContestIdParticipantsByMemberIdResult`: GetContestsByContestIdParticipantsByMemberIdResult200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsByContestIdParticipantsByMemberIdResult`: %v\n", resp)
 }
 ```
@@ -1198,7 +1198,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainMemberResult**](DomainMemberResult.md)
+[**GetContestsByContestIdParticipantsByMemberIdResult200Response**](GetContestsByContestIdParticipantsByMemberIdResult200Response.md)
 
 ### Authorization
 
@@ -1216,7 +1216,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsById
 
-> DomainContest GetContestsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateContests201Response GetContestsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a contest by ID
 
@@ -1245,7 +1245,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsById`: DomainContest
+	// response from `GetContestsById`: CreateContests201Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsById`: %v\n", resp)
 }
 ```
@@ -1270,7 +1270,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContest**](DomainContest.md)
+[**CreateContests201Response**](CreateContests201Response.md)
 
 ### Authorization
 
@@ -1288,7 +1288,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdHostings
 
-> []DomainContestHosting GetContestsByIdHostings(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdHostings200Response GetContestsByIdHostings(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List hostings for a contest the calling tenant owns
 
@@ -1306,16 +1306,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContestsAPI.GetContestsByIdHostings(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.ContestsAPI.GetContestsByIdHostings(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsByIdHostings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdHostings`: []DomainContestHosting
+	// response from `GetContestsByIdHostings`: GetContestsByIdHostings200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsByIdHostings`: %v\n", resp)
 }
 ```
@@ -1336,11 +1338,13 @@ Other parameters are passed through a pointer to a apiGetContestsByIdHostingsReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainContestHosting**](DomainContestHosting.md)
+[**GetContestsByIdHostings200Response**](GetContestsByIdHostings200Response.md)
 
 ### Authorization
 
@@ -1358,7 +1362,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdParticipation
 
-> []DomainParticipation GetContestsByIdParticipation(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdParticipation200Response GetContestsByIdParticipation(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get contest participation result (cursor-paginated)
 
@@ -1387,7 +1391,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsByIdParticipation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdParticipation`: []DomainParticipation
+	// response from `GetContestsByIdParticipation`: GetContestsByIdParticipation200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsByIdParticipation`: %v\n", resp)
 }
 ```
@@ -1414,7 +1418,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainParticipation**](DomainParticipation.md)
+[**GetContestsByIdParticipation200Response**](GetContestsByIdParticipation200Response.md)
 
 ### Authorization
 
@@ -1432,7 +1436,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdQuestionStats
 
-> []DomainQuestionStats GetContestsByIdQuestionStats(ctx, id).Sort(sort).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByIdQuestionStats200Response GetContestsByIdQuestionStats(ctx, id).Sort(sort).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get question statistics for a contest (Contest Owner or Admin Only)
 
@@ -1453,16 +1457,18 @@ import (
 func main() {
 	id := "id_example" // string | Contest ID
 	sort := "sort_example" // string | Sort order: failures, successes, failure_rate, success_rate (default: question number) (optional)
+	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page aggregate) (optional)
+	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page aggregate) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContestsAPI.GetContestsByIdQuestionStats(context.Background(), id).Sort(sort).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.ContestsAPI.GetContestsByIdQuestionStats(context.Background(), id).Sort(sort).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsByIdQuestionStats``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdQuestionStats`: []DomainQuestionStats
+	// response from `GetContestsByIdQuestionStats`: GetContestsByIdQuestionStats200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsByIdQuestionStats`: %v\n", resp)
 }
 ```
@@ -1484,11 +1490,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **sort** | **string** | Sort order: failures, successes, failure_rate, success_rate (default: question number) | 
+ **cursor** | **string** | Accepted for shape uniformity; ignored (single-page aggregate) | 
+ **limit** | **int32** | Accepted for shape uniformity; ignored (single-page aggregate) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainQuestionStats**](DomainQuestionStats.md)
+[**GetContestsByIdQuestionStats200Response**](GetContestsByIdQuestionStats200Response.md)
 
 ### Authorization
 
@@ -1506,7 +1514,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsSearch
 
-> []DomainContest GetContestsSearch(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetContestsSearch(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search contests not owned by the caller (cursor-paginated)
 
@@ -1534,7 +1542,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetContestsSearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsSearch`: []DomainContest
+	// response from `GetContestsSearch`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetContestsSearch`: %v\n", resp)
 }
 ```
@@ -1556,7 +1564,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -1574,7 +1582,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidBuddyBoardInvites
 
-> DomainBuddyBoardInvitesResponse GetIdentitiesByPiidBuddyBoardInvites(ctx, piid).Status(status).XTenantUserId(xTenantUserId).Execute()
+> GetIdentitiesByPiidBuddyBoardInvites200Response GetIdentitiesByPiidBuddyBoardInvites(ctx, piid).Status(status).XTenantUserId(xTenantUserId).Execute()
 
 List buddy board invites for a platform identity
 
@@ -1604,7 +1612,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetIdentitiesByPiidBuddyBoardInvites``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidBuddyBoardInvites`: DomainBuddyBoardInvitesResponse
+	// response from `GetIdentitiesByPiidBuddyBoardInvites`: GetIdentitiesByPiidBuddyBoardInvites200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetIdentitiesByPiidBuddyBoardInvites`: %v\n", resp)
 }
 ```
@@ -1630,7 +1638,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBuddyBoardInvitesResponse**](DomainBuddyBoardInvitesResponse.md)
+[**GetIdentitiesByPiidBuddyBoardInvites200Response**](GetIdentitiesByPiidBuddyBoardInvites200Response.md)
 
 ### Authorization
 
@@ -1648,7 +1656,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidContests
 
-> []DomainContest GetIdentitiesByPiidContests(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetIdentitiesByPiidContests(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List contests for a platform identity (cursor-paginated)
 
@@ -1679,7 +1687,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetIdentitiesByPiidContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidContests`: []DomainContest
+	// response from `GetIdentitiesByPiidContests`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetIdentitiesByPiidContests`: %v\n", resp)
 }
 ```
@@ -1706,7 +1714,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -1724,7 +1732,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsByIdContests
 
-> []DomainContest GetPublicChannelsByIdContests(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetPublicChannelsByIdContests(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get channel contests (cursor-paginated)
 
@@ -1755,7 +1763,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicChannelsByIdContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicChannelsByIdContests`: []DomainContest
+	// response from `GetPublicChannelsByIdContests`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicChannelsByIdContests`: %v\n", resp)
 }
 ```
@@ -1782,7 +1790,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -1800,7 +1808,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContests
 
-> []DomainContest GetPublicContests(ctx).Cursor(cursor).Limit(limit).Ended(ended).Region(region).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetPublicContests(ctx).Cursor(cursor).Limit(limit).Ended(ended).Region(region).XTenantUserId(xTenantUserId).Execute()
 
 List public contests (region-scoped, cursor-paginated)
 
@@ -1830,7 +1838,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContests`: []DomainContest
+	// response from `GetPublicContests`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContests`: %v\n", resp)
 }
 ```
@@ -1854,7 +1862,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -1872,7 +1880,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByContestIdBuddyBoardsByBoardId
 
-> DomainBuddyBoardView GetPublicContestsByContestIdBuddyBoardsByBoardId(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdBuddyBoardsByBoardId200Response GetPublicContestsByContestIdBuddyBoardsByBoardId(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
 
 Get buddy board view (metadata + scores filtered to board members)
 
@@ -1902,7 +1910,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsByContestIdBuddyBoardsByBoardId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContestsByContestIdBuddyBoardsByBoardId`: DomainBuddyBoardView
+	// response from `GetPublicContestsByContestIdBuddyBoardsByBoardId`: GetContestsByContestIdBuddyBoardsByBoardId200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsByContestIdBuddyBoardsByBoardId`: %v\n", resp)
 }
 ```
@@ -1929,7 +1937,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBuddyBoardView**](DomainBuddyBoardView.md)
+[**GetContestsByContestIdBuddyBoardsByBoardId200Response**](GetContestsByContestIdBuddyBoardsByBoardId200Response.md)
 
 ### Authorization
 
@@ -1947,7 +1955,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers
 
-> DomainBuddyBoardMembersResponse GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers(ctx, contestId, boardId).XTenantUserId(xTenantUserId).Execute()
 
 List buddy board members (public or authed)
 
@@ -1977,7 +1985,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers`: DomainBuddyBoardMembersResponse
+	// response from `GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers`: GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers`: %v\n", resp)
 }
 ```
@@ -2004,7 +2012,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainBuddyBoardMembersResponse**](DomainBuddyBoardMembersResponse.md)
+[**GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response**](GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response.md)
 
 ### Authorization
 
@@ -2022,7 +2030,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsById
 
-> DomainContest GetPublicContestsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateContests201Response GetPublicContestsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a contest by ID
 
@@ -2051,7 +2059,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContestsById`: DomainContest
+	// response from `GetPublicContestsById`: CreateContests201Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsById`: %v\n", resp)
 }
 ```
@@ -2076,7 +2084,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContest**](DomainContest.md)
+[**CreateContests201Response**](CreateContests201Response.md)
 
 ### Authorization
 
@@ -2094,7 +2102,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByIdGroups
 
-> DomainContestGroups GetPublicContestsByIdGroups(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetPublicContestsByIdGroups200Response GetPublicContestsByIdGroups(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Contest Groups
 
@@ -2123,7 +2131,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsByIdGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContestsByIdGroups`: DomainContestGroups
+	// response from `GetPublicContestsByIdGroups`: GetPublicContestsByIdGroups200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsByIdGroups`: %v\n", resp)
 }
 ```
@@ -2148,7 +2156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContestGroups**](DomainContestGroups.md)
+[**GetPublicContestsByIdGroups200Response**](GetPublicContestsByIdGroups200Response.md)
 
 ### Authorization
 
@@ -2166,7 +2174,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsByIdSubmissionFeed
 
-> []DomainSubmissionFeedItem GetPublicContestsByIdSubmissionFeed(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> GetPublicContestsByIdSubmissionFeed200Response GetPublicContestsByIdSubmissionFeed(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get the real-time feed of contest submissions (cursor-paginated)
 
@@ -2195,7 +2203,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsByIdSubmissionFeed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContestsByIdSubmissionFeed`: []DomainSubmissionFeedItem
+	// response from `GetPublicContestsByIdSubmissionFeed`: GetPublicContestsByIdSubmissionFeed200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsByIdSubmissionFeed`: %v\n", resp)
 }
 ```
@@ -2222,7 +2230,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainSubmissionFeedItem**](DomainSubmissionFeedItem.md)
+[**GetPublicContestsByIdSubmissionFeed200Response**](GetPublicContestsByIdSubmissionFeed200Response.md)
 
 ### Authorization
 
@@ -2240,7 +2248,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicContestsSearchKeywordByKeyword
 
-> []DomainContest GetPublicContestsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Ended(ended).XTenantUserId(xTenantUserId).Execute()
+> GetChannelsByIdContests200Response GetPublicContestsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).Ended(ended).XTenantUserId(xTenantUserId).Execute()
 
 Search public contests by keyword (cursor-paginated)
 
@@ -2270,7 +2278,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetPublicContestsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicContestsSearchKeywordByKeyword`: []DomainContest
+	// response from `GetPublicContestsSearchKeywordByKeyword`: GetChannelsByIdContests200Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetPublicContestsSearchKeywordByKeyword`: %v\n", resp)
 }
 ```
@@ -2298,7 +2306,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DomainContest**](DomainContest.md)
+[**GetChannelsByIdContests200Response**](GetChannelsByIdContests200Response.md)
 
 ### Authorization
 
@@ -2316,7 +2324,7 @@ Name | Type | Description  | Notes
 
 ## PatchContestsById
 
-> DomainContest PatchContestsById(ctx, id).RequestUpdateContestRequest(requestUpdateContestRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateContests201Response PatchContestsById(ctx, id).RequestUpdateContestRequest(requestUpdateContestRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update a contest
 
@@ -2344,7 +2352,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.PatchContestsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchContestsById`: DomainContest
+	// response from `PatchContestsById`: CreateContests201Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.PatchContestsById`: %v\n", resp)
 }
 ```
@@ -2370,7 +2378,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContest**](DomainContest.md)
+[**CreateContests201Response**](CreateContests201Response.md)
 
 ### Authorization
 
@@ -2388,7 +2396,7 @@ Name | Type | Description  | Notes
 
 ## UpdateContestsByIdHeaderImage
 
-> DomainContest UpdateContestsByIdHeaderImage(ctx, id).RequestUpdateContestHeaderImage(requestUpdateContestHeaderImage).XTenantUserId(xTenantUserId).Execute()
+> CreateContests201Response UpdateContestsByIdHeaderImage(ctx, id).RequestUpdateContestHeaderImage(requestUpdateContestHeaderImage).XTenantUserId(xTenantUserId).Execute()
 
 Update a contest's header image
 
@@ -2416,7 +2424,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.UpdateContestsByIdHeaderImage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateContestsByIdHeaderImage`: DomainContest
+	// response from `UpdateContestsByIdHeaderImage`: CreateContests201Response
 	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.UpdateContestsByIdHeaderImage`: %v\n", resp)
 }
 ```
@@ -2442,7 +2450,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainContest**](DomainContest.md)
+[**CreateContests201Response**](CreateContests201Response.md)
 
 ### Authorization
 

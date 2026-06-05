@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateContestsByContestIdSponsorships
 
-> DomainSponsorship CreateContestsByContestIdSponsorships(ctx, contestId).RequestCreateSponsorshipOfferRequest(requestCreateSponsorshipOfferRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateContestsByContestIdSponsorships201Response CreateContestsByContestIdSponsorships(ctx, contestId).RequestCreateSponsorshipOfferRequest(requestCreateSponsorshipOfferRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Offer (v2)
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipsAPI.CreateContestsByContestIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByContestIdSponsorships`: DomainSponsorship
+	// response from `CreateContestsByContestIdSponsorships`: CreateContestsByContestIdSponsorships201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipsAPI.CreateContestsByContestIdSponsorships`: %v\n", resp)
 }
 ```
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorship**](DomainSponsorship.md)
+[**CreateContestsByContestIdSponsorships201Response**](CreateContestsByContestIdSponsorships201Response.md)
 
 ### Authorization
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## CreateSponsorshipsByIdAccept
 
-> DomainSponsorship CreateSponsorshipsByIdAccept(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateContestsByContestIdSponsorships201Response CreateSponsorshipsByIdAccept(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Accept Sponsorship (v2)
 
@@ -117,7 +117,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipsAPI.CreateSponsorshipsByIdAccept``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipsByIdAccept`: DomainSponsorship
+	// response from `CreateSponsorshipsByIdAccept`: CreateContestsByContestIdSponsorships201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipsAPI.CreateSponsorshipsByIdAccept`: %v\n", resp)
 }
 ```
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorship**](DomainSponsorship.md)
+[**CreateContestsByContestIdSponsorships201Response**](CreateContestsByContestIdSponsorships201Response.md)
 
 ### Authorization
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## CreateSponsorshipsByIdReject
 
-> DomainSponsorship CreateSponsorshipsByIdReject(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateContestsByContestIdSponsorships201Response CreateSponsorshipsByIdReject(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Reject Sponsorship (v2)
 
@@ -189,7 +189,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipsAPI.CreateSponsorshipsByIdReject``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipsByIdReject`: DomainSponsorship
+	// response from `CreateSponsorshipsByIdReject`: CreateContestsByContestIdSponsorships201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipsAPI.CreateSponsorshipsByIdReject`: %v\n", resp)
 }
 ```
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorship**](DomainSponsorship.md)
+[**CreateContestsByContestIdSponsorships201Response**](CreateContestsByContestIdSponsorships201Response.md)
 
 ### Authorization
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByContestIdSponsorships
 
-> []DomainSponsorship GetContestsByContestIdSponsorships(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdSponsorships200Response GetContestsByContestIdSponsorships(ctx, contestId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Contest Sponsorships (v2)
 
@@ -252,16 +252,18 @@ import (
 
 func main() {
 	contestId := "contestId_example" // string | Contest ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipsAPI.GetContestsByContestIdSponsorships(context.Background(), contestId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipsAPI.GetContestsByContestIdSponsorships(context.Background(), contestId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipsAPI.GetContestsByContestIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByContestIdSponsorships`: []DomainSponsorship
+	// response from `GetContestsByContestIdSponsorships`: GetContestsByContestIdSponsorships200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipsAPI.GetContestsByContestIdSponsorships`: %v\n", resp)
 }
 ```
@@ -282,11 +284,13 @@ Other parameters are passed through a pointer to a apiGetContestsByContestIdSpon
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorship**](DomainSponsorship.md)
+[**GetContestsByContestIdSponsorships200Response**](GetContestsByContestIdSponsorships200Response.md)
 
 ### Authorization
 
@@ -304,7 +308,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipsByIdAgreement
 
-> DomainSponsorshipAgreement GetSponsorshipsByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetSponsorshipsByIdAgreement200Response GetSponsorshipsByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Agreement (v2)
 
@@ -333,7 +337,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipsAPI.GetSponsorshipsByIdAgreement``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipsByIdAgreement`: DomainSponsorshipAgreement
+	// response from `GetSponsorshipsByIdAgreement`: GetSponsorshipsByIdAgreement200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipsAPI.GetSponsorshipsByIdAgreement`: %v\n", resp)
 }
 ```
@@ -358,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsorshipAgreement**](DomainSponsorshipAgreement.md)
+[**GetSponsorshipsByIdAgreement200Response**](GetSponsorshipsByIdAgreement200Response.md)
 
 ### Authorization
 

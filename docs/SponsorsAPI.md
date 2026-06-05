@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateSponsors
 
-> DomainSponsor CreateSponsors(ctx).RequestCreateSponsorRequest(requestCreateSponsorRequest).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsors201Response CreateSponsors(ctx).RequestCreateSponsorRequest(requestCreateSponsorRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsor (v2)
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.CreateSponsors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsors`: DomainSponsor
+	// response from `CreateSponsors`: CreateSponsors201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.CreateSponsors`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsor**](DomainSponsor.md)
+[**CreateSponsors201Response**](CreateSponsors201Response.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsors
 
-> []DomainSponsor GetSponsors(ctx).XTenantUserId(xTenantUserId).Execute()
+> GetSponsors200Response GetSponsors(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsors (v2)
 
@@ -100,16 +100,18 @@ import (
 )
 
 func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorsAPI.GetSponsors(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorsAPI.GetSponsors(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsors`: []DomainSponsor
+	// response from `GetSponsors`: GetSponsors200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsors`: %v\n", resp)
 }
 ```
@@ -125,11 +127,13 @@ Other parameters are passed through a pointer to a apiGetSponsorsRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsor**](DomainSponsor.md)
+[**GetSponsors200Response**](GetSponsors200Response.md)
 
 ### Authorization
 
@@ -147,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorsById
 
-> DomainSponsor GetSponsorsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> CreateSponsors201Response GetSponsorsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsor by ID (v2)
 
@@ -176,7 +180,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsorsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorsById`: DomainSponsor
+	// response from `GetSponsorsById`: CreateSponsors201Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsorsById`: %v\n", resp)
 }
 ```
@@ -201,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DomainSponsor**](DomainSponsor.md)
+[**CreateSponsors201Response**](CreateSponsors201Response.md)
 
 ### Authorization
 
@@ -219,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorsByIdSponsorships
 
-> []DomainSponsorship GetSponsorsByIdSponsorships(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> GetContestsByContestIdSponsorships200Response GetSponsorsByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsor Sponsorships (v2)
 
@@ -239,16 +243,18 @@ import (
 
 func main() {
 	id := "id_example" // string | Sponsor ID
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
 	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorsAPI.GetSponsorsByIdSponsorships(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorsAPI.GetSponsorsByIdSponsorships(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsorsByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorsByIdSponsorships`: []DomainSponsorship
+	// response from `GetSponsorsByIdSponsorships`: GetContestsByContestIdSponsorships200Response
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsorsByIdSponsorships`: %v\n", resp)
 }
 ```
@@ -269,11 +275,13 @@ Other parameters are passed through a pointer to a apiGetSponsorsByIdSponsorship
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
  **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**[]DomainSponsorship**](DomainSponsorship.md)
+[**GetContestsByContestIdSponsorships200Response**](GetContestsByContestIdSponsorships200Response.md)
 
 ### Authorization
 
