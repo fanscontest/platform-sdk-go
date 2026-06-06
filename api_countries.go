@@ -49,7 +49,7 @@ func (r ApiGetPublicCountriesRequest) XTenantUserId(xTenantUserId string) ApiGet
 	return r
 }
 
-func (r ApiGetPublicCountriesRequest) Execute() (*GetPublicCountries200Response, *http.Response, error) {
+func (r ApiGetPublicCountriesRequest) Execute() (*DomainCountryListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicCountriesExecute(r)
 }
 
@@ -72,13 +72,13 @@ func (a *CountriesAPIService) GetPublicCountries(ctx context.Context) ApiGetPubl
 }
 
 // Execute executes the request
-//  @return GetPublicCountries200Response
-func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesRequest) (*GetPublicCountries200Response, *http.Response, error) {
+//  @return DomainCountryListResponse
+func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesRequest) (*DomainCountryListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicCountries200Response
+		localVarReturnValue  *DomainCountryListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountriesAPIService.GetPublicCountries")
@@ -177,7 +177,7 @@ func (r ApiGetPublicLocationRequest) XTenantUserId(xTenantUserId string) ApiGetP
 	return r
 }
 
-func (r ApiGetPublicLocationRequest) Execute() (*GetPublicLocation200Response, *http.Response, error) {
+func (r ApiGetPublicLocationRequest) Execute() (*DomainCountryResponse, *http.Response, error) {
 	return r.ApiService.GetPublicLocationExecute(r)
 }
 
@@ -195,13 +195,13 @@ func (a *CountriesAPIService) GetPublicLocation(ctx context.Context) ApiGetPubli
 }
 
 // Execute executes the request
-//  @return GetPublicLocation200Response
-func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationRequest) (*GetPublicLocation200Response, *http.Response, error) {
+//  @return DomainCountryResponse
+func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationRequest) (*DomainCountryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicLocation200Response
+		localVarReturnValue  *DomainCountryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CountriesAPIService.GetPublicLocation")

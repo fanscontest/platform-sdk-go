@@ -44,7 +44,7 @@ func (r ApiGetPublicOgChannelByChannelIdRequest) XTenantUserId(xTenantUserId str
 	return r
 }
 
-func (r ApiGetPublicOgChannelByChannelIdRequest) Execute() (*GetPublicOgChannelByChannelId200Response, *http.Response, error) {
+func (r ApiGetPublicOgChannelByChannelIdRequest) Execute() (*HandlerOGChannelDataResponse, *http.Response, error) {
 	return r.ApiService.GetPublicOgChannelByChannelIdExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *OGImagesAPIService) GetPublicOgChannelByChannelId(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetPublicOgChannelByChannelId200Response
-func (a *OGImagesAPIService) GetPublicOgChannelByChannelIdExecute(r ApiGetPublicOgChannelByChannelIdRequest) (*GetPublicOgChannelByChannelId200Response, *http.Response, error) {
+//  @return HandlerOGChannelDataResponse
+func (a *OGImagesAPIService) GetPublicOgChannelByChannelIdExecute(r ApiGetPublicOgChannelByChannelIdRequest) (*HandlerOGChannelDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicOgChannelByChannelId200Response
+		localVarReturnValue  *HandlerOGChannelDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OGImagesAPIService.GetPublicOgChannelByChannelId")
@@ -181,7 +181,7 @@ func (r ApiGetPublicOgContestByContestIdRequest) XTenantUserId(xTenantUserId str
 	return r
 }
 
-func (r ApiGetPublicOgContestByContestIdRequest) Execute() (*GetPublicOgContestByContestId200Response, *http.Response, error) {
+func (r ApiGetPublicOgContestByContestIdRequest) Execute() (*HandlerOGContestDataResponse, *http.Response, error) {
 	return r.ApiService.GetPublicOgContestByContestIdExecute(r)
 }
 
@@ -203,13 +203,13 @@ func (a *OGImagesAPIService) GetPublicOgContestByContestId(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetPublicOgContestByContestId200Response
-func (a *OGImagesAPIService) GetPublicOgContestByContestIdExecute(r ApiGetPublicOgContestByContestIdRequest) (*GetPublicOgContestByContestId200Response, *http.Response, error) {
+//  @return HandlerOGContestDataResponse
+func (a *OGImagesAPIService) GetPublicOgContestByContestIdExecute(r ApiGetPublicOgContestByContestIdRequest) (*HandlerOGContestDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicOgContestByContestId200Response
+		localVarReturnValue  *HandlerOGContestDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OGImagesAPIService.GetPublicOgContestByContestId")
@@ -315,7 +315,7 @@ func (r ApiGetPublicOgScoreboardByContestIdRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetPublicOgScoreboardByContestIdRequest) Execute() (*GetPublicOgScoreboardByContestId200Response, *http.Response, error) {
+func (r ApiGetPublicOgScoreboardByContestIdRequest) Execute() (*HandlerOGScoreboardDataResponse, *http.Response, error) {
 	return r.ApiService.GetPublicOgScoreboardByContestIdExecute(r)
 }
 
@@ -337,13 +337,13 @@ func (a *OGImagesAPIService) GetPublicOgScoreboardByContestId(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return GetPublicOgScoreboardByContestId200Response
-func (a *OGImagesAPIService) GetPublicOgScoreboardByContestIdExecute(r ApiGetPublicOgScoreboardByContestIdRequest) (*GetPublicOgScoreboardByContestId200Response, *http.Response, error) {
+//  @return HandlerOGScoreboardDataResponse
+func (a *OGImagesAPIService) GetPublicOgScoreboardByContestIdExecute(r ApiGetPublicOgScoreboardByContestIdRequest) (*HandlerOGScoreboardDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicOgScoreboardByContestId200Response
+		localVarReturnValue  *HandlerOGScoreboardDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OGImagesAPIService.GetPublicOgScoreboardByContestId")
@@ -449,7 +449,7 @@ func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) Execute() (*GetPublicOgSubmissionsByParticipationId200Response, *http.Response, error) {
+func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) Execute() (*HandlerOGParticipationDataResponse, *http.Response, error) {
 	return r.ApiService.GetPublicOgSubmissionsByParticipationIdExecute(r)
 }
 
@@ -471,13 +471,13 @@ func (a *OGImagesAPIService) GetPublicOgSubmissionsByParticipationId(ctx context
 }
 
 // Execute executes the request
-//  @return GetPublicOgSubmissionsByParticipationId200Response
-func (a *OGImagesAPIService) GetPublicOgSubmissionsByParticipationIdExecute(r ApiGetPublicOgSubmissionsByParticipationIdRequest) (*GetPublicOgSubmissionsByParticipationId200Response, *http.Response, error) {
+//  @return HandlerOGParticipationDataResponse
+func (a *OGImagesAPIService) GetPublicOgSubmissionsByParticipationIdExecute(r ApiGetPublicOgSubmissionsByParticipationIdRequest) (*HandlerOGParticipationDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicOgSubmissionsByParticipationId200Response
+		localVarReturnValue  *HandlerOGParticipationDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OGImagesAPIService.GetPublicOgSubmissionsByParticipationId")

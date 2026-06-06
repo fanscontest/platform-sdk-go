@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateBlocks
 
-> CreateBlocks200Response CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainBlockResponse CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Block
 
@@ -41,7 +41,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.CreateBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateBlocks`: CreateBlocks200Response
+	// response from `CreateBlocks`: DomainBlockResponse
 	fmt.Fprintf(os.Stdout, "Response from `BlocksAPI.CreateBlocks`: %v\n", resp)
 }
 ```
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateBlocks200Response**](CreateBlocks200Response.md)
+[**DomainBlockResponse**](DomainBlockResponse.md)
 
 ### Authorization
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetBlocks
 
-> GetBlocks200Response GetBlocks(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainBlockListResponse GetBlocks(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Blocked Members (cursor-paginated)
 
@@ -182,7 +182,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.GetBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetBlocks`: GetBlocks200Response
+	// response from `GetBlocks`: DomainBlockListResponse
 	fmt.Fprintf(os.Stdout, "Response from `BlocksAPI.GetBlocks`: %v\n", resp)
 }
 ```
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetBlocks200Response**](GetBlocks200Response.md)
+[**DomainBlockListResponse**](DomainBlockListResponse.md)
 
 ### Authorization
 

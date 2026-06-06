@@ -43,7 +43,7 @@ func (r ApiCreateTenantsRequest) XTenantUserId(xTenantUserId string) ApiCreateTe
 	return r
 }
 
-func (r ApiCreateTenantsRequest) Execute() (*CreateTenants201Response, *http.Response, error) {
+func (r ApiCreateTenantsRequest) Execute() (*DomainTenantResponse, *http.Response, error) {
 	return r.ApiService.CreateTenantsExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *TenantsAPIService) CreateTenants(ctx context.Context) ApiCreateTenantsR
 }
 
 // Execute executes the request
-//  @return CreateTenants201Response
-func (a *TenantsAPIService) CreateTenantsExecute(r ApiCreateTenantsRequest) (*CreateTenants201Response, *http.Response, error) {
+//  @return DomainTenantResponse
+func (a *TenantsAPIService) CreateTenantsExecute(r ApiCreateTenantsRequest) (*DomainTenantResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateTenants201Response
+		localVarReturnValue  *DomainTenantResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TenantsAPIService.CreateTenants")
@@ -200,7 +200,7 @@ func (r ApiCreateTenantsByIdApiKeysRequest) XTenantUserId(xTenantUserId string) 
 	return r
 }
 
-func (r ApiCreateTenantsByIdApiKeysRequest) Execute() (*CreateTenantsByIdApiKeys201Response, *http.Response, error) {
+func (r ApiCreateTenantsByIdApiKeysRequest) Execute() (*DomainTenantApiKeyResponse, *http.Response, error) {
 	return r.ApiService.CreateTenantsByIdApiKeysExecute(r)
 }
 
@@ -225,13 +225,13 @@ func (a *TenantsAPIService) CreateTenantsByIdApiKeys(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return CreateTenantsByIdApiKeys201Response
-func (a *TenantsAPIService) CreateTenantsByIdApiKeysExecute(r ApiCreateTenantsByIdApiKeysRequest) (*CreateTenantsByIdApiKeys201Response, *http.Response, error) {
+//  @return DomainTenantApiKeyResponse
+func (a *TenantsAPIService) CreateTenantsByIdApiKeysExecute(r ApiCreateTenantsByIdApiKeysRequest) (*DomainTenantApiKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateTenantsByIdApiKeys201Response
+		localVarReturnValue  *DomainTenantApiKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TenantsAPIService.CreateTenantsByIdApiKeys")
@@ -393,7 +393,7 @@ func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) XTenantUserId(xTenantUs
 	return r
 }
 
-func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) Execute() (*CreateTenantsByIdWebhookSubscriptions201Response, *http.Response, error) {
+func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) Execute() (*DomainWebhookSubscriptionCreatedResponse, *http.Response, error) {
 	return r.ApiService.CreateTenantsByIdWebhookSubscriptionsExecute(r)
 }
 
@@ -417,13 +417,13 @@ func (a *TenantsAPIService) CreateTenantsByIdWebhookSubscriptions(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CreateTenantsByIdWebhookSubscriptions201Response
-func (a *TenantsAPIService) CreateTenantsByIdWebhookSubscriptionsExecute(r ApiCreateTenantsByIdWebhookSubscriptionsRequest) (*CreateTenantsByIdWebhookSubscriptions201Response, *http.Response, error) {
+//  @return DomainWebhookSubscriptionCreatedResponse
+func (a *TenantsAPIService) CreateTenantsByIdWebhookSubscriptionsExecute(r ApiCreateTenantsByIdWebhookSubscriptionsRequest) (*DomainWebhookSubscriptionCreatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateTenantsByIdWebhookSubscriptions201Response
+		localVarReturnValue  *DomainWebhookSubscriptionCreatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TenantsAPIService.CreateTenantsByIdWebhookSubscriptions")
@@ -742,7 +742,7 @@ func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) XTenantUserId(xTenantUserI
 	return r
 }
 
-func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) Execute() (*GetTenantsByIdWebhookSubscriptions200Response, *http.Response, error) {
+func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) Execute() (*DomainWebhookSubscriptionListResponse, *http.Response, error) {
 	return r.ApiService.GetTenantsByIdWebhookSubscriptionsExecute(r)
 }
 
@@ -765,13 +765,13 @@ func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptions(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return GetTenantsByIdWebhookSubscriptions200Response
-func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsExecute(r ApiGetTenantsByIdWebhookSubscriptionsRequest) (*GetTenantsByIdWebhookSubscriptions200Response, *http.Response, error) {
+//  @return DomainWebhookSubscriptionListResponse
+func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsExecute(r ApiGetTenantsByIdWebhookSubscriptionsRequest) (*DomainWebhookSubscriptionListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetTenantsByIdWebhookSubscriptions200Response
+		localVarReturnValue  *DomainWebhookSubscriptionListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TenantsAPIService.GetTenantsByIdWebhookSubscriptions")

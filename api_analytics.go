@@ -42,7 +42,7 @@ func (r ApiCreateAnalyticsImpressionRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiCreateAnalyticsImpressionRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateAnalyticsImpressionRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateAnalyticsImpressionExecute(r)
 }
 
@@ -63,13 +63,13 @@ func (a *AnalyticsAPIService) CreateAnalyticsImpression(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *AnalyticsAPIService) CreateAnalyticsImpressionExecute(r ApiCreateAnalyticsImpressionRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *AnalyticsAPIService) CreateAnalyticsImpressionExecute(r ApiCreateAnalyticsImpressionRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsAPIService.CreateAnalyticsImpression")
@@ -185,7 +185,7 @@ func (r ApiCreateTrackerClickRequest) XTenantUserId(xTenantUserId string) ApiCre
 	return r
 }
 
-func (r ApiCreateTrackerClickRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateTrackerClickRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateTrackerClickExecute(r)
 }
 
@@ -206,13 +206,13 @@ func (a *AnalyticsAPIService) CreateTrackerClick(ctx context.Context) ApiCreateT
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *AnalyticsAPIService) CreateTrackerClickExecute(r ApiCreateTrackerClickRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *AnalyticsAPIService) CreateTrackerClickExecute(r ApiCreateTrackerClickRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsAPIService.CreateTrackerClick")
@@ -321,7 +321,7 @@ func (r ApiGetAnalyticsOverviewRequest) XTenantUserId(xTenantUserId string) ApiG
 	return r
 }
 
-func (r ApiGetAnalyticsOverviewRequest) Execute() (*GetAnalyticsOverview200Response, *http.Response, error) {
+func (r ApiGetAnalyticsOverviewRequest) Execute() (*DomainStatsOverviewResponse, *http.Response, error) {
 	return r.ApiService.GetAnalyticsOverviewExecute(r)
 }
 
@@ -339,13 +339,13 @@ func (a *AnalyticsAPIService) GetAnalyticsOverview(ctx context.Context) ApiGetAn
 }
 
 // Execute executes the request
-//  @return GetAnalyticsOverview200Response
-func (a *AnalyticsAPIService) GetAnalyticsOverviewExecute(r ApiGetAnalyticsOverviewRequest) (*GetAnalyticsOverview200Response, *http.Response, error) {
+//  @return DomainStatsOverviewResponse
+func (a *AnalyticsAPIService) GetAnalyticsOverviewExecute(r ApiGetAnalyticsOverviewRequest) (*DomainStatsOverviewResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetAnalyticsOverview200Response
+		localVarReturnValue  *DomainStatsOverviewResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnalyticsAPIService.GetAnalyticsOverview")

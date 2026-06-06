@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateTenants
 
-> CreateTenants201Response CreateTenants(ctx).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainTenantResponse CreateTenants(ctx).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XTenantUserId(xTenantUserId).Execute()
 
 Apply to become a tenant (vetted-signup)
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenants``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTenants`: CreateTenants201Response
+	// response from `CreateTenants`: DomainTenantResponse
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.CreateTenants`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateTenants201Response**](CreateTenants201Response.md)
+[**DomainTenantResponse**](DomainTenantResponse.md)
 
 ### Authorization
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## CreateTenantsByIdApiKeys
 
-> CreateTenantsByIdApiKeys201Response CreateTenantsByIdApiKeys(ctx, id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainTenantApiKeyResponse CreateTenantsByIdApiKeys(ctx, id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XTenantUserId(xTenantUserId).Execute()
 
 Mint an API key for an approved tenant
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenantsByIdApiKeys``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTenantsByIdApiKeys`: CreateTenantsByIdApiKeys201Response
+	// response from `CreateTenantsByIdApiKeys`: DomainTenantApiKeyResponse
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.CreateTenantsByIdApiKeys`: %v\n", resp)
 }
 ```
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateTenantsByIdApiKeys201Response**](CreateTenantsByIdApiKeys201Response.md)
+[**DomainTenantApiKeyResponse**](DomainTenantApiKeyResponse.md)
 
 ### Authorization
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## CreateTenantsByIdWebhookSubscriptions
 
-> CreateTenantsByIdWebhookSubscriptions201Response CreateTenantsByIdWebhookSubscriptions(ctx, id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainWebhookSubscriptionCreatedResponse CreateTenantsByIdWebhookSubscriptions(ctx, id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
 
 Register a webhook subscription for a tenant
 
@@ -186,7 +186,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenantsByIdWebhookSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTenantsByIdWebhookSubscriptions`: CreateTenantsByIdWebhookSubscriptions201Response
+	// response from `CreateTenantsByIdWebhookSubscriptions`: DomainWebhookSubscriptionCreatedResponse
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.CreateTenantsByIdWebhookSubscriptions`: %v\n", resp)
 }
 ```
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateTenantsByIdWebhookSubscriptions201Response**](CreateTenantsByIdWebhookSubscriptions201Response.md)
+[**DomainWebhookSubscriptionCreatedResponse**](DomainWebhookSubscriptionCreatedResponse.md)
 
 ### Authorization
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## GetTenantsByIdWebhookSubscriptions
 
-> GetTenantsByIdWebhookSubscriptions200Response GetTenantsByIdWebhookSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainWebhookSubscriptionListResponse GetTenantsByIdWebhookSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List a tenant's webhook subscriptions
 
@@ -334,7 +334,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.GetTenantsByIdWebhookSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTenantsByIdWebhookSubscriptions`: GetTenantsByIdWebhookSubscriptions200Response
+	// response from `GetTenantsByIdWebhookSubscriptions`: DomainWebhookSubscriptionListResponse
 	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.GetTenantsByIdWebhookSubscriptions`: %v\n", resp)
 }
 ```
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetTenantsByIdWebhookSubscriptions200Response**](GetTenantsByIdWebhookSubscriptions200Response.md)
+[**DomainWebhookSubscriptionListResponse**](DomainWebhookSubscriptionListResponse.md)
 
 ### Authorization
 

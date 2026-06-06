@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## CreateContestsByIdEntries
 
-> CreateContestsByIdEntries200Response CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainEntryResponse CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Submit entry for creative contest
 
@@ -53,7 +53,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdEntries`: CreateContestsByIdEntries200Response
+	// response from `CreateContestsByIdEntries`: DomainEntryResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdEntries`: %v\n", resp)
 }
 ```
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateContestsByIdEntries200Response**](CreateContestsByIdEntries200Response.md)
+[**DomainEntryResponse**](DomainEntryResponse.md)
 
 ### Authorization
 
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdEntriesByEntryIdScore
 
-> UpdateContestsByIdEntriesByEntryIdScore200Response CreateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorScoreResponse CreateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Score an entry
 
@@ -128,7 +128,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdEntriesByEntryIdScore`: UpdateContestsByIdEntriesByEntryIdScore200Response
+	// response from `CreateContestsByIdEntriesByEntryIdScore`: DomainJurorScoreResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdEntriesByEntryIdScore`: %v\n", resp)
 }
 ```
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdateContestsByIdEntriesByEntryIdScore200Response**](UpdateContestsByIdEntriesByEntryIdScore200Response.md)
+[**DomainJurorScoreResponse**](DomainJurorScoreResponse.md)
 
 ### Authorization
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdForceProceed
 
-> CreateAnalyticsImpression200Response CreateContestsByIdForceProceed(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateContestsByIdForceProceed(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Force proceed from paused state
 
@@ -203,7 +203,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdForceProceed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdForceProceed`: CreateAnalyticsImpression200Response
+	// response from `CreateContestsByIdForceProceed`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdForceProceed`: %v\n", resp)
 }
 ```
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdJurorsInvite
 
-> CreateAnalyticsImpression200Response CreateContestsByIdJurorsInvite(ctx, id).RequestInviteJurorsRequest(requestInviteJurorsRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateContestsByIdJurorsInvite(ctx, id).RequestInviteJurorsRequest(requestInviteJurorsRequest).XTenantUserId(xTenantUserId).Execute()
 
 Invite jurors to judge a contest
 
@@ -276,7 +276,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdJurorsInvite``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateContestsByIdJurorsInvite`: CreateAnalyticsImpression200Response
+	// response from `CreateContestsByIdJurorsInvite`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdJurorsInvite`: %v\n", resp)
 }
 ```
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsInvitationsByInvitationIdAccept
 
-> CreateJurorsInvitationsByInvitationIdAccept200Response CreateJurorsInvitationsByInvitationIdAccept(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorAssignmentResponse CreateJurorsInvitationsByInvitationIdAccept(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
 
 Accept a juror invitation
 
@@ -349,7 +349,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateJurorsInvitationsByInvitationIdAccept`: CreateJurorsInvitationsByInvitationIdAccept200Response
+	// response from `CreateJurorsInvitationsByInvitationIdAccept`: DomainJurorAssignmentResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdAccept`: %v\n", resp)
 }
 ```
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateJurorsInvitationsByInvitationIdAccept200Response**](CreateJurorsInvitationsByInvitationIdAccept200Response.md)
+[**DomainJurorAssignmentResponse**](DomainJurorAssignmentResponse.md)
 
 ### Authorization
 
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsInvitationsByInvitationIdDecline
 
-> CreateAnalyticsImpression200Response CreateJurorsInvitationsByInvitationIdDecline(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateJurorsInvitationsByInvitationIdDecline(ctx, invitationId).XTenantUserId(xTenantUserId).Execute()
 
 Decline a juror invitation
 
@@ -421,7 +421,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateJurorsInvitationsByInvitationIdDecline`: CreateAnalyticsImpression200Response
+	// response from `CreateJurorsInvitationsByInvitationIdDecline`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateJurorsInvitationsByInvitationIdDecline`: %v\n", resp)
 }
 ```
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -464,7 +464,7 @@ Name | Type | Description  | Notes
 
 ## CreateJurorsOptIn
 
-> CreateJurorsOptIn200Response CreateJurorsOptIn(ctx).RequestOptInJurorRequest(requestOptInJurorRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorResponse CreateJurorsOptIn(ctx).RequestOptInJurorRequest(requestOptInJurorRequest).XTenantUserId(xTenantUserId).Execute()
 
 Opt into jury pool
 
@@ -493,7 +493,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateJurorsOptIn``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateJurorsOptIn`: CreateJurorsOptIn200Response
+	// response from `CreateJurorsOptIn`: DomainJurorResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateJurorsOptIn`: %v\n", resp)
 }
 ```
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateJurorsOptIn200Response**](CreateJurorsOptIn200Response.md)
+[**DomainJurorResponse**](DomainJurorResponse.md)
 
 ### Authorization
 
@@ -532,7 +532,7 @@ Name | Type | Description  | Notes
 
 ## DeleteContestsByIdEntries
 
-> CreateAnalyticsImpression200Response DeleteContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse DeleteContestsByIdEntries(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Withdraw entry from creative contest
 
@@ -561,7 +561,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.DeleteContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteContestsByIdEntries`: CreateAnalyticsImpression200Response
+	// response from `DeleteContestsByIdEntries`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.DeleteContestsByIdEntries`: %v\n", resp)
 }
 ```
@@ -586,7 +586,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -604,7 +604,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdEntries
 
-> GetContestsByIdEntries200Response GetContestsByIdEntries(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainEntryListResponse GetContestsByIdEntries(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get entries for a contest
 
@@ -635,7 +635,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdEntries`: GetContestsByIdEntries200Response
+	// response from `GetContestsByIdEntries`: DomainEntryListResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetContestsByIdEntries`: %v\n", resp)
 }
 ```
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByIdEntries200Response**](GetContestsByIdEntries200Response.md)
+[**DomainEntryListResponse**](DomainEntryListResponse.md)
 
 ### Authorization
 
@@ -680,7 +680,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdJurors
 
-> GetContestsByIdJurors200Response GetContestsByIdJurors(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorListResponse GetContestsByIdJurors(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get jurors for a contest
 
@@ -711,7 +711,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdJurors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdJurors`: GetContestsByIdJurors200Response
+	// response from `GetContestsByIdJurors`: DomainJurorListResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetContestsByIdJurors`: %v\n", resp)
 }
 ```
@@ -738,7 +738,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByIdJurors200Response**](GetContestsByIdJurors200Response.md)
+[**DomainJurorListResponse**](DomainJurorListResponse.md)
 
 ### Authorization
 
@@ -756,7 +756,7 @@ Name | Type | Description  | Notes
 
 ## GetContestsByIdJurorsInvitations
 
-> GetContestsByIdJurorsInvitations200Response GetContestsByIdJurorsInvitations(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorAssignmentListResponse GetContestsByIdJurorsInvitations(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get invitations for a contest
 
@@ -787,7 +787,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetContestsByIdJurorsInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContestsByIdJurorsInvitations`: GetContestsByIdJurorsInvitations200Response
+	// response from `GetContestsByIdJurorsInvitations`: DomainJurorAssignmentListResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetContestsByIdJurorsInvitations`: %v\n", resp)
 }
 ```
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByIdJurorsInvitations200Response**](GetContestsByIdJurorsInvitations200Response.md)
+[**DomainJurorAssignmentListResponse**](DomainJurorAssignmentListResponse.md)
 
 ### Authorization
 
@@ -832,7 +832,7 @@ Name | Type | Description  | Notes
 
 ## GetJurorsAssignments
 
-> GetContestsByIdJurorsInvitations200Response GetJurorsAssignments(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorAssignmentListResponse GetJurorsAssignments(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get juror assignments (cursor-paginated)
 
@@ -862,7 +862,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetJurorsAssignments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetJurorsAssignments`: GetContestsByIdJurorsInvitations200Response
+	// response from `GetJurorsAssignments`: DomainJurorAssignmentListResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetJurorsAssignments`: %v\n", resp)
 }
 ```
@@ -884,7 +884,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByIdJurorsInvitations200Response**](GetContestsByIdJurorsInvitations200Response.md)
+[**DomainJurorAssignmentListResponse**](DomainJurorAssignmentListResponse.md)
 
 ### Authorization
 
@@ -902,7 +902,7 @@ Name | Type | Description  | Notes
 
 ## GetJurorsInvitations
 
-> GetContestsByIdJurorsInvitations200Response GetJurorsInvitations(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorAssignmentListResponse GetJurorsInvitations(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get my pending invitations
 
@@ -932,7 +932,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.GetJurorsInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetJurorsInvitations`: GetContestsByIdJurorsInvitations200Response
+	// response from `GetJurorsInvitations`: DomainJurorAssignmentListResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.GetJurorsInvitations`: %v\n", resp)
 }
 ```
@@ -954,7 +954,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByIdJurorsInvitations200Response**](GetContestsByIdJurorsInvitations200Response.md)
+[**DomainJurorAssignmentListResponse**](DomainJurorAssignmentListResponse.md)
 
 ### Authorization
 
@@ -972,7 +972,7 @@ Name | Type | Description  | Notes
 
 ## UpdateContestsByIdEntriesByEntryIdScore
 
-> UpdateContestsByIdEntriesByEntryIdScore200Response UpdateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainJurorScoreResponse UpdateContestsByIdEntriesByEntryIdScore(ctx, id, entryId).RequestScoreEntryRequest(requestScoreEntryRequest).XTenantUserId(xTenantUserId).Execute()
 
 Score an entry
 
@@ -1003,7 +1003,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateContestsByIdEntriesByEntryIdScore`: UpdateContestsByIdEntriesByEntryIdScore200Response
+	// response from `UpdateContestsByIdEntriesByEntryIdScore`: DomainJurorScoreResponse
 	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.UpdateContestsByIdEntriesByEntryIdScore`: %v\n", resp)
 }
 ```
@@ -1031,7 +1031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdateContestsByIdEntriesByEntryIdScore200Response**](UpdateContestsByIdEntriesByEntryIdScore200Response.md)
+[**DomainJurorScoreResponse**](DomainJurorScoreResponse.md)
 
 ### Authorization
 

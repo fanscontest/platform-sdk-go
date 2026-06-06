@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipPackages
 
-> CreateSponsorshipPackages201Response CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageResponse CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Package (v2)
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipPackages`: CreateSponsorshipPackages201Response
+	// response from `CreateSponsorshipPackages`: DomainSponsorshipPackageResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.CreateSponsorshipPackages`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsorshipPackages201Response**](CreateSponsorshipPackages201Response.md)
+[**DomainSponsorshipPackageResponse**](DomainSponsorshipPackageResponse.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## CreateSponsorshipPackagesByIdCancel
 
-> CreateSponsorshipPackages201Response CreateSponsorshipPackagesByIdCancel(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageResponse CreateSponsorshipPackagesByIdCancel(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Cancel Sponsorship Package (v2)
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipPackagesByIdCancel`: CreateSponsorshipPackages201Response
+	// response from `CreateSponsorshipPackagesByIdCancel`: DomainSponsorshipPackageResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel`: %v\n", resp)
 }
 ```
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsorshipPackages201Response**](CreateSponsorshipPackages201Response.md)
+[**DomainSponsorshipPackageResponse**](DomainSponsorshipPackageResponse.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackages
 
-> GetSponsorshipPackages200Response GetSponsorshipPackages(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageListResponse GetSponsorshipPackages(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Packages (v2)
 
@@ -185,7 +185,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackages`: GetSponsorshipPackages200Response
+	// response from `GetSponsorshipPackages`: DomainSponsorshipPackageListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackages`: %v\n", resp)
 }
 ```
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSponsorshipPackages200Response**](GetSponsorshipPackages200Response.md)
+[**DomainSponsorshipPackageListResponse**](DomainSponsorshipPackageListResponse.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesAvailable
 
-> GetSponsorshipPackages200Response GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageListResponse GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Available Packages (v2)
 
@@ -257,7 +257,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackagesAvailable`: GetSponsorshipPackages200Response
+	// response from `GetSponsorshipPackagesAvailable`: DomainSponsorshipPackageListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable`: %v\n", resp)
 }
 ```
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSponsorshipPackages200Response**](GetSponsorshipPackages200Response.md)
+[**DomainSponsorshipPackageListResponse**](DomainSponsorshipPackageListResponse.md)
 
 ### Authorization
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdAgreement
 
-> GetSponsorshipPackagesByIdAgreement200Response GetSponsorshipPackagesByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageAgreementResponse GetSponsorshipPackagesByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Package Agreement (v2)
 
@@ -328,7 +328,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackagesByIdAgreement`: GetSponsorshipPackagesByIdAgreement200Response
+	// response from `GetSponsorshipPackagesByIdAgreement`: DomainSponsorshipPackageAgreementResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement`: %v\n", resp)
 }
 ```
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSponsorshipPackagesByIdAgreement200Response**](GetSponsorshipPackagesByIdAgreement200Response.md)
+[**DomainSponsorshipPackageAgreementResponse**](DomainSponsorshipPackageAgreementResponse.md)
 
 ### Authorization
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdSponsorships
 
-> GetContestsByContestIdSponsorships200Response GetSponsorshipPackagesByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipListResponse GetSponsorshipPackagesByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Package Sponsorships (v2)
 
@@ -402,7 +402,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipPackagesByIdSponsorships`: GetContestsByContestIdSponsorships200Response
+	// response from `GetSponsorshipPackagesByIdSponsorships`: DomainSponsorshipListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships`: %v\n", resp)
 }
 ```
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByContestIdSponsorships200Response**](GetContestsByContestIdSponsorships200Response.md)
+[**DomainSponsorshipListResponse**](DomainSponsorshipListResponse.md)
 
 ### Authorization
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetPublicCountries
 
-> GetPublicCountries200Response GetPublicCountries(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainCountryListResponse GetPublicCountries(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List enabled countries (sorted, with native names for non-English Accept-Language)
 
@@ -41,7 +41,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicCountries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicCountries`: GetPublicCountries200Response
+	// response from `GetPublicCountries`: DomainCountryListResponse
 	fmt.Fprintf(os.Stdout, "Response from `CountriesAPI.GetPublicCountries`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetPublicCountries200Response**](GetPublicCountries200Response.md)
+[**DomainCountryListResponse**](DomainCountryListResponse.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicLocation
 
-> GetPublicLocation200Response GetPublicLocation(ctx).XTenantUserId(xTenantUserId).Execute()
+> DomainCountryResponse GetPublicLocation(ctx).XTenantUserId(xTenantUserId).Execute()
 
 Resolve the caller's country by IP (CF-Ipcountry, then Maxmind)
 
@@ -107,7 +107,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CountriesAPI.GetPublicLocation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicLocation`: GetPublicLocation200Response
+	// response from `GetPublicLocation`: DomainCountryResponse
 	fmt.Fprintf(os.Stdout, "Response from `CountriesAPI.GetPublicLocation`: %v\n", resp)
 }
 ```
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetPublicLocation200Response**](GetPublicLocation200Response.md)
+[**DomainCountryResponse**](DomainCountryResponse.md)
 
 ### Authorization
 

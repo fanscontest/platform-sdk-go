@@ -43,7 +43,7 @@ func (r ApiCreateCelebsRequest) XTenantUserId(xTenantUserId string) ApiCreateCel
 	return r
 }
 
-func (r ApiCreateCelebsRequest) Execute() (*CreateCelebs200Response, *http.Response, error) {
+func (r ApiCreateCelebsRequest) Execute() (*DomainStanResponse, *http.Response, error) {
 	return r.ApiService.CreateCelebsExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *StansAPIService) CreateCelebs(ctx context.Context) ApiCreateCelebsReque
 }
 
 // Execute executes the request
-//  @return CreateCelebs200Response
-func (a *StansAPIService) CreateCelebsExecute(r ApiCreateCelebsRequest) (*CreateCelebs200Response, *http.Response, error) {
+//  @return DomainStanResponse
+func (a *StansAPIService) CreateCelebsExecute(r ApiCreateCelebsRequest) (*DomainStanResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateCelebs200Response
+		localVarReturnValue  *DomainStanResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.CreateCelebs")
@@ -340,7 +340,7 @@ func (r ApiGetCelebsRequest) XTenantUserId(xTenantUserId string) ApiGetCelebsReq
 	return r
 }
 
-func (r ApiGetCelebsRequest) Execute() (*GetCelebs200Response, *http.Response, error) {
+func (r ApiGetCelebsRequest) Execute() (*DomainStanListResponse, *http.Response, error) {
 	return r.ApiService.GetCelebsExecute(r)
 }
 
@@ -360,13 +360,13 @@ func (a *StansAPIService) GetCelebs(ctx context.Context) ApiGetCelebsRequest {
 }
 
 // Execute executes the request
-//  @return GetCelebs200Response
-func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) (*GetCelebs200Response, *http.Response, error) {
+//  @return DomainStanListResponse
+func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) (*DomainStanListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetCelebs200Response
+		localVarReturnValue  *DomainStanListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.GetCelebs")
@@ -490,7 +490,7 @@ func (r ApiGetStansRequest) XTenantUserId(xTenantUserId string) ApiGetStansReque
 	return r
 }
 
-func (r ApiGetStansRequest) Execute() (*GetCelebs200Response, *http.Response, error) {
+func (r ApiGetStansRequest) Execute() (*DomainStanListResponse, *http.Response, error) {
 	return r.ApiService.GetStansExecute(r)
 }
 
@@ -510,13 +510,13 @@ func (a *StansAPIService) GetStans(ctx context.Context) ApiGetStansRequest {
 }
 
 // Execute executes the request
-//  @return GetCelebs200Response
-func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) (*GetCelebs200Response, *http.Response, error) {
+//  @return DomainStanListResponse
+func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) (*DomainStanListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetCelebs200Response
+		localVarReturnValue  *DomainStanListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StansAPIService.GetStans")

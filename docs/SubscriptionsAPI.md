@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## CreateSubscriptions
 
-> CreateSubscriptions200Response CreateSubscriptions(ctx).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainSubscriptionResponse CreateSubscriptions(ctx).RequestCreateSubscriptionRequest(requestCreateSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
 
 Subscribe the caller to a channel
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.CreateSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSubscriptions`: CreateSubscriptions200Response
+	// response from `CreateSubscriptions`: DomainSubscriptionResponse
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.CreateSubscriptions`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSubscriptions200Response**](CreateSubscriptions200Response.md)
+[**DomainSubscriptionResponse**](DomainSubscriptionResponse.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdSubscriptions
 
-> GetChannelsByIdSubscriptions200Response GetChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSubscriptionListResponse GetChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channel subscriptions (cursor-paginated)
 
@@ -184,7 +184,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetChannelsByIdSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsByIdSubscriptions`: GetChannelsByIdSubscriptions200Response
+	// response from `GetChannelsByIdSubscriptions`: DomainSubscriptionListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetChannelsByIdSubscriptions`: %v\n", resp)
 }
 ```
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
+[**DomainSubscriptionListResponse**](DomainSubscriptionListResponse.md)
 
 ### Authorization
 
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidSubscriptions
 
-> GetChannelsByIdSubscriptions200Response GetIdentitiesByPiidSubscriptions(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSubscriptionListResponse GetIdentitiesByPiidSubscriptions(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get a platform identity's channel subscriptions (v2)
 
@@ -260,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetIdentitiesByPiidSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidSubscriptions`: GetChannelsByIdSubscriptions200Response
+	// response from `GetIdentitiesByPiidSubscriptions`: DomainSubscriptionListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetIdentitiesByPiidSubscriptions`: %v\n", resp)
 }
 ```
@@ -287,7 +287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
+[**DomainSubscriptionListResponse**](DomainSubscriptionListResponse.md)
 
 ### Authorization
 
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsByIdSubscriptions
 
-> GetChannelsByIdSubscriptions200Response GetPublicChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSubscriptionListResponse GetPublicChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channel subscriptions (cursor-paginated)
 
@@ -336,7 +336,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicChannelsByIdSubscriptions`: GetChannelsByIdSubscriptions200Response
+	// response from `GetPublicChannelsByIdSubscriptions`: DomainSubscriptionListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions`: %v\n", resp)
 }
 ```
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
+[**DomainSubscriptionListResponse**](DomainSubscriptionListResponse.md)
 
 ### Authorization
 
@@ -381,7 +381,7 @@ Name | Type | Description  | Notes
 
 ## GetSubscriptionsByIdLogs
 
-> GetContestsByIdParticipation200Response GetSubscriptionsByIdLogs(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainParticipationListResponse GetSubscriptionsByIdLogs(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get the participation log for a subscription
 
@@ -410,7 +410,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetSubscriptionsByIdLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSubscriptionsByIdLogs`: GetContestsByIdParticipation200Response
+	// response from `GetSubscriptionsByIdLogs`: DomainParticipationListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetSubscriptionsByIdLogs`: %v\n", resp)
 }
 ```
@@ -437,7 +437,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByIdParticipation200Response**](GetContestsByIdParticipation200Response.md)
+[**DomainParticipationListResponse**](DomainParticipationListResponse.md)
 
 ### Authorization
 
@@ -455,7 +455,7 @@ Name | Type | Description  | Notes
 
 ## GetSubscriptionsSearchKeywordByKeyword
 
-> GetChannelsByIdSubscriptions200Response GetSubscriptionsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSubscriptionListResponse GetSubscriptionsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search subscriptions by keyword (cursor-paginated)
 
@@ -484,7 +484,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSubscriptionsSearchKeywordByKeyword`: GetChannelsByIdSubscriptions200Response
+	// response from `GetSubscriptionsSearchKeywordByKeyword`: DomainSubscriptionListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetSubscriptionsSearchKeywordByKeyword`: %v\n", resp)
 }
 ```
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdSubscriptions200Response**](GetChannelsByIdSubscriptions200Response.md)
+[**DomainSubscriptionListResponse**](DomainSubscriptionListResponse.md)
 
 ### Authorization
 

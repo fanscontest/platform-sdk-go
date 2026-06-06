@@ -44,7 +44,7 @@ func (r ApiCreateContestsByIdEntriesRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiCreateContestsByIdEntriesRequest) Execute() (*CreateContestsByIdEntries200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdEntriesRequest) Execute() (*DomainEntryResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdEntriesExecute(r)
 }
 
@@ -66,13 +66,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdEntries(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CreateContestsByIdEntries200Response
-func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreateContestsByIdEntriesRequest) (*CreateContestsByIdEntries200Response, *http.Response, error) {
+//  @return DomainEntryResponse
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreateContestsByIdEntriesRequest) (*DomainEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContestsByIdEntries200Response
+		localVarReturnValue  *DomainEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdEntries")
@@ -191,7 +191,7 @@ func (r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*DomainJurorScoreResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdEntriesByEntryIdScoreExecute(r)
 }
 
@@ -215,13 +215,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScore(ctx
 }
 
 // Execute executes the request
-//  @return UpdateContestsByIdEntriesByEntryIdScore200Response
-func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScoreExecute(r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
+//  @return DomainJurorScoreResponse
+func (a *CreativeContestsAPIService) CreateContestsByIdEntriesByEntryIdScoreExecute(r ApiCreateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScoreResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UpdateContestsByIdEntriesByEntryIdScore200Response
+		localVarReturnValue  *DomainJurorScoreResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdEntriesByEntryIdScore")
@@ -333,7 +333,7 @@ func (r ApiCreateContestsByIdForceProceedRequest) XTenantUserId(xTenantUserId st
 	return r
 }
 
-func (r ApiCreateContestsByIdForceProceedRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdForceProceedRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdForceProceedExecute(r)
 }
 
@@ -355,13 +355,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdForceProceed(ctx context.
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *CreativeContestsAPIService) CreateContestsByIdForceProceedExecute(r ApiCreateContestsByIdForceProceedRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *CreativeContestsAPIService) CreateContestsByIdForceProceedExecute(r ApiCreateContestsByIdForceProceedRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdForceProceed")
@@ -474,7 +474,7 @@ func (r ApiCreateContestsByIdJurorsInviteRequest) XTenantUserId(xTenantUserId st
 	return r
 }
 
-func (r ApiCreateContestsByIdJurorsInviteRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdJurorsInviteRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdJurorsInviteExecute(r)
 }
 
@@ -496,13 +496,13 @@ func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInvite(ctx context.
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInviteExecute(r ApiCreateContestsByIdJurorsInviteRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *CreativeContestsAPIService) CreateContestsByIdJurorsInviteExecute(r ApiCreateContestsByIdJurorsInviteRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateContestsByIdJurorsInvite")
@@ -624,7 +624,7 @@ func (r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) XTenantUserId(xTe
 	return r
 }
 
-func (r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) Execute() (*CreateJurorsInvitationsByInvitationIdAccept200Response, *http.Response, error) {
+func (r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) Execute() (*DomainJurorAssignmentResponse, *http.Response, error) {
 	return r.ApiService.CreateJurorsInvitationsByInvitationIdAcceptExecute(r)
 }
 
@@ -646,13 +646,13 @@ func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAccept
 }
 
 // Execute executes the request
-//  @return CreateJurorsInvitationsByInvitationIdAccept200Response
-func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAcceptExecute(r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) (*CreateJurorsInvitationsByInvitationIdAccept200Response, *http.Response, error) {
+//  @return DomainJurorAssignmentResponse
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdAcceptExecute(r ApiCreateJurorsInvitationsByInvitationIdAcceptRequest) (*DomainJurorAssignmentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateJurorsInvitationsByInvitationIdAccept200Response
+		localVarReturnValue  *DomainJurorAssignmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsInvitationsByInvitationIdAccept")
@@ -780,7 +780,7 @@ func (r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) XTenantUserId(xT
 	return r
 }
 
-func (r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateJurorsInvitationsByInvitationIdDeclineExecute(r)
 }
 
@@ -802,13 +802,13 @@ func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclin
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclineExecute(r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *CreativeContestsAPIService) CreateJurorsInvitationsByInvitationIdDeclineExecute(r ApiCreateJurorsInvitationsByInvitationIdDeclineRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsInvitationsByInvitationIdDecline")
@@ -942,7 +942,7 @@ func (r ApiCreateJurorsOptInRequest) XTenantUserId(xTenantUserId string) ApiCrea
 	return r
 }
 
-func (r ApiCreateJurorsOptInRequest) Execute() (*CreateJurorsOptIn200Response, *http.Response, error) {
+func (r ApiCreateJurorsOptInRequest) Execute() (*DomainJurorResponse, *http.Response, error) {
 	return r.ApiService.CreateJurorsOptInExecute(r)
 }
 
@@ -962,13 +962,13 @@ func (a *CreativeContestsAPIService) CreateJurorsOptIn(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return CreateJurorsOptIn200Response
-func (a *CreativeContestsAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOptInRequest) (*CreateJurorsOptIn200Response, *http.Response, error) {
+//  @return DomainJurorResponse
+func (a *CreativeContestsAPIService) CreateJurorsOptInExecute(r ApiCreateJurorsOptInRequest) (*DomainJurorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateJurorsOptIn200Response
+		localVarReturnValue  *DomainJurorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.CreateJurorsOptIn")
@@ -1078,7 +1078,7 @@ func (r ApiDeleteContestsByIdEntriesRequest) XTenantUserId(xTenantUserId string)
 	return r
 }
 
-func (r ApiDeleteContestsByIdEntriesRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiDeleteContestsByIdEntriesRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.DeleteContestsByIdEntriesExecute(r)
 }
 
@@ -1100,13 +1100,13 @@ func (a *CreativeContestsAPIService) DeleteContestsByIdEntries(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *CreativeContestsAPIService) DeleteContestsByIdEntriesExecute(r ApiDeleteContestsByIdEntriesRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *CreativeContestsAPIService) DeleteContestsByIdEntriesExecute(r ApiDeleteContestsByIdEntriesRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.DeleteContestsByIdEntries")
@@ -1237,7 +1237,7 @@ func (r ApiGetContestsByIdEntriesRequest) XTenantUserId(xTenantUserId string) Ap
 	return r
 }
 
-func (r ApiGetContestsByIdEntriesRequest) Execute() (*GetContestsByIdEntries200Response, *http.Response, error) {
+func (r ApiGetContestsByIdEntriesRequest) Execute() (*DomainEntryListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdEntriesExecute(r)
 }
 
@@ -1259,13 +1259,13 @@ func (a *CreativeContestsAPIService) GetContestsByIdEntries(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return GetContestsByIdEntries200Response
-func (a *CreativeContestsAPIService) GetContestsByIdEntriesExecute(r ApiGetContestsByIdEntriesRequest) (*GetContestsByIdEntries200Response, *http.Response, error) {
+//  @return DomainEntryListResponse
+func (a *CreativeContestsAPIService) GetContestsByIdEntriesExecute(r ApiGetContestsByIdEntriesRequest) (*DomainEntryListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdEntries200Response
+		localVarReturnValue  *DomainEntryListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdEntries")
@@ -1391,7 +1391,7 @@ func (r ApiGetContestsByIdJurorsRequest) XTenantUserId(xTenantUserId string) Api
 	return r
 }
 
-func (r ApiGetContestsByIdJurorsRequest) Execute() (*GetContestsByIdJurors200Response, *http.Response, error) {
+func (r ApiGetContestsByIdJurorsRequest) Execute() (*DomainJurorListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdJurorsExecute(r)
 }
 
@@ -1416,13 +1416,13 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurors(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetContestsByIdJurors200Response
-func (a *CreativeContestsAPIService) GetContestsByIdJurorsExecute(r ApiGetContestsByIdJurorsRequest) (*GetContestsByIdJurors200Response, *http.Response, error) {
+//  @return DomainJurorListResponse
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsExecute(r ApiGetContestsByIdJurorsRequest) (*DomainJurorListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdJurors200Response
+		localVarReturnValue  *DomainJurorListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdJurors")
@@ -1548,7 +1548,7 @@ func (r ApiGetContestsByIdJurorsInvitationsRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetContestsByIdJurorsInvitationsRequest) Execute() (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
+func (r ApiGetContestsByIdJurorsInvitationsRequest) Execute() (*DomainJurorAssignmentListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdJurorsInvitationsExecute(r)
 }
 
@@ -1570,13 +1570,13 @@ func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitations(ctx contex
 }
 
 // Execute executes the request
-//  @return GetContestsByIdJurorsInvitations200Response
-func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r ApiGetContestsByIdJurorsInvitationsRequest) (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
+//  @return DomainJurorAssignmentListResponse
+func (a *CreativeContestsAPIService) GetContestsByIdJurorsInvitationsExecute(r ApiGetContestsByIdJurorsInvitationsRequest) (*DomainJurorAssignmentListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdJurorsInvitations200Response
+		localVarReturnValue  *DomainJurorAssignmentListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetContestsByIdJurorsInvitations")
@@ -1712,7 +1712,7 @@ func (r ApiGetJurorsAssignmentsRequest) XTenantUserId(xTenantUserId string) ApiG
 	return r
 }
 
-func (r ApiGetJurorsAssignmentsRequest) Execute() (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
+func (r ApiGetJurorsAssignmentsRequest) Execute() (*DomainJurorAssignmentListResponse, *http.Response, error) {
 	return r.ApiService.GetJurorsAssignmentsExecute(r)
 }
 
@@ -1732,13 +1732,13 @@ func (a *CreativeContestsAPIService) GetJurorsAssignments(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return GetContestsByIdJurorsInvitations200Response
-func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAssignmentsRequest) (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
+//  @return DomainJurorAssignmentListResponse
+func (a *CreativeContestsAPIService) GetJurorsAssignmentsExecute(r ApiGetJurorsAssignmentsRequest) (*DomainJurorAssignmentListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdJurorsInvitations200Response
+		localVarReturnValue  *DomainJurorAssignmentListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetJurorsAssignments")
@@ -1862,7 +1862,7 @@ func (r ApiGetJurorsInvitationsRequest) XTenantUserId(xTenantUserId string) ApiG
 	return r
 }
 
-func (r ApiGetJurorsInvitationsRequest) Execute() (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
+func (r ApiGetJurorsInvitationsRequest) Execute() (*DomainJurorAssignmentListResponse, *http.Response, error) {
 	return r.ApiService.GetJurorsInvitationsExecute(r)
 }
 
@@ -1885,13 +1885,13 @@ func (a *CreativeContestsAPIService) GetJurorsInvitations(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return GetContestsByIdJurorsInvitations200Response
-func (a *CreativeContestsAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsInvitationsRequest) (*GetContestsByIdJurorsInvitations200Response, *http.Response, error) {
+//  @return DomainJurorAssignmentListResponse
+func (a *CreativeContestsAPIService) GetJurorsInvitationsExecute(r ApiGetJurorsInvitationsRequest) (*DomainJurorAssignmentListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdJurorsInvitations200Response
+		localVarReturnValue  *DomainJurorAssignmentListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.GetJurorsInvitations")
@@ -1999,7 +1999,7 @@ func (r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
+func (r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) Execute() (*DomainJurorScoreResponse, *http.Response, error) {
 	return r.ApiService.UpdateContestsByIdEntriesByEntryIdScoreExecute(r)
 }
 
@@ -2023,13 +2023,13 @@ func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScore(ctx
 }
 
 // Execute executes the request
-//  @return UpdateContestsByIdEntriesByEntryIdScore200Response
-func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecute(r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) (*UpdateContestsByIdEntriesByEntryIdScore200Response, *http.Response, error) {
+//  @return DomainJurorScoreResponse
+func (a *CreativeContestsAPIService) UpdateContestsByIdEntriesByEntryIdScoreExecute(r ApiUpdateContestsByIdEntriesByEntryIdScoreRequest) (*DomainJurorScoreResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UpdateContestsByIdEntriesByEntryIdScore200Response
+		localVarReturnValue  *DomainJurorScoreResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CreativeContestsAPIService.UpdateContestsByIdEntriesByEntryIdScore")

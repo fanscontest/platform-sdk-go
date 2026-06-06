@@ -44,7 +44,7 @@ func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) XTenantUserId(xTenantUserId s
 	return r
 }
 
-func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.UpdateTeamPreferenceByTeamSetIdExecute(r)
 }
 
@@ -64,13 +64,13 @@ func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetId(ctx context.
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r ApiUpdateTeamPreferenceByTeamSetIdRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r ApiUpdateTeamPreferenceByTeamSetIdRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamPreferencesAPIService.UpdateTeamPreferenceByTeamSetId")

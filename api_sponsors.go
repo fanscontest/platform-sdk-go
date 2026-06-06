@@ -43,7 +43,7 @@ func (r ApiCreateSponsorsRequest) XTenantUserId(xTenantUserId string) ApiCreateS
 	return r
 }
 
-func (r ApiCreateSponsorsRequest) Execute() (*CreateSponsors201Response, *http.Response, error) {
+func (r ApiCreateSponsorsRequest) Execute() (*DomainSponsorResponse, *http.Response, error) {
 	return r.ApiService.CreateSponsorsExecute(r)
 }
 
@@ -63,13 +63,13 @@ func (a *SponsorsAPIService) CreateSponsors(ctx context.Context) ApiCreateSponso
 }
 
 // Execute executes the request
-//  @return CreateSponsors201Response
-func (a *SponsorsAPIService) CreateSponsorsExecute(r ApiCreateSponsorsRequest) (*CreateSponsors201Response, *http.Response, error) {
+//  @return DomainSponsorResponse
+func (a *SponsorsAPIService) CreateSponsorsExecute(r ApiCreateSponsorsRequest) (*DomainSponsorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateSponsors201Response
+		localVarReturnValue  *DomainSponsorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorsAPIService.CreateSponsors")
@@ -192,7 +192,7 @@ func (r ApiGetSponsorsRequest) XTenantUserId(xTenantUserId string) ApiGetSponsor
 	return r
 }
 
-func (r ApiGetSponsorsRequest) Execute() (*GetSponsors200Response, *http.Response, error) {
+func (r ApiGetSponsorsRequest) Execute() (*DomainSponsorListResponse, *http.Response, error) {
 	return r.ApiService.GetSponsorsExecute(r)
 }
 
@@ -212,13 +212,13 @@ func (a *SponsorsAPIService) GetSponsors(ctx context.Context) ApiGetSponsorsRequ
 }
 
 // Execute executes the request
-//  @return GetSponsors200Response
-func (a *SponsorsAPIService) GetSponsorsExecute(r ApiGetSponsorsRequest) (*GetSponsors200Response, *http.Response, error) {
+//  @return DomainSponsorListResponse
+func (a *SponsorsAPIService) GetSponsorsExecute(r ApiGetSponsorsRequest) (*DomainSponsorListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetSponsors200Response
+		localVarReturnValue  *DomainSponsorListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorsAPIService.GetSponsors")
@@ -329,7 +329,7 @@ func (r ApiGetSponsorsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetSpo
 	return r
 }
 
-func (r ApiGetSponsorsByIdRequest) Execute() (*CreateSponsors201Response, *http.Response, error) {
+func (r ApiGetSponsorsByIdRequest) Execute() (*DomainSponsorResponse, *http.Response, error) {
 	return r.ApiService.GetSponsorsByIdExecute(r)
 }
 
@@ -351,13 +351,13 @@ func (a *SponsorsAPIService) GetSponsorsById(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return CreateSponsors201Response
-func (a *SponsorsAPIService) GetSponsorsByIdExecute(r ApiGetSponsorsByIdRequest) (*CreateSponsors201Response, *http.Response, error) {
+//  @return DomainSponsorResponse
+func (a *SponsorsAPIService) GetSponsorsByIdExecute(r ApiGetSponsorsByIdRequest) (*DomainSponsorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateSponsors201Response
+		localVarReturnValue  *DomainSponsorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorsAPIService.GetSponsorsById")
@@ -477,7 +477,7 @@ func (r ApiGetSponsorsByIdSponsorshipsRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetSponsorsByIdSponsorshipsRequest) Execute() (*GetContestsByContestIdSponsorships200Response, *http.Response, error) {
+func (r ApiGetSponsorsByIdSponsorshipsRequest) Execute() (*DomainSponsorshipListResponse, *http.Response, error) {
 	return r.ApiService.GetSponsorsByIdSponsorshipsExecute(r)
 }
 
@@ -499,13 +499,13 @@ func (a *SponsorsAPIService) GetSponsorsByIdSponsorships(ctx context.Context, id
 }
 
 // Execute executes the request
-//  @return GetContestsByContestIdSponsorships200Response
-func (a *SponsorsAPIService) GetSponsorsByIdSponsorshipsExecute(r ApiGetSponsorsByIdSponsorshipsRequest) (*GetContestsByContestIdSponsorships200Response, *http.Response, error) {
+//  @return DomainSponsorshipListResponse
+func (a *SponsorsAPIService) GetSponsorsByIdSponsorshipsExecute(r ApiGetSponsorsByIdSponsorshipsRequest) (*DomainSponsorshipListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByContestIdSponsorships200Response
+		localVarReturnValue  *DomainSponsorshipListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SponsorsAPIService.GetSponsorsByIdSponsorships")

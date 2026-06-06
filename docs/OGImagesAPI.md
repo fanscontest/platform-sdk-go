@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetPublicOgChannelByChannelId
 
-> GetPublicOgChannelByChannelId200Response GetPublicOgChannelByChannelId(ctx, channelId).AccessCode(accessCode).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGChannelDataResponse GetPublicOgChannelByChannelId(ctx, channelId).AccessCode(accessCode).XTenantUserId(xTenantUserId).Execute()
 
 Get channel data for OG image generation
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgChannelByChannelId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicOgChannelByChannelId`: GetPublicOgChannelByChannelId200Response
+	// response from `GetPublicOgChannelByChannelId`: HandlerOGChannelDataResponse
 	fmt.Fprintf(os.Stdout, "Response from `OGImagesAPI.GetPublicOgChannelByChannelId`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetPublicOgChannelByChannelId200Response**](GetPublicOgChannelByChannelId200Response.md)
+[**HandlerOGChannelDataResponse**](HandlerOGChannelDataResponse.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicOgContestByContestId
 
-> GetPublicOgContestByContestId200Response GetPublicOgContestByContestId(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGContestDataResponse GetPublicOgContestByContestId(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
 
 Get contest data for OG image generation
 
@@ -116,7 +116,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgContestByContestId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicOgContestByContestId`: GetPublicOgContestByContestId200Response
+	// response from `GetPublicOgContestByContestId`: HandlerOGContestDataResponse
 	fmt.Fprintf(os.Stdout, "Response from `OGImagesAPI.GetPublicOgContestByContestId`: %v\n", resp)
 }
 ```
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetPublicOgContestByContestId200Response**](GetPublicOgContestByContestId200Response.md)
+[**HandlerOGContestDataResponse**](HandlerOGContestDataResponse.md)
 
 ### Authorization
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicOgScoreboardByContestId
 
-> GetPublicOgScoreboardByContestId200Response GetPublicOgScoreboardByContestId(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGScoreboardDataResponse GetPublicOgScoreboardByContestId(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
 
 Get scoreboard data for OG image generation
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgScoreboardByContestId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicOgScoreboardByContestId`: GetPublicOgScoreboardByContestId200Response
+	// response from `GetPublicOgScoreboardByContestId`: HandlerOGScoreboardDataResponse
 	fmt.Fprintf(os.Stdout, "Response from `OGImagesAPI.GetPublicOgScoreboardByContestId`: %v\n", resp)
 }
 ```
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetPublicOgScoreboardByContestId200Response**](GetPublicOgScoreboardByContestId200Response.md)
+[**HandlerOGScoreboardDataResponse**](HandlerOGScoreboardDataResponse.md)
 
 ### Authorization
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicOgSubmissionsByParticipationId
 
-> GetPublicOgSubmissionsByParticipationId200Response GetPublicOgSubmissionsByParticipationId(ctx, participationId).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGParticipationDataResponse GetPublicOgSubmissionsByParticipationId(ctx, participationId).XTenantUserId(xTenantUserId).Execute()
 
 Get participation data for OG image generation
 
@@ -260,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgSubmissionsByParticipationId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicOgSubmissionsByParticipationId`: GetPublicOgSubmissionsByParticipationId200Response
+	// response from `GetPublicOgSubmissionsByParticipationId`: HandlerOGParticipationDataResponse
 	fmt.Fprintf(os.Stdout, "Response from `OGImagesAPI.GetPublicOgSubmissionsByParticipationId`: %v\n", resp)
 }
 ```
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetPublicOgSubmissionsByParticipationId200Response**](GetPublicOgSubmissionsByParticipationId200Response.md)
+[**HandlerOGParticipationDataResponse**](HandlerOGParticipationDataResponse.md)
 
 ### Authorization
 

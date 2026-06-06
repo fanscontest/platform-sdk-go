@@ -51,7 +51,7 @@ func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) XTenantUserId(xTenantUser
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) Execute() (*GetIdentitiesByPiidFeedPersonalized200Response, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) Execute() (*DomainFeedItemListResponse, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidFeedPersonalizedExecute(r)
 }
 
@@ -74,13 +74,13 @@ func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalized(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return GetIdentitiesByPiidFeedPersonalized200Response
-func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIdentitiesByPiidFeedPersonalizedRequest) (*GetIdentitiesByPiidFeedPersonalized200Response, *http.Response, error) {
+//  @return DomainFeedItemListResponse
+func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIdentitiesByPiidFeedPersonalizedRequest) (*DomainFeedItemListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIdentitiesByPiidFeedPersonalized200Response
+		localVarReturnValue  *DomainFeedItemListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedsAPIService.GetIdentitiesByPiidFeedPersonalized")
@@ -234,7 +234,7 @@ func (r ApiGetPublicFeedRequest) XTenantUserId(xTenantUserId string) ApiGetPubli
 	return r
 }
 
-func (r ApiGetPublicFeedRequest) Execute() (*GetIdentitiesByPiidFeedPersonalized200Response, *http.Response, error) {
+func (r ApiGetPublicFeedRequest) Execute() (*DomainFeedItemListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicFeedExecute(r)
 }
 
@@ -252,13 +252,13 @@ func (a *FeedsAPIService) GetPublicFeed(ctx context.Context) ApiGetPublicFeedReq
 }
 
 // Execute executes the request
-//  @return GetIdentitiesByPiidFeedPersonalized200Response
-func (a *FeedsAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) (*GetIdentitiesByPiidFeedPersonalized200Response, *http.Response, error) {
+//  @return DomainFeedItemListResponse
+func (a *FeedsAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) (*DomainFeedItemListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIdentitiesByPiidFeedPersonalized200Response
+		localVarReturnValue  *DomainFeedItemListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedsAPIService.GetPublicFeed")

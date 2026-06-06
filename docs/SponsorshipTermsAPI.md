@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipTerms
 
-> CreateSponsorshipTerms201Response CreateSponsorshipTerms(ctx).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipTermResponse CreateSponsorshipTerms(ctx).RequestCreateSponsorshipTermRequest(requestCreateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsorship Term (v2)
 
@@ -44,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.CreateSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsorshipTerms`: CreateSponsorshipTerms201Response
+	// response from `CreateSponsorshipTerms`: DomainSponsorshipTermResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.CreateSponsorshipTerms`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsorshipTerms201Response**](CreateSponsorshipTerms201Response.md)
+[**DomainSponsorshipTermResponse**](DomainSponsorshipTermResponse.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSponsorshipTermsById
 
-> CreateAnalyticsImpression200Response DeleteSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse DeleteSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Deactivate Sponsorship Term (v2)
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.DeleteSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteSponsorshipTermsById`: CreateAnalyticsImpression200Response
+	// response from `DeleteSponsorshipTermsById`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.DeleteSponsorshipTermsById`: %v\n", resp)
 }
 ```
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTerms
 
-> GetSponsorshipTerms200Response GetSponsorshipTerms(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipTermListResponse GetSponsorshipTerms(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Terms (v2)
 
@@ -185,7 +185,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTerms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipTerms`: GetSponsorshipTerms200Response
+	// response from `GetSponsorshipTerms`: DomainSponsorshipTermListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTerms`: %v\n", resp)
 }
 ```
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSponsorshipTerms200Response**](GetSponsorshipTerms200Response.md)
+[**DomainSponsorshipTermListResponse**](DomainSponsorshipTermListResponse.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTermsById
 
-> CreateSponsorshipTerms201Response GetSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipTermResponse GetSponsorshipTermsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsorship Term (v2)
 
@@ -254,7 +254,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipTermsById`: CreateSponsorshipTerms201Response
+	// response from `GetSponsorshipTermsById`: DomainSponsorshipTermResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTermsById`: %v\n", resp)
 }
 ```
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsorshipTerms201Response**](CreateSponsorshipTerms201Response.md)
+[**DomainSponsorshipTermResponse**](DomainSponsorshipTermResponse.md)
 
 ### Authorization
 
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipTermsPlatform
 
-> GetSponsorshipTerms200Response GetSponsorshipTermsPlatform(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipTermListResponse GetSponsorshipTermsPlatform(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Platform Terms (v2)
 
@@ -327,7 +327,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.GetSponsorshipTermsPlatform``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorshipTermsPlatform`: GetSponsorshipTerms200Response
+	// response from `GetSponsorshipTermsPlatform`: DomainSponsorshipTermListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.GetSponsorshipTermsPlatform`: %v\n", resp)
 }
 ```
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSponsorshipTerms200Response**](GetSponsorshipTerms200Response.md)
+[**DomainSponsorshipTermListResponse**](DomainSponsorshipTermListResponse.md)
 
 ### Authorization
 
@@ -367,7 +367,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSponsorshipTermsById
 
-> CreateSponsorshipTerms201Response UpdateSponsorshipTermsById(ctx, id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipTermResponse UpdateSponsorshipTermsById(ctx, id).RequestUpdateSponsorshipTermRequest(requestUpdateSponsorshipTermRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Sponsorship Term (v2)
 
@@ -397,7 +397,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipTermsAPI.UpdateSponsorshipTermsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateSponsorshipTermsById`: CreateSponsorshipTerms201Response
+	// response from `UpdateSponsorshipTermsById`: DomainSponsorshipTermResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorshipTermsAPI.UpdateSponsorshipTermsById`: %v\n", resp)
 }
 ```
@@ -423,7 +423,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsorshipTerms201Response**](CreateSponsorshipTerms201Response.md)
+[**DomainSponsorshipTermResponse**](DomainSponsorshipTermResponse.md)
 
 ### Authorization
 

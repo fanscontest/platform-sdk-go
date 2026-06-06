@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateCelebs
 
-> CreateCelebs200Response CreateCelebs(ctx).Body(body).XTenantUserId(xTenantUserId).Execute()
+> DomainStanResponse CreateCelebs(ctx).Body(body).XTenantUserId(xTenantUserId).Execute()
 
 Create Member Stan
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.CreateCelebs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateCelebs`: CreateCelebs200Response
+	// response from `CreateCelebs`: DomainStanResponse
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.CreateCelebs`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateCelebs200Response**](CreateCelebs200Response.md)
+[**DomainStanResponse**](DomainStanResponse.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## GetCelebs
 
-> GetCelebs200Response GetCelebs(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainStanListResponse GetCelebs(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Member Celebs
 
@@ -183,7 +183,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.GetCelebs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCelebs`: GetCelebs200Response
+	// response from `GetCelebs`: DomainStanListResponse
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.GetCelebs`: %v\n", resp)
 }
 ```
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetCelebs200Response**](GetCelebs200Response.md)
+[**DomainStanListResponse**](DomainStanListResponse.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetStans
 
-> GetCelebs200Response GetStans(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainStanListResponse GetStans(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Celeb Stans
 
@@ -253,7 +253,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `StansAPI.GetStans``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetStans`: GetCelebs200Response
+	// response from `GetStans`: DomainStanListResponse
 	fmt.Fprintf(os.Stdout, "Response from `StansAPI.GetStans`: %v\n", resp)
 }
 ```
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetCelebs200Response**](GetCelebs200Response.md)
+[**DomainStanListResponse**](DomainStanListResponse.md)
 
 ### Authorization
 

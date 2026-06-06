@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 ## CreateChannels
 
-> CreateChannels201Response CreateChannels(ctx).RequestCreateChannelRequest(requestCreateChannelRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelResponse CreateChannels(ctx).RequestCreateChannelRequest(requestCreateChannelRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a channel
 
@@ -56,7 +56,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateChannels`: CreateChannels201Response
+	// response from `CreateChannels`: DomainChannelResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannels`: %v\n", resp)
 }
 ```
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannels201Response**](CreateChannels201Response.md)
+[**DomainChannelResponse**](DomainChannelResponse.md)
 
 ### Authorization
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ## CreateChannelsByIdTeamSets
 
-> CreateChannelsByIdTeamSets201Response CreateChannelsByIdTeamSets(ctx, id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainTeamSetResponse CreateChannelsByIdTeamSets(ctx, id).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a channel-owned team set
 
@@ -195,7 +195,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdTeamSets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateChannelsByIdTeamSets`: CreateChannelsByIdTeamSets201Response
+	// response from `CreateChannelsByIdTeamSets`: DomainTeamSetResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannelsByIdTeamSets`: %v\n", resp)
 }
 ```
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannelsByIdTeamSets201Response**](CreateChannelsByIdTeamSets201Response.md)
+[**DomainTeamSetResponse**](DomainTeamSetResponse.md)
 
 ### Authorization
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 ## CreateChannelsByIdValidateAccessCode
 
-> CreateAnalyticsImpression200Response CreateChannelsByIdValidateAccessCode(ctx, id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateChannelsByIdValidateAccessCode(ctx, id).RequestValidateAccessCodeRequest(requestValidateAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
 
 Validate a channel access code
 
@@ -267,7 +267,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelsByIdValidateAccessCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateChannelsByIdValidateAccessCode`: CreateAnalyticsImpression200Response
+	// response from `CreateChannelsByIdValidateAccessCode`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.CreateChannelsByIdValidateAccessCode`: %v\n", resp)
 }
 ```
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 ## DeleteChannelsById
 
-> CreateChannels201Response DeleteChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelResponse DeleteChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Delete Channel
 
@@ -340,7 +340,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.DeleteChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteChannelsById`: CreateChannels201Response
+	// response from `DeleteChannelsById`: DomainChannelResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.DeleteChannelsById`: %v\n", resp)
 }
 ```
@@ -365,7 +365,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannels201Response**](CreateChannels201Response.md)
+[**DomainChannelResponse**](DomainChannelResponse.md)
 
 ### Authorization
 
@@ -383,7 +383,7 @@ Name | Type | Description  | Notes
 
 ## GetChannels
 
-> GetChannels200Response GetChannels(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetChannels(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List the caller's channels (cursor-paginated)
 
@@ -411,7 +411,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannels`: GetChannels200Response
+	// response from `GetChannels`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannels`: %v\n", resp)
 }
 ```
@@ -433,7 +433,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -451,7 +451,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsById
 
-> CreateChannels201Response GetChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelResponse GetChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a channel by ID
 
@@ -480,7 +480,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsById`: CreateChannels201Response
+	// response from `GetChannelsById`: DomainChannelResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsById`: %v\n", resp)
 }
 ```
@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannels201Response**](CreateChannels201Response.md)
+[**DomainChannelResponse**](DomainChannelResponse.md)
 
 ### Authorization
 
@@ -523,7 +523,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsByIdTeamSets
 
-> GetChannelsByIdTeamSets200Response GetChannelsByIdTeamSets(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainTeamSetListResponse GetChannelsByIdTeamSets(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List team sets owned by a channel
 
@@ -554,7 +554,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsByIdTeamSets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsByIdTeamSets`: GetChannelsByIdTeamSets200Response
+	// response from `GetChannelsByIdTeamSets`: DomainTeamSetListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsByIdTeamSets`: %v\n", resp)
 }
 ```
@@ -581,7 +581,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdTeamSets200Response**](GetChannelsByIdTeamSets200Response.md)
+[**DomainTeamSetListResponse**](DomainTeamSetListResponse.md)
 
 ### Authorization
 
@@ -599,7 +599,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsSearch
 
-> GetChannels200Response GetChannelsSearch(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetChannelsSearch(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List public channels the caller is not subscribed to (cursor-paginated)
 
@@ -627,7 +627,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsSearch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsSearch`: GetChannels200Response
+	// response from `GetChannelsSearch`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsSearch`: %v\n", resp)
 }
 ```
@@ -649,7 +649,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -667,7 +667,7 @@ Name | Type | Description  | Notes
 
 ## GetChannelsSearchKeywordByKeyword
 
-> GetChannels200Response GetChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search channels by keyword (cursor-paginated)
 
@@ -698,7 +698,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetChannelsSearchKeywordByKeyword`: GetChannels200Response
+	// response from `GetChannelsSearchKeywordByKeyword`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsSearchKeywordByKeyword`: %v\n", resp)
 }
 ```
@@ -725,7 +725,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -743,7 +743,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidChannels
 
-> GetChannels200Response GetIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channels for a platform identity (cursor-paginated)
 
@@ -774,7 +774,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetIdentitiesByPiidChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidChannels`: GetChannels200Response
+	// response from `GetIdentitiesByPiidChannels`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetIdentitiesByPiidChannels`: %v\n", resp)
 }
 ```
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -819,7 +819,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannels
 
-> GetChannels200Response GetPublicChannels(ctx).Region(region).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetPublicChannels(ctx).Region(region).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Channels by Region (v2)
 
@@ -850,7 +850,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicChannels`: GetChannels200Response
+	// response from `GetPublicChannels`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannels`: %v\n", resp)
 }
 ```
@@ -873,7 +873,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -891,7 +891,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsById
 
-> CreateChannels201Response GetPublicChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelResponse GetPublicChannelsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a channel by ID
 
@@ -920,7 +920,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicChannelsById`: CreateChannels201Response
+	// response from `GetPublicChannelsById`: DomainChannelResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannelsById`: %v\n", resp)
 }
 ```
@@ -945,7 +945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannels201Response**](CreateChannels201Response.md)
+[**DomainChannelResponse**](DomainChannelResponse.md)
 
 ### Authorization
 
@@ -963,7 +963,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicChannelsSearchKeywordByKeyword
 
-> GetChannels200Response GetPublicChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetPublicChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Search channels by keyword (cursor-paginated)
 
@@ -994,7 +994,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicChannelsSearchKeywordByKeyword`: GetChannels200Response
+	// response from `GetPublicChannelsSearchKeywordByKeyword`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword`: %v\n", resp)
 }
 ```
@@ -1021,7 +1021,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -1039,7 +1039,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicIdentitiesByPiidChannels
 
-> GetChannels200Response GetPublicIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetPublicIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channels for a platform identity (cursor-paginated)
 
@@ -1070,7 +1070,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicIdentitiesByPiidChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicIdentitiesByPiidChannels`: GetChannels200Response
+	// response from `GetPublicIdentitiesByPiidChannels`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicIdentitiesByPiidChannels`: %v\n", resp)
 }
 ```
@@ -1097,7 +1097,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 
@@ -1115,7 +1115,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicTeamSetsSystem
 
-> GetChannelsByIdTeamSets200Response GetPublicTeamSetsSystem(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainTeamSetListResponse GetPublicTeamSetsSystem(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List platform-defined system team sets
 
@@ -1145,7 +1145,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicTeamSetsSystem``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPublicTeamSetsSystem`: GetChannelsByIdTeamSets200Response
+	// response from `GetPublicTeamSetsSystem`: DomainTeamSetListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicTeamSetsSystem`: %v\n", resp)
 }
 ```
@@ -1167,7 +1167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdTeamSets200Response**](GetChannelsByIdTeamSets200Response.md)
+[**DomainTeamSetListResponse**](DomainTeamSetListResponse.md)
 
 ### Authorization
 
@@ -1185,7 +1185,7 @@ Name | Type | Description  | Notes
 
 ## GetTeamSetsSystem
 
-> GetChannelsByIdTeamSets200Response GetTeamSetsSystem(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainTeamSetListResponse GetTeamSetsSystem(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List platform-defined system team sets
 
@@ -1215,7 +1215,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetTeamSetsSystem``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTeamSetsSystem`: GetChannelsByIdTeamSets200Response
+	// response from `GetTeamSetsSystem`: DomainTeamSetListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetTeamSetsSystem`: %v\n", resp)
 }
 ```
@@ -1237,7 +1237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannelsByIdTeamSets200Response**](GetChannelsByIdTeamSets200Response.md)
+[**DomainTeamSetListResponse**](DomainTeamSetListResponse.md)
 
 ### Authorization
 
@@ -1255,7 +1255,7 @@ Name | Type | Description  | Notes
 
 ## PatchChannelsByIdAccessCode
 
-> CreateChannels201Response PatchChannelsByIdAccessCode(ctx, id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelResponse PatchChannelsByIdAccessCode(ctx, id).RequestUpdateChannelAccessCodeRequest(requestUpdateChannelAccessCodeRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Channel Access Code
 
@@ -1285,7 +1285,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.PatchChannelsByIdAccessCode``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchChannelsByIdAccessCode`: CreateChannels201Response
+	// response from `PatchChannelsByIdAccessCode`: DomainChannelResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.PatchChannelsByIdAccessCode`: %v\n", resp)
 }
 ```
@@ -1311,7 +1311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannels201Response**](CreateChannels201Response.md)
+[**DomainChannelResponse**](DomainChannelResponse.md)
 
 ### Authorization
 
@@ -1329,7 +1329,7 @@ Name | Type | Description  | Notes
 
 ## UpdateChannelsById
 
-> CreateChannels201Response UpdateChannelsById(ctx, id).RequestUpdateChannelRequest(requestUpdateChannelRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelResponse UpdateChannelsById(ctx, id).RequestUpdateChannelRequest(requestUpdateChannelRequest).XTenantUserId(xTenantUserId).Execute()
 
 Update Channel
 
@@ -1359,7 +1359,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.UpdateChannelsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateChannelsById`: CreateChannels201Response
+	// response from `UpdateChannelsById`: DomainChannelResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.UpdateChannelsById`: %v\n", resp)
 }
 ```
@@ -1385,7 +1385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannels201Response**](CreateChannels201Response.md)
+[**DomainChannelResponse**](DomainChannelResponse.md)
 
 ### Authorization
 
@@ -1403,7 +1403,7 @@ Name | Type | Description  | Notes
 
 ## UpdateChannelsByIdTeamSetsByTeamSetId
 
-> CreateChannelsByIdTeamSets201Response UpdateChannelsByIdTeamSetsByTeamSetId(ctx, id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainTeamSetResponse UpdateChannelsByIdTeamSetsByTeamSetId(ctx, id, teamSetId).RequestCreateTeamSetRequest(requestCreateTeamSetRequest).XTenantUserId(xTenantUserId).Execute()
 
 Replace a channel team set's lineup
 
@@ -1434,7 +1434,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateChannelsByIdTeamSetsByTeamSetId`: CreateChannelsByIdTeamSets201Response
+	// response from `UpdateChannelsByIdTeamSetsByTeamSetId`: DomainTeamSetResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.UpdateChannelsByIdTeamSetsByTeamSetId`: %v\n", resp)
 }
 ```
@@ -1462,7 +1462,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateChannelsByIdTeamSets201Response**](CreateChannelsByIdTeamSets201Response.md)
+[**DomainTeamSetResponse**](DomainTeamSetResponse.md)
 
 ### Authorization
 

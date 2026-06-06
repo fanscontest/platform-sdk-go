@@ -43,7 +43,7 @@ func (r ApiCreateBlocksRequest) XTenantUserId(xTenantUserId string) ApiCreateBlo
 	return r
 }
 
-func (r ApiCreateBlocksRequest) Execute() (*CreateBlocks200Response, *http.Response, error) {
+func (r ApiCreateBlocksRequest) Execute() (*DomainBlockResponse, *http.Response, error) {
 	return r.ApiService.CreateBlocksExecute(r)
 }
 
@@ -68,13 +68,13 @@ func (a *BlocksAPIService) CreateBlocks(ctx context.Context) ApiCreateBlocksRequ
 }
 
 // Execute executes the request
-//  @return CreateBlocks200Response
-func (a *BlocksAPIService) CreateBlocksExecute(r ApiCreateBlocksRequest) (*CreateBlocks200Response, *http.Response, error) {
+//  @return DomainBlockResponse
+func (a *BlocksAPIService) CreateBlocksExecute(r ApiCreateBlocksRequest) (*DomainBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateBlocks200Response
+		localVarReturnValue  *DomainBlockResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BlocksAPIService.CreateBlocks")
@@ -342,7 +342,7 @@ func (r ApiGetBlocksRequest) XTenantUserId(xTenantUserId string) ApiGetBlocksReq
 	return r
 }
 
-func (r ApiGetBlocksRequest) Execute() (*GetBlocks200Response, *http.Response, error) {
+func (r ApiGetBlocksRequest) Execute() (*DomainBlockListResponse, *http.Response, error) {
 	return r.ApiService.GetBlocksExecute(r)
 }
 
@@ -362,13 +362,13 @@ func (a *BlocksAPIService) GetBlocks(ctx context.Context) ApiGetBlocksRequest {
 }
 
 // Execute executes the request
-//  @return GetBlocks200Response
-func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) (*GetBlocks200Response, *http.Response, error) {
+//  @return DomainBlockListResponse
+func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) (*DomainBlockListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetBlocks200Response
+		localVarReturnValue  *DomainBlockListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BlocksAPIService.GetBlocks")

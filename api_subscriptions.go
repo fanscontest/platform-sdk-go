@@ -43,7 +43,7 @@ func (r ApiCreateSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiCr
 	return r
 }
 
-func (r ApiCreateSubscriptionsRequest) Execute() (*CreateSubscriptions200Response, *http.Response, error) {
+func (r ApiCreateSubscriptionsRequest) Execute() (*DomainSubscriptionResponse, *http.Response, error) {
 	return r.ApiService.CreateSubscriptionsExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *SubscriptionsAPIService) CreateSubscriptions(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return CreateSubscriptions200Response
-func (a *SubscriptionsAPIService) CreateSubscriptionsExecute(r ApiCreateSubscriptionsRequest) (*CreateSubscriptions200Response, *http.Response, error) {
+//  @return DomainSubscriptionResponse
+func (a *SubscriptionsAPIService) CreateSubscriptionsExecute(r ApiCreateSubscriptionsRequest) (*DomainSubscriptionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateSubscriptions200Response
+		localVarReturnValue  *DomainSubscriptionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.CreateSubscriptions")
@@ -314,7 +314,7 @@ func (r ApiGetChannelsByIdSubscriptionsRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiGetChannelsByIdSubscriptionsRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+func (r ApiGetChannelsByIdSubscriptionsRequest) Execute() (*DomainSubscriptionListResponse, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdSubscriptionsExecute(r)
 }
 
@@ -340,13 +340,13 @@ func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptions(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdSubscriptions200Response
-func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptionsExecute(r ApiGetChannelsByIdSubscriptionsRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+//  @return DomainSubscriptionListResponse
+func (a *SubscriptionsAPIService) GetChannelsByIdSubscriptionsExecute(r ApiGetChannelsByIdSubscriptionsRequest) (*DomainSubscriptionListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
+		localVarReturnValue  *DomainSubscriptionListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetChannelsByIdSubscriptions")
@@ -472,7 +472,7 @@ func (r ApiGetIdentitiesByPiidSubscriptionsRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidSubscriptionsRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidSubscriptionsRequest) Execute() (*DomainSubscriptionListResponse, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidSubscriptionsExecute(r)
 }
 
@@ -494,13 +494,13 @@ func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptions(ctx context.C
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdSubscriptions200Response
-func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptionsExecute(r ApiGetIdentitiesByPiidSubscriptionsRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+//  @return DomainSubscriptionListResponse
+func (a *SubscriptionsAPIService) GetIdentitiesByPiidSubscriptionsExecute(r ApiGetIdentitiesByPiidSubscriptionsRequest) (*DomainSubscriptionListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
+		localVarReturnValue  *DomainSubscriptionListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetIdentitiesByPiidSubscriptions")
@@ -626,7 +626,7 @@ func (r ApiGetPublicChannelsByIdSubscriptionsRequest) XTenantUserId(xTenantUserI
 	return r
 }
 
-func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+func (r ApiGetPublicChannelsByIdSubscriptionsRequest) Execute() (*DomainSubscriptionListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicChannelsByIdSubscriptionsExecute(r)
 }
 
@@ -652,13 +652,13 @@ func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptions(ctx context
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdSubscriptions200Response
-func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptionsExecute(r ApiGetPublicChannelsByIdSubscriptionsRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+//  @return DomainSubscriptionListResponse
+func (a *SubscriptionsAPIService) GetPublicChannelsByIdSubscriptionsExecute(r ApiGetPublicChannelsByIdSubscriptionsRequest) (*DomainSubscriptionListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
+		localVarReturnValue  *DomainSubscriptionListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetPublicChannelsByIdSubscriptions")
@@ -784,7 +784,7 @@ func (r ApiGetSubscriptionsByIdLogsRequest) XTenantUserId(xTenantUserId string) 
 	return r
 }
 
-func (r ApiGetSubscriptionsByIdLogsRequest) Execute() (*GetContestsByIdParticipation200Response, *http.Response, error) {
+func (r ApiGetSubscriptionsByIdLogsRequest) Execute() (*DomainParticipationListResponse, *http.Response, error) {
 	return r.ApiService.GetSubscriptionsByIdLogsExecute(r)
 }
 
@@ -804,13 +804,13 @@ func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogs(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetContestsByIdParticipation200Response
-func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogsExecute(r ApiGetSubscriptionsByIdLogsRequest) (*GetContestsByIdParticipation200Response, *http.Response, error) {
+//  @return DomainParticipationListResponse
+func (a *SubscriptionsAPIService) GetSubscriptionsByIdLogsExecute(r ApiGetSubscriptionsByIdLogsRequest) (*DomainParticipationListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdParticipation200Response
+		localVarReturnValue  *DomainParticipationListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetSubscriptionsByIdLogs")
@@ -936,7 +936,7 @@ func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) XTenantUserId(xTenantU
 	return r
 }
 
-func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) Execute() (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+func (r ApiGetSubscriptionsSearchKeywordByKeywordRequest) Execute() (*DomainSubscriptionListResponse, *http.Response, error) {
 	return r.ApiService.GetSubscriptionsSearchKeywordByKeywordExecute(r)
 }
 
@@ -956,13 +956,13 @@ func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeyword(ctx con
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdSubscriptions200Response
-func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeywordExecute(r ApiGetSubscriptionsSearchKeywordByKeywordRequest) (*GetChannelsByIdSubscriptions200Response, *http.Response, error) {
+//  @return DomainSubscriptionListResponse
+func (a *SubscriptionsAPIService) GetSubscriptionsSearchKeywordByKeywordExecute(r ApiGetSubscriptionsSearchKeywordByKeywordRequest) (*DomainSubscriptionListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdSubscriptions200Response
+		localVarReturnValue  *DomainSubscriptionListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubscriptionsAPIService.GetSubscriptionsSearchKeywordByKeyword")

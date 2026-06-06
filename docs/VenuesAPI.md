@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateVenues
 
-> CreateAnalyticsImpression200Response CreateVenues(ctx).HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateVenues(ctx).HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a venue under the calling tenant
 
@@ -40,7 +40,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.CreateVenues``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateVenues`: CreateAnalyticsImpression200Response
+	// response from `CreateVenues`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `VenuesAPI.CreateVenues`: %v\n", resp)
 }
 ```
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## CreateVenuesByVenueIdChannels
 
-> CreateAnalyticsImpression200Response CreateVenuesByVenueIdChannels(ctx, venueId).HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateVenuesByVenueIdChannels(ctx, venueId).HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create a channel under one of the tenant's venues
 
@@ -107,7 +107,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.CreateVenuesByVenueIdChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateVenuesByVenueIdChannels`: CreateAnalyticsImpression200Response
+	// response from `CreateVenuesByVenueIdChannels`: HandlerStatusResponseResponse
 	fmt.Fprintf(os.Stdout, "Response from `VenuesAPI.CreateVenuesByVenueIdChannels`: %v\n", resp)
 }
 ```
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAnalyticsImpression200Response**](CreateAnalyticsImpression200Response.md)
+[**HandlerStatusResponseResponse**](HandlerStatusResponseResponse.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetVenues
 
-> GetVenues200Response GetVenues(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainVenueListResponse GetVenues(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List venues owned by the calling tenant
 
@@ -179,7 +179,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.GetVenues``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetVenues`: GetVenues200Response
+	// response from `GetVenues`: DomainVenueListResponse
 	fmt.Fprintf(os.Stdout, "Response from `VenuesAPI.GetVenues`: %v\n", resp)
 }
 ```
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetVenues200Response**](GetVenues200Response.md)
+[**DomainVenueListResponse**](DomainVenueListResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ## GetVenuesByVenueIdChannels
 
-> GetChannels200Response GetVenuesByVenueIdChannels(ctx, venueId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetVenuesByVenueIdChannels(ctx, venueId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 List channels under one of the tenant's venues
 
@@ -248,7 +248,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.GetVenuesByVenueIdChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetVenuesByVenueIdChannels`: GetChannels200Response
+	// response from `GetVenuesByVenueIdChannels`: DomainChannelListResponse
 	fmt.Fprintf(os.Stdout, "Response from `VenuesAPI.GetVenuesByVenueIdChannels`: %v\n", resp)
 }
 ```
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetChannels200Response**](GetChannels200Response.md)
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
 
 ### Authorization
 

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateSponsors
 
-> CreateSponsors201Response CreateSponsors(ctx).RequestCreateSponsorRequest(requestCreateSponsorRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorResponse CreateSponsors(ctx).RequestCreateSponsorRequest(requestCreateSponsorRequest).XTenantUserId(xTenantUserId).Execute()
 
 Create Sponsor (v2)
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.CreateSponsors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateSponsors`: CreateSponsors201Response
+	// response from `CreateSponsors`: DomainSponsorResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.CreateSponsors`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsors201Response**](CreateSponsors201Response.md)
+[**DomainSponsorResponse**](DomainSponsorResponse.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsors
 
-> GetSponsors200Response GetSponsors(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorListResponse GetSponsors(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsors (v2)
 
@@ -111,7 +111,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsors``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsors`: GetSponsors200Response
+	// response from `GetSponsors`: DomainSponsorListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsors`: %v\n", resp)
 }
 ```
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSponsors200Response**](GetSponsors200Response.md)
+[**DomainSponsorListResponse**](DomainSponsorListResponse.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorsById
 
-> CreateSponsors201Response GetSponsorsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorResponse GetSponsorsById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsor by ID (v2)
 
@@ -180,7 +180,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsorsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorsById`: CreateSponsors201Response
+	// response from `GetSponsorsById`: DomainSponsorResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsorsById`: %v\n", resp)
 }
 ```
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSponsors201Response**](CreateSponsors201Response.md)
+[**DomainSponsorResponse**](DomainSponsorResponse.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorsByIdSponsorships
 
-> GetContestsByContestIdSponsorships200Response GetSponsorsByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipListResponse GetSponsorsByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
 
 Get Sponsor Sponsorships (v2)
 
@@ -254,7 +254,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorsAPI.GetSponsorsByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSponsorsByIdSponsorships`: GetContestsByContestIdSponsorships200Response
+	// response from `GetSponsorsByIdSponsorships`: DomainSponsorshipListResponse
 	fmt.Fprintf(os.Stdout, "Response from `SponsorsAPI.GetSponsorsByIdSponsorships`: %v\n", resp)
 }
 ```
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetContestsByContestIdSponsorships200Response**](GetContestsByContestIdSponsorships200Response.md)
+[**DomainSponsorshipListResponse**](DomainSponsorshipListResponse.md)
 
 ### Authorization
 

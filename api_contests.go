@@ -43,7 +43,7 @@ func (r ApiCreateContestsRequest) XTenantUserId(xTenantUserId string) ApiCreateC
 	return r
 }
 
-func (r ApiCreateContestsRequest) Execute() (*CreateContests201Response, *http.Response, error) {
+func (r ApiCreateContestsRequest) Execute() (*DomainContestResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *ContestsAPIService) CreateContests(ctx context.Context) ApiCreateContes
 }
 
 // Execute executes the request
-//  @return CreateContests201Response
-func (a *ContestsAPIService) CreateContestsExecute(r ApiCreateContestsRequest) (*CreateContests201Response, *http.Response, error) {
+//  @return DomainContestResponse
+func (a *ContestsAPIService) CreateContestsExecute(r ApiCreateContestsRequest) (*DomainContestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContests201Response
+		localVarReturnValue  *DomainContestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContests")
@@ -195,7 +195,7 @@ func (r ApiCreateContestsByContestIdBuddyBoardsRequest) XTenantUserId(xTenantUse
 	return r
 }
 
-func (r ApiCreateContestsByContestIdBuddyBoardsRequest) Execute() (*CreateContestsByContestIdBuddyBoards200Response, *http.Response, error) {
+func (r ApiCreateContestsByContestIdBuddyBoardsRequest) Execute() (*DomainBuddyBoardResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByContestIdBuddyBoardsExecute(r)
 }
 
@@ -215,13 +215,13 @@ func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoards(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CreateContestsByContestIdBuddyBoards200Response
-func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsExecute(r ApiCreateContestsByContestIdBuddyBoardsRequest) (*CreateContestsByContestIdBuddyBoards200Response, *http.Response, error) {
+//  @return DomainBuddyBoardResponse
+func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsExecute(r ApiCreateContestsByContestIdBuddyBoardsRequest) (*DomainBuddyBoardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContestsByContestIdBuddyBoards200Response
+		localVarReturnValue  *DomainBuddyBoardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByContestIdBuddyBoards")
@@ -333,7 +333,7 @@ func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptRequest) XT
 	return r
 }
 
-func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptExecute(r)
 }
 
@@ -358,13 +358,13 @@ func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdInvite
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptExecute(r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptExecute(r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept")
@@ -483,7 +483,7 @@ func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineRequest) X
 	return r
 }
 
-func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineExecute(r)
 }
 
@@ -505,13 +505,13 @@ func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdInvite
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineExecute(r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineExecute(r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesDeclineRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByContestIdBuddyBoardsByBoardIdInvitesDecline")
@@ -637,7 +637,7 @@ func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdMembersRequest) XTenantU
 	return r
 }
 
-func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r)
 }
 
@@ -662,13 +662,13 @@ func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdMember
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiCreateContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiCreateContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByContestIdBuddyBoardsByBoardIdMembers")
@@ -809,7 +809,7 @@ func (r ApiCreateContestsByIdHostingsRequest) XTenantUserId(xTenantUserId string
 	return r
 }
 
-func (r ApiCreateContestsByIdHostingsRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdHostingsRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdHostingsExecute(r)
 }
 
@@ -833,13 +833,13 @@ func (a *ContestsAPIService) CreateContestsByIdHostings(ctx context.Context, id 
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByIdHostingsExecute(r ApiCreateContestsByIdHostingsRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByIdHostingsExecute(r ApiCreateContestsByIdHostingsRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByIdHostings")
@@ -973,7 +973,7 @@ func (r ApiCreateContestsByIdHostingsByHostingIdAcceptRequest) XTenantUserId(xTe
 	return r
 }
 
-func (r ApiCreateContestsByIdHostingsByHostingIdAcceptRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdHostingsByHostingIdAcceptRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdHostingsByHostingIdAcceptExecute(r)
 }
 
@@ -997,13 +997,13 @@ func (a *ContestsAPIService) CreateContestsByIdHostingsByHostingIdAccept(ctx con
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByIdHostingsByHostingIdAcceptExecute(r ApiCreateContestsByIdHostingsByHostingIdAcceptRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByIdHostingsByHostingIdAcceptExecute(r ApiCreateContestsByIdHostingsByHostingIdAcceptRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByIdHostingsByHostingIdAccept")
@@ -1111,7 +1111,7 @@ func (r ApiCreateContestsByIdHostingsByHostingIdDeclineRequest) XTenantUserId(xT
 	return r
 }
 
-func (r ApiCreateContestsByIdHostingsByHostingIdDeclineRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdHostingsByHostingIdDeclineRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdHostingsByHostingIdDeclineExecute(r)
 }
 
@@ -1135,13 +1135,13 @@ func (a *ContestsAPIService) CreateContestsByIdHostingsByHostingIdDecline(ctx co
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByIdHostingsByHostingIdDeclineExecute(r ApiCreateContestsByIdHostingsByHostingIdDeclineRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByIdHostingsByHostingIdDeclineExecute(r ApiCreateContestsByIdHostingsByHostingIdDeclineRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByIdHostingsByHostingIdDecline")
@@ -1255,7 +1255,7 @@ func (r ApiCreateContestsByIdParticipationsRequest) XTenantUserId(xTenantUserId 
 	return r
 }
 
-func (r ApiCreateContestsByIdParticipationsRequest) Execute() (*CreateAnalyticsImpression200Response, *http.Response, error) {
+func (r ApiCreateContestsByIdParticipationsRequest) Execute() (*HandlerStatusResponseResponse, *http.Response, error) {
 	return r.ApiService.CreateContestsByIdParticipationsExecute(r)
 }
 
@@ -1278,13 +1278,13 @@ func (a *ContestsAPIService) CreateContestsByIdParticipations(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return CreateAnalyticsImpression200Response
-func (a *ContestsAPIService) CreateContestsByIdParticipationsExecute(r ApiCreateContestsByIdParticipationsRequest) (*CreateAnalyticsImpression200Response, *http.Response, error) {
+//  @return HandlerStatusResponseResponse
+func (a *ContestsAPIService) CreateContestsByIdParticipationsExecute(r ApiCreateContestsByIdParticipationsRequest) (*HandlerStatusResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateAnalyticsImpression200Response
+		localVarReturnValue  *HandlerStatusResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateContestsByIdParticipations")
@@ -1413,7 +1413,7 @@ func (r ApiCreateTournamentsByIdContestRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiCreateTournamentsByIdContestRequest) Execute() (*CreateContests201Response, *http.Response, error) {
+func (r ApiCreateTournamentsByIdContestRequest) Execute() (*DomainContestResponse, *http.Response, error) {
 	return r.ApiService.CreateTournamentsByIdContestExecute(r)
 }
 
@@ -1433,13 +1433,13 @@ func (a *ContestsAPIService) CreateTournamentsByIdContest(ctx context.Context, i
 }
 
 // Execute executes the request
-//  @return CreateContests201Response
-func (a *ContestsAPIService) CreateTournamentsByIdContestExecute(r ApiCreateTournamentsByIdContestRequest) (*CreateContests201Response, *http.Response, error) {
+//  @return DomainContestResponse
+func (a *ContestsAPIService) CreateTournamentsByIdContestExecute(r ApiCreateTournamentsByIdContestRequest) (*DomainContestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContests201Response
+		localVarReturnValue  *DomainContestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.CreateTournamentsByIdContest")
@@ -1720,7 +1720,7 @@ func (r ApiGetChannelsByIdContestsRequest) XTenantUserId(xTenantUserId string) A
 	return r
 }
 
-func (r ApiGetChannelsByIdContestsRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetChannelsByIdContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetChannelsByIdContestsExecute(r)
 }
 
@@ -1742,13 +1742,13 @@ func (a *ContestsAPIService) GetChannelsByIdContests(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetChannelsByIdContestsExecute(r ApiGetChannelsByIdContestsRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetChannelsByIdContestsExecute(r ApiGetChannelsByIdContestsRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetChannelsByIdContests")
@@ -1884,7 +1884,7 @@ func (r ApiGetContestsRequest) XTenantUserId(xTenantUserId string) ApiGetContest
 	return r
 }
 
-func (r ApiGetContestsRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsExecute(r)
 }
 
@@ -1902,13 +1902,13 @@ func (a *ContestsAPIService) GetContests(ctx context.Context) ApiGetContestsRequ
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetContestsExecute(r ApiGetContestsRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetContestsExecute(r ApiGetContestsRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContests")
@@ -2020,7 +2020,7 @@ func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdRequest) XTenantUserId(xTen
 	return r
 }
 
-func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdRequest) Execute() (*GetContestsByContestIdBuddyBoardsByBoardId200Response, *http.Response, error) {
+func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdRequest) Execute() (*DomainBuddyBoardViewResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByContestIdBuddyBoardsByBoardIdExecute(r)
 }
 
@@ -2044,13 +2044,13 @@ func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardId(ctx cont
 }
 
 // Execute executes the request
-//  @return GetContestsByContestIdBuddyBoardsByBoardId200Response
-func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdExecute(r ApiGetContestsByContestIdBuddyBoardsByBoardIdRequest) (*GetContestsByContestIdBuddyBoardsByBoardId200Response, *http.Response, error) {
+//  @return DomainBuddyBoardViewResponse
+func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdExecute(r ApiGetContestsByContestIdBuddyBoardsByBoardIdRequest) (*DomainBuddyBoardViewResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByContestIdBuddyBoardsByBoardId200Response
+		localVarReturnValue  *DomainBuddyBoardViewResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByContestIdBuddyBoardsByBoardId")
@@ -2169,7 +2169,7 @@ func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) XTenantUser
 	return r
 }
 
-func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response, *http.Response, error) {
+func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r)
 }
 
@@ -2193,13 +2193,13 @@ func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembers(c
 }
 
 // Execute executes the request
-//  @return GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response
-func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response, *http.Response, error) {
+//  @return DomainBuddyBoardMembersResponseResponse
+func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response
+		localVarReturnValue  *DomainBuddyBoardMembersResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByContestIdBuddyBoardsByBoardIdMembers")
@@ -2318,7 +2318,7 @@ func (r ApiGetContestsByContestIdParticipantsByMemberIdResultRequest) XTenantUse
 	return r
 }
 
-func (r ApiGetContestsByContestIdParticipantsByMemberIdResultRequest) Execute() (*GetContestsByContestIdParticipantsByMemberIdResult200Response, *http.Response, error) {
+func (r ApiGetContestsByContestIdParticipantsByMemberIdResultRequest) Execute() (*DomainMemberResultResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByContestIdParticipantsByMemberIdResultExecute(r)
 }
 
@@ -2342,13 +2342,13 @@ func (a *ContestsAPIService) GetContestsByContestIdParticipantsByMemberIdResult(
 }
 
 // Execute executes the request
-//  @return GetContestsByContestIdParticipantsByMemberIdResult200Response
-func (a *ContestsAPIService) GetContestsByContestIdParticipantsByMemberIdResultExecute(r ApiGetContestsByContestIdParticipantsByMemberIdResultRequest) (*GetContestsByContestIdParticipantsByMemberIdResult200Response, *http.Response, error) {
+//  @return DomainMemberResultResponse
+func (a *ContestsAPIService) GetContestsByContestIdParticipantsByMemberIdResultExecute(r ApiGetContestsByContestIdParticipantsByMemberIdResultRequest) (*DomainMemberResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByContestIdParticipantsByMemberIdResult200Response
+		localVarReturnValue  *DomainMemberResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByContestIdParticipantsByMemberIdResult")
@@ -2466,7 +2466,7 @@ func (r ApiGetContestsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetCon
 	return r
 }
 
-func (r ApiGetContestsByIdRequest) Execute() (*CreateContests201Response, *http.Response, error) {
+func (r ApiGetContestsByIdRequest) Execute() (*DomainContestResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdExecute(r)
 }
 
@@ -2488,13 +2488,13 @@ func (a *ContestsAPIService) GetContestsById(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return CreateContests201Response
-func (a *ContestsAPIService) GetContestsByIdExecute(r ApiGetContestsByIdRequest) (*CreateContests201Response, *http.Response, error) {
+//  @return DomainContestResponse
+func (a *ContestsAPIService) GetContestsByIdExecute(r ApiGetContestsByIdRequest) (*DomainContestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContests201Response
+		localVarReturnValue  *DomainContestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsById")
@@ -2614,7 +2614,7 @@ func (r ApiGetContestsByIdHostingsRequest) XTenantUserId(xTenantUserId string) A
 	return r
 }
 
-func (r ApiGetContestsByIdHostingsRequest) Execute() (*GetContestsByIdHostings200Response, *http.Response, error) {
+func (r ApiGetContestsByIdHostingsRequest) Execute() (*DomainContestHostingListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdHostingsExecute(r)
 }
 
@@ -2634,13 +2634,13 @@ func (a *ContestsAPIService) GetContestsByIdHostings(ctx context.Context, id str
 }
 
 // Execute executes the request
-//  @return GetContestsByIdHostings200Response
-func (a *ContestsAPIService) GetContestsByIdHostingsExecute(r ApiGetContestsByIdHostingsRequest) (*GetContestsByIdHostings200Response, *http.Response, error) {
+//  @return DomainContestHostingListResponse
+func (a *ContestsAPIService) GetContestsByIdHostingsExecute(r ApiGetContestsByIdHostingsRequest) (*DomainContestHostingListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdHostings200Response
+		localVarReturnValue  *DomainContestHostingListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByIdHostings")
@@ -2756,6 +2756,8 @@ type ApiGetContestsByIdParticipationRequest struct {
 	id string
 	cursor *string
 	limit *int32
+	winners *bool
+	status *string
 	xTenantUserId *string
 }
 
@@ -2771,13 +2773,25 @@ func (r ApiGetContestsByIdParticipationRequest) Limit(limit int32) ApiGetContest
 	return r
 }
 
+// Restrict to winning participations only
+func (r ApiGetContestsByIdParticipationRequest) Winners(winners bool) ApiGetContestsByIdParticipationRequest {
+	r.winners = &winners
+	return r
+}
+
+// Restrict to a single participation status (enrolled, participated, timed_out); omit for all
+func (r ApiGetContestsByIdParticipationRequest) Status(status string) ApiGetContestsByIdParticipationRequest {
+	r.status = &status
+	return r
+}
+
 // Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
 func (r ApiGetContestsByIdParticipationRequest) XTenantUserId(xTenantUserId string) ApiGetContestsByIdParticipationRequest {
 	r.xTenantUserId = &xTenantUserId
 	return r
 }
 
-func (r ApiGetContestsByIdParticipationRequest) Execute() (*GetContestsByIdParticipation200Response, *http.Response, error) {
+func (r ApiGetContestsByIdParticipationRequest) Execute() (*DomainParticipationListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdParticipationExecute(r)
 }
 
@@ -2797,13 +2811,13 @@ func (a *ContestsAPIService) GetContestsByIdParticipation(ctx context.Context, i
 }
 
 // Execute executes the request
-//  @return GetContestsByIdParticipation200Response
-func (a *ContestsAPIService) GetContestsByIdParticipationExecute(r ApiGetContestsByIdParticipationRequest) (*GetContestsByIdParticipation200Response, *http.Response, error) {
+//  @return DomainParticipationListResponse
+func (a *ContestsAPIService) GetContestsByIdParticipationExecute(r ApiGetContestsByIdParticipationRequest) (*DomainParticipationListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdParticipation200Response
+		localVarReturnValue  *DomainParticipationListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByIdParticipation")
@@ -2823,6 +2837,12 @@ func (a *ContestsAPIService) GetContestsByIdParticipationExecute(r ApiGetContest
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	if r.winners != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "winners", r.winners, "form", "")
+	}
+	if r.status != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2936,7 +2956,7 @@ func (r ApiGetContestsByIdQuestionStatsRequest) XTenantUserId(xTenantUserId stri
 	return r
 }
 
-func (r ApiGetContestsByIdQuestionStatsRequest) Execute() (*GetContestsByIdQuestionStats200Response, *http.Response, error) {
+func (r ApiGetContestsByIdQuestionStatsRequest) Execute() (*DomainQuestionStatsListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByIdQuestionStatsExecute(r)
 }
 
@@ -2961,13 +2981,13 @@ func (a *ContestsAPIService) GetContestsByIdQuestionStats(ctx context.Context, i
 }
 
 // Execute executes the request
-//  @return GetContestsByIdQuestionStats200Response
-func (a *ContestsAPIService) GetContestsByIdQuestionStatsExecute(r ApiGetContestsByIdQuestionStatsRequest) (*GetContestsByIdQuestionStats200Response, *http.Response, error) {
+//  @return DomainQuestionStatsListResponse
+func (a *ContestsAPIService) GetContestsByIdQuestionStatsExecute(r ApiGetContestsByIdQuestionStatsRequest) (*DomainQuestionStatsListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByIdQuestionStats200Response
+		localVarReturnValue  *DomainQuestionStatsListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByIdQuestionStats")
@@ -3117,7 +3137,7 @@ func (r ApiGetContestsSearchRequest) XTenantUserId(xTenantUserId string) ApiGetC
 	return r
 }
 
-func (r ApiGetContestsSearchRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetContestsSearchRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsSearchExecute(r)
 }
 
@@ -3135,13 +3155,13 @@ func (a *ContestsAPIService) GetContestsSearch(ctx context.Context) ApiGetContes
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetContestsSearchExecute(r ApiGetContestsSearchRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetContestsSearchExecute(r ApiGetContestsSearchRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsSearch")
@@ -3259,7 +3279,7 @@ func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) XTenantUserId(xTenantUse
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Execute() (*GetIdentitiesByPiidBuddyBoardInvites200Response, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Execute() (*DomainBuddyBoardInvitesResponseResponse, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidBuddyBoardInvitesExecute(r)
 }
 
@@ -3282,13 +3302,13 @@ func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvites(ctx context.Co
 }
 
 // Execute executes the request
-//  @return GetIdentitiesByPiidBuddyBoardInvites200Response
-func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvitesExecute(r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) (*GetIdentitiesByPiidBuddyBoardInvites200Response, *http.Response, error) {
+//  @return DomainBuddyBoardInvitesResponseResponse
+func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvitesExecute(r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) (*DomainBuddyBoardInvitesResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetIdentitiesByPiidBuddyBoardInvites200Response
+		localVarReturnValue  *DomainBuddyBoardInvitesResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetIdentitiesByPiidBuddyBoardInvites")
@@ -3422,7 +3442,7 @@ func (r ApiGetIdentitiesByPiidContestsRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidContestsRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidContestsExecute(r)
 }
 
@@ -3445,13 +3465,13 @@ func (a *ContestsAPIService) GetIdentitiesByPiidContests(ctx context.Context, pi
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetIdentitiesByPiidContestsExecute(r ApiGetIdentitiesByPiidContestsRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetIdentitiesByPiidContestsExecute(r ApiGetIdentitiesByPiidContestsRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetIdentitiesByPiidContests")
@@ -3577,7 +3597,7 @@ func (r ApiGetPublicChannelsByIdContestsRequest) XTenantUserId(xTenantUserId str
 	return r
 }
 
-func (r ApiGetPublicChannelsByIdContestsRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetPublicChannelsByIdContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicChannelsByIdContestsExecute(r)
 }
 
@@ -3599,13 +3619,13 @@ func (a *ContestsAPIService) GetPublicChannelsByIdContests(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetPublicChannelsByIdContestsExecute(r ApiGetPublicChannelsByIdContestsRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetPublicChannelsByIdContestsExecute(r ApiGetPublicChannelsByIdContestsRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicChannelsByIdContests")
@@ -3755,7 +3775,7 @@ func (r ApiGetPublicContestsRequest) XTenantUserId(xTenantUserId string) ApiGetP
 	return r
 }
 
-func (r ApiGetPublicContestsRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetPublicContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsExecute(r)
 }
 
@@ -3773,13 +3793,13 @@ func (a *ContestsAPIService) GetPublicContests(ctx context.Context) ApiGetPublic
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetPublicContestsExecute(r ApiGetPublicContestsRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetPublicContestsExecute(r ApiGetPublicContestsRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContests")
@@ -3897,7 +3917,7 @@ func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) XTenantUserI
 	return r
 }
 
-func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) Execute() (*GetContestsByContestIdBuddyBoardsByBoardId200Response, *http.Response, error) {
+func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) Execute() (*DomainBuddyBoardViewResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByContestIdBuddyBoardsByBoardIdExecute(r)
 }
 
@@ -3921,13 +3941,13 @@ func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardId(ct
 }
 
 // Execute executes the request
-//  @return GetContestsByContestIdBuddyBoardsByBoardId200Response
-func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdExecute(r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) (*GetContestsByContestIdBuddyBoardsByBoardId200Response, *http.Response, error) {
+//  @return DomainBuddyBoardViewResponse
+func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdExecute(r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) (*DomainBuddyBoardViewResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByContestIdBuddyBoardsByBoardId200Response
+		localVarReturnValue  *DomainBuddyBoardViewResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByContestIdBuddyBoardsByBoardId")
@@ -4046,7 +4066,7 @@ func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) XTena
 	return r
 }
 
-func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response, *http.Response, error) {
+func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r)
 }
 
@@ -4070,13 +4090,13 @@ func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdMem
 }
 
 // Execute executes the request
-//  @return GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response
-func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response, *http.Response, error) {
+//  @return DomainBuddyBoardMembersResponseResponse
+func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetContestsByContestIdBuddyBoardsByBoardIdMembers200Response
+		localVarReturnValue  *DomainBuddyBoardMembersResponseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers")
@@ -4194,7 +4214,7 @@ func (r ApiGetPublicContestsByIdRequest) XTenantUserId(xTenantUserId string) Api
 	return r
 }
 
-func (r ApiGetPublicContestsByIdRequest) Execute() (*CreateContests201Response, *http.Response, error) {
+func (r ApiGetPublicContestsByIdRequest) Execute() (*DomainContestResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByIdExecute(r)
 }
 
@@ -4216,13 +4236,13 @@ func (a *ContestsAPIService) GetPublicContestsById(ctx context.Context, id strin
 }
 
 // Execute executes the request
-//  @return CreateContests201Response
-func (a *ContestsAPIService) GetPublicContestsByIdExecute(r ApiGetPublicContestsByIdRequest) (*CreateContests201Response, *http.Response, error) {
+//  @return DomainContestResponse
+func (a *ContestsAPIService) GetPublicContestsByIdExecute(r ApiGetPublicContestsByIdRequest) (*DomainContestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContests201Response
+		localVarReturnValue  *DomainContestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsById")
@@ -4328,7 +4348,7 @@ func (r ApiGetPublicContestsByIdGroupsRequest) XTenantUserId(xTenantUserId strin
 	return r
 }
 
-func (r ApiGetPublicContestsByIdGroupsRequest) Execute() (*GetPublicContestsByIdGroups200Response, *http.Response, error) {
+func (r ApiGetPublicContestsByIdGroupsRequest) Execute() (*DomainContestGroupsResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByIdGroupsExecute(r)
 }
 
@@ -4350,13 +4370,13 @@ func (a *ContestsAPIService) GetPublicContestsByIdGroups(ctx context.Context, id
 }
 
 // Execute executes the request
-//  @return GetPublicContestsByIdGroups200Response
-func (a *ContestsAPIService) GetPublicContestsByIdGroupsExecute(r ApiGetPublicContestsByIdGroupsRequest) (*GetPublicContestsByIdGroups200Response, *http.Response, error) {
+//  @return DomainContestGroupsResponse
+func (a *ContestsAPIService) GetPublicContestsByIdGroupsExecute(r ApiGetPublicContestsByIdGroupsRequest) (*DomainContestGroupsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicContestsByIdGroups200Response
+		localVarReturnValue  *DomainContestGroupsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByIdGroups")
@@ -4476,7 +4496,7 @@ func (r ApiGetPublicContestsByIdSubmissionFeedRequest) XTenantUserId(xTenantUser
 	return r
 }
 
-func (r ApiGetPublicContestsByIdSubmissionFeedRequest) Execute() (*GetPublicContestsByIdSubmissionFeed200Response, *http.Response, error) {
+func (r ApiGetPublicContestsByIdSubmissionFeedRequest) Execute() (*DomainSubmissionFeedItemListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsByIdSubmissionFeedExecute(r)
 }
 
@@ -4496,13 +4516,13 @@ func (a *ContestsAPIService) GetPublicContestsByIdSubmissionFeed(ctx context.Con
 }
 
 // Execute executes the request
-//  @return GetPublicContestsByIdSubmissionFeed200Response
-func (a *ContestsAPIService) GetPublicContestsByIdSubmissionFeedExecute(r ApiGetPublicContestsByIdSubmissionFeedRequest) (*GetPublicContestsByIdSubmissionFeed200Response, *http.Response, error) {
+//  @return DomainSubmissionFeedItemListResponse
+func (a *ContestsAPIService) GetPublicContestsByIdSubmissionFeedExecute(r ApiGetPublicContestsByIdSubmissionFeedRequest) (*DomainSubmissionFeedItemListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetPublicContestsByIdSubmissionFeed200Response
+		localVarReturnValue  *DomainSubmissionFeedItemListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByIdSubmissionFeed")
@@ -4646,7 +4666,7 @@ func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) XTenantUserId(xTenant
 	return r
 }
 
-func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) Execute() (*GetChannelsByIdContests200Response, *http.Response, error) {
+func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
 	return r.ApiService.GetPublicContestsSearchKeywordByKeywordExecute(r)
 }
 
@@ -4666,13 +4686,13 @@ func (a *ContestsAPIService) GetPublicContestsSearchKeywordByKeyword(ctx context
 }
 
 // Execute executes the request
-//  @return GetChannelsByIdContests200Response
-func (a *ContestsAPIService) GetPublicContestsSearchKeywordByKeywordExecute(r ApiGetPublicContestsSearchKeywordByKeywordRequest) (*GetChannelsByIdContests200Response, *http.Response, error) {
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetPublicContestsSearchKeywordByKeywordExecute(r ApiGetPublicContestsSearchKeywordByKeywordRequest) (*DomainContestListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetChannelsByIdContests200Response
+		localVarReturnValue  *DomainContestListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsSearchKeywordByKeyword")
@@ -4794,7 +4814,7 @@ func (r ApiPatchContestsByIdRequest) XTenantUserId(xTenantUserId string) ApiPatc
 	return r
 }
 
-func (r ApiPatchContestsByIdRequest) Execute() (*CreateContests201Response, *http.Response, error) {
+func (r ApiPatchContestsByIdRequest) Execute() (*DomainContestResponse, *http.Response, error) {
 	return r.ApiService.PatchContestsByIdExecute(r)
 }
 
@@ -4814,13 +4834,13 @@ func (a *ContestsAPIService) PatchContestsById(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return CreateContests201Response
-func (a *ContestsAPIService) PatchContestsByIdExecute(r ApiPatchContestsByIdRequest) (*CreateContests201Response, *http.Response, error) {
+//  @return DomainContestResponse
+func (a *ContestsAPIService) PatchContestsByIdExecute(r ApiPatchContestsByIdRequest) (*DomainContestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContests201Response
+		localVarReturnValue  *DomainContestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.PatchContestsById")
@@ -4938,7 +4958,7 @@ func (r ApiUpdateContestsByIdHeaderImageRequest) XTenantUserId(xTenantUserId str
 	return r
 }
 
-func (r ApiUpdateContestsByIdHeaderImageRequest) Execute() (*CreateContests201Response, *http.Response, error) {
+func (r ApiUpdateContestsByIdHeaderImageRequest) Execute() (*DomainContestResponse, *http.Response, error) {
 	return r.ApiService.UpdateContestsByIdHeaderImageExecute(r)
 }
 
@@ -4958,13 +4978,13 @@ func (a *ContestsAPIService) UpdateContestsByIdHeaderImage(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return CreateContests201Response
-func (a *ContestsAPIService) UpdateContestsByIdHeaderImageExecute(r ApiUpdateContestsByIdHeaderImageRequest) (*CreateContests201Response, *http.Response, error) {
+//  @return DomainContestResponse
+func (a *ContestsAPIService) UpdateContestsByIdHeaderImageExecute(r ApiUpdateContestsByIdHeaderImageRequest) (*DomainContestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateContests201Response
+		localVarReturnValue  *DomainContestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.UpdateContestsByIdHeaderImage")

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateIdentities
 
-> GetIdentities200Response CreateIdentities(ctx).HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainPlatformIdentityResponse CreateIdentities(ctx).HandlerCreatePlatformIdentityRequest(handlerCreatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
 
 Register a tenant-supplied end-user as a platform identity
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.CreateIdentities``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateIdentities`: GetIdentities200Response
+	// response from `CreateIdentities`: DomainPlatformIdentityResponse
 	fmt.Fprintf(os.Stdout, "Response from `IdentitiesAPI.CreateIdentities`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetIdentities200Response**](GetIdentities200Response.md)
+[**DomainPlatformIdentityResponse**](DomainPlatformIdentityResponse.md)
 
 ### Authorization
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentities
 
-> GetIdentities200Response GetIdentities(ctx).TenantUserId(tenantUserId).XTenantUserId(xTenantUserId).Execute()
+> DomainPlatformIdentityResponse GetIdentities(ctx).TenantUserId(tenantUserId).XTenantUserId(xTenantUserId).Execute()
 
 Look up a platform identity by tenant_user_id (409 recovery)
 
@@ -181,7 +181,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.GetIdentities``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentities`: GetIdentities200Response
+	// response from `GetIdentities`: DomainPlatformIdentityResponse
 	fmt.Fprintf(os.Stdout, "Response from `IdentitiesAPI.GetIdentities`: %v\n", resp)
 }
 ```
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetIdentities200Response**](GetIdentities200Response.md)
+[**DomainPlatformIdentityResponse**](DomainPlatformIdentityResponse.md)
 
 ### Authorization
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesById
 
-> GetIdentities200Response GetIdentitiesById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainPlatformIdentityResponse GetIdentitiesById(ctx, id).XTenantUserId(xTenantUserId).Execute()
 
 Get a platform identity by ID, scoped to the calling tenant
 
@@ -249,7 +249,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.GetIdentitiesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesById`: GetIdentities200Response
+	// response from `GetIdentitiesById`: DomainPlatformIdentityResponse
 	fmt.Fprintf(os.Stdout, "Response from `IdentitiesAPI.GetIdentitiesById`: %v\n", resp)
 }
 ```
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetIdentities200Response**](GetIdentities200Response.md)
+[**DomainPlatformIdentityResponse**](DomainPlatformIdentityResponse.md)
 
 ### Authorization
 
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## UpdateIdentitiesById
 
-> GetIdentities200Response UpdateIdentitiesById(ctx, id).HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainPlatformIdentityResponse UpdateIdentitiesById(ctx, id).HandlerUpdatePlatformIdentityRequest(handlerUpdatePlatformIdentityRequest).XTenantUserId(xTenantUserId).Execute()
 
 Replace a platform identity's profile, scoped to the calling tenant
 
@@ -322,7 +322,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `IdentitiesAPI.UpdateIdentitiesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateIdentitiesById`: GetIdentities200Response
+	// response from `UpdateIdentitiesById`: DomainPlatformIdentityResponse
 	fmt.Fprintf(os.Stdout, "Response from `IdentitiesAPI.UpdateIdentitiesById`: %v\n", resp)
 }
 ```
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetIdentities200Response**](GetIdentities200Response.md)
+[**DomainPlatformIdentityResponse**](DomainPlatformIdentityResponse.md)
 
 ### Authorization
 
