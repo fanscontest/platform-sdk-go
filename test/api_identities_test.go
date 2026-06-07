@@ -47,18 +47,6 @@ func Test_platform_IdentitiesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test IdentitiesAPIService GetIdentities", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.IdentitiesAPI.GetIdentities(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test IdentitiesAPIService GetIdentitiesById", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

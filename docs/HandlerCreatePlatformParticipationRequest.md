@@ -6,15 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChannelId** | **string** |  | 
 **DisplayName** | **string** |  | 
+**PlatformIdentityId** | **string** |  | 
 **Solution** | Pointer to **[]int32** |  | [optional] 
-**TenantUserId** | **string** |  | 
 **VenueId** | **string** |  | 
 
 ## Methods
 
 ### NewHandlerCreatePlatformParticipationRequest
 
-`func NewHandlerCreatePlatformParticipationRequest(channelId string, displayName string, tenantUserId string, venueId string, ) *HandlerCreatePlatformParticipationRequest`
+`func NewHandlerCreatePlatformParticipationRequest(channelId string, displayName string, platformIdentityId string, venueId string, ) *HandlerCreatePlatformParticipationRequest`
 
 NewHandlerCreatePlatformParticipationRequest instantiates a new HandlerCreatePlatformParticipationRequest object
 This constructor will assign default values to properties that have it defined,
@@ -69,6 +69,26 @@ and a boolean to check if the value has been set.
 SetDisplayName sets DisplayName field to given value.
 
 
+### GetPlatformIdentityId
+
+`func (o *HandlerCreatePlatformParticipationRequest) GetPlatformIdentityId() string`
+
+GetPlatformIdentityId returns the PlatformIdentityId field if non-nil, zero value otherwise.
+
+### GetPlatformIdentityIdOk
+
+`func (o *HandlerCreatePlatformParticipationRequest) GetPlatformIdentityIdOk() (*string, bool)`
+
+GetPlatformIdentityIdOk returns a tuple with the PlatformIdentityId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformIdentityId
+
+`func (o *HandlerCreatePlatformParticipationRequest) SetPlatformIdentityId(v string)`
+
+SetPlatformIdentityId sets PlatformIdentityId field to given value.
+
+
 ### GetSolution
 
 `func (o *HandlerCreatePlatformParticipationRequest) GetSolution() []int32`
@@ -93,26 +113,6 @@ SetSolution sets Solution field to given value.
 `func (o *HandlerCreatePlatformParticipationRequest) HasSolution() bool`
 
 HasSolution returns a boolean if a field has been set.
-
-### GetTenantUserId
-
-`func (o *HandlerCreatePlatformParticipationRequest) GetTenantUserId() string`
-
-GetTenantUserId returns the TenantUserId field if non-nil, zero value otherwise.
-
-### GetTenantUserIdOk
-
-`func (o *HandlerCreatePlatformParticipationRequest) GetTenantUserIdOk() (*string, bool)`
-
-GetTenantUserIdOk returns a tuple with the TenantUserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTenantUserId
-
-`func (o *HandlerCreatePlatformParticipationRequest) SetTenantUserId(v string)`
-
-SetTenantUserId sets TenantUserId field to given value.
-
 
 ### GetVenueId
 

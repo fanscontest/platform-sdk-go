@@ -28,7 +28,8 @@ type ApiCreateIdentitiesRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	handlerCreatePlatformIdentityRequest *HandlerCreatePlatformIdentityRequest
-	xTenantUserId *string
+	idempotencyKey *string
+	xActingAs *string
 }
 
 // Platform identity payload
@@ -37,9 +38,15 @@ func (r ApiCreateIdentitiesRequest) HandlerCreatePlatformIdentityRequest(handler
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateIdentitiesRequest) XTenantUserId(xTenantUserId string) ApiCreateIdentitiesRequest {
-	r.xTenantUserId = &xTenantUserId
+// Best-effort retry key (~24h). Replays are keyed only by this header and return the original response body.
+func (r ApiCreateIdentitiesRequest) IdempotencyKey(idempotencyKey string) ApiCreateIdentitiesRequest {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateIdentitiesRequest) XActingAs(xActingAs string) ApiCreateIdentitiesRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -48,11 +55,14 @@ func (r ApiCreateIdentitiesRequest) Execute() (*DomainPlatformIdentityResponse, 
 }
 
 /*
-CreateIdentities Register a tenant-supplied end-user as a platform identity
+CreateIdentities Register a platform identity (platform mints the id)
 
-Strict on (tenant_id, tenant_user_id) — duplicates return 409
-(caller recovers via GET by tenant_user_id). Profile mutations
-land via PUT, never via repeat POST. ADR 0006.
+The platform mints the piid (ADR 0033). Supply an optional
+Idempotency-Key header for best-effort retry dedup: while the
+replay record lives (~24h) the same key replays the original
+201. Replays are keyed only by the header — the request body is
+not compared (ADR 0034). Profile mutations land via PUT, never
+via repeat POST. metadata is opaque and echoed verbatim.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIdentitiesRequest
@@ -105,8 +115,11 @@ func (a *IdentitiesAPIService) CreateIdentitiesExecute(r ApiCreateIdentitiesRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreatePlatformIdentityRequest
@@ -154,17 +167,6 @@ func (a *IdentitiesAPIService) CreateIdentitiesExecute(r ApiCreateIdentitiesRequ
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -194,12 +196,12 @@ type ApiDeleteIdentitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiDeleteIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteIdentitiesByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiDeleteIdentitiesByIdRequest) XActingAs(xActingAs string) ApiDeleteIdentitiesByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -265,8 +267,8 @@ func (a *IdentitiesAPIService) DeleteIdentitiesByIdExecute(r ApiDeleteIdentities
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -328,182 +330,16 @@ func (a *IdentitiesAPIService) DeleteIdentitiesByIdExecute(r ApiDeleteIdentities
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetIdentitiesRequest struct {
-	ctx context.Context
-	ApiService *IdentitiesAPIService
-	tenantUserId *string
-	xTenantUserId *string
-}
-
-// Tenant-supplied user ID
-func (r ApiGetIdentitiesRequest) TenantUserId(tenantUserId string) ApiGetIdentitiesRequest {
-	r.tenantUserId = &tenantUserId
-	return r
-}
-
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetIdentitiesRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesRequest {
-	r.xTenantUserId = &xTenantUserId
-	return r
-}
-
-func (r ApiGetIdentitiesRequest) Execute() (*DomainPlatformIdentityResponse, *http.Response, error) {
-	return r.ApiService.GetIdentitiesExecute(r)
-}
-
-/*
-GetIdentities Look up a platform identity by tenant_user_id (409 recovery)
-
-The 409 recovery path: when POST /identities returns 409 the
-tenant has a tenant_user_id but no PI uuid — this gets them
-back. Absent or empty tenant_user_id is a 400. Same 404
-semantics as GET /identities/{id} (no existence leak). ADR 0006.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIdentitiesRequest
-*/
-func (a *IdentitiesAPIService) GetIdentities(ctx context.Context) ApiGetIdentitiesRequest {
-	return ApiGetIdentitiesRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return DomainPlatformIdentityResponse
-func (a *IdentitiesAPIService) GetIdentitiesExecute(r ApiGetIdentitiesRequest) (*DomainPlatformIdentityResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainPlatformIdentityResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IdentitiesAPIService.GetIdentities")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/identities"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.tenantUserId == nil {
-		return localVarReturnValue, nil, reportError("tenantUserId is required and must be specified")
-	}
-
-	parameterAddToHeaderOrQuery(localVarQueryParams, "tenant_user_id", r.tenantUserId, "form", "")
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetIdentitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *IdentitiesAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByIdRequest) XActingAs(xActingAs string) ApiGetIdentitiesByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -568,8 +404,8 @@ func (a *IdentitiesAPIService) GetIdentitiesByIdExecute(r ApiGetIdentitiesByIdRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -645,7 +481,7 @@ type ApiUpdateIdentitiesByIdRequest struct {
 	ApiService *IdentitiesAPIService
 	id string
 	handlerUpdatePlatformIdentityRequest *HandlerUpdatePlatformIdentityRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Profile fields
@@ -654,9 +490,9 @@ func (r ApiUpdateIdentitiesByIdRequest) HandlerUpdatePlatformIdentityRequest(han
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiUpdateIdentitiesByIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateIdentitiesByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiUpdateIdentitiesByIdRequest) XActingAs(xActingAs string) ApiUpdateIdentitiesByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -669,8 +505,8 @@ UpdateIdentitiesById Replace a platform identity's profile, scoped to the callin
 
 Text fields are overwritten as-sent (omission blanks them); image
 URLs are skipped when empty so a partial body doesn't accidentally
-clear them. The only mutation path on existing PIs (POST is
-strict-409 and never mutates). ADR 0006.
+clear them. PUT is the only mutation path on existing PIs —
+POST never mutates an existing identity. ADR 0006.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Platform Identity ID
@@ -726,8 +562,8 @@ func (a *IdentitiesAPIService) UpdateIdentitiesByIdExecute(r ApiUpdateIdentities
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerUpdatePlatformIdentityRequest

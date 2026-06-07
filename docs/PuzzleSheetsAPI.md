@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## PuzzleWebV2PuzzleSheetControllerClonePuzzleSheet
 
-> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerClonePuzzleSheet(ctx, id).XTenantUserId(xTenantUserId).ClonePuzzleSheetRequest(clonePuzzleSheetRequest).Execute()
+> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerClonePuzzleSheet(ctx, id).XActingAs(xActingAs).ClonePuzzleSheetRequest(clonePuzzleSheetRequest).Execute()
 
 Clone puzzle sheet
 
@@ -35,12 +35,12 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	clonePuzzleSheetRequest := *openapiclient.NewClonePuzzleSheetRequest() // ClonePuzzleSheetRequest | Clone payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerClonePuzzleSheet(context.Background(), id).XTenantUserId(xTenantUserId).ClonePuzzleSheetRequest(clonePuzzleSheetRequest).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerClonePuzzleSheet(context.Background(), id).XActingAs(xActingAs).ClonePuzzleSheetRequest(clonePuzzleSheetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerClonePuzzleSheet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,7 +66,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **clonePuzzleSheetRequest** | [**ClonePuzzleSheetRequest**](ClonePuzzleSheetRequest.md) | Clone payload | 
 
 ### Return type
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerCreate
 
-> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerCreate(ctx).XTenantUserId(xTenantUserId).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
+> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerCreate(ctx).XActingAs(xActingAs).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
 
 Create puzzle sheet
 
@@ -106,12 +106,12 @@ import (
 )
 
 func main() {
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	createPuzzleSheetRequest := *openapiclient.NewCreatePuzzleSheetRequest("Name_example", "private") // CreatePuzzleSheetRequest | Puzzle sheet payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreate(context.Background()).XTenantUserId(xTenantUserId).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreate(context.Background()).XActingAs(xActingAs).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -132,7 +132,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **createPuzzleSheetRequest** | [**CreatePuzzleSheetRequest**](CreatePuzzleSheetRequest.md) | Puzzle sheet payload | 
 
 ### Return type
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerCreateAdhocCommunitySheet
 
-> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerCreateAdhocCommunitySheet(ctx).XTenantUserId(xTenantUserId).CreateAdhocCommunitySheetRequest(createAdhocCommunitySheetRequest).Execute()
+> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerCreateAdhocCommunitySheet(ctx).XActingAs(xActingAs).CreateAdhocCommunitySheetRequest(createAdhocCommunitySheetRequest).Execute()
 
 Create adhoc community puzzle sheet
 
@@ -174,12 +174,12 @@ import (
 )
 
 func main() {
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	createAdhocCommunitySheetRequest := *openapiclient.NewCreateAdhocCommunitySheetRequest("Difficulty_example", int32(123), "Topic_example") // CreateAdhocCommunitySheetRequest | Adhoc community sheet payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreateAdhocCommunitySheet(context.Background()).XTenantUserId(xTenantUserId).CreateAdhocCommunitySheetRequest(createAdhocCommunitySheetRequest).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreateAdhocCommunitySheet(context.Background()).XActingAs(xActingAs).CreateAdhocCommunitySheetRequest(createAdhocCommunitySheetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreateAdhocCommunitySheet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,7 +200,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **createAdhocCommunitySheetRequest** | [**CreateAdhocCommunitySheetRequest**](CreateAdhocCommunitySheetRequest.md) | Adhoc community sheet payload | 
 
 ### Return type
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerCreateAdhocUserSheet
 
-> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerCreateAdhocUserSheet(ctx).XTenantUserId(xTenantUserId).CreateAdhocUserSheetRequest(createAdhocUserSheetRequest).Execute()
+> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerCreateAdhocUserSheet(ctx).XActingAs(xActingAs).CreateAdhocUserSheetRequest(createAdhocUserSheetRequest).Execute()
 
 Create adhoc user puzzle sheet
 
@@ -242,12 +242,12 @@ import (
 )
 
 func main() {
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	createAdhocUserSheetRequest := *openapiclient.NewCreateAdhocUserSheetRequest(int32(123), "PuzzleSheetId_example") // CreateAdhocUserSheetRequest | Adhoc user sheet payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreateAdhocUserSheet(context.Background()).XTenantUserId(xTenantUserId).CreateAdhocUserSheetRequest(createAdhocUserSheetRequest).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreateAdhocUserSheet(context.Background()).XActingAs(xActingAs).CreateAdhocUserSheetRequest(createAdhocUserSheetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerCreateAdhocUserSheet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -268,7 +268,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **createAdhocUserSheetRequest** | [**CreateAdhocUserSheetRequest**](CreateAdhocUserSheetRequest.md) | Adhoc user sheet payload | 
 
 ### Return type
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerDelete
 
-> PuzzleWebV2PuzzleSheetControllerDelete(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> PuzzleWebV2PuzzleSheetControllerDelete(ctx, id).XActingAs(xActingAs).Execute()
 
 Delete puzzle sheet
 
@@ -309,11 +309,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerDelete(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerDelete(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -337,7 +337,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -359,7 +359,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerIndex
 
-> PuzzleSheetsListResponse PuzzleWebV2PuzzleSheetControllerIndex(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> PuzzleSheetsListResponse PuzzleWebV2PuzzleSheetControllerIndex(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 List puzzle sheets
 
@@ -380,11 +380,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string |  (optional)
 	limit := int32(56) // int32 |  (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerIndex(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerIndex(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerIndex``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** |  | 
  **limit** | **int32** |  | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerShow
 
-> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerShow(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerShow(ctx, id).XActingAs(xActingAs).Execute()
 
 Get puzzle sheet
 
@@ -447,11 +447,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerShow(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerShow(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerShow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -477,7 +477,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -499,7 +499,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2PuzzleSheetControllerUpdate
 
-> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerUpdate(ctx, id).XTenantUserId(xTenantUserId).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
+> PuzzleSheetResponse PuzzleWebV2PuzzleSheetControllerUpdate(ctx, id).XActingAs(xActingAs).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
 
 Update puzzle sheet
 
@@ -517,12 +517,12 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	createPuzzleSheetRequest := *openapiclient.NewCreatePuzzleSheetRequest("Name_example", "private") // CreatePuzzleSheetRequest | Puzzle sheet payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerUpdate(context.Background(), id).XTenantUserId(xTenantUserId).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
+	resp, r, err := apiClient.PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerUpdate(context.Background(), id).XActingAs(xActingAs).CreatePuzzleSheetRequest(createPuzzleSheetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PuzzleSheetsAPI.PuzzleWebV2PuzzleSheetControllerUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -548,7 +548,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2PuzzleSheetCont
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **createPuzzleSheetRequest** | [**CreatePuzzleSheetRequest**](CreatePuzzleSheetRequest.md) | Puzzle sheet payload | 
 
 ### Return type

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateVenues
 
-> HandlerStatusResponseResponse CreateVenues(ctx).HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateVenues(ctx).HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest).XActingAs(xActingAs).Execute()
 
 Create a venue under the calling tenant
 
@@ -31,11 +31,11 @@ import (
 
 func main() {
 	handlerCreatePlatformVenueRequest := *openapiclient.NewHandlerCreatePlatformVenueRequest("Name_example", "Type_example") // HandlerCreatePlatformVenueRequest | Venue payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VenuesAPI.CreateVenues(context.Background()).HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.VenuesAPI.CreateVenues(context.Background()).HandlerCreatePlatformVenueRequest(handlerCreatePlatformVenueRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.CreateVenues``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiCreateVenuesRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **handlerCreatePlatformVenueRequest** | [**HandlerCreatePlatformVenueRequest**](HandlerCreatePlatformVenueRequest.md) | Venue payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## CreateVenuesByVenueIdChannels
 
-> HandlerStatusResponseResponse CreateVenuesByVenueIdChannels(ctx, venueId).HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateVenuesByVenueIdChannels(ctx, venueId).HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest).XActingAs(xActingAs).Execute()
 
 Create a channel under one of the tenant's venues
 
@@ -98,11 +98,11 @@ import (
 func main() {
 	venueId := "venueId_example" // string | Venue ID
 	handlerCreatePlatformChannelRequest := *openapiclient.NewHandlerCreatePlatformChannelRequest("AccessType_example", "Name_example", int32(123)) // HandlerCreatePlatformChannelRequest | Channel payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VenuesAPI.CreateVenuesByVenueIdChannels(context.Background(), venueId).HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.VenuesAPI.CreateVenuesByVenueIdChannels(context.Background(), venueId).HandlerCreatePlatformChannelRequest(handlerCreatePlatformChannelRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.CreateVenuesByVenueIdChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **handlerCreatePlatformChannelRequest** | [**HandlerCreatePlatformChannelRequest**](HandlerCreatePlatformChannelRequest.md) | Channel payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetVenues
 
-> DomainVenueListResponse GetVenues(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainVenueListResponse GetVenues(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 List venues owned by the calling tenant
 
@@ -170,11 +170,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VenuesAPI.GetVenues(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.VenuesAPI.GetVenues(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.GetVenues``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 50, max 200) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ## GetVenuesByVenueIdChannels
 
-> DomainChannelListResponse GetVenuesByVenueIdChannels(ctx, venueId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainChannelListResponse GetVenuesByVenueIdChannels(ctx, venueId).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 List channels under one of the tenant's venues
 
@@ -239,11 +239,11 @@ func main() {
 	venueId := "venueId_example" // string | Venue ID
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VenuesAPI.GetVenuesByVenueIdChannels(context.Background(), venueId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.VenuesAPI.GetVenuesByVenueIdChannels(context.Background(), venueId).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VenuesAPI.GetVenuesByVenueIdChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 50, max 200) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

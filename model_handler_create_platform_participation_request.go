@@ -24,8 +24,8 @@ var _ MappedNullable = &HandlerCreatePlatformParticipationRequest{}
 type HandlerCreatePlatformParticipationRequest struct {
 	ChannelId string `json:"channel_id"`
 	DisplayName string `json:"display_name"`
+	PlatformIdentityId string `json:"platform_identity_id"`
 	Solution []int32 `json:"solution,omitempty"`
-	TenantUserId string `json:"tenant_user_id"`
 	VenueId string `json:"venue_id"`
 }
 
@@ -35,11 +35,11 @@ type _HandlerCreatePlatformParticipationRequest HandlerCreatePlatformParticipati
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHandlerCreatePlatformParticipationRequest(channelId string, displayName string, tenantUserId string, venueId string) *HandlerCreatePlatformParticipationRequest {
+func NewHandlerCreatePlatformParticipationRequest(channelId string, displayName string, platformIdentityId string, venueId string) *HandlerCreatePlatformParticipationRequest {
 	this := HandlerCreatePlatformParticipationRequest{}
 	this.ChannelId = channelId
 	this.DisplayName = displayName
-	this.TenantUserId = tenantUserId
+	this.PlatformIdentityId = platformIdentityId
 	this.VenueId = venueId
 	return &this
 }
@@ -100,6 +100,30 @@ func (o *HandlerCreatePlatformParticipationRequest) SetDisplayName(v string) {
 	o.DisplayName = v
 }
 
+// GetPlatformIdentityId returns the PlatformIdentityId field value
+func (o *HandlerCreatePlatformParticipationRequest) GetPlatformIdentityId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformIdentityId
+}
+
+// GetPlatformIdentityIdOk returns a tuple with the PlatformIdentityId field value
+// and a boolean to check if the value has been set.
+func (o *HandlerCreatePlatformParticipationRequest) GetPlatformIdentityIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PlatformIdentityId, true
+}
+
+// SetPlatformIdentityId sets field value
+func (o *HandlerCreatePlatformParticipationRequest) SetPlatformIdentityId(v string) {
+	o.PlatformIdentityId = v
+}
+
 // GetSolution returns the Solution field value if set, zero value otherwise.
 func (o *HandlerCreatePlatformParticipationRequest) GetSolution() []int32 {
 	if o == nil || IsNil(o.Solution) {
@@ -130,30 +154,6 @@ func (o *HandlerCreatePlatformParticipationRequest) HasSolution() bool {
 // SetSolution gets a reference to the given []int32 and assigns it to the Solution field.
 func (o *HandlerCreatePlatformParticipationRequest) SetSolution(v []int32) {
 	o.Solution = v
-}
-
-// GetTenantUserId returns the TenantUserId field value
-func (o *HandlerCreatePlatformParticipationRequest) GetTenantUserId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.TenantUserId
-}
-
-// GetTenantUserIdOk returns a tuple with the TenantUserId field value
-// and a boolean to check if the value has been set.
-func (o *HandlerCreatePlatformParticipationRequest) GetTenantUserIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TenantUserId, true
-}
-
-// SetTenantUserId sets field value
-func (o *HandlerCreatePlatformParticipationRequest) SetTenantUserId(v string) {
-	o.TenantUserId = v
 }
 
 // GetVenueId returns the VenueId field value
@@ -192,10 +192,10 @@ func (o HandlerCreatePlatformParticipationRequest) ToMap() (map[string]interface
 	toSerialize := map[string]interface{}{}
 	toSerialize["channel_id"] = o.ChannelId
 	toSerialize["display_name"] = o.DisplayName
+	toSerialize["platform_identity_id"] = o.PlatformIdentityId
 	if !IsNil(o.Solution) {
 		toSerialize["solution"] = o.Solution
 	}
-	toSerialize["tenant_user_id"] = o.TenantUserId
 	toSerialize["venue_id"] = o.VenueId
 	return toSerialize, nil
 }
@@ -207,7 +207,7 @@ func (o *HandlerCreatePlatformParticipationRequest) UnmarshalJSON(data []byte) (
 	requiredProperties := []string{
 		"channel_id",
 		"display_name",
-		"tenant_user_id",
+		"platform_identity_id",
 		"venue_id",
 	}
 

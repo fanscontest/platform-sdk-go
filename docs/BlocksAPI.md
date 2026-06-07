@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateBlocks
 
-> DomainBlockResponse CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainBlockResponse CreateBlocks(ctx).HandlerCreateBlockRequest(handlerCreateBlockRequest).XActingAs(xActingAs).Execute()
 
 Create Block
 
@@ -32,11 +32,11 @@ import (
 
 func main() {
 	handlerCreateBlockRequest := *openapiclient.NewHandlerCreateBlockRequest("PlatformIdentityId_example") // HandlerCreateBlockRequest | Block payload; optional channel_id scopes the block to a channel
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.CreateBlocks(context.Background()).HandlerCreateBlockRequest(handlerCreateBlockRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.BlocksAPI.CreateBlocks(context.Background()).HandlerCreateBlockRequest(handlerCreateBlockRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.CreateBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiCreateBlocksRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **handlerCreateBlockRequest** | [**HandlerCreateBlockRequest**](HandlerCreateBlockRequest.md) | Block payload; optional channel_id scopes the block to a channel | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DeleteBlocksById
 
-> DeleteBlocksById200Response DeleteBlocksById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DeleteBlocksById200Response DeleteBlocksById(ctx, id).XActingAs(xActingAs).Execute()
 
 Delete Block
 
@@ -100,11 +100,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Blocked PlatformIdentity ID to unblock
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.DeleteBlocksById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.BlocksAPI.DeleteBlocksById(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.DeleteBlocksById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiDeleteBlocksByIdRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetBlocks
 
-> DomainBlockListResponse GetBlocks(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainBlockListResponse GetBlocks(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 Get Blocked Members (cursor-paginated)
 
@@ -173,11 +173,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BlocksAPI.GetBlocks(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.BlocksAPI.GetBlocks(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BlocksAPI.GetBlocks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 50, max 200) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

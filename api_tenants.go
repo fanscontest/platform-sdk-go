@@ -28,7 +28,7 @@ type ApiCreateTenantsRequest struct {
 	ctx context.Context
 	ApiService *TenantsAPIService
 	handlerCreatePlatformRequest *HandlerCreatePlatformRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Tenant application payload
@@ -37,9 +37,9 @@ func (r ApiCreateTenantsRequest) HandlerCreatePlatformRequest(handlerCreatePlatf
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateTenantsRequest) XTenantUserId(xTenantUserId string) ApiCreateTenantsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateTenantsRequest) XActingAs(xActingAs string) ApiCreateTenantsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -106,8 +106,8 @@ func (a *TenantsAPIService) CreateTenantsExecute(r ApiCreateTenantsRequest) (*Do
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreatePlatformRequest
@@ -185,7 +185,7 @@ type ApiCreateTenantsByIdApiKeysRequest struct {
 	ApiService *TenantsAPIService
 	id string
 	handlerCreateApiKeyRequest *HandlerCreateApiKeyRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // API key request (env + name)
@@ -194,9 +194,9 @@ func (r ApiCreateTenantsByIdApiKeysRequest) HandlerCreateApiKeyRequest(handlerCr
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateTenantsByIdApiKeysRequest) XTenantUserId(xTenantUserId string) ApiCreateTenantsByIdApiKeysRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateTenantsByIdApiKeysRequest) XActingAs(xActingAs string) ApiCreateTenantsByIdApiKeysRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -266,8 +266,8 @@ func (a *TenantsAPIService) CreateTenantsByIdApiKeysExecute(r ApiCreateTenantsBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreateApiKeyRequest
@@ -378,7 +378,7 @@ type ApiCreateTenantsByIdWebhookSubscriptionsRequest struct {
 	ApiService *TenantsAPIService
 	id string
 	handlerCreateWebhookSubscriptionRequest *HandlerCreateWebhookSubscriptionRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Subscription payload
@@ -387,9 +387,9 @@ func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) HandlerCreateWebhookSub
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiCreateTenantsByIdWebhookSubscriptionsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateTenantsByIdWebhookSubscriptionsRequest) XActingAs(xActingAs string) ApiCreateTenantsByIdWebhookSubscriptionsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -458,8 +458,8 @@ func (a *TenantsAPIService) CreateTenantsByIdWebhookSubscriptionsExecute(r ApiCr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreateWebhookSubscriptionRequest
@@ -570,12 +570,12 @@ type ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest struct {
 	ApiService *TenantsAPIService
 	id string
 	subscriptionId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest) XActingAs(xActingAs string) ApiDeleteTenantsByIdWebhookSubscriptionsBySubscriptionIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -641,8 +641,8 @@ func (a *TenantsAPIService) DeleteTenantsByIdWebhookSubscriptionsBySubscriptionI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -721,7 +721,7 @@ type ApiGetTenantsByIdWebhookSubscriptionsRequest struct {
 	id string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -736,9 +736,9 @@ func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) Limit(limit int32) ApiGetT
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) XTenantUserId(xTenantUserId string) ApiGetTenantsByIdWebhookSubscriptionsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetTenantsByIdWebhookSubscriptionsRequest) XActingAs(xActingAs string) ApiGetTenantsByIdWebhookSubscriptionsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -809,8 +809,8 @@ func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsExecute(r ApiGetTe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

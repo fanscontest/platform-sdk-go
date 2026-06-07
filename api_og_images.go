@@ -29,7 +29,7 @@ type ApiGetPublicOgChannelByChannelIdRequest struct {
 	ApiService *OGImagesAPIService
 	channelId string
 	accessCode *string
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Access code for restricted channels
@@ -38,9 +38,9 @@ func (r ApiGetPublicOgChannelByChannelIdRequest) AccessCode(accessCode string) A
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicOgChannelByChannelIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgChannelByChannelIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgChannelByChannelIdRequest) XActingAs(xActingAs string) ApiGetPublicOgChannelByChannelIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -107,8 +107,8 @@ func (a *OGImagesAPIService) GetPublicOgChannelByChannelIdExecute(r ApiGetPublic
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -172,12 +172,12 @@ type ApiGetPublicOgContestByContestIdRequest struct {
 	ctx context.Context
 	ApiService *OGImagesAPIService
 	contestId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicOgContestByContestIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgContestByContestIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgContestByContestIdRequest) XActingAs(xActingAs string) ApiGetPublicOgContestByContestIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -241,8 +241,8 @@ func (a *OGImagesAPIService) GetPublicOgContestByContestIdExecute(r ApiGetPublic
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -306,12 +306,12 @@ type ApiGetPublicOgScoreboardByContestIdRequest struct {
 	ctx context.Context
 	ApiService *OGImagesAPIService
 	contestId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicOgScoreboardByContestIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgScoreboardByContestIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgScoreboardByContestIdRequest) XActingAs(xActingAs string) ApiGetPublicOgScoreboardByContestIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -375,8 +375,8 @@ func (a *OGImagesAPIService) GetPublicOgScoreboardByContestIdExecute(r ApiGetPub
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -440,12 +440,12 @@ type ApiGetPublicOgSubmissionsByParticipationIdRequest struct {
 	ctx context.Context
 	ApiService *OGImagesAPIService
 	participationId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicOgSubmissionsByParticipationIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicOgSubmissionsByParticipationIdRequest) XActingAs(xActingAs string) ApiGetPublicOgSubmissionsByParticipationIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -509,8 +509,8 @@ func (a *OGImagesAPIService) GetPublicOgSubmissionsByParticipationIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

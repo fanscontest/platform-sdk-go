@@ -28,7 +28,7 @@ type ApiCreateBlocksRequest struct {
 	ctx context.Context
 	ApiService *BlocksAPIService
 	handlerCreateBlockRequest *HandlerCreateBlockRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Block payload; optional channel_id scopes the block to a channel
@@ -37,9 +37,9 @@ func (r ApiCreateBlocksRequest) HandlerCreateBlockRequest(handlerCreateBlockRequ
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateBlocksRequest) XTenantUserId(xTenantUserId string) ApiCreateBlocksRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateBlocksRequest) XActingAs(xActingAs string) ApiCreateBlocksRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -108,8 +108,8 @@ func (a *BlocksAPIService) CreateBlocksExecute(r ApiCreateBlocksRequest) (*Domai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.handlerCreateBlockRequest
@@ -186,12 +186,12 @@ type ApiDeleteBlocksByIdRequest struct {
 	ctx context.Context
 	ApiService *BlocksAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiDeleteBlocksByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteBlocksByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiDeleteBlocksByIdRequest) XActingAs(xActingAs string) ApiDeleteBlocksByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -255,8 +255,8 @@ func (a *BlocksAPIService) DeleteBlocksByIdExecute(r ApiDeleteBlocksByIdRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -321,7 +321,7 @@ type ApiGetBlocksRequest struct {
 	ApiService *BlocksAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -336,9 +336,9 @@ func (r ApiGetBlocksRequest) Limit(limit int32) ApiGetBlocksRequest {
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetBlocksRequest) XTenantUserId(xTenantUserId string) ApiGetBlocksRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetBlocksRequest) XActingAs(xActingAs string) ApiGetBlocksRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -405,8 +405,8 @@ func (a *BlocksAPIService) GetBlocksExecute(r ApiGetBlocksRequest) (*DomainBlock
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

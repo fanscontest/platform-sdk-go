@@ -28,12 +28,12 @@ type ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest struct {
 	ctx context.Context
 	ApiService *ContestPuzzlesAPIService
 	contestId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest) XActingAs(xActingAs string) ApiPuzzleWebV2ContestPuzzleControllerGetPuzzleRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -97,8 +97,8 @@ func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerGetPuzzleEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -162,12 +162,12 @@ type ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest struct {
 	ctx context.Context
 	ApiService *ContestPuzzlesAPIService
 	contestId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest) XActingAs(xActingAs string) ApiPuzzleWebV2ContestPuzzleControllerRankingsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -231,8 +231,8 @@ func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerRankingsExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -275,12 +275,12 @@ type ApiPuzzleWebV2ContestPuzzleControllerStatusRequest struct {
 	ctx context.Context
 	ApiService *ContestPuzzlesAPIService
 	contestId string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiPuzzleWebV2ContestPuzzleControllerStatusRequest) XTenantUserId(xTenantUserId string) ApiPuzzleWebV2ContestPuzzleControllerStatusRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2ContestPuzzleControllerStatusRequest) XActingAs(xActingAs string) ApiPuzzleWebV2ContestPuzzleControllerStatusRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -344,8 +344,8 @@ func (a *ContestPuzzlesAPIService) PuzzleWebV2ContestPuzzleControllerStatusExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

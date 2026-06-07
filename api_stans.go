@@ -28,7 +28,7 @@ type ApiCreateCelebsRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
 	body *string
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Celeb PlatformIdentity ID
@@ -37,9 +37,9 @@ func (r ApiCreateCelebsRequest) Body(body string) ApiCreateCelebsRequest {
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateCelebsRequest) XTenantUserId(xTenantUserId string) ApiCreateCelebsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateCelebsRequest) XActingAs(xActingAs string) ApiCreateCelebsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -106,8 +106,8 @@ func (a *StansAPIService) CreateCelebsExecute(r ApiCreateCelebsRequest) (*Domain
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.body
@@ -184,12 +184,12 @@ type ApiDeleteCelebsByIdRequest struct {
 	ctx context.Context
 	ApiService *StansAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiDeleteCelebsByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteCelebsByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiDeleteCelebsByIdRequest) XActingAs(xActingAs string) ApiDeleteCelebsByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -253,8 +253,8 @@ func (a *StansAPIService) DeleteCelebsByIdExecute(r ApiDeleteCelebsByIdRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -319,7 +319,7 @@ type ApiGetCelebsRequest struct {
 	ApiService *StansAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -334,9 +334,9 @@ func (r ApiGetCelebsRequest) Limit(limit int32) ApiGetCelebsRequest {
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetCelebsRequest) XTenantUserId(xTenantUserId string) ApiGetCelebsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetCelebsRequest) XActingAs(xActingAs string) ApiGetCelebsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -403,8 +403,8 @@ func (a *StansAPIService) GetCelebsExecute(r ApiGetCelebsRequest) (*DomainStanLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -469,7 +469,7 @@ type ApiGetStansRequest struct {
 	ApiService *StansAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -484,9 +484,9 @@ func (r ApiGetStansRequest) Limit(limit int32) ApiGetStansRequest {
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetStansRequest) XTenantUserId(xTenantUserId string) ApiGetStansRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetStansRequest) XActingAs(xActingAs string) ApiGetStansRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -553,8 +553,8 @@ func (a *StansAPIService) GetStansExecute(r ApiGetStansRequest) (*DomainStanList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

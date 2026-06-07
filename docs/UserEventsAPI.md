@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## PuzzleWebV2UserEventsControllerCreate
 
-> EventResponse PuzzleWebV2UserEventsControllerCreate(ctx).XTenantUserId(xTenantUserId).CreateUserEventRequest(createUserEventRequest).Execute()
+> EventResponse PuzzleWebV2UserEventsControllerCreate(ctx).XActingAs(xActingAs).CreateUserEventRequest(createUserEventRequest).Execute()
 
 Create user event
 
@@ -35,12 +35,12 @@ import (
 )
 
 func main() {
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	createUserEventRequest := *openapiclient.NewCreateUserEventRequest("Name_example", "TemplateId_example") // CreateUserEventRequest | User event payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerCreate(context.Background()).XTenantUserId(xTenantUserId).CreateUserEventRequest(createUserEventRequest).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerCreate(context.Background()).XActingAs(xActingAs).CreateUserEventRequest(createUserEventRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,7 +61,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **createUserEventRequest** | [**CreateUserEventRequest**](CreateUserEventRequest.md) | User event payload | 
 
 ### Return type
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerDelete
 
-> PuzzleWebV2UserEventsControllerDelete(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> PuzzleWebV2UserEventsControllerDelete(ctx, id).XActingAs(xActingAs).Execute()
 
 Delete user event
 
@@ -102,11 +102,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerDelete(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerDelete(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerGetResultSuggestions
 
-> ResultSuggestionsResponse PuzzleWebV2UserEventsControllerGetResultSuggestions(ctx, userEventsId).XTenantUserId(xTenantUserId).Execute()
+> ResultSuggestionsResponse PuzzleWebV2UserEventsControllerGetResultSuggestions(ctx, userEventsId).XActingAs(xActingAs).Execute()
 
 Get result suggestions for a user event
 
@@ -170,11 +170,11 @@ import (
 
 func main() {
 	userEventsId := "userEventsId_example" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerGetResultSuggestions(context.Background(), userEventsId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerGetResultSuggestions(context.Background(), userEventsId).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerGetResultSuggestions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,7 +200,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerGetStatus
 
-> UserEventStatusResponse PuzzleWebV2UserEventsControllerGetStatus(ctx, userEventsId).XTenantUserId(xTenantUserId).Execute()
+> UserEventStatusResponse PuzzleWebV2UserEventsControllerGetStatus(ctx, userEventsId).XActingAs(xActingAs).Execute()
 
 Get user event status
 
@@ -240,11 +240,11 @@ import (
 
 func main() {
 	userEventsId := "userEventsId_example" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerGetStatus(context.Background(), userEventsId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerGetStatus(context.Background(), userEventsId).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerGetStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -270,7 +270,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerIndex
 
-> PuzzleWebV2UserEventsControllerIndex200Response PuzzleWebV2UserEventsControllerIndex(ctx).All(all).Visibility(visibility).DateFrom(dateFrom).DateTo(dateTo).XTenantUserId(xTenantUserId).Execute()
+> PuzzleWebV2UserEventsControllerIndex200Response PuzzleWebV2UserEventsControllerIndex(ctx).All(all).Visibility(visibility).DateFrom(dateFrom).DateTo(dateTo).XActingAs(xActingAs).Execute()
 
 List user events
 
@@ -314,11 +314,11 @@ func main() {
 	visibility := "visibility_example" // string |  (optional)
 	dateFrom := time.Now() // time.Time |  (optional)
 	dateTo := time.Now() // time.Time |  (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerIndex(context.Background()).All(all).Visibility(visibility).DateFrom(dateFrom).DateTo(dateTo).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerIndex(context.Background()).All(all).Visibility(visibility).DateFrom(dateFrom).DateTo(dateTo).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerIndex``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
  **visibility** | **string** |  | 
  **dateFrom** | **time.Time** |  | 
  **dateTo** | **time.Time** |  | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -365,7 +365,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerListTemplates
 
-> EventTemplatesListResponse PuzzleWebV2UserEventsControllerListTemplates(ctx).Category(category).EventType(eventType).XTenantUserId(xTenantUserId).Execute()
+> EventTemplatesListResponse PuzzleWebV2UserEventsControllerListTemplates(ctx).Category(category).EventType(eventType).XActingAs(xActingAs).Execute()
 
 List event templates
 
@@ -386,11 +386,11 @@ import (
 func main() {
 	category := "category_example" // string |  (optional)
 	eventType := "eventType_example" // string |  (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerListTemplates(context.Background()).Category(category).EventType(eventType).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerListTemplates(context.Background()).Category(category).EventType(eventType).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerListTemplates``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -413,7 +413,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **category** | **string** |  | 
  **eventType** | **string** |  | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -435,7 +435,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerShow
 
-> EventResponse PuzzleWebV2UserEventsControllerShow(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> EventResponse PuzzleWebV2UserEventsControllerShow(ctx, id).XActingAs(xActingAs).Execute()
 
 Get user event
 
@@ -453,11 +453,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerShow(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerShow(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerShow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -483,7 +483,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerUpdate
 
-> EventResponse PuzzleWebV2UserEventsControllerUpdate(ctx, id).XTenantUserId(xTenantUserId).UpdateUserEventRequest(updateUserEventRequest).Execute()
+> EventResponse PuzzleWebV2UserEventsControllerUpdate(ctx, id).XActingAs(xActingAs).UpdateUserEventRequest(updateUserEventRequest).Execute()
 
 Update user event
 
@@ -523,12 +523,12 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	updateUserEventRequest := *openapiclient.NewUpdateUserEventRequest() // UpdateUserEventRequest | User event update payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerUpdate(context.Background(), id).XTenantUserId(xTenantUserId).UpdateUserEventRequest(updateUserEventRequest).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerUpdate(context.Background(), id).XActingAs(xActingAs).UpdateUserEventRequest(updateUserEventRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -554,7 +554,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **updateUserEventRequest** | [**UpdateUserEventRequest**](UpdateUserEventRequest.md) | User event update payload | 
 
 ### Return type
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 
 ## PuzzleWebV2UserEventsControllerUseExistingResult
 
-> EventResponse PuzzleWebV2UserEventsControllerUseExistingResult(ctx, userEventsId).XTenantUserId(xTenantUserId).UseExistingResultRequest(useExistingResultRequest).Execute()
+> EventResponse PuzzleWebV2UserEventsControllerUseExistingResult(ctx, userEventsId).XActingAs(xActingAs).UseExistingResultRequest(useExistingResultRequest).Execute()
 
 Copy result from another user event
 
@@ -595,12 +595,12 @@ import (
 
 func main() {
 	userEventsId := "userEventsId_example" // string | 
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 	useExistingResultRequest := *openapiclient.NewUseExistingResultRequest("SourceEventId_example") // UseExistingResultRequest | Source event payload (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerUseExistingResult(context.Background(), userEventsId).XTenantUserId(xTenantUserId).UseExistingResultRequest(useExistingResultRequest).Execute()
+	resp, r, err := apiClient.UserEventsAPI.PuzzleWebV2UserEventsControllerUseExistingResult(context.Background(), userEventsId).XActingAs(xActingAs).UseExistingResultRequest(useExistingResultRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UserEventsAPI.PuzzleWebV2UserEventsControllerUseExistingResult``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -626,7 +626,7 @@ Other parameters are passed through a pointer to a apiPuzzleWebV2UserEventsContr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
  **useExistingResultRequest** | [**UseExistingResultRequest**](UseExistingResultRequest.md) | Source event payload | 
 
 ### Return type

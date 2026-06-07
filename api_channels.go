@@ -28,7 +28,7 @@ type ApiCreateChannelsRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	requestCreateChannelRequest *RequestCreateChannelRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Channel payload
@@ -37,9 +37,9 @@ func (r ApiCreateChannelsRequest) RequestCreateChannelRequest(requestCreateChann
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateChannelsRequest) XTenantUserId(xTenantUserId string) ApiCreateChannelsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateChannelsRequest) XActingAs(xActingAs string) ApiCreateChannelsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -101,8 +101,8 @@ func (a *ChannelsAPIService) CreateChannelsExecute(r ApiCreateChannelsRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateChannelRequest
@@ -168,12 +168,12 @@ type ApiCreateChannelsByIdReportRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateChannelsByIdReportRequest) XTenantUserId(xTenantUserId string) ApiCreateChannelsByIdReportRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateChannelsByIdReportRequest) XActingAs(xActingAs string) ApiCreateChannelsByIdReportRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -237,8 +237,8 @@ func (a *ChannelsAPIService) CreateChannelsByIdReportExecute(r ApiCreateChannels
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -303,7 +303,7 @@ type ApiCreateChannelsByIdTeamSetsRequest struct {
 	ApiService *ChannelsAPIService
 	id string
 	requestCreateTeamSetRequest *RequestCreateTeamSetRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Team set payload
@@ -312,9 +312,9 @@ func (r ApiCreateChannelsByIdTeamSetsRequest) RequestCreateTeamSetRequest(reques
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateChannelsByIdTeamSetsRequest) XTenantUserId(xTenantUserId string) ApiCreateChannelsByIdTeamSetsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateChannelsByIdTeamSetsRequest) XActingAs(xActingAs string) ApiCreateChannelsByIdTeamSetsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -379,8 +379,8 @@ func (a *ChannelsAPIService) CreateChannelsByIdTeamSetsExecute(r ApiCreateChanne
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateTeamSetRequest
@@ -469,7 +469,7 @@ type ApiCreateChannelsByIdValidateAccessCodeRequest struct {
 	ApiService *ChannelsAPIService
 	id string
 	requestValidateAccessCodeRequest *RequestValidateAccessCodeRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Access code body
@@ -478,9 +478,9 @@ func (r ApiCreateChannelsByIdValidateAccessCodeRequest) RequestValidateAccessCod
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateChannelsByIdValidateAccessCodeRequest) XTenantUserId(xTenantUserId string) ApiCreateChannelsByIdValidateAccessCodeRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateChannelsByIdValidateAccessCodeRequest) XActingAs(xActingAs string) ApiCreateChannelsByIdValidateAccessCodeRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -545,8 +545,8 @@ func (a *ChannelsAPIService) CreateChannelsByIdValidateAccessCodeExecute(r ApiCr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestValidateAccessCodeRequest
@@ -623,12 +623,12 @@ type ApiDeleteChannelsByIdRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiDeleteChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiDeleteChannelsByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiDeleteChannelsByIdRequest) XActingAs(xActingAs string) ApiDeleteChannelsByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -692,8 +692,8 @@ func (a *ChannelsAPIService) DeleteChannelsByIdExecute(r ApiDeleteChannelsByIdRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -758,7 +758,7 @@ type ApiGetChannelsRequest struct {
 	ApiService *ChannelsAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -773,9 +773,9 @@ func (r ApiGetChannelsRequest) Limit(limit int32) ApiGetChannelsRequest {
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsRequest) XActingAs(xActingAs string) ApiGetChannelsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -840,8 +840,8 @@ func (a *ChannelsAPIService) GetChannelsExecute(r ApiGetChannelsRequest) (*Domai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -905,12 +905,12 @@ type ApiGetChannelsByIdRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsByIdRequest) XActingAs(xActingAs string) ApiGetChannelsByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -974,8 +974,8 @@ func (a *ChannelsAPIService) GetChannelsByIdExecute(r ApiGetChannelsByIdRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1052,7 +1052,7 @@ type ApiGetChannelsByIdTeamSetsRequest struct {
 	id string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Accepted for shape uniformity; ignored (single-page, name-sorted)
@@ -1067,9 +1067,9 @@ func (r ApiGetChannelsByIdTeamSetsRequest) Limit(limit int32) ApiGetChannelsById
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsByIdTeamSetsRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsByIdTeamSetsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsByIdTeamSetsRequest) XActingAs(xActingAs string) ApiGetChannelsByIdTeamSetsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -1141,8 +1141,8 @@ func (a *ChannelsAPIService) GetChannelsByIdTeamSetsExecute(r ApiGetChannelsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1218,7 +1218,7 @@ type ApiGetChannelsSearchRequest struct {
 	ApiService *ChannelsAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -1233,9 +1233,9 @@ func (r ApiGetChannelsSearchRequest) Limit(limit int32) ApiGetChannelsSearchRequ
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsSearchRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsSearchRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsSearchRequest) XActingAs(xActingAs string) ApiGetChannelsSearchRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -1300,8 +1300,8 @@ func (a *ChannelsAPIService) GetChannelsSearchExecute(r ApiGetChannelsSearchRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1367,7 +1367,7 @@ type ApiGetChannelsSearchKeywordByKeywordRequest struct {
 	keyword string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -1382,9 +1382,9 @@ func (r ApiGetChannelsSearchKeywordByKeywordRequest) Limit(limit int32) ApiGetCh
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsSearchKeywordByKeywordRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsSearchKeywordByKeywordRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsSearchKeywordByKeywordRequest) XActingAs(xActingAs string) ApiGetChannelsSearchKeywordByKeywordRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -1454,8 +1454,8 @@ func (a *ChannelsAPIService) GetChannelsSearchKeywordByKeywordExecute(r ApiGetCh
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1521,7 +1521,7 @@ type ApiGetIdentitiesByPiidChannelsRequest struct {
 	piid string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -1536,9 +1536,9 @@ func (r ApiGetIdentitiesByPiidChannelsRequest) Limit(limit int32) ApiGetIdentiti
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetIdentitiesByPiidChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByPiidChannelsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByPiidChannelsRequest) XActingAs(xActingAs string) ApiGetIdentitiesByPiidChannelsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -1608,8 +1608,8 @@ func (a *ChannelsAPIService) GetIdentitiesByPiidChannelsExecute(r ApiGetIdentiti
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1675,7 +1675,7 @@ type ApiGetPublicChannelsRequest struct {
 	region *string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Region Code
@@ -1696,9 +1696,9 @@ func (r ApiGetPublicChannelsRequest) Limit(limit int32) ApiGetPublicChannelsRequ
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetPublicChannelsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicChannelsRequest) XActingAs(xActingAs string) ApiGetPublicChannelsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -1769,8 +1769,8 @@ func (a *ChannelsAPIService) GetPublicChannelsExecute(r ApiGetPublicChannelsRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1834,12 +1834,12 @@ type ApiGetPublicChannelsByIdRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetPublicChannelsByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicChannelsByIdRequest) XActingAs(xActingAs string) ApiGetPublicChannelsByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -1903,8 +1903,8 @@ func (a *ChannelsAPIService) GetPublicChannelsByIdExecute(r ApiGetPublicChannels
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1981,7 +1981,7 @@ type ApiGetPublicChannelsSearchKeywordByKeywordRequest struct {
 	keyword string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -1996,9 +1996,9 @@ func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) Limit(limit int32) Ap
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) XTenantUserId(xTenantUserId string) ApiGetPublicChannelsSearchKeywordByKeywordRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) XActingAs(xActingAs string) ApiGetPublicChannelsSearchKeywordByKeywordRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2068,8 +2068,8 @@ func (a *ChannelsAPIService) GetPublicChannelsSearchKeywordByKeywordExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -2135,7 +2135,7 @@ type ApiGetPublicIdentitiesByPiidChannelsRequest struct {
 	piid string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -2150,9 +2150,9 @@ func (r ApiGetPublicIdentitiesByPiidChannelsRequest) Limit(limit int32) ApiGetPu
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicIdentitiesByPiidChannelsRequest) XTenantUserId(xTenantUserId string) ApiGetPublicIdentitiesByPiidChannelsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicIdentitiesByPiidChannelsRequest) XActingAs(xActingAs string) ApiGetPublicIdentitiesByPiidChannelsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2222,8 +2222,8 @@ func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannelsExecute(r ApiGetPu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -2288,7 +2288,7 @@ type ApiGetPublicTeamSetsSystemRequest struct {
 	ApiService *ChannelsAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Accepted for shape uniformity; ignored (single-page, name-sorted)
@@ -2303,9 +2303,9 @@ func (r ApiGetPublicTeamSetsSystemRequest) Limit(limit int32) ApiGetPublicTeamSe
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicTeamSetsSystemRequest) XTenantUserId(xTenantUserId string) ApiGetPublicTeamSetsSystemRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicTeamSetsSystemRequest) XActingAs(xActingAs string) ApiGetPublicTeamSetsSystemRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2375,8 +2375,8 @@ func (a *ChannelsAPIService) GetPublicTeamSetsSystemExecute(r ApiGetPublicTeamSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -2430,7 +2430,7 @@ type ApiGetTeamSetsSystemRequest struct {
 	ApiService *ChannelsAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Accepted for shape uniformity; ignored (single-page, name-sorted)
@@ -2445,9 +2445,9 @@ func (r ApiGetTeamSetsSystemRequest) Limit(limit int32) ApiGetTeamSetsSystemRequ
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetTeamSetsSystemRequest) XTenantUserId(xTenantUserId string) ApiGetTeamSetsSystemRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetTeamSetsSystemRequest) XActingAs(xActingAs string) ApiGetTeamSetsSystemRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2517,8 +2517,8 @@ func (a *ChannelsAPIService) GetTeamSetsSystemExecute(r ApiGetTeamSetsSystemRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -2572,7 +2572,7 @@ type ApiPatchChannelsByIdAccessCodeRequest struct {
 	ApiService *ChannelsAPIService
 	id string
 	requestUpdateChannelAccessCodeRequest *RequestUpdateChannelAccessCodeRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // request
@@ -2581,9 +2581,9 @@ func (r ApiPatchChannelsByIdAccessCodeRequest) RequestUpdateChannelAccessCodeReq
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiPatchChannelsByIdAccessCodeRequest) XTenantUserId(xTenantUserId string) ApiPatchChannelsByIdAccessCodeRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiPatchChannelsByIdAccessCodeRequest) XActingAs(xActingAs string) ApiPatchChannelsByIdAccessCodeRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2650,8 +2650,8 @@ func (a *ChannelsAPIService) PatchChannelsByIdAccessCodeExecute(r ApiPatchChanne
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpdateChannelAccessCodeRequest
@@ -2718,7 +2718,7 @@ type ApiUpdateChannelsByIdRequest struct {
 	ApiService *ChannelsAPIService
 	id string
 	requestUpdateChannelRequest *RequestUpdateChannelRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // request
@@ -2727,9 +2727,9 @@ func (r ApiUpdateChannelsByIdRequest) RequestUpdateChannelRequest(requestUpdateC
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiUpdateChannelsByIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateChannelsByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiUpdateChannelsByIdRequest) XActingAs(xActingAs string) ApiUpdateChannelsByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2796,8 +2796,8 @@ func (a *ChannelsAPIService) UpdateChannelsByIdExecute(r ApiUpdateChannelsByIdRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpdateChannelRequest
@@ -2865,7 +2865,7 @@ type ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest struct {
 	id string
 	teamSetId string
 	requestCreateTeamSetRequest *RequestCreateTeamSetRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Replacement team set payload
@@ -2874,9 +2874,9 @@ func (r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) RequestCreateTeamSetReq
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest) XActingAs(xActingAs string) ApiUpdateChannelsByIdTeamSetsByTeamSetIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -2947,8 +2947,8 @@ func (a *ChannelsAPIService) UpdateChannelsByIdTeamSetsByTeamSetIdExecute(r ApiU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateTeamSetRequest

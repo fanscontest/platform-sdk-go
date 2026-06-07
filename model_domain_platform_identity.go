@@ -30,9 +30,10 @@ type DomainPlatformIdentity struct {
 	Id *string `json:"id,omitempty"`
 	IsOfficial *bool `json:"is_official,omitempty"`
 	LastName *string `json:"last_name,omitempty"`
+	// Metadata is an opaque, tenant-owned string→string map (ADR 0033). The platform stores and echoes it verbatim and never reads, indexes, or constrains it — it exists only so a tenant can hang its own reference (e.g. its member id) off a PI. Replaces the retired tenant_user_id scalar; omitted from JSON when empty.
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	ProfilePic *string `json:"profile_pic,omitempty"`
 	TenantId *string `json:"tenant_id,omitempty"`
-	TenantUserId *string `json:"tenant_user_id,omitempty"`
 }
 
 // NewDomainPlatformIdentity instantiates a new DomainPlatformIdentity object
@@ -372,6 +373,38 @@ func (o *DomainPlatformIdentity) SetLastName(v string) {
 	o.LastName = &v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *DomainPlatformIdentity) GetMetadata() map[string]string {
+	if o == nil || IsNil(o.Metadata) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainPlatformIdentity) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *DomainPlatformIdentity) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *DomainPlatformIdentity) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 // GetProfilePic returns the ProfilePic field value if set, zero value otherwise.
 func (o *DomainPlatformIdentity) GetProfilePic() string {
 	if o == nil || IsNil(o.ProfilePic) {
@@ -436,38 +469,6 @@ func (o *DomainPlatformIdentity) SetTenantId(v string) {
 	o.TenantId = &v
 }
 
-// GetTenantUserId returns the TenantUserId field value if set, zero value otherwise.
-func (o *DomainPlatformIdentity) GetTenantUserId() string {
-	if o == nil || IsNil(o.TenantUserId) {
-		var ret string
-		return ret
-	}
-	return *o.TenantUserId
-}
-
-// GetTenantUserIdOk returns a tuple with the TenantUserId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainPlatformIdentity) GetTenantUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TenantUserId) {
-		return nil, false
-	}
-	return o.TenantUserId, true
-}
-
-// HasTenantUserId returns a boolean if a field has been set.
-func (o *DomainPlatformIdentity) HasTenantUserId() bool {
-	if o != nil && !IsNil(o.TenantUserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTenantUserId gets a reference to the given string and assigns it to the TenantUserId field.
-func (o *DomainPlatformIdentity) SetTenantUserId(v string) {
-	o.TenantUserId = &v
-}
-
 func (o DomainPlatformIdentity) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -508,14 +509,14 @@ func (o DomainPlatformIdentity) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastName) {
 		toSerialize["last_name"] = o.LastName
 	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	if !IsNil(o.ProfilePic) {
 		toSerialize["profile_pic"] = o.ProfilePic
 	}
 	if !IsNil(o.TenantId) {
 		toSerialize["tenant_id"] = o.TenantId
-	}
-	if !IsNil(o.TenantUserId) {
-		toSerialize["tenant_user_id"] = o.TenantUserId
 	}
 	return toSerialize, nil
 }

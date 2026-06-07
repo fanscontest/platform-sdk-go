@@ -28,7 +28,7 @@ type ApiGetPublicCountriesRequest struct {
 	ApiService *CountriesAPIService
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Accepted for shape uniformity; ignored (single-page reference data)
@@ -43,9 +43,9 @@ func (r ApiGetPublicCountriesRequest) Limit(limit int32) ApiGetPublicCountriesRe
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicCountriesRequest) XTenantUserId(xTenantUserId string) ApiGetPublicCountriesRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicCountriesRequest) XActingAs(xActingAs string) ApiGetPublicCountriesRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -115,8 +115,8 @@ func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -168,12 +168,12 @@ func (a *CountriesAPIService) GetPublicCountriesExecute(r ApiGetPublicCountriesR
 type ApiGetPublicLocationRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicLocationRequest) XTenantUserId(xTenantUserId string) ApiGetPublicLocationRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicLocationRequest) XActingAs(xActingAs string) ApiGetPublicLocationRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -232,8 +232,8 @@ func (a *CountriesAPIService) GetPublicLocationExecute(r ApiGetPublicLocationReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

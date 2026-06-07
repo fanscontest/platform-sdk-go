@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetPublicOgChannelByChannelId
 
-> HandlerOGChannelDataResponse GetPublicOgChannelByChannelId(ctx, channelId).AccessCode(accessCode).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGChannelDataResponse GetPublicOgChannelByChannelId(ctx, channelId).AccessCode(accessCode).XActingAs(xActingAs).Execute()
 
 Get channel data for OG image generation
 
@@ -34,11 +34,11 @@ import (
 func main() {
 	channelId := "channelId_example" // string | Channel ID
 	accessCode := "accessCode_example" // string | Access code for restricted channels (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OGImagesAPI.GetPublicOgChannelByChannelId(context.Background(), channelId).AccessCode(accessCode).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.OGImagesAPI.GetPublicOgChannelByChannelId(context.Background(), channelId).AccessCode(accessCode).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgChannelByChannelId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **accessCode** | **string** | Access code for restricted channels | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicOgContestByContestId
 
-> HandlerOGContestDataResponse GetPublicOgContestByContestId(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGContestDataResponse GetPublicOgContestByContestId(ctx, contestId).XActingAs(xActingAs).Execute()
 
 Get contest data for OG image generation
 
@@ -107,11 +107,11 @@ import (
 
 func main() {
 	contestId := "contestId_example" // string | Contest ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OGImagesAPI.GetPublicOgContestByContestId(context.Background(), contestId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.OGImagesAPI.GetPublicOgContestByContestId(context.Background(), contestId).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgContestByContestId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,7 +137,7 @@ Other parameters are passed through a pointer to a apiGetPublicOgContestByContes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicOgScoreboardByContestId
 
-> HandlerOGScoreboardDataResponse GetPublicOgScoreboardByContestId(ctx, contestId).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGScoreboardDataResponse GetPublicOgScoreboardByContestId(ctx, contestId).XActingAs(xActingAs).Execute()
 
 Get scoreboard data for OG image generation
 
@@ -179,11 +179,11 @@ import (
 
 func main() {
 	contestId := "contestId_example" // string | Contest ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OGImagesAPI.GetPublicOgScoreboardByContestId(context.Background(), contestId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.OGImagesAPI.GetPublicOgScoreboardByContestId(context.Background(), contestId).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgScoreboardByContestId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -209,7 +209,7 @@ Other parameters are passed through a pointer to a apiGetPublicOgScoreboardByCon
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## GetPublicOgSubmissionsByParticipationId
 
-> HandlerOGParticipationDataResponse GetPublicOgSubmissionsByParticipationId(ctx, participationId).XTenantUserId(xTenantUserId).Execute()
+> HandlerOGParticipationDataResponse GetPublicOgSubmissionsByParticipationId(ctx, participationId).XActingAs(xActingAs).Execute()
 
 Get participation data for OG image generation
 
@@ -251,11 +251,11 @@ import (
 
 func main() {
 	participationId := "participationId_example" // string | Participation ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OGImagesAPI.GetPublicOgSubmissionsByParticipationId(context.Background(), participationId).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.OGImagesAPI.GetPublicOgSubmissionsByParticipationId(context.Background(), participationId).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OGImagesAPI.GetPublicOgSubmissionsByParticipationId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -281,7 +281,7 @@ Other parameters are passed through a pointer to a apiGetPublicOgSubmissionsByPa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

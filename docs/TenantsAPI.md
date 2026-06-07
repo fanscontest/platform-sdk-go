@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateTenants
 
-> DomainTenantResponse CreateTenants(ctx).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainTenantResponse CreateTenants(ctx).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XActingAs(xActingAs).Execute()
 
 Apply to become a tenant (vetted-signup)
 
@@ -34,11 +34,11 @@ import (
 
 func main() {
 	handlerCreatePlatformRequest := *openapiclient.NewHandlerCreatePlatformRequest("Name_example") // HandlerCreatePlatformRequest | Tenant application payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TenantsAPI.CreateTenants(context.Background()).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.TenantsAPI.CreateTenants(context.Background()).HandlerCreatePlatformRequest(handlerCreatePlatformRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenants``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiCreateTenantsRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **handlerCreatePlatformRequest** | [**HandlerCreatePlatformRequest**](HandlerCreatePlatformRequest.md) | Tenant application payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## CreateTenantsByIdApiKeys
 
-> DomainTenantApiKeyResponse CreateTenantsByIdApiKeys(ctx, id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainTenantApiKeyResponse CreateTenantsByIdApiKeys(ctx, id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XActingAs(xActingAs).Execute()
 
 Mint an API key for an approved tenant
 
@@ -103,11 +103,11 @@ import (
 func main() {
 	id := "id_example" // string | Tenant ID
 	handlerCreateApiKeyRequest := *openapiclient.NewHandlerCreateApiKeyRequest("Env_example") // HandlerCreateApiKeyRequest | API key request (env + name)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TenantsAPI.CreateTenantsByIdApiKeys(context.Background(), id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.TenantsAPI.CreateTenantsByIdApiKeys(context.Background(), id).HandlerCreateApiKeyRequest(handlerCreateApiKeyRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenantsByIdApiKeys``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **handlerCreateApiKeyRequest** | [**HandlerCreateApiKeyRequest**](HandlerCreateApiKeyRequest.md) | API key request (env + name) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## CreateTenantsByIdWebhookSubscriptions
 
-> DomainWebhookSubscriptionCreatedResponse CreateTenantsByIdWebhookSubscriptions(ctx, id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainWebhookSubscriptionCreatedResponse CreateTenantsByIdWebhookSubscriptions(ctx, id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XActingAs(xActingAs).Execute()
 
 Register a webhook subscription for a tenant
 
@@ -177,11 +177,11 @@ import (
 func main() {
 	id := "id_example" // string | Tenant ID
 	handlerCreateWebhookSubscriptionRequest := *openapiclient.NewHandlerCreateWebhookSubscriptionRequest([]string{"EventTypes_example"}, "Url_example") // HandlerCreateWebhookSubscriptionRequest | Subscription payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TenantsAPI.CreateTenantsByIdWebhookSubscriptions(context.Background(), id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.TenantsAPI.CreateTenantsByIdWebhookSubscriptions(context.Background(), id).HandlerCreateWebhookSubscriptionRequest(handlerCreateWebhookSubscriptionRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.CreateTenantsByIdWebhookSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **handlerCreateWebhookSubscriptionRequest** | [**HandlerCreateWebhookSubscriptionRequest**](HandlerCreateWebhookSubscriptionRequest.md) | Subscription payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ## DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId
 
-> DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId(ctx, id, subscriptionId).XTenantUserId(xTenantUserId).Execute()
+> DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId(ctx, id, subscriptionId).XActingAs(xActingAs).Execute()
 
 Delete a webhook subscription
 
@@ -251,11 +251,11 @@ import (
 func main() {
 	id := "id_example" // string | Tenant ID
 	subscriptionId := "subscriptionId_example" // string | Webhook Subscription ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TenantsAPI.DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId(context.Background(), id, subscriptionId).XTenantUserId(xTenantUserId).Execute()
+	r, err := apiClient.TenantsAPI.DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId(context.Background(), id, subscriptionId).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## GetTenantsByIdWebhookSubscriptions
 
-> DomainWebhookSubscriptionListResponse GetTenantsByIdWebhookSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainWebhookSubscriptionListResponse GetTenantsByIdWebhookSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 List a tenant's webhook subscriptions
 
@@ -325,11 +325,11 @@ func main() {
 	id := "id_example" // string | Tenant ID
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TenantsAPI.GetTenantsByIdWebhookSubscriptions(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.TenantsAPI.GetTenantsByIdWebhookSubscriptions(context.Background(), id).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.GetTenantsByIdWebhookSubscriptions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 50, max 200) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

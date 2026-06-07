@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSponsorshipPackages
 
-> DomainSponsorshipPackageResponse CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageResponse CreateSponsorshipPackages(ctx).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XActingAs(xActingAs).Execute()
 
 Create Sponsorship Package (v2)
 
@@ -35,11 +35,11 @@ import (
 
 func main() {
 	requestCreateSponsorshipPackageRequest := *openapiclient.NewRequestCreateSponsorshipPackageRequest("BudgetPerContestCurrency_example", "BudgetPerContestValue_example", []string{"TermIds_example"}, "TotalBudgetCurrency_example", "TotalBudgetValue_example", int32(123)) // RequestCreateSponsorshipPackageRequest | Create Sponsorship Package Request
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackages(context.Background()).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackages(context.Background()).RequestCreateSponsorshipPackageRequest(requestCreateSponsorshipPackageRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,7 +61,7 @@ Other parameters are passed through a pointer to a apiCreateSponsorshipPackagesR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestCreateSponsorshipPackageRequest** | [**RequestCreateSponsorshipPackageRequest**](RequestCreateSponsorshipPackageRequest.md) | Create Sponsorship Package Request | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## CreateSponsorshipPackagesByIdCancel
 
-> DomainSponsorshipPackageResponse CreateSponsorshipPackagesByIdCancel(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageResponse CreateSponsorshipPackagesByIdCancel(ctx, id).XActingAs(xActingAs).Execute()
 
 Cancel Sponsorship Package (v2)
 
@@ -103,11 +103,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Package ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.CreateSponsorshipPackagesByIdCancel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,7 +133,7 @@ Other parameters are passed through a pointer to a apiCreateSponsorshipPackagesB
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackages
 
-> DomainSponsorshipPackageListResponse GetSponsorshipPackages(ctx).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageListResponse GetSponsorshipPackages(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 Get Sponsorship Packages (v2)
 
@@ -176,11 +176,11 @@ import (
 func main() {
 	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) (optional)
 	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackages(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) | 
  **limit** | **int32** | Accepted for shape uniformity; ignored (single-page endpoint; see uman#132) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesAvailable
 
-> DomainSponsorshipPackageListResponse GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageListResponse GetSponsorshipPackagesAvailable(ctx).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 Get Available Packages (v2)
 
@@ -248,11 +248,11 @@ func main() {
 	packageId := "packageId_example" // string | Get specific package by ID (optional)
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable(context.Background()).SponsorId(sponsorId).PackageId(packageId).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesAvailable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
  **packageId** | **string** | Get specific package by ID | 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 50, max 200) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdAgreement
 
-> DomainSponsorshipPackageAgreementResponse GetSponsorshipPackagesByIdAgreement(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipPackageAgreementResponse GetSponsorshipPackagesByIdAgreement(ctx, id).XActingAs(xActingAs).Execute()
 
 Get Package Agreement (v2)
 
@@ -319,11 +319,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Package ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdAgreement``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -349,7 +349,7 @@ Other parameters are passed through a pointer to a apiGetSponsorshipPackagesById
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 ## GetSponsorshipPackagesByIdSponsorships
 
-> DomainSponsorshipListResponse GetSponsorshipPackagesByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+> DomainSponsorshipListResponse GetSponsorshipPackagesByIdSponsorships(ctx, id).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 Get Package Sponsorships (v2)
 
@@ -393,11 +393,11 @@ func main() {
 	id := "id_example" // string | Package ID
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
 	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).Cursor(cursor).Limit(limit).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships(context.Background(), id).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SponsorshipPackagesAPI.GetSponsorshipPackagesByIdSponsorships``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Opaque pagination cursor | 
  **limit** | **int32** | Page size (default 50, max 200) | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

@@ -29,7 +29,7 @@ type ApiCreateContestsByContestIdSponsorshipsRequest struct {
 	ApiService *SponsorshipsAPIService
 	contestId string
 	requestCreateSponsorshipOfferRequest *RequestCreateSponsorshipOfferRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Create Sponsorship Offer Request
@@ -38,9 +38,9 @@ func (r ApiCreateContestsByContestIdSponsorshipsRequest) RequestCreateSponsorshi
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateContestsByContestIdSponsorshipsRequest) XTenantUserId(xTenantUserId string) ApiCreateContestsByContestIdSponsorshipsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateContestsByContestIdSponsorshipsRequest) XActingAs(xActingAs string) ApiCreateContestsByContestIdSponsorshipsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -107,8 +107,8 @@ func (a *SponsorshipsAPIService) CreateContestsByContestIdSponsorshipsExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestCreateSponsorshipOfferRequest
@@ -174,12 +174,12 @@ type ApiCreateSponsorshipsByIdAcceptRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateSponsorshipsByIdAcceptRequest) XTenantUserId(xTenantUserId string) ApiCreateSponsorshipsByIdAcceptRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateSponsorshipsByIdAcceptRequest) XActingAs(xActingAs string) ApiCreateSponsorshipsByIdAcceptRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -243,8 +243,8 @@ func (a *SponsorshipsAPIService) CreateSponsorshipsByIdAcceptExecute(r ApiCreate
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -308,12 +308,12 @@ type ApiCreateSponsorshipsByIdRejectRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateSponsorshipsByIdRejectRequest) XTenantUserId(xTenantUserId string) ApiCreateSponsorshipsByIdRejectRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateSponsorshipsByIdRejectRequest) XActingAs(xActingAs string) ApiCreateSponsorshipsByIdRejectRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -377,8 +377,8 @@ func (a *SponsorshipsAPIService) CreateSponsorshipsByIdRejectExecute(r ApiCreate
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -444,7 +444,7 @@ type ApiGetContestsByContestIdSponsorshipsRequest struct {
 	contestId string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -459,9 +459,9 @@ func (r ApiGetContestsByContestIdSponsorshipsRequest) Limit(limit int32) ApiGetC
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetContestsByContestIdSponsorshipsRequest) XTenantUserId(xTenantUserId string) ApiGetContestsByContestIdSponsorshipsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetContestsByContestIdSponsorshipsRequest) XActingAs(xActingAs string) ApiGetContestsByContestIdSponsorshipsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -531,8 +531,8 @@ func (a *SponsorshipsAPIService) GetContestsByContestIdSponsorshipsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -596,12 +596,12 @@ type ApiGetSponsorshipsByIdAgreementRequest struct {
 	ctx context.Context
 	ApiService *SponsorshipsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetSponsorshipsByIdAgreementRequest) XTenantUserId(xTenantUserId string) ApiGetSponsorshipsByIdAgreementRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetSponsorshipsByIdAgreementRequest) XActingAs(xActingAs string) ApiGetSponsorshipsByIdAgreementRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -665,8 +665,8 @@ func (a *SponsorshipsAPIService) GetSponsorshipsByIdAgreementExecute(r ApiGetSpo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

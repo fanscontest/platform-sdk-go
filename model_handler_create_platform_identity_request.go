@@ -13,8 +13,6 @@ package platform
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the HandlerCreatePlatformIdentityRequest type satisfies the MappedNullable interface at compile time
@@ -29,19 +27,16 @@ type HandlerCreatePlatformIdentityRequest struct {
 	FirstName *string `json:"first_name,omitempty"`
 	HeaderImageUrl *string `json:"header_image_url,omitempty"`
 	LastName *string `json:"last_name,omitempty"`
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	ProfilePic *string `json:"profile_pic,omitempty"`
-	TenantUserId string `json:"tenant_user_id"`
 }
-
-type _HandlerCreatePlatformIdentityRequest HandlerCreatePlatformIdentityRequest
 
 // NewHandlerCreatePlatformIdentityRequest instantiates a new HandlerCreatePlatformIdentityRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHandlerCreatePlatformIdentityRequest(tenantUserId string) *HandlerCreatePlatformIdentityRequest {
+func NewHandlerCreatePlatformIdentityRequest() *HandlerCreatePlatformIdentityRequest {
 	this := HandlerCreatePlatformIdentityRequest{}
-	this.TenantUserId = tenantUserId
 	return &this
 }
 
@@ -245,6 +240,38 @@ func (o *HandlerCreatePlatformIdentityRequest) SetLastName(v string) {
 	o.LastName = &v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *HandlerCreatePlatformIdentityRequest) GetMetadata() map[string]string {
+	if o == nil || IsNil(o.Metadata) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HandlerCreatePlatformIdentityRequest) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *HandlerCreatePlatformIdentityRequest) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *HandlerCreatePlatformIdentityRequest) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 // GetProfilePic returns the ProfilePic field value if set, zero value otherwise.
 func (o *HandlerCreatePlatformIdentityRequest) GetProfilePic() string {
 	if o == nil || IsNil(o.ProfilePic) {
@@ -277,30 +304,6 @@ func (o *HandlerCreatePlatformIdentityRequest) SetProfilePic(v string) {
 	o.ProfilePic = &v
 }
 
-// GetTenantUserId returns the TenantUserId field value
-func (o *HandlerCreatePlatformIdentityRequest) GetTenantUserId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.TenantUserId
-}
-
-// GetTenantUserIdOk returns a tuple with the TenantUserId field value
-// and a boolean to check if the value has been set.
-func (o *HandlerCreatePlatformIdentityRequest) GetTenantUserIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TenantUserId, true
-}
-
-// SetTenantUserId sets field value
-func (o *HandlerCreatePlatformIdentityRequest) SetTenantUserId(v string) {
-	o.TenantUserId = v
-}
-
 func (o HandlerCreatePlatformIdentityRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -329,48 +332,13 @@ func (o HandlerCreatePlatformIdentityRequest) ToMap() (map[string]interface{}, e
 	if !IsNil(o.LastName) {
 		toSerialize["last_name"] = o.LastName
 	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	if !IsNil(o.ProfilePic) {
 		toSerialize["profile_pic"] = o.ProfilePic
 	}
-	toSerialize["tenant_user_id"] = o.TenantUserId
 	return toSerialize, nil
-}
-
-func (o *HandlerCreatePlatformIdentityRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"tenant_user_id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varHandlerCreatePlatformIdentityRequest := _HandlerCreatePlatformIdentityRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHandlerCreatePlatformIdentityRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = HandlerCreatePlatformIdentityRequest(varHandlerCreatePlatformIdentityRequest)
-
-	return err
 }
 
 type NullableHandlerCreatePlatformIdentityRequest struct {

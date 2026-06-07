@@ -30,7 +30,7 @@ type ApiGetIdentitiesByPiidFeedPersonalizedRequest struct {
 	piid string
 	limit *int32
 	cursor *string
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Page size (1-200, default 20)
@@ -45,9 +45,9 @@ func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) Cursor(cursor string) Api
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) XTenantUserId(xTenantUserId string) ApiGetIdentitiesByPiidFeedPersonalizedRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetIdentitiesByPiidFeedPersonalizedRequest) XActingAs(xActingAs string) ApiGetIdentitiesByPiidFeedPersonalizedRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -118,8 +118,8 @@ func (a *FeedsAPIService) GetIdentitiesByPiidFeedPersonalizedExecute(r ApiGetIde
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -207,7 +207,7 @@ type ApiGetPublicFeedRequest struct {
 	limit *int32
 	cursor *string
 	region *string
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Page size (1-200, default 20)
@@ -228,9 +228,9 @@ func (r ApiGetPublicFeedRequest) Region(region string) ApiGetPublicFeedRequest {
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetPublicFeedRequest) XTenantUserId(xTenantUserId string) ApiGetPublicFeedRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetPublicFeedRequest) XActingAs(xActingAs string) ApiGetPublicFeedRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -298,8 +298,8 @@ func (a *FeedsAPIService) GetPublicFeedExecute(r ApiGetPublicFeedRequest) (*Doma
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

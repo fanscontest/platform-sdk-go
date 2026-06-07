@@ -165,9 +165,8 @@ Class | Method | HTTP request | Description
 *EventsAPI* | [**PuzzleWebV2EventControllerShowDetails**](docs/EventsAPI.md#puzzlewebv2eventcontrollershowdetails) | **Get** /v2/events/{id}/details | Get event details (from Postgres)
 *FeedsAPI* | [**GetIdentitiesByPiidFeedPersonalized**](docs/FeedsAPI.md#getidentitiesbypiidfeedpersonalized) | **Get** /v2/identities/{piid}/feed-personalized | Get the personalized feed for a platform identity
 *FeedsAPI* | [**GetPublicFeed**](docs/FeedsAPI.md#getpublicfeed) | **Get** /v2/public/feed | Get the public feed (trending content, unauthenticated)
-*IdentitiesAPI* | [**CreateIdentities**](docs/IdentitiesAPI.md#createidentities) | **Post** /v2/identities | Register a tenant-supplied end-user as a platform identity
+*IdentitiesAPI* | [**CreateIdentities**](docs/IdentitiesAPI.md#createidentities) | **Post** /v2/identities | Register a platform identity (platform mints the id)
 *IdentitiesAPI* | [**DeleteIdentitiesById**](docs/IdentitiesAPI.md#deleteidentitiesbyid) | **Delete** /v2/identities/{id} | Soft-delete a platform identity, scoped to the calling tenant
-*IdentitiesAPI* | [**GetIdentities**](docs/IdentitiesAPI.md#getidentities) | **Get** /v2/identities | Look up a platform identity by tenant_user_id (409 recovery)
 *IdentitiesAPI* | [**GetIdentitiesById**](docs/IdentitiesAPI.md#getidentitiesbyid) | **Get** /v2/identities/{id} | Get a platform identity by ID, scoped to the calling tenant
 *IdentitiesAPI* | [**UpdateIdentitiesById**](docs/IdentitiesAPI.md#updateidentitiesbyid) | **Put** /v2/identities/{id} | Replace a platform identity&#39;s profile, scoped to the calling tenant
 *MessagesAPI* | [**CreateMessages**](docs/MessagesAPI.md#createmessages) | **Post** /v2/messages | Create a message

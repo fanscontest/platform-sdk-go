@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateMessages
 
-> string CreateMessages(ctx).DomainMessage(domainMessage).XTenantUserId(xTenantUserId).Execute()
+> string CreateMessages(ctx).DomainMessage(domainMessage).XActingAs(xActingAs).Execute()
 
 Create a message
 
@@ -33,11 +33,11 @@ import (
 
 func main() {
 	domainMessage := *openapiclient.NewDomainMessage() // DomainMessage | Message payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.CreateMessages(context.Background()).DomainMessage(domainMessage).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.MessagesAPI.CreateMessages(context.Background()).DomainMessage(domainMessage).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.CreateMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,7 +59,7 @@ Other parameters are passed through a pointer to a apiCreateMessagesRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domainMessage** | [**DomainMessage**](DomainMessage.md) | Message payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetMessages
 
-> string GetMessages(ctx).XTenantUserId(xTenantUserId).Execute()
+> string GetMessages(ctx).XActingAs(xActingAs).Execute()
 
 List messages for the caller
 
@@ -100,11 +100,11 @@ import (
 )
 
 func main() {
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.GetMessages(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.MessagesAPI.GetMessages(context.Background()).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.GetMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -125,7 +125,7 @@ Other parameters are passed through a pointer to a apiGetMessagesRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ## GetMessagesById
 
-> string GetMessagesById(ctx, id).XTenantUserId(xTenantUserId).Execute()
+> string GetMessagesById(ctx, id).XActingAs(xActingAs).Execute()
 
 Get a message by ID
 
@@ -167,11 +167,11 @@ import (
 
 func main() {
 	id := "id_example" // string | Message ID
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.GetMessagesById(context.Background(), id).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.MessagesAPI.GetMessagesById(context.Background(), id).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.GetMessagesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -197,7 +197,7 @@ Other parameters are passed through a pointer to a apiGetMessagesByIdRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ## UpdateMessagesById
 
-> string UpdateMessagesById(ctx, id).Body(body).XTenantUserId(xTenantUserId).Execute()
+> string UpdateMessagesById(ctx, id).Body(body).XActingAs(xActingAs).Execute()
 
 Update a message's status
 
@@ -240,11 +240,11 @@ import (
 func main() {
 	id := "id_example" // string | Message ID
 	body := "body_example" // string | New status
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.UpdateMessagesById(context.Background(), id).Body(body).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.MessagesAPI.UpdateMessagesById(context.Background(), id).Body(body).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.UpdateMessagesById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **body** | **string** | New status | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

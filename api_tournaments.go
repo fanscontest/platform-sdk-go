@@ -27,12 +27,12 @@ type TournamentsAPIService service
 type ApiCreateTournamentsRequest struct {
 	ctx context.Context
 	ApiService *TournamentsAPIService
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiCreateTournamentsRequest) XTenantUserId(xTenantUserId string) ApiCreateTournamentsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiCreateTournamentsRequest) XActingAs(xActingAs string) ApiCreateTournamentsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -93,8 +93,8 @@ func (a *TournamentsAPIService) CreateTournamentsExecute(r ApiCreateTournamentsR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -158,12 +158,12 @@ type ApiGetChannelsByIdTournamentConfigurationRequest struct {
 	ctx context.Context
 	ApiService *TournamentsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsByIdTournamentConfigurationRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsByIdTournamentConfigurationRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsByIdTournamentConfigurationRequest) XActingAs(xActingAs string) ApiGetChannelsByIdTournamentConfigurationRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -227,8 +227,8 @@ func (a *TournamentsAPIService) GetChannelsByIdTournamentConfigurationExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -294,7 +294,7 @@ type ApiGetChannelsByIdTournamentsRequest struct {
 	id string
 	cursor *string
 	limit *int32
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Opaque pagination cursor
@@ -309,9 +309,9 @@ func (r ApiGetChannelsByIdTournamentsRequest) Limit(limit int32) ApiGetChannelsB
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetChannelsByIdTournamentsRequest) XTenantUserId(xTenantUserId string) ApiGetChannelsByIdTournamentsRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsByIdTournamentsRequest) XActingAs(xActingAs string) ApiGetChannelsByIdTournamentsRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -379,8 +379,8 @@ func (a *TournamentsAPIService) GetChannelsByIdTournamentsExecute(r ApiGetChanne
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -444,12 +444,12 @@ type ApiGetTournamentsByIdRequest struct {
 	ctx context.Context
 	ApiService *TournamentsAPIService
 	id string
-	xTenantUserId *string
+	xActingAs *string
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiGetTournamentsByIdRequest) XTenantUserId(xTenantUserId string) ApiGetTournamentsByIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetTournamentsByIdRequest) XActingAs(xActingAs string) ApiGetTournamentsByIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -513,8 +513,8 @@ func (a *TournamentsAPIService) GetTournamentsByIdExecute(r ApiGetTournamentsByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

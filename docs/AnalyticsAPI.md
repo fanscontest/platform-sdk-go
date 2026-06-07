@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateAnalyticsImpression
 
-> HandlerStatusResponseResponse CreateAnalyticsImpression(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateAnalyticsImpression(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XActingAs(xActingAs).Execute()
 
 Record a click/impression event
 
@@ -32,11 +32,11 @@ import (
 
 func main() {
 	requestUpdateClickCountRequest := *openapiclient.NewRequestUpdateClickCountRequest("RefId_example", "Type_example") // RequestUpdateClickCountRequest | Impression payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalyticsAPI.CreateAnalyticsImpression(context.Background()).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.AnalyticsAPI.CreateAnalyticsImpression(context.Background()).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalyticsAPI.CreateAnalyticsImpression``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiCreateAnalyticsImpressionR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestUpdateClickCountRequest** | [**RequestUpdateClickCountRequest**](RequestUpdateClickCountRequest.md) | Impression payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## CreateTrackerClick
 
-> HandlerStatusResponseResponse CreateTrackerClick(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
+> HandlerStatusResponseResponse CreateTrackerClick(ctx).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XActingAs(xActingAs).Execute()
 
 Record a click/impression event
 
@@ -100,11 +100,11 @@ import (
 
 func main() {
 	requestUpdateClickCountRequest := *openapiclient.NewRequestUpdateClickCountRequest("RefId_example", "Type_example") // RequestUpdateClickCountRequest | Impression payload
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalyticsAPI.CreateTrackerClick(context.Background()).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.AnalyticsAPI.CreateTrackerClick(context.Background()).RequestUpdateClickCountRequest(requestUpdateClickCountRequest).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalyticsAPI.CreateTrackerClick``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,7 +126,7 @@ Other parameters are passed through a pointer to a apiCreateTrackerClickRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestUpdateClickCountRequest** | [**RequestUpdateClickCountRequest**](RequestUpdateClickCountRequest.md) | Impression payload | 
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ## GetAnalyticsOverview
 
-> DomainStatsOverviewResponse GetAnalyticsOverview(ctx).XTenantUserId(xTenantUserId).Execute()
+> DomainStatsOverviewResponse GetAnalyticsOverview(ctx).XActingAs(xActingAs).Execute()
 
 Get the caller's analytics overview
 
@@ -165,11 +165,11 @@ import (
 )
 
 func main() {
-	xTenantUserId := "xTenantUserId_example" // string | Acting-as. The tenant's own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AnalyticsAPI.GetAnalyticsOverview(context.Background()).XTenantUserId(xTenantUserId).Execute()
+	resp, r, err := apiClient.AnalyticsAPI.GetAnalyticsOverview(context.Background()).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AnalyticsAPI.GetAnalyticsOverview``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -190,7 +190,7 @@ Other parameters are passed through a pointer to a apiGetAnalyticsOverviewReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xTenantUserId** | **string** | Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls. | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 

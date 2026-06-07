@@ -29,7 +29,7 @@ type ApiUpdateTeamPreferenceByTeamSetIdRequest struct {
 	ApiService *TeamPreferencesAPIService
 	teamSetId string
 	requestUpsertTeamPreferenceRequest *RequestUpsertTeamPreferenceRequest
-	xTenantUserId *string
+	xActingAs *string
 }
 
 // Preference payload
@@ -38,9 +38,9 @@ func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) RequestUpsertTeamPreferenceRe
 	return r
 }
 
-// Acting-as. The tenant&#39;s own identifier for the fan this request is on behalf of. The platform resolves (tenant, X-Tenant-User-Id) to a platform identity. Omit for tenant-level calls.
-func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) XTenantUserId(xTenantUserId string) ApiUpdateTeamPreferenceByTeamSetIdRequest {
-	r.xTenantUserId = &xTenantUserId
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiUpdateTeamPreferenceByTeamSetIdRequest) XActingAs(xActingAs string) ApiUpdateTeamPreferenceByTeamSetIdRequest {
+	r.xActingAs = &xActingAs
 	return r
 }
 
@@ -105,8 +105,8 @@ func (a *TeamPreferencesAPIService) UpdateTeamPreferenceByTeamSetIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xTenantUserId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Tenant-User-Id", r.xTenantUserId, "simple", "")
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.requestUpsertTeamPreferenceRequest
