@@ -340,8 +340,8 @@ func (r ApiCreateContestsByContestIdBuddyBoardsByBoardIdInvitesAcceptRequest) Ex
 /*
 CreateContestsByContestIdBuddyBoardsByBoardIdInvitesAccept Accept a pending buddy board invite (invitee only)
 
-Rejected with 400 ALREADY_PARTICIPATED if the invitee has
-already played the contest; declines are always allowed.
+Accepts a pending invite. Allowed regardless of whether the
+invitee has already played the contest.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param contestId Contest ID
@@ -1707,6 +1707,143 @@ func (a *ContestsAPIService) DeleteContestsByIdExecute(r ApiDeleteContestsByIdRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetAdminHostingInvitationsRequest struct {
+	ctx context.Context
+	ApiService *ContestsAPIService
+	cursor *string
+	limit *int32
+	xActingAs *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetAdminHostingInvitationsRequest) Cursor(cursor string) ApiGetAdminHostingInvitationsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetAdminHostingInvitationsRequest) Limit(limit int32) ApiGetAdminHostingInvitationsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetAdminHostingInvitationsRequest) XActingAs(xActingAs string) ApiGetAdminHostingInvitationsRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetAdminHostingInvitationsRequest) Execute() (*DomainContestHostingListResponse, *http.Response, error) {
+	return r.ApiService.GetAdminHostingInvitationsExecute(r)
+}
+
+/*
+GetAdminHostingInvitations List pending hosting invitations for the calling tenant's venues
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdminHostingInvitationsRequest
+*/
+func (a *ContestsAPIService) GetAdminHostingInvitations(ctx context.Context) ApiGetAdminHostingInvitationsRequest {
+	return ApiGetAdminHostingInvitationsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DomainContestHostingListResponse
+func (a *ContestsAPIService) GetAdminHostingInvitationsExecute(r ApiGetAdminHostingInvitationsRequest) (*DomainContestHostingListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainContestHostingListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetAdminHostingInvitations")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/admin/hosting-invitations"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetChannelsByIdContestsRequest struct {
 	ctx context.Context
 	ApiService *ContestsAPIService
@@ -1740,8 +1877,6 @@ func (r ApiGetChannelsByIdContestsRequest) Execute() (*DomainContestListResponse
 
 /*
 GetChannelsByIdContests Get channel contests (cursor-paginated)
-
-Mounted twice (authed + public) with identical semantics.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Channel ID
@@ -2174,7 +2309,21 @@ type ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest struct {
 	ApiService *ContestsAPIService
 	contestId string
 	boardId string
+	cursor *string
+	limit *int32
 	xActingAs *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Cursor(cursor string) ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Limit(limit int32) ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest {
+	r.limit = &limit
+	return r
 }
 
 // Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
@@ -2183,7 +2332,7 @@ func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) XActingAs(x
 	return r
 }
 
-func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
+func (r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*DomainPlatformIdentityListResponse, *http.Response, error) {
 	return r.ApiService.GetContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r)
 }
 
@@ -2207,13 +2356,13 @@ func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembers(c
 }
 
 // Execute executes the request
-//  @return DomainBuddyBoardMembersResponseResponse
-func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
+//  @return DomainPlatformIdentityListResponse
+func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*DomainPlatformIdentityListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainBuddyBoardMembersResponseResponse
+		localVarReturnValue  *DomainPlatformIdentityListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByContestIdBuddyBoardsByBoardIdMembers")
@@ -2229,6 +2378,12 @@ func (a *ContestsAPIService) GetContestsByContestIdBuddyBoardsByBoardIdMembersEx
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2487,8 +2642,6 @@ func (r ApiGetContestsByIdRequest) Execute() (*DomainContestResponse, *http.Resp
 /*
 GetContestsById Get a contest by ID
 
-Mounted twice (authed + public) with identical semantics.
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Contest ID
  @return ApiGetContestsByIdRequest
@@ -2517,6 +2670,140 @@ func (a *ContestsAPIService) GetContestsByIdExecute(r ApiGetContestsByIdRequest)
 	}
 
 	localVarPath := localBasePath + "/v2/contests/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetContestsByIdGroupsRequest struct {
+	ctx context.Context
+	ApiService *ContestsAPIService
+	id string
+	xActingAs *string
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetContestsByIdGroupsRequest) XActingAs(xActingAs string) ApiGetContestsByIdGroupsRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetContestsByIdGroupsRequest) Execute() (*DomainContestGroupsResponse, *http.Response, error) {
+	return r.ApiService.GetContestsByIdGroupsExecute(r)
+}
+
+/*
+GetContestsByIdGroups Get Contest Groups
+
+Get Contest Groups
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Contest ID
+ @return ApiGetContestsByIdGroupsRequest
+*/
+func (a *ContestsAPIService) GetContestsByIdGroups(ctx context.Context, id string) ApiGetContestsByIdGroupsRequest {
+	return ApiGetContestsByIdGroupsRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return DomainContestGroupsResponse
+func (a *ContestsAPIService) GetContestsByIdGroupsExecute(r ApiGetContestsByIdGroupsRequest) (*DomainContestGroupsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainContestGroupsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByIdGroups")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/contests/{id}/groups"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -3125,6 +3412,337 @@ func (a *ContestsAPIService) GetContestsByIdQuestionStatsExecute(r ApiGetContest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetContestsByIdSubmissionFeedRequest struct {
+	ctx context.Context
+	ApiService *ContestsAPIService
+	id string
+	cursor *string
+	limit *int32
+	xActingAs *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsByIdSubmissionFeedRequest) Cursor(cursor string) ApiGetContestsByIdSubmissionFeedRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 20, max 100)
+func (r ApiGetContestsByIdSubmissionFeedRequest) Limit(limit int32) ApiGetContestsByIdSubmissionFeedRequest {
+	r.limit = &limit
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetContestsByIdSubmissionFeedRequest) XActingAs(xActingAs string) ApiGetContestsByIdSubmissionFeedRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetContestsByIdSubmissionFeedRequest) Execute() (*DomainSubmissionFeedItemListResponse, *http.Response, error) {
+	return r.ApiService.GetContestsByIdSubmissionFeedExecute(r)
+}
+
+/*
+GetContestsByIdSubmissionFeed Get the real-time feed of contest submissions (cursor-paginated)
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Contest ID
+ @return ApiGetContestsByIdSubmissionFeedRequest
+*/
+func (a *ContestsAPIService) GetContestsByIdSubmissionFeed(ctx context.Context, id string) ApiGetContestsByIdSubmissionFeedRequest {
+	return ApiGetContestsByIdSubmissionFeedRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return DomainSubmissionFeedItemListResponse
+func (a *ContestsAPIService) GetContestsByIdSubmissionFeedExecute(r ApiGetContestsByIdSubmissionFeedRequest) (*DomainSubmissionFeedItemListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainSubmissionFeedItemListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByIdSubmissionFeed")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/contests/{id}/submission-feed"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetContestsByRegionRequest struct {
+	ctx context.Context
+	ApiService *ContestsAPIService
+	cursor *string
+	limit *int32
+	ended *bool
+	region *string
+	xActingAs *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsByRegionRequest) Cursor(cursor string) ApiGetContestsByRegionRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50)
+func (r ApiGetContestsByRegionRequest) Limit(limit int32) ApiGetContestsByRegionRequest {
+	r.limit = &limit
+	return r
+}
+
+// Include ended contests
+func (r ApiGetContestsByRegionRequest) Ended(ended bool) ApiGetContestsByRegionRequest {
+	r.ended = &ended
+	return r
+}
+
+// ISO 3166-1 alpha-2 region filter
+func (r ApiGetContestsByRegionRequest) Region(region string) ApiGetContestsByRegionRequest {
+	r.region = &region
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetContestsByRegionRequest) XActingAs(xActingAs string) ApiGetContestsByRegionRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetContestsByRegionRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
+	return r.ApiService.GetContestsByRegionExecute(r)
+}
+
+/*
+GetContestsByRegion List contests by region (tenant-scoped, cursor-paginated)
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetContestsByRegionRequest
+*/
+func (a *ContestsAPIService) GetContestsByRegion(ctx context.Context) ApiGetContestsByRegionRequest {
+	return ApiGetContestsByRegionRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetContestsByRegionExecute(r ApiGetContestsByRegionRequest) (*DomainContestListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainContestListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsByRegion")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/contests/by-region"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	if r.ended != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ended", r.ended, "form", "")
+	}
+	if r.region != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetContestsSearchRequest struct {
 	ctx context.Context
 	ApiService *ContestsAPIService
@@ -3273,11 +3891,175 @@ func (a *ContestsAPIService) GetContestsSearchExecute(r ApiGetContestsSearchRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetContestsSearchKeywordByKeywordRequest struct {
+	ctx context.Context
+	ApiService *ContestsAPIService
+	keyword string
+	cursor *string
+	limit *int32
+	ended *bool
+	xActingAs *string
+}
+
+// Opaque pagination cursor
+func (r ApiGetContestsSearchKeywordByKeywordRequest) Cursor(cursor string) ApiGetContestsSearchKeywordByKeywordRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50)
+func (r ApiGetContestsSearchKeywordByKeywordRequest) Limit(limit int32) ApiGetContestsSearchKeywordByKeywordRequest {
+	r.limit = &limit
+	return r
+}
+
+// Include ended contests
+func (r ApiGetContestsSearchKeywordByKeywordRequest) Ended(ended bool) ApiGetContestsSearchKeywordByKeywordRequest {
+	r.ended = &ended
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetContestsSearchKeywordByKeywordRequest) XActingAs(xActingAs string) ApiGetContestsSearchKeywordByKeywordRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetContestsSearchKeywordByKeywordRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
+	return r.ApiService.GetContestsSearchKeywordByKeywordExecute(r)
+}
+
+/*
+GetContestsSearchKeywordByKeyword Search contests by keyword (tenant-scoped, cursor-paginated)
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param keyword Search keyword
+ @return ApiGetContestsSearchKeywordByKeywordRequest
+*/
+func (a *ContestsAPIService) GetContestsSearchKeywordByKeyword(ctx context.Context, keyword string) ApiGetContestsSearchKeywordByKeywordRequest {
+	return ApiGetContestsSearchKeywordByKeywordRequest{
+		ApiService: a,
+		ctx: ctx,
+		keyword: keyword,
+	}
+}
+
+// Execute executes the request
+//  @return DomainContestListResponse
+func (a *ContestsAPIService) GetContestsSearchKeywordByKeywordExecute(r ApiGetContestsSearchKeywordByKeywordRequest) (*DomainContestListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainContestListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetContestsSearchKeywordByKeyword")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/contests/searchKeyword/{keyword}"
+	localVarPath = strings.Replace(localVarPath, "{"+"keyword"+"}", url.PathEscape(parameterValueToString(r.keyword, "keyword")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	if r.ended != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ended", r.ended, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetIdentitiesByPiidBuddyBoardInvitesRequest struct {
 	ctx context.Context
 	ApiService *ContestsAPIService
 	piid string
 	status *string
+	cursor *string
+	limit *int32
 	xActingAs *string
 }
 
@@ -3287,13 +4069,25 @@ func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Status(status string) Ap
 	return r
 }
 
+// Opaque pagination cursor
+func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Cursor(cursor string) ApiGetIdentitiesByPiidBuddyBoardInvitesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size (default 50, max 200)
+func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Limit(limit int32) ApiGetIdentitiesByPiidBuddyBoardInvitesRequest {
+	r.limit = &limit
+	return r
+}
+
 // Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
 func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) XActingAs(xActingAs string) ApiGetIdentitiesByPiidBuddyBoardInvitesRequest {
 	r.xActingAs = &xActingAs
 	return r
 }
 
-func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Execute() (*DomainBuddyBoardInvitesResponseResponse, *http.Response, error) {
+func (r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) Execute() (*DomainBuddyBoardInviteListResponse, *http.Response, error) {
 	return r.ApiService.GetIdentitiesByPiidBuddyBoardInvitesExecute(r)
 }
 
@@ -3316,13 +4110,13 @@ func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvites(ctx context.Co
 }
 
 // Execute executes the request
-//  @return DomainBuddyBoardInvitesResponseResponse
-func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvitesExecute(r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) (*DomainBuddyBoardInvitesResponseResponse, *http.Response, error) {
+//  @return DomainBuddyBoardInviteListResponse
+func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvitesExecute(r ApiGetIdentitiesByPiidBuddyBoardInvitesRequest) (*DomainBuddyBoardInviteListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DomainBuddyBoardInvitesResponseResponse
+		localVarReturnValue  *DomainBuddyBoardInviteListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetIdentitiesByPiidBuddyBoardInvites")
@@ -3339,6 +4133,12 @@ func (a *ContestsAPIService) GetIdentitiesByPiidBuddyBoardInvitesExecute(r ApiGe
 
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3549,1230 +4349,6 @@ func (a *ContestsAPIService) GetIdentitiesByPiidContestsExecute(r ApiGetIdentiti
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicChannelsByIdContestsRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	id string
-	cursor *string
-	limit *int32
-	xActingAs *string
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicChannelsByIdContestsRequest) Cursor(cursor string) ApiGetPublicChannelsByIdContestsRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size (default 20)
-func (r ApiGetPublicChannelsByIdContestsRequest) Limit(limit int32) ApiGetPublicChannelsByIdContestsRequest {
-	r.limit = &limit
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsByIdContestsRequest) XActingAs(xActingAs string) ApiGetPublicChannelsByIdContestsRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicChannelsByIdContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicChannelsByIdContestsExecute(r)
-}
-
-/*
-GetPublicChannelsByIdContests Get channel contests (cursor-paginated)
-
-Mounted twice (authed + public) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Channel ID
- @return ApiGetPublicChannelsByIdContestsRequest
-*/
-func (a *ContestsAPIService) GetPublicChannelsByIdContests(ctx context.Context, id string) ApiGetPublicChannelsByIdContestsRequest {
-	return ApiGetPublicChannelsByIdContestsRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return DomainContestListResponse
-func (a *ContestsAPIService) GetPublicChannelsByIdContestsExecute(r ApiGetPublicChannelsByIdContestsRequest) (*DomainContestListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainContestListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicChannelsByIdContests")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/channels/{id}/contests"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	cursor *string
-	limit *int32
-	ended *bool
-	region *string
-	xActingAs *string
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicContestsRequest) Cursor(cursor string) ApiGetPublicContestsRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size (default 50)
-func (r ApiGetPublicContestsRequest) Limit(limit int32) ApiGetPublicContestsRequest {
-	r.limit = &limit
-	return r
-}
-
-// Include ended contests
-func (r ApiGetPublicContestsRequest) Ended(ended bool) ApiGetPublicContestsRequest {
-	r.ended = &ended
-	return r
-}
-
-// ISO 3166-1 alpha-2 region filter
-func (r ApiGetPublicContestsRequest) Region(region string) ApiGetPublicContestsRequest {
-	r.region = &region
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsRequest) XActingAs(xActingAs string) ApiGetPublicContestsRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsExecute(r)
-}
-
-/*
-GetPublicContests List public contests (region-scoped, cursor-paginated)
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPublicContestsRequest
-*/
-func (a *ContestsAPIService) GetPublicContests(ctx context.Context) ApiGetPublicContestsRequest {
-	return ApiGetPublicContestsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return DomainContestListResponse
-func (a *ContestsAPIService) GetPublicContestsExecute(r ApiGetPublicContestsRequest) (*DomainContestListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainContestListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContests")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	if r.ended != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ended", r.ended, "form", "")
-	}
-	if r.region != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	contestId string
-	boardId string
-	xActingAs *string
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) XActingAs(xActingAs string) ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) Execute() (*DomainBuddyBoardViewResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsByContestIdBuddyBoardsByBoardIdExecute(r)
-}
-
-/*
-GetPublicContestsByContestIdBuddyBoardsByBoardId Get buddy board view (metadata + scores filtered to board members)
-
-Mounted twice (public + authed) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param contestId Contest ID
- @param boardId Buddy Board ID
- @return ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest
-*/
-func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardId(ctx context.Context, contestId string, boardId string) ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest {
-	return ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest{
-		ApiService: a,
-		ctx: ctx,
-		contestId: contestId,
-		boardId: boardId,
-	}
-}
-
-// Execute executes the request
-//  @return DomainBuddyBoardViewResponse
-func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdExecute(r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdRequest) (*DomainBuddyBoardViewResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainBuddyBoardViewResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByContestIdBuddyBoardsByBoardId")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests/{contestId}/buddy-boards/{boardId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"contestId"+"}", url.PathEscape(parameterValueToString(r.contestId, "contestId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"boardId"+"}", url.PathEscape(parameterValueToString(r.boardId, "boardId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	contestId string
-	boardId string
-	xActingAs *string
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) XActingAs(xActingAs string) ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) Execute() (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r)
-}
-
-/*
-GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers List buddy board members (public or authed)
-
-Mounted twice (public + authed) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param contestId Contest ID
- @param boardId Buddy Board ID
- @return ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest
-*/
-func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers(ctx context.Context, contestId string, boardId string) ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest {
-	return ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest{
-		ApiService: a,
-		ctx: ctx,
-		contestId: contestId,
-		boardId: boardId,
-	}
-}
-
-// Execute executes the request
-//  @return DomainBuddyBoardMembersResponseResponse
-func (a *ContestsAPIService) GetPublicContestsByContestIdBuddyBoardsByBoardIdMembersExecute(r ApiGetPublicContestsByContestIdBuddyBoardsByBoardIdMembersRequest) (*DomainBuddyBoardMembersResponseResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainBuddyBoardMembersResponseResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests/{contestId}/buddy-boards/{boardId}/members"
-	localVarPath = strings.Replace(localVarPath, "{"+"contestId"+"}", url.PathEscape(parameterValueToString(r.contestId, "contestId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"boardId"+"}", url.PathEscape(parameterValueToString(r.boardId, "boardId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsByIdRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	id string
-	xActingAs *string
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsByIdRequest) XActingAs(xActingAs string) ApiGetPublicContestsByIdRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsByIdRequest) Execute() (*DomainContestResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsByIdExecute(r)
-}
-
-/*
-GetPublicContestsById Get a contest by ID
-
-Mounted twice (authed + public) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Contest ID
- @return ApiGetPublicContestsByIdRequest
-*/
-func (a *ContestsAPIService) GetPublicContestsById(ctx context.Context, id string) ApiGetPublicContestsByIdRequest {
-	return ApiGetPublicContestsByIdRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return DomainContestResponse
-func (a *ContestsAPIService) GetPublicContestsByIdExecute(r ApiGetPublicContestsByIdRequest) (*DomainContestResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainContestResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsById")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsByIdGroupsRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	id string
-	xActingAs *string
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsByIdGroupsRequest) XActingAs(xActingAs string) ApiGetPublicContestsByIdGroupsRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsByIdGroupsRequest) Execute() (*DomainContestGroupsResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsByIdGroupsExecute(r)
-}
-
-/*
-GetPublicContestsByIdGroups Get Contest Groups
-
-Get Contest Groups
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Contest ID
- @return ApiGetPublicContestsByIdGroupsRequest
-*/
-func (a *ContestsAPIService) GetPublicContestsByIdGroups(ctx context.Context, id string) ApiGetPublicContestsByIdGroupsRequest {
-	return ApiGetPublicContestsByIdGroupsRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return DomainContestGroupsResponse
-func (a *ContestsAPIService) GetPublicContestsByIdGroupsExecute(r ApiGetPublicContestsByIdGroupsRequest) (*DomainContestGroupsResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainContestGroupsResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByIdGroups")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests/{id}/groups"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsByIdSubmissionFeedRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	id string
-	cursor *string
-	limit *int32
-	xActingAs *string
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicContestsByIdSubmissionFeedRequest) Cursor(cursor string) ApiGetPublicContestsByIdSubmissionFeedRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size (default 20, max 100)
-func (r ApiGetPublicContestsByIdSubmissionFeedRequest) Limit(limit int32) ApiGetPublicContestsByIdSubmissionFeedRequest {
-	r.limit = &limit
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsByIdSubmissionFeedRequest) XActingAs(xActingAs string) ApiGetPublicContestsByIdSubmissionFeedRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsByIdSubmissionFeedRequest) Execute() (*DomainSubmissionFeedItemListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsByIdSubmissionFeedExecute(r)
-}
-
-/*
-GetPublicContestsByIdSubmissionFeed Get the real-time feed of contest submissions (cursor-paginated)
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Contest ID
- @return ApiGetPublicContestsByIdSubmissionFeedRequest
-*/
-func (a *ContestsAPIService) GetPublicContestsByIdSubmissionFeed(ctx context.Context, id string) ApiGetPublicContestsByIdSubmissionFeedRequest {
-	return ApiGetPublicContestsByIdSubmissionFeedRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return DomainSubmissionFeedItemListResponse
-func (a *ContestsAPIService) GetPublicContestsByIdSubmissionFeedExecute(r ApiGetPublicContestsByIdSubmissionFeedRequest) (*DomainSubmissionFeedItemListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainSubmissionFeedItemListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsByIdSubmissionFeed")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests/{id}/submission-feed"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicContestsSearchKeywordByKeywordRequest struct {
-	ctx context.Context
-	ApiService *ContestsAPIService
-	keyword string
-	cursor *string
-	limit *int32
-	ended *bool
-	xActingAs *string
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) Cursor(cursor string) ApiGetPublicContestsSearchKeywordByKeywordRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size (default 50)
-func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) Limit(limit int32) ApiGetPublicContestsSearchKeywordByKeywordRequest {
-	r.limit = &limit
-	return r
-}
-
-// Include ended contests
-func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) Ended(ended bool) ApiGetPublicContestsSearchKeywordByKeywordRequest {
-	r.ended = &ended
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) XActingAs(xActingAs string) ApiGetPublicContestsSearchKeywordByKeywordRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicContestsSearchKeywordByKeywordRequest) Execute() (*DomainContestListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicContestsSearchKeywordByKeywordExecute(r)
-}
-
-/*
-GetPublicContestsSearchKeywordByKeyword Search public contests by keyword (cursor-paginated)
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param keyword Search keyword
- @return ApiGetPublicContestsSearchKeywordByKeywordRequest
-*/
-func (a *ContestsAPIService) GetPublicContestsSearchKeywordByKeyword(ctx context.Context, keyword string) ApiGetPublicContestsSearchKeywordByKeywordRequest {
-	return ApiGetPublicContestsSearchKeywordByKeywordRequest{
-		ApiService: a,
-		ctx: ctx,
-		keyword: keyword,
-	}
-}
-
-// Execute executes the request
-//  @return DomainContestListResponse
-func (a *ContestsAPIService) GetPublicContestsSearchKeywordByKeywordExecute(r ApiGetPublicContestsSearchKeywordByKeywordRequest) (*DomainContestListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainContestListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContestsAPIService.GetPublicContestsSearchKeywordByKeyword")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/contests/searchKeyword/{keyword}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyword"+"}", url.PathEscape(parameterValueToString(r.keyword, "keyword")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	if r.ended != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ended", r.ended, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

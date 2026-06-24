@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Category** | Pointer to **string** |  | [optional] 
-**ChannelId** | Pointer to **string** |  | [optional] 
+**ChannelId** | **string** |  | 
 **Description** | Pointer to **string** |  | [optional] 
 **Difficulty** | Pointer to **string** |  | [optional] 
 **GroupingType** | Pointer to **string** |  | [optional] 
@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **TeamSetId** | Pointer to **string** |  | [optional] 
 **Timing** | [**DomainTiming**](DomainTiming.md) |  | 
 **Title** | **string** |  | 
-**VenueId** | **string** |  | 
 **WinnersPerGroup** | **int32** |  | 
 **ZoneAdvantage** | **int32** |  | 
 
@@ -28,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewRequestCreateContestRequest
 
-`func NewRequestCreateContestRequest(noOfGroups int32, reward DomainReward, sourceId string, sourceType string, timing DomainTiming, title string, venueId string, winnersPerGroup int32, zoneAdvantage int32, ) *RequestCreateContestRequest`
+`func NewRequestCreateContestRequest(channelId string, noOfGroups int32, reward DomainReward, sourceId string, sourceType string, timing DomainTiming, title string, winnersPerGroup int32, zoneAdvantage int32, ) *RequestCreateContestRequest`
 
 NewRequestCreateContestRequest instantiates a new RequestCreateContestRequest object
 This constructor will assign default values to properties that have it defined,
@@ -87,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetChannelId sets ChannelId field to given value.
 
-### HasChannelId
-
-`func (o *RequestCreateContestRequest) HasChannelId() bool`
-
-HasChannelId returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -411,26 +405,6 @@ and a boolean to check if the value has been set.
 `func (o *RequestCreateContestRequest) SetTitle(v string)`
 
 SetTitle sets Title field to given value.
-
-
-### GetVenueId
-
-`func (o *RequestCreateContestRequest) GetVenueId() string`
-
-GetVenueId returns the VenueId field if non-nil, zero value otherwise.
-
-### GetVenueIdOk
-
-`func (o *RequestCreateContestRequest) GetVenueIdOk() (*string, bool)`
-
-GetVenueIdOk returns a tuple with the VenueId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVenueId
-
-`func (o *RequestCreateContestRequest) SetVenueId(v string)`
-
-SetVenueId sets VenueId field to given value.
 
 
 ### GetWinnersPerGroup

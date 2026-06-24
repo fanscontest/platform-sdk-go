@@ -61,6 +61,18 @@ func Test_platform_PredictionSlipsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PredictionSlipsAPIService PuzzleWebV2PredictionControllerListCommunityPredictionSlips", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCommunityPredictionSlips(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PredictionSlipsAPIService PuzzleWebV2PredictionControllerListCuratedSlips", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

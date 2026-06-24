@@ -434,6 +434,133 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerDeletePredict
 	return localVarHTTPResponse, nil
 }
 
+type ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest struct {
+	ctx context.Context
+	ApiService *PredictionSlipsAPIService
+	cursor *string
+	limit *int32
+	xActingAs *string
+}
+
+func (r ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest) Cursor(cursor string) ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+func (r ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest) Limit(limit int32) ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest) XActingAs(xActingAs string) ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest) Execute() (*PredictionSlipsListResponse, *http.Response, error) {
+	return r.ApiService.PuzzleWebV2PredictionControllerListCommunityPredictionSlipsExecute(r)
+}
+
+/*
+PuzzleWebV2PredictionControllerListCommunityPredictionSlips List public/community prediction slips
+
+Community feed: the tenant's public prediction slips (is_public=true) across all owners, newest first, cursor-paginated.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest
+*/
+func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerListCommunityPredictionSlips(ctx context.Context) ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest {
+	return ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return PredictionSlipsListResponse
+func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerListCommunityPredictionSlipsExecute(r ApiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest) (*PredictionSlipsListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PredictionSlipsListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PredictionSlipsAPIService.PuzzleWebV2PredictionControllerListCommunityPredictionSlips")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/prediction-slips/community"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPuzzleWebV2PredictionControllerListCuratedSlipsRequest struct {
 	ctx context.Context
 	ApiService *PredictionSlipsAPIService
@@ -508,7 +635,7 @@ func (a *PredictionSlipsAPIService) PuzzleWebV2PredictionControllerListCuratedSl
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/public/curated-slips"
+	localVarPath := localBasePath + "/v2/curated-slips"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

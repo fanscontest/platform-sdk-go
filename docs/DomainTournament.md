@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Creator** | Pointer to [**DomainPlatformIdentity**](DomainPlatformIdentity.md) |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
+**RevealGroupsLastNRounds** | Pointer to **int32** | RevealGroupsLastNRounds is how many trailing rounds get their groups pre-assigned from the advancers (revealed ahead of play). See ADR 0045. | [optional] 
 **Rounds** | Pointer to [**[]DomainTournamentRound**](DomainTournamentRound.md) |  | [optional] 
 **State** | Pointer to **string** |  | [optional] 
 **Title** | Pointer to **string** |  | [optional] 
@@ -156,6 +157,31 @@ SetId sets Id field to given value.
 `func (o *DomainTournament) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetRevealGroupsLastNRounds
+
+`func (o *DomainTournament) GetRevealGroupsLastNRounds() int32`
+
+GetRevealGroupsLastNRounds returns the RevealGroupsLastNRounds field if non-nil, zero value otherwise.
+
+### GetRevealGroupsLastNRoundsOk
+
+`func (o *DomainTournament) GetRevealGroupsLastNRoundsOk() (*int32, bool)`
+
+GetRevealGroupsLastNRoundsOk returns a tuple with the RevealGroupsLastNRounds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRevealGroupsLastNRounds
+
+`func (o *DomainTournament) SetRevealGroupsLastNRounds(v int32)`
+
+SetRevealGroupsLastNRounds sets RevealGroupsLastNRounds field to given value.
+
+### HasRevealGroupsLastNRounds
+
+`func (o *DomainTournament) HasRevealGroupsLastNRounds() bool`
+
+HasRevealGroupsLastNRounds returns a boolean if a field has been set.
 
 ### GetRounds
 

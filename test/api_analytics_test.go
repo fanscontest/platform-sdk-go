@@ -22,30 +22,6 @@ func Test_platform_AnalyticsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test AnalyticsAPIService CreateAnalyticsImpression", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.AnalyticsAPI.CreateAnalyticsImpression(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AnalyticsAPIService CreateTrackerClick", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.AnalyticsAPI.CreateTrackerClick(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test AnalyticsAPIService GetAnalyticsOverview", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

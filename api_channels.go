@@ -921,8 +921,6 @@ func (r ApiGetChannelsByIdRequest) Execute() (*DomainChannelResponse, *http.Resp
 /*
 GetChannelsById Get a channel by ID
 
-Mounted twice (authed + public) with identical semantics.
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Channel ID
  @return ApiGetChannelsByIdRequest
@@ -1213,6 +1211,167 @@ func (a *ChannelsAPIService) GetChannelsByIdTeamSetsExecute(r ApiGetChannelsById
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetChannelsByRegionRequest struct {
+	ctx context.Context
+	ApiService *ChannelsAPIService
+	region *string
+	cursor *string
+	limit *int32
+	xActingAs *string
+}
+
+// Region Code
+func (r ApiGetChannelsByRegionRequest) Region(region string) ApiGetChannelsByRegionRequest {
+	r.region = &region
+	return r
+}
+
+// Opaque pagination cursor
+func (r ApiGetChannelsByRegionRequest) Cursor(cursor string) ApiGetChannelsByRegionRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size
+func (r ApiGetChannelsByRegionRequest) Limit(limit int32) ApiGetChannelsByRegionRequest {
+	r.limit = &limit
+	return r
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetChannelsByRegionRequest) XActingAs(xActingAs string) ApiGetChannelsByRegionRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetChannelsByRegionRequest) Execute() (*DomainChannelListResponse, *http.Response, error) {
+	return r.ApiService.GetChannelsByRegionExecute(r)
+}
+
+/*
+GetChannelsByRegion Get Channels by Region (v2)
+
+Get Channels by Region - cursor pagination
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChannelsByRegionRequest
+*/
+func (a *ChannelsAPIService) GetChannelsByRegion(ctx context.Context) ApiGetChannelsByRegionRequest {
+	return ApiGetChannelsByRegionRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DomainChannelListResponse
+func (a *ChannelsAPIService) GetChannelsByRegionExecute(r ApiGetChannelsByRegionRequest) (*DomainChannelListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainChannelListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetChannelsByRegion")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/channels/by-region"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.region == nil {
+		return localVarReturnValue, nil, reportError("region is required and must be specified")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetChannelsSearchRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
@@ -1395,8 +1554,6 @@ func (r ApiGetChannelsSearchKeywordByKeywordRequest) Execute() (*DomainChannelLi
 /*
 GetChannelsSearchKeywordByKeyword Search channels by keyword (cursor-paginated)
 
-Mounted twice (authed + public) with identical semantics.
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param keyword Search keyword
  @return ApiGetChannelsSearchKeywordByKeywordRequest
@@ -1549,8 +1706,6 @@ func (r ApiGetIdentitiesByPiidChannelsRequest) Execute() (*DomainChannelListResp
 /*
 GetIdentitiesByPiidChannels List channels for a platform identity (cursor-paginated)
 
-Mounted twice (authed + public) with identical semantics.
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param piid Platform Identity ID
  @return ApiGetIdentitiesByPiidChannelsRequest
@@ -1669,762 +1824,6 @@ func (a *ChannelsAPIService) GetIdentitiesByPiidChannelsExecute(r ApiGetIdentiti
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPublicChannelsRequest struct {
-	ctx context.Context
-	ApiService *ChannelsAPIService
-	region *string
-	cursor *string
-	limit *int32
-	xActingAs *string
-}
-
-// Region Code
-func (r ApiGetPublicChannelsRequest) Region(region string) ApiGetPublicChannelsRequest {
-	r.region = &region
-	return r
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicChannelsRequest) Cursor(cursor string) ApiGetPublicChannelsRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size
-func (r ApiGetPublicChannelsRequest) Limit(limit int32) ApiGetPublicChannelsRequest {
-	r.limit = &limit
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsRequest) XActingAs(xActingAs string) ApiGetPublicChannelsRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicChannelsRequest) Execute() (*DomainChannelListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicChannelsExecute(r)
-}
-
-/*
-GetPublicChannels Get Channels by Region (v2)
-
-Get Channels by Region - cursor pagination
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPublicChannelsRequest
-*/
-func (a *ChannelsAPIService) GetPublicChannels(ctx context.Context) ApiGetPublicChannelsRequest {
-	return ApiGetPublicChannelsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return DomainChannelListResponse
-func (a *ChannelsAPIService) GetPublicChannelsExecute(r ApiGetPublicChannelsRequest) (*DomainChannelListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainChannelListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicChannels")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/channels"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.region == nil {
-		return localVarReturnValue, nil, reportError("region is required and must be specified")
-	}
-
-	parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicChannelsByIdRequest struct {
-	ctx context.Context
-	ApiService *ChannelsAPIService
-	id string
-	xActingAs *string
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsByIdRequest) XActingAs(xActingAs string) ApiGetPublicChannelsByIdRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicChannelsByIdRequest) Execute() (*DomainChannelResponse, *http.Response, error) {
-	return r.ApiService.GetPublicChannelsByIdExecute(r)
-}
-
-/*
-GetPublicChannelsById Get a channel by ID
-
-Mounted twice (authed + public) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Channel ID
- @return ApiGetPublicChannelsByIdRequest
-*/
-func (a *ChannelsAPIService) GetPublicChannelsById(ctx context.Context, id string) ApiGetPublicChannelsByIdRequest {
-	return ApiGetPublicChannelsByIdRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return DomainChannelResponse
-func (a *ChannelsAPIService) GetPublicChannelsByIdExecute(r ApiGetPublicChannelsByIdRequest) (*DomainChannelResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainChannelResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicChannelsById")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/channels/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicChannelsSearchKeywordByKeywordRequest struct {
-	ctx context.Context
-	ApiService *ChannelsAPIService
-	keyword string
-	cursor *string
-	limit *int32
-	xActingAs *string
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) Cursor(cursor string) ApiGetPublicChannelsSearchKeywordByKeywordRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size
-func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) Limit(limit int32) ApiGetPublicChannelsSearchKeywordByKeywordRequest {
-	r.limit = &limit
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) XActingAs(xActingAs string) ApiGetPublicChannelsSearchKeywordByKeywordRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicChannelsSearchKeywordByKeywordRequest) Execute() (*DomainChannelListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicChannelsSearchKeywordByKeywordExecute(r)
-}
-
-/*
-GetPublicChannelsSearchKeywordByKeyword Search channels by keyword (cursor-paginated)
-
-Mounted twice (authed + public) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param keyword Search keyword
- @return ApiGetPublicChannelsSearchKeywordByKeywordRequest
-*/
-func (a *ChannelsAPIService) GetPublicChannelsSearchKeywordByKeyword(ctx context.Context, keyword string) ApiGetPublicChannelsSearchKeywordByKeywordRequest {
-	return ApiGetPublicChannelsSearchKeywordByKeywordRequest{
-		ApiService: a,
-		ctx: ctx,
-		keyword: keyword,
-	}
-}
-
-// Execute executes the request
-//  @return DomainChannelListResponse
-func (a *ChannelsAPIService) GetPublicChannelsSearchKeywordByKeywordExecute(r ApiGetPublicChannelsSearchKeywordByKeywordRequest) (*DomainChannelListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainChannelListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicChannelsSearchKeywordByKeyword")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/channels/searchKeyword/{keyword}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyword"+"}", url.PathEscape(parameterValueToString(r.keyword, "keyword")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicIdentitiesByPiidChannelsRequest struct {
-	ctx context.Context
-	ApiService *ChannelsAPIService
-	piid string
-	cursor *string
-	limit *int32
-	xActingAs *string
-}
-
-// Opaque pagination cursor
-func (r ApiGetPublicIdentitiesByPiidChannelsRequest) Cursor(cursor string) ApiGetPublicIdentitiesByPiidChannelsRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Page size
-func (r ApiGetPublicIdentitiesByPiidChannelsRequest) Limit(limit int32) ApiGetPublicIdentitiesByPiidChannelsRequest {
-	r.limit = &limit
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicIdentitiesByPiidChannelsRequest) XActingAs(xActingAs string) ApiGetPublicIdentitiesByPiidChannelsRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicIdentitiesByPiidChannelsRequest) Execute() (*DomainChannelListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicIdentitiesByPiidChannelsExecute(r)
-}
-
-/*
-GetPublicIdentitiesByPiidChannels List channels for a platform identity (cursor-paginated)
-
-Mounted twice (authed + public) with identical semantics.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param piid Platform Identity ID
- @return ApiGetPublicIdentitiesByPiidChannelsRequest
-*/
-func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannels(ctx context.Context, piid string) ApiGetPublicIdentitiesByPiidChannelsRequest {
-	return ApiGetPublicIdentitiesByPiidChannelsRequest{
-		ApiService: a,
-		ctx: ctx,
-		piid: piid,
-	}
-}
-
-// Execute executes the request
-//  @return DomainChannelListResponse
-func (a *ChannelsAPIService) GetPublicIdentitiesByPiidChannelsExecute(r ApiGetPublicIdentitiesByPiidChannelsRequest) (*DomainChannelListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainChannelListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicIdentitiesByPiidChannels")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/identities/{piid}/channels"
-	localVarPath = strings.Replace(localVarPath, "{"+"piid"+"}", url.PathEscape(parameterValueToString(r.piid, "piid")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPublicTeamSetsSystemRequest struct {
-	ctx context.Context
-	ApiService *ChannelsAPIService
-	cursor *string
-	limit *int32
-	xActingAs *string
-}
-
-// Accepted for shape uniformity; ignored (single-page, name-sorted)
-func (r ApiGetPublicTeamSetsSystemRequest) Cursor(cursor string) ApiGetPublicTeamSetsSystemRequest {
-	r.cursor = &cursor
-	return r
-}
-
-// Accepted for shape uniformity; ignored (single-page, name-sorted)
-func (r ApiGetPublicTeamSetsSystemRequest) Limit(limit int32) ApiGetPublicTeamSetsSystemRequest {
-	r.limit = &limit
-	return r
-}
-
-// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
-func (r ApiGetPublicTeamSetsSystemRequest) XActingAs(xActingAs string) ApiGetPublicTeamSetsSystemRequest {
-	r.xActingAs = &xActingAs
-	return r
-}
-
-func (r ApiGetPublicTeamSetsSystemRequest) Execute() (*DomainTeamSetListResponse, *http.Response, error) {
-	return r.ApiService.GetPublicTeamSetsSystemExecute(r)
-}
-
-/*
-GetPublicTeamSetsSystem List platform-defined system team sets
-
-Mounted twice: under tenant auth at /team-sets/system and
-unauthenticated at /public/team-sets/system. This is a bounded set
-sorted by name (not a keyset list); per uman#132 it carries an inert
-pagination block (has_next:false) and ignores cursor/limit.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPublicTeamSetsSystemRequest
-*/
-func (a *ChannelsAPIService) GetPublicTeamSetsSystem(ctx context.Context) ApiGetPublicTeamSetsSystemRequest {
-	return ApiGetPublicTeamSetsSystemRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return DomainTeamSetListResponse
-func (a *ChannelsAPIService) GetPublicTeamSetsSystemExecute(r ApiGetPublicTeamSetsSystemRequest) (*DomainTeamSetListResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DomainTeamSetListResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChannelsAPIService.GetPublicTeamSetsSystem")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/public/team-sets/system"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.xActingAs != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v HandlerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetTeamSetsSystemRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
@@ -2456,12 +1855,12 @@ func (r ApiGetTeamSetsSystemRequest) Execute() (*DomainTeamSetListResponse, *htt
 }
 
 /*
-GetTeamSetsSystem List platform-defined system team sets
+GetTeamSetsSystem List the calling tenant's system team sets
 
-Mounted twice: under tenant auth at /team-sets/system and
-unauthenticated at /public/team-sets/system. This is a bounded set
-sorted by name (not a keyset list); per uman#132 it carries an inert
-pagination block (has_next:false) and ignores cursor/limit.
+Tenant-scoped (uman#40): a "system" team set is a tenant-global set
+(owned by the tenant, not a channel). This is a bounded set sorted by
+name (not a keyset list); per uman#132 it carries an inert pagination
+block (has_next:false) and ignores cursor/limit.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTeamSetsSystemRequest

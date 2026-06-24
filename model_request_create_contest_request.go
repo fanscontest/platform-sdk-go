@@ -23,7 +23,7 @@ var _ MappedNullable = &RequestCreateContestRequest{}
 // RequestCreateContestRequest struct for RequestCreateContestRequest
 type RequestCreateContestRequest struct {
 	Category *string `json:"category,omitempty"`
-	ChannelId *string `json:"channel_id,omitempty"`
+	ChannelId string `json:"channel_id"`
 	Description *string `json:"description,omitempty"`
 	Difficulty *string `json:"difficulty,omitempty"`
 	GroupingType *string `json:"grouping_type,omitempty"`
@@ -38,7 +38,6 @@ type RequestCreateContestRequest struct {
 	TeamSetId *string `json:"team_set_id,omitempty"`
 	Timing DomainTiming `json:"timing"`
 	Title string `json:"title"`
-	VenueId string `json:"venue_id"`
 	WinnersPerGroup int32 `json:"winners_per_group"`
 	ZoneAdvantage int32 `json:"zone_advantage"`
 }
@@ -49,15 +48,15 @@ type _RequestCreateContestRequest RequestCreateContestRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequestCreateContestRequest(noOfGroups int32, reward DomainReward, sourceId string, sourceType string, timing DomainTiming, title string, venueId string, winnersPerGroup int32, zoneAdvantage int32) *RequestCreateContestRequest {
+func NewRequestCreateContestRequest(channelId string, noOfGroups int32, reward DomainReward, sourceId string, sourceType string, timing DomainTiming, title string, winnersPerGroup int32, zoneAdvantage int32) *RequestCreateContestRequest {
 	this := RequestCreateContestRequest{}
+	this.ChannelId = channelId
 	this.NoOfGroups = noOfGroups
 	this.Reward = reward
 	this.SourceId = sourceId
 	this.SourceType = sourceType
 	this.Timing = timing
 	this.Title = title
-	this.VenueId = venueId
 	this.WinnersPerGroup = winnersPerGroup
 	this.ZoneAdvantage = zoneAdvantage
 	return &this
@@ -103,36 +102,28 @@ func (o *RequestCreateContestRequest) SetCategory(v string) {
 	o.Category = &v
 }
 
-// GetChannelId returns the ChannelId field value if set, zero value otherwise.
+// GetChannelId returns the ChannelId field value
 func (o *RequestCreateContestRequest) GetChannelId() string {
-	if o == nil || IsNil(o.ChannelId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ChannelId
+
+	return o.ChannelId
 }
 
-// GetChannelIdOk returns a tuple with the ChannelId field value if set, nil otherwise
+// GetChannelIdOk returns a tuple with the ChannelId field value
 // and a boolean to check if the value has been set.
 func (o *RequestCreateContestRequest) GetChannelIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ChannelId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChannelId, true
+	return &o.ChannelId, true
 }
 
-// HasChannelId returns a boolean if a field has been set.
-func (o *RequestCreateContestRequest) HasChannelId() bool {
-	if o != nil && !IsNil(o.ChannelId) {
-		return true
-	}
-
-	return false
-}
-
-// SetChannelId gets a reference to the given string and assigns it to the ChannelId field.
+// SetChannelId sets field value
 func (o *RequestCreateContestRequest) SetChannelId(v string) {
-	o.ChannelId = &v
+	o.ChannelId = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -535,30 +526,6 @@ func (o *RequestCreateContestRequest) SetTitle(v string) {
 	o.Title = v
 }
 
-// GetVenueId returns the VenueId field value
-func (o *RequestCreateContestRequest) GetVenueId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.VenueId
-}
-
-// GetVenueIdOk returns a tuple with the VenueId field value
-// and a boolean to check if the value has been set.
-func (o *RequestCreateContestRequest) GetVenueIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VenueId, true
-}
-
-// SetVenueId sets field value
-func (o *RequestCreateContestRequest) SetVenueId(v string) {
-	o.VenueId = v
-}
-
 // GetWinnersPerGroup returns the WinnersPerGroup field value
 func (o *RequestCreateContestRequest) GetWinnersPerGroup() int32 {
 	if o == nil {
@@ -620,9 +587,7 @@ func (o RequestCreateContestRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
-	if !IsNil(o.ChannelId) {
-		toSerialize["channel_id"] = o.ChannelId
-	}
+	toSerialize["channel_id"] = o.ChannelId
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -653,7 +618,6 @@ func (o RequestCreateContestRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["timing"] = o.Timing
 	toSerialize["title"] = o.Title
-	toSerialize["venue_id"] = o.VenueId
 	toSerialize["winners_per_group"] = o.WinnersPerGroup
 	toSerialize["zone_advantage"] = o.ZoneAdvantage
 	return toSerialize, nil
@@ -664,13 +628,13 @@ func (o *RequestCreateContestRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"channel_id",
 		"no_of_groups",
 		"reward",
 		"source_id",
 		"source_type",
 		"timing",
 		"title",
-		"venue_id",
 		"winners_per_group",
 		"zone_advantage",
 	}

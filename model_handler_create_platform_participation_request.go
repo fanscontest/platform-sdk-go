@@ -26,7 +26,6 @@ type HandlerCreatePlatformParticipationRequest struct {
 	DisplayName string `json:"display_name"`
 	PlatformIdentityId string `json:"platform_identity_id"`
 	Solution []int32 `json:"solution,omitempty"`
-	VenueId string `json:"venue_id"`
 }
 
 type _HandlerCreatePlatformParticipationRequest HandlerCreatePlatformParticipationRequest
@@ -35,12 +34,11 @@ type _HandlerCreatePlatformParticipationRequest HandlerCreatePlatformParticipati
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHandlerCreatePlatformParticipationRequest(channelId string, displayName string, platformIdentityId string, venueId string) *HandlerCreatePlatformParticipationRequest {
+func NewHandlerCreatePlatformParticipationRequest(channelId string, displayName string, platformIdentityId string) *HandlerCreatePlatformParticipationRequest {
 	this := HandlerCreatePlatformParticipationRequest{}
 	this.ChannelId = channelId
 	this.DisplayName = displayName
 	this.PlatformIdentityId = platformIdentityId
-	this.VenueId = venueId
 	return &this
 }
 
@@ -156,30 +154,6 @@ func (o *HandlerCreatePlatformParticipationRequest) SetSolution(v []int32) {
 	o.Solution = v
 }
 
-// GetVenueId returns the VenueId field value
-func (o *HandlerCreatePlatformParticipationRequest) GetVenueId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.VenueId
-}
-
-// GetVenueIdOk returns a tuple with the VenueId field value
-// and a boolean to check if the value has been set.
-func (o *HandlerCreatePlatformParticipationRequest) GetVenueIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VenueId, true
-}
-
-// SetVenueId sets field value
-func (o *HandlerCreatePlatformParticipationRequest) SetVenueId(v string) {
-	o.VenueId = v
-}
-
 func (o HandlerCreatePlatformParticipationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -196,7 +170,6 @@ func (o HandlerCreatePlatformParticipationRequest) ToMap() (map[string]interface
 	if !IsNil(o.Solution) {
 		toSerialize["solution"] = o.Solution
 	}
-	toSerialize["venue_id"] = o.VenueId
 	return toSerialize, nil
 }
 
@@ -208,7 +181,6 @@ func (o *HandlerCreatePlatformParticipationRequest) UnmarshalJSON(data []byte) (
 		"channel_id",
 		"display_name",
 		"platform_identity_id",
-		"venue_id",
 	}
 
 	allProperties := make(map[string]interface{})

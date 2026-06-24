@@ -24,8 +24,8 @@ var _ MappedNullable = &HandlerCreatePlatformContestHostingRequest{}
 type HandlerCreatePlatformContestHostingRequest struct {
 	CanParticipate *bool `json:"can_participate,omitempty"`
 	CanView *bool `json:"can_view,omitempty"`
+	// venue_id is not a request field (uman#177): the channel determines the venue (channels.venue_id is canonical), so the caller supplies only the channel and the venue is derived from it.
 	ChannelId string `json:"channel_id"`
-	VenueId string `json:"venue_id"`
 }
 
 type _HandlerCreatePlatformContestHostingRequest HandlerCreatePlatformContestHostingRequest
@@ -34,10 +34,9 @@ type _HandlerCreatePlatformContestHostingRequest HandlerCreatePlatformContestHos
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHandlerCreatePlatformContestHostingRequest(channelId string, venueId string) *HandlerCreatePlatformContestHostingRequest {
+func NewHandlerCreatePlatformContestHostingRequest(channelId string) *HandlerCreatePlatformContestHostingRequest {
 	this := HandlerCreatePlatformContestHostingRequest{}
 	this.ChannelId = channelId
-	this.VenueId = venueId
 	return &this
 }
 
@@ -137,30 +136,6 @@ func (o *HandlerCreatePlatformContestHostingRequest) SetChannelId(v string) {
 	o.ChannelId = v
 }
 
-// GetVenueId returns the VenueId field value
-func (o *HandlerCreatePlatformContestHostingRequest) GetVenueId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.VenueId
-}
-
-// GetVenueIdOk returns a tuple with the VenueId field value
-// and a boolean to check if the value has been set.
-func (o *HandlerCreatePlatformContestHostingRequest) GetVenueIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VenueId, true
-}
-
-// SetVenueId sets field value
-func (o *HandlerCreatePlatformContestHostingRequest) SetVenueId(v string) {
-	o.VenueId = v
-}
-
 func (o HandlerCreatePlatformContestHostingRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -178,7 +153,6 @@ func (o HandlerCreatePlatformContestHostingRequest) ToMap() (map[string]interfac
 		toSerialize["can_view"] = o.CanView
 	}
 	toSerialize["channel_id"] = o.ChannelId
-	toSerialize["venue_id"] = o.VenueId
 	return toSerialize, nil
 }
 
@@ -188,7 +162,6 @@ func (o *HandlerCreatePlatformContestHostingRequest) UnmarshalJSON(data []byte) 
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"channel_id",
-		"venue_id",
 	}
 
 	allProperties := make(map[string]interface{})

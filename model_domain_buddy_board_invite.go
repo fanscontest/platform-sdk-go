@@ -22,6 +22,7 @@ var _ MappedNullable = &DomainBuddyBoardInvite{}
 type DomainBuddyBoardInvite struct {
 	BoardId *string `json:"board_id,omitempty"`
 	ContestId *string `json:"contest_id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	InvitedAt *string `json:"invited_at,omitempty"`
 	InvitedById *string `json:"invited_by_id,omitempty"`
 	Member *DomainPlatformIdentity `json:"member,omitempty"`
@@ -108,6 +109,38 @@ func (o *DomainBuddyBoardInvite) HasContestId() bool {
 // SetContestId gets a reference to the given string and assigns it to the ContestId field.
 func (o *DomainBuddyBoardInvite) SetContestId(v string) {
 	o.ContestId = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *DomainBuddyBoardInvite) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainBuddyBoardInvite) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *DomainBuddyBoardInvite) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *DomainBuddyBoardInvite) SetId(v string) {
+	o.Id = &v
 }
 
 // GetInvitedAt returns the InvitedAt field value if set, zero value otherwise.
@@ -285,6 +318,9 @@ func (o DomainBuddyBoardInvite) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ContestId) {
 		toSerialize["contest_id"] = o.ContestId
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.InvitedAt) {
 		toSerialize["invited_at"] = o.InvitedAt

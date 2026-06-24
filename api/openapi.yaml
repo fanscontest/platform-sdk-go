@@ -16,6 +16,8 @@ servers:
 security:
 - TenantApiKey: []
 tags:
+- name: Contests
+  x-displayName: Contests
 - name: Analytics
   x-displayName: Analytics
 - name: Blocks
@@ -24,8 +26,6 @@ tags:
   x-displayName: Stans
 - name: Channels
   x-displayName: Channels
-- name: Contests
-  x-displayName: Contests
 - name: Subscriptions
   x-displayName: Subscriptions
 - name: Tournaments
@@ -36,16 +36,12 @@ tags:
   x-displayName: Participation
 - name: CreativeContests
   x-displayName: CreativeContests
-- name: Identities
-  x-displayName: Identities
 - name: Feeds
   x-displayName: Feeds
+- name: Identities
+  x-displayName: Identities
 - name: Messages
   x-displayName: Messages
-- name: Countries
-  x-displayName: Countries
-- name: OGImages
-  x-displayName: OGImages
 - name: Sponsors
   x-displayName: Sponsors
 - name: SponsorshipPackages
@@ -60,24 +56,37 @@ tags:
   x-displayName: Venues
 - name: Contest Puzzles
   x-displayName: Contest Puzzles
+- name: Prediction Slips
+  x-displayName: Prediction Slips
 - name: User Events
   x-displayName: User Events
 - name: Events
   x-displayName: Events
-- name: Prediction Slips
-  x-displayName: Prediction Slips
 - name: Puzzle Sheets
   x-displayName: Puzzle Sheets
 - name: Puzzles
   x-displayName: Puzzles
 paths:
-  /v2/analytics/impression:
-    post:
-      description: |-
-        Mounted twice with identical semantics: /analytics/impression
-        and /tracker/click.
-      operationId: createAnalyticsImpression
+  /v2/admin/hosting-invitations:
+    get:
+      operationId: getAdminHostingInvitations
       parameters:
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size (default 50, max 200)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -88,36 +97,22 @@ paths:
         schema:
           type: string
         style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Request.UpdateClickCountRequest'
-        description: Impression payload
-        required: true
-        x-originalParamName: impression
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Handler.StatusResponseResponse'
+                $ref: '#/components/schemas/Domain.ContestHostingListResponse'
           description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
         "500":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Internal Server Error
-      summary: Record a click/impression event
+      summary: List pending hosting invitations for the calling tenant's venues
       tags:
-      - Analytics
+      - Contests
   /v2/analytics/overview:
     get:
       operationId: getAnalyticsOverview
@@ -595,7 +590,6 @@ paths:
       tags:
       - Channels
     get:
-      description: Mounted twice (authed + public) with identical semantics.
       operationId: getChannelsById
       parameters:
       - description: Channel ID
@@ -751,7 +745,6 @@ paths:
       - Channels
   /v2/channels/{id}/contests:
     get:
-      description: Mounted twice (authed + public) with identical semantics.
       operationId: getChannelsByIdContests
       parameters:
       - description: Channel ID
@@ -864,8 +857,7 @@ paths:
   /v2/channels/{id}/subscriptions:
     get:
       description: |-
-        Mounted twice (authed + public) with identical semantics. The
-        channel owner additionally sees pending requests; non-owners see
+        The channel owner additionally sees pending requests; non-owners see
         only approved subscriptions. Each item carries its `status`
         (uman#132 flattened the former {subscribers, pending_request}
         object into the declared Domain.Subscription array).
@@ -1305,6 +1297,67 @@ paths:
       summary: Validate a channel access code
       tags:
       - Channels
+  /v2/channels/by-region:
+    get:
+      description: Get Channels by Region - cursor pagination
+      operationId: getChannelsByRegion
+      parameters:
+      - description: Region Code
+        explode: true
+        in: query
+        name: region
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.ChannelListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Get Channels by Region (v2)
+      tags:
+      - Channels
   /v2/channels/search:
     get:
       operationId: getChannelsSearch
@@ -1359,7 +1412,6 @@ paths:
       - Channels
   /v2/channels/searchKeyword/{keyword}:
     get:
-      description: Mounted twice (authed + public) with identical semantics.
       operationId: getChannelsSearchKeywordByKeyword
       parameters:
       - description: Search keyword
@@ -1748,8 +1800,8 @@ paths:
   /v2/contests/{contestId}/buddy-boards/{boardId}/invites/accept:
     post:
       description: |-
-        Rejected with 400 ALREADY_PARTICIPATED if the invitee has
-        already played the contest; declines are always allowed.
+        Accepts a pending invite. Allowed regardless of whether the
+        invitee has already played the contest.
       operationId: createContestsByContestIdBuddyBoardsByBoardIdInvitesAccept
       parameters:
       - description: Contest ID
@@ -1885,6 +1937,22 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size (default 50, max 200)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -1900,7 +1968,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Domain.BuddyBoardMembersResponseResponse'
+                $ref: '#/components/schemas/Domain.PlatformIdentityListResponse'
           description: OK
         "400":
           content:
@@ -2217,7 +2285,6 @@ paths:
       tags:
       - Contests
     get:
-      description: Mounted twice (authed + public) with identical semantics.
       operationId: getContestsById
       parameters:
       - description: Contest ID
@@ -2725,6 +2792,96 @@ paths:
       summary: Force proceed from paused state
       tags:
       - CreativeContests
+  /v2/contests/{id}/grouped-scoreboard:
+    get:
+      description: Get ScoreBoard
+      operationId: getContestsByIdGroupedScoreboard
+      parameters:
+      - description: Contest ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.GroupedScoreBoardResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Get ScoreBoard
+      tags:
+      - Participation
+  /v2/contests/{id}/groups:
+    get:
+      description: Get Contest Groups
+      operationId: getContestsByIdGroups
+      parameters:
+      - description: Contest ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.ContestGroupsResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Get Contest Groups
+      tags:
+      - Contests
   /v2/contests/{id}/header-image:
     put:
       operationId: updateContestsByIdHeaderImage
@@ -3215,6 +3372,46 @@ paths:
       summary: Invite jurors to judge a contest
       tags:
       - CreativeContests
+  /v2/contests/{id}/live-ranking:
+    get:
+      description: "Returns the latest provisional ranking for an active contest,\
+        \ cached from puzzle.ranking.live."
+      operationId: getContestsByIdLiveRanking
+      parameters:
+      - description: Contest ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.GroupedScoreBoardResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+      summary: Get live ranking snapshot
+      tags:
+      - Participation
   /v2/contests/{id}/participate:
     post:
       description: Create Participation. The request body is resolved by contest type
@@ -3497,7 +3694,6 @@ paths:
   /v2/contests/{id}/scoreboard:
     get:
       deprecated: true
-      description: Mounted twice (authed + public) with identical semantics.
       operationId: getContestsByIdScoreboard
       parameters:
       - description: Contest ID
@@ -3540,6 +3736,140 @@ paths:
       summary: Get a contest scoreboard
       tags:
       - Participation
+  /v2/contests/{id}/submission-feed:
+    get:
+      operationId: getContestsByIdSubmissionFeed
+      parameters:
+      - description: Contest ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size (default 20, max 100)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.SubmissionFeedItemListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Get the real-time feed of contest submissions (cursor-paginated)
+      tags:
+      - Contests
+  /v2/contests/by-region:
+    get:
+      operationId: getContestsByRegion
+      parameters:
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size (default 50)
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Include ended contests
+        explode: true
+        in: query
+        name: ended
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: ISO 3166-1 alpha-2 region filter
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.ContestListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: "List contests by region (tenant-scoped, cursor-paginated)"
+      tags:
+      - Contests
   /v2/contests/search:
     get:
       operationId: getContestsSearch
@@ -3592,6 +3922,133 @@ paths:
       summary: Search contests not owned by the caller (cursor-paginated)
       tags:
       - Contests
+  /v2/contests/searchKeyword/{keyword}:
+    get:
+      operationId: getContestsSearchKeywordByKeyword
+      parameters:
+      - description: Search keyword
+        explode: false
+        in: path
+        name: keyword
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size (default 50)
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Include ended contests
+        explode: true
+        in: query
+        name: ended
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.ContestListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: "Search contests by keyword (tenant-scoped, cursor-paginated)"
+      tags:
+      - Contests
+  /v2/curated-slips:
+    get:
+      operationId: PuzzleWeb.V2.PredictionController.list_curated_slips
+      parameters:
+      - explode: true
+        in: query
+        name: family
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: is_public
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionSlipsListResponse'
+          description: Curated prediction slips
+      summary: List curated prediction slips
+      tags:
+      - Prediction Slips
   /v2/event-templates:
     get:
       description: Public catalog of templates users can instantiate as user events.
@@ -3973,6 +4430,66 @@ paths:
       summary: Search events
       tags:
       - Events
+  /v2/feed:
+    get:
+      operationId: getFeed
+      parameters:
+      - description: "Page size (1-200, default 20)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Optional ISO 3166-1 alpha-2 region filter
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.FeedItemListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: "Get the trending feed (tenant-scoped, cursor-paginated)"
+      tags:
+      - Feeds
   /v2/identities:
     post:
       description: |-
@@ -4234,6 +4751,22 @@ paths:
         schema:
           type: string
         style: form
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size (default 50, max 200)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -4249,7 +4782,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Domain.BuddyBoardInvitesResponseResponse'
+                $ref: '#/components/schemas/Domain.BuddyBoardInviteListResponse'
           description: OK
         "400":
           content:
@@ -4274,7 +4807,6 @@ paths:
       - Contests
   /v2/identities/{piid}/channels:
     get:
-      description: Mounted twice (authed + public) with identical semantics.
       operationId: getIdentitiesByPiidChannels
       parameters:
       - description: Platform Identity ID
@@ -4474,8 +5006,11 @@ paths:
   /v2/identities/{piid}/participation:
     get:
       description: |-
-        PI-existence gate is tenant-scoped (ADR 0018); foreign-tenant
-        or unknown PI returns 404.
+        The member's participation rows across all contest states (the
+        contest's lifecycle state is not a filter here — schedule/upcoming
+        lives at GET /identities/{piid}/schedule). Optionally narrowed by
+        participation status. PI-existence gate is tenant-scoped
+        (ADR 0018); foreign-tenant or unknown PI returns 404.
       operationId: getIdentitiesByPiidParticipation
       parameters:
       - description: Platform Identity ID
@@ -4502,10 +5037,11 @@ paths:
         schema:
           type: string
         style: form
-      - description: Contest state filter (created|started|closed|completed)
+      - description: "Participation status filter, comma-separated (enrolled|participated|timed_out);\
+          \ default all. The schedule history view passes participated,timed_out."
         explode: true
         in: query
-        name: state
+        name: status
         required: false
         schema:
           type: string
@@ -4551,10 +5087,12 @@ paths:
   /v2/identities/{piid}/schedule:
     get:
       description: |-
-        Upcoming + started + recently-finished contests. PI-existence
-        gate is tenant-scoped (ADR 0018). This is a derived schedule, not
-        a keyset list; per uman#132 it carries an inert pagination block
-        (has_next:false) for shape uniformity and ignores cursor/limit.
+        The contests the member can still act on (ADR 0042): created/started contests the
+        member is eligible for (region + public-or-approved-subscribed channel) and has not
+        already participated in (no participation row in a status other than enrolled).
+        Auto-enrolled-but-not-yet-acted contests still appear. Past/ended history lives at
+        GET /identities/{piid}/participation. Ordered by contest start time (start_at desc);
+        clients re-sort locally. PI-existence gate is tenant-scoped (ADR 0018).
       operationId: getIdentitiesByPiidSchedule
       parameters:
       - description: Platform Identity ID
@@ -4565,7 +5103,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Accepted for shape uniformity; ignored (single-page derived data)
+      - description: Opaque pagination cursor
         explode: true
         in: query
         name: cursor
@@ -4573,7 +5111,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: Accepted for shape uniformity; ignored (single-page derived data)
+      - description: "Page size (1-200, default 50)"
         explode: true
         in: query
         name: limit
@@ -4596,7 +5134,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Domain.ParticipationListResponse'
+                $ref: '#/components/schemas/Domain.ContestListResponse'
           description: OK
         "404":
           content:
@@ -4610,7 +5148,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Internal Server Error
-      summary: Get a platform identity's contest schedule (cached read model)
+      summary: "Get a platform identity's contest schedule (upcoming, eligibility-sourced,\
+        \ cursor-paginated)"
       tags:
       - Participation
   /v2/identities/{piid}/subscriptions:
@@ -5595,958 +6134,12 @@ paths:
       summary: Clone prediction slip
       tags:
       - Prediction Slips
-  /v2/prediction-slips/open:
+  /v2/prediction-slips/community:
     get:
-      description: "Returns the user's currently-open slip or `{data: null}` when\
-        \ none exists."
-      operationId: PuzzleWeb.V2.PredictionController.show_open_prediction_slip
+      description: "Community feed: the tenant's public prediction slips (is_public=true)\
+        \ across all owners, newest first, cursor-paginated."
+      operationId: PuzzleWeb.V2.PredictionController.list_community_prediction_slips
       parameters:
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OpenPredictionSlipResponse'
-          description: Open prediction slip or null
-      summary: Get the caller's open prediction slip
-      tags:
-      - Prediction Slips
-  /v2/public/channels:
-    get:
-      description: Get Channels by Region - cursor pagination
-      operationId: getPublicChannels
-      parameters:
-      - description: Region Code
-        explode: true
-        in: query
-        name: region
-        required: true
-        schema:
-          type: string
-        style: form
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Page size
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ChannelListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get Channels by Region (v2)
-      tags:
-      - Channels
-  /v2/public/channels/{id}:
-    get:
-      description: Mounted twice (authed + public) with identical semantics.
-      operationId: getPublicChannelsById
-      parameters:
-      - description: Channel ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ChannelResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get a channel by ID
-      tags:
-      - Channels
-  /v2/public/channels/{id}/contests:
-    get:
-      description: Mounted twice (authed + public) with identical semantics.
-      operationId: getPublicChannelsByIdContests
-      parameters:
-      - description: Channel ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Page size (default 20)
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ContestListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get channel contests (cursor-paginated)
-      tags:
-      - Contests
-  /v2/public/channels/{id}/subscriptions:
-    get:
-      description: |-
-        Mounted twice (authed + public) with identical semantics. The
-        channel owner additionally sees pending requests; non-owners see
-        only approved subscriptions. Each item carries its `status`
-        (uman#132 flattened the former {subscribers, pending_request}
-        object into the declared Domain.Subscription array).
-      operationId: getPublicChannelsByIdSubscriptions
-      parameters:
-      - description: Channel ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "Page size (default 50, max 200)"
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.SubscriptionListResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: List channel subscriptions (cursor-paginated)
-      tags:
-      - Subscriptions
-  /v2/public/channels/searchKeyword/{keyword}:
-    get:
-      description: Mounted twice (authed + public) with identical semantics.
-      operationId: getPublicChannelsSearchKeywordByKeyword
-      parameters:
-      - description: Search keyword
-        explode: false
-        in: path
-        name: keyword
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Page size
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ChannelListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Search channels by keyword (cursor-paginated)
-      tags:
-      - Channels
-  /v2/public/contests:
-    get:
-      operationId: getPublicContests
-      parameters:
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Page size (default 50)
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Include ended contests
-        explode: true
-        in: query
-        name: ended
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - description: ISO 3166-1 alpha-2 region filter
-        explode: true
-        in: query
-        name: region
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ContestListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: "List public contests (region-scoped, cursor-paginated)"
-      tags:
-      - Contests
-  /v2/public/contests/{contestId}/buddy-boards/{boardId}:
-    get:
-      description: Mounted twice (public + authed) with identical semantics.
-      operationId: getPublicContestsByContestIdBuddyBoardsByBoardId
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: contestId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Buddy Board ID
-        explode: false
-        in: path
-        name: boardId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.BuddyBoardViewResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get buddy board view (metadata + scores filtered to board members)
-      tags:
-      - Contests
-  /v2/public/contests/{contestId}/buddy-boards/{boardId}/members:
-    get:
-      description: Mounted twice (public + authed) with identical semantics.
-      operationId: getPublicContestsByContestIdBuddyBoardsByBoardIdMembers
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: contestId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Buddy Board ID
-        explode: false
-        in: path
-        name: boardId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.BuddyBoardMembersResponseResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: List buddy board members (public or authed)
-      tags:
-      - Contests
-  /v2/public/contests/{id}:
-    get:
-      description: Mounted twice (authed + public) with identical semantics.
-      operationId: getPublicContestsById
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ContestResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get a contest by ID
-      tags:
-      - Contests
-  /v2/public/contests/{id}/grouped-scoreboard:
-    get:
-      description: Get ScoreBoard
-      operationId: getPublicContestsByIdGroupedScoreboard
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.GroupedScoreBoardResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get ScoreBoard
-      tags:
-      - Participation
-  /v2/public/contests/{id}/groups:
-    get:
-      description: Get Contest Groups
-      operationId: getPublicContestsByIdGroups
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ContestGroupsResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get Contest Groups
-      tags:
-      - Contests
-  /v2/public/contests/{id}/live-ranking:
-    get:
-      description: "Returns the latest provisional ranking for an active contest,\
-        \ cached from puzzle.ranking.live."
-      operationId: getPublicContestsByIdLiveRanking
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.GroupedScoreBoardResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-      summary: Get live ranking snapshot
-      tags:
-      - Participation
-  /v2/public/contests/{id}/scoreboard:
-    get:
-      deprecated: true
-      description: Mounted twice (authed + public) with identical semantics.
-      operationId: getPublicContestsByIdScoreboard
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ScoreBoardResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get a contest scoreboard
-      tags:
-      - Participation
-  /v2/public/contests/{id}/submission-feed:
-    get:
-      operationId: getPublicContestsByIdSubmissionFeed
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "Page size (default 20, max 100)"
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.SubmissionFeedItemListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Get the real-time feed of contest submissions (cursor-paginated)
-      tags:
-      - Contests
-  /v2/public/contests/searchKeyword/{keyword}:
-    get:
-      operationId: getPublicContestsSearchKeywordByKeyword
-      parameters:
-      - description: Search keyword
-        explode: false
-        in: path
-        name: keyword
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Page size (default 50)
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Include ended contests
-        explode: true
-        in: query
-        name: ended
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ContestListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Search public contests by keyword (cursor-paginated)
-      tags:
-      - Contests
-  /v2/public/countries:
-    get:
-      description: |-
-        Returns the full enabled-countries reference set, sorted by name.
-        This is bounded reference data, not a keyset list; per uman#132 it
-        carries an inert pagination block (has_next:false) for a uniform
-        response shape, and the cursor/limit params are accepted but ignored.
-      operationId: getPublicCountries
-      parameters:
-      - description: Accepted for shape uniformity; ignored (single-page reference
-          data)
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Accepted for shape uniformity; ignored (single-page reference
-          data)
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.CountryListResponse'
-          description: OK
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: "List enabled countries (sorted, with native names for non-English\
-        \ Accept-Language)"
-      tags:
-      - Countries
-  /v2/public/curated-slips:
-    get:
-      operationId: PuzzleWeb.V2.PredictionController.list_curated_slips
-      parameters:
-      - explode: true
-        in: query
-        name: family
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: tags
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: is_public
-        required: false
-        schema:
-          type: boolean
-        style: form
       - explode: true
         in: query
         name: cursor
@@ -6577,134 +6170,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PredictionSlipsListResponse'
-          description: Curated prediction slips
-      summary: List curated prediction slips
+          description: Community prediction slips list
+      summary: List public/community prediction slips
       tags:
       - Prediction Slips
-  /v2/public/feed:
+  /v2/prediction-slips/open:
     get:
-      operationId: getPublicFeed
-      parameters:
-      - description: "Page size (1-200, default 20)"
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Optional ISO 3166-1 alpha-2 region filter
-        explode: true
-        in: query
-        name: region
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.FeedItemListResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: "Get the public feed (trending content, unauthenticated)"
-      tags:
-      - Feeds
-  /v2/public/identities/{piid}/channels:
-    get:
-      description: Mounted twice (authed + public) with identical semantics.
-      operationId: getPublicIdentitiesByPiidChannels
-      parameters:
-      - description: Platform Identity ID
-        explode: false
-        in: path
-        name: piid
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Opaque pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Page size
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.ChannelListResponse'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: List channels for a platform identity (cursor-paginated)
-      tags:
-      - Channels
-  /v2/public/location:
-    get:
-      operationId: getPublicLocation
+      description: "Returns the user's currently-open slip or `{data: null}` when\
+        \ none exists."
+      operationId: PuzzleWeb.V2.PredictionController.show_open_prediction_slip
       parameters:
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
@@ -6721,254 +6195,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Domain.CountryResponse'
-          description: OK
-      summary: "Resolve the caller's country by IP (CF-Ipcountry, then Maxmind)"
+                $ref: '#/components/schemas/OpenPredictionSlipResponse'
+          description: Open prediction slip or null
+      summary: Get the caller's open prediction slip
       tags:
-      - Countries
-  /v2/public/og/channel/{channelId}:
-    get:
-      description: Returns channel data formatted for OG image generation (public
-        endpoint)
-      operationId: getPublicOgChannelByChannelId
-      parameters:
-      - description: Channel ID
-        explode: false
-        in: path
-        name: channelId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Access code for restricted channels
-        explode: true
-        in: query
-        name: accessCode
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.OGChannelDataResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-      summary: Get channel data for OG image generation
-      tags:
-      - OGImages
-  /v2/public/og/contest/{contestId}:
-    get:
-      description: Returns contest data formatted for OG image generation (public
-        endpoint)
-      operationId: getPublicOgContestByContestId
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: contestId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.OGContestDataResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-      summary: Get contest data for OG image generation
-      tags:
-      - OGImages
-  /v2/public/og/scoreboard/{contestId}:
-    get:
-      description: Returns scoreboard data formatted for OG image generation (public
-        endpoint)
-      operationId: getPublicOgScoreboardByContestId
-      parameters:
-      - description: Contest ID
-        explode: false
-        in: path
-        name: contestId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.OGScoreboardDataResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-      summary: Get scoreboard data for OG image generation
-      tags:
-      - OGImages
-  /v2/public/og/submissions/{participationId}:
-    get:
-      description: Returns participation data formatted for OG image generation (public
-        endpoint). Only supports prediction contests.
-      operationId: getPublicOgSubmissionsByParticipationId
-      parameters:
-      - description: Participation ID
-        explode: false
-        in: path
-        name: participationId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.OGParticipationDataResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Not Found
-      summary: Get participation data for OG image generation
-      tags:
-      - OGImages
-  /v2/public/team-sets/system:
-    get:
-      description: |-
-        Mounted twice: under tenant auth at /team-sets/system and
-        unauthenticated at /public/team-sets/system. This is a bounded set
-        sorted by name (not a keyset list); per uman#132 it carries an inert
-        pagination block (has_next:false) and ignores cursor/limit.
-      operationId: getPublicTeamSetsSystem
-      parameters:
-      - description: "Accepted for shape uniformity; ignored (single-page, name-sorted)"
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "Accepted for shape uniformity; ignored (single-page, name-sorted)"
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Domain.TeamSetListResponse'
-          description: OK
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: List platform-defined system team sets
-      tags:
-      - Channels
+      - Prediction Slips
   /v2/puzzle-sheets:
     get:
       description: Cursor-paginated puzzle sheets visible to the caller within their
@@ -7588,13 +6819,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
-          description: Migration started
+          description: Rebuild complete
         "422":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiError'
-          description: Migration failed or unauthorized
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Rebuild failed
       summary: Migrate puzzles to OpenSearch
       tags:
       - Puzzles
@@ -9051,10 +8288,10 @@ paths:
   /v2/team-sets/system:
     get:
       description: |-
-        Mounted twice: under tenant auth at /team-sets/system and
-        unauthenticated at /public/team-sets/system. This is a bounded set
-        sorted by name (not a keyset list); per uman#132 it carries an inert
-        pagination block (has_next:false) and ignores cursor/limit.
+        Tenant-scoped (uman#40): a "system" team set is a tenant-global set
+        (owned by the tenant, not a channel). This is a bounded set sorted by
+        name (not a keyset list); per uman#132 it carries an inert pagination
+        block (has_next:false) and ignores cursor/limit.
       operationId: getTeamSetsSystem
       parameters:
       - description: "Accepted for shape uniformity; ignored (single-page, name-sorted)"
@@ -9096,7 +8333,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Internal Server Error
-      summary: List platform-defined system team sets
+      summary: List the calling tenant's system team sets
       tags:
       - Channels
   /v2/tenants:
@@ -9598,53 +8835,6 @@ paths:
       summary: Create a contest for the next pending round in a tournament
       tags:
       - Contests
-  /v2/tracker/click:
-    post:
-      description: |-
-        Mounted twice with identical semantics: /analytics/impression
-        and /tracker/click.
-      operationId: createTrackerClick
-      parameters:
-      - description: Acting-as. The platform identity id (piid) this request is on
-          behalf of. The platform verifies the piid belongs to the calling tenant
-          and acts as that identity. Omit for tenant-level calls.
-        explode: false
-        in: header
-        name: X-Acting-As
-        required: false
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Request.UpdateClickCountRequest'
-        description: Impression payload
-        required: true
-        x-originalParamName: impression
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.StatusResponseResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Bad Request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Handler.ErrorResponse'
-          description: Internal Server Error
-      summary: Record a click/impression event
-      tags:
-      - Analytics
   /v2/user-events:
     get:
       operationId: PuzzleWeb.V2.UserEventsController.index
@@ -10634,7 +9824,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - blocker:
@@ -10979,12 +10169,15 @@ components:
           first_name: first_name
           header_image_url: header_image_url
         responded_at: responded_at
+        id: id
         contest_id: contest_id
         status: status
       properties:
         board_id:
           type: string
         contest_id:
+          type: string
+        id:
           type: string
         invited_at:
           type: string
@@ -10997,9 +10190,15 @@ components:
         status:
           type: string
       type: object
-    Domain.BuddyBoardInvitesResponse:
+    Domain.BuddyBoardInviteListResponse:
       example:
-        invites:
+        pagination:
+          prev_cursor: prev_cursor
+          next_cursor: next_cursor
+          has_previous: true
+          limit: 0
+          has_next: true
+        data:
         - invited_by_id: invited_by_id
           board_id: board_id
           invited_at: invited_at
@@ -11025,6 +10224,7 @@ components:
             first_name: first_name
             header_image_url: header_image_url
           responded_at: responded_at
+          id: id
           contest_id: contest_id
           status: status
         - invited_by_id: invited_by_id
@@ -11052,174 +10252,16 @@ components:
             first_name: first_name
             header_image_url: header_image_url
           responded_at: responded_at
+          id: id
           contest_id: contest_id
           status: status
       properties:
-        invites:
+        data:
           items:
             $ref: '#/components/schemas/Domain.BuddyBoardInvite'
           type: array
-      type: object
-    Domain.BuddyBoardInvitesResponseResponse:
-      example:
-        data:
-          invites:
-          - invited_by_id: invited_by_id
-            board_id: board_id
-            invited_at: invited_at
-            member:
-              tenant_id: tenant_id
-              country:
-                continent_name: continent_name
-                code: code
-                name: name
-                continent_code: continent_code
-                currency: currency
-                native_name: native_name
-              metadata:
-                key: metadata
-              profile_pic: profile_pic
-              created_at: created_at
-              last_name: last_name
-              display_name: display_name
-              country_code: country_code
-              is_official: true
-              company: company
-              id: id
-              first_name: first_name
-              header_image_url: header_image_url
-            responded_at: responded_at
-            contest_id: contest_id
-            status: status
-          - invited_by_id: invited_by_id
-            board_id: board_id
-            invited_at: invited_at
-            member:
-              tenant_id: tenant_id
-              country:
-                continent_name: continent_name
-                code: code
-                name: name
-                continent_code: continent_code
-                currency: currency
-                native_name: native_name
-              metadata:
-                key: metadata
-              profile_pic: profile_pic
-              created_at: created_at
-              last_name: last_name
-              display_name: display_name
-              country_code: country_code
-              is_official: true
-              company: company
-              id: id
-              first_name: first_name
-              header_image_url: header_image_url
-            responded_at: responded_at
-            contest_id: contest_id
-            status: status
-      properties:
-        data:
-          $ref: '#/components/schemas/Domain.BuddyBoardInvitesResponse'
-      required:
-      - data
-      type: object
-    Domain.BuddyBoardMembersResponse:
-      example:
-        members:
-        - tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-        - tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-      properties:
-        members:
-          items:
-            $ref: '#/components/schemas/Domain.PlatformIdentity'
-          type: array
-      type: object
-    Domain.BuddyBoardMembersResponseResponse:
-      example:
-        data:
-          members:
-          - tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-          - tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-      properties:
-        data:
-          $ref: '#/components/schemas/Domain.BuddyBoardMembersResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
       required:
       - data
       type: object
@@ -11928,7 +10970,6 @@ components:
           id: id
           time: time
           channel_id: channel_id
-          venue_id: venue_id
           status: status
           submission_number: 3
       properties:
@@ -12633,7 +11674,6 @@ components:
             id: id
             time: time
             channel_id: channel_id
-            venue_id: venue_id
             status: status
             submission_number: 3
       properties:
@@ -12729,7 +11769,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - owner:
@@ -13324,7 +12364,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - can_view: true
@@ -13365,7 +12405,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - tenant_id: tenant_id
@@ -14003,52 +13043,6 @@ components:
         native_name:
           type: string
       type: object
-    Domain.CountryListResponse:
-      example:
-        pagination:
-          prev_cursor: prev_cursor
-          next_cursor: next_cursor
-          has_previous: true
-          limit: 5
-          has_next: true
-        data:
-        - continent_name: continent_name
-          code: code
-          name: name
-          continent_code: continent_code
-          currency: currency
-          native_name: native_name
-        - continent_name: continent_name
-          code: code
-          name: name
-          continent_code: continent_code
-          currency: currency
-          native_name: native_name
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Domain.Country'
-          type: array
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      type: object
-    Domain.CountryResponse:
-      example:
-        data:
-          continent_name: continent_name
-          code: code
-          name: name
-          continent_code: continent_code
-          currency: currency
-          native_name: native_name
-      properties:
-        data:
-          $ref: '#/components/schemas/Domain.Country'
-      required:
-      - data
-      type: object
     Domain.Entry:
       example:
         duration: 0
@@ -14094,7 +13088,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - duration: 0
@@ -14182,7 +13176,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - meta:
@@ -14776,7 +13770,6 @@ components:
           id: id
           time: time
           channel_id: channel_id
-          venue_id: venue_id
           status: status
           submission_number: 3
       properties:
@@ -15357,7 +14350,6 @@ components:
             id: id
             time: time
             channel_id: channel_id
-            venue_id: venue_id
             status: status
             submission_number: 3
       properties:
@@ -15439,7 +14431,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - assigned_at: assigned_at
@@ -15488,7 +14480,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - platform_identity_id: platform_identity_id
@@ -16018,7 +15010,6 @@ components:
         id: id
         time: time
         channel_id: channel_id
-        venue_id: venue_id
         status: status
         submission_number: 3
       properties:
@@ -16052,8 +15043,6 @@ components:
         team:
           $ref: '#/components/schemas/Domain.Team'
         time:
-          type: string
-        venue_id:
           type: string
       type: object
     Domain.ParticipationCount:
@@ -16093,7 +15082,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - contest:
@@ -16353,7 +15342,6 @@ components:
           id: id
           time: time
           channel_id: channel_id
-          venue_id: venue_id
           status: status
           submission_number: 3
         - contest:
@@ -16613,7 +15601,6 @@ components:
           id: id
           time: time
           channel_id: channel_id
-          venue_id: venue_id
           status: status
           submission_number: 3
       properties:
@@ -16886,7 +15873,6 @@ components:
           id: id
           time: time
           channel_id: channel_id
-          venue_id: venue_id
           status: status
           submission_number: 3
       properties:
@@ -17070,6 +16056,65 @@ components:
         tenant_id:
           type: string
       type: object
+    Domain.PlatformIdentityListResponse:
+      example:
+        pagination:
+          prev_cursor: prev_cursor
+          next_cursor: next_cursor
+          has_previous: true
+          limit: 0
+          has_next: true
+        data:
+        - tenant_id: tenant_id
+          country:
+            continent_name: continent_name
+            code: code
+            name: name
+            continent_code: continent_code
+            currency: currency
+            native_name: native_name
+          metadata:
+            key: metadata
+          profile_pic: profile_pic
+          created_at: created_at
+          last_name: last_name
+          display_name: display_name
+          country_code: country_code
+          is_official: true
+          company: company
+          id: id
+          first_name: first_name
+          header_image_url: header_image_url
+        - tenant_id: tenant_id
+          country:
+            continent_name: continent_name
+            code: code
+            name: name
+            continent_code: continent_code
+            currency: currency
+            native_name: native_name
+          metadata:
+            key: metadata
+          profile_pic: profile_pic
+          created_at: created_at
+          last_name: last_name
+          display_name: display_name
+          country_code: country_code
+          is_official: true
+          company: company
+          id: id
+          first_name: first_name
+          header_image_url: header_image_url
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Domain.PlatformIdentity'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      type: object
     Domain.PlatformIdentityResponse:
       example:
         data:
@@ -17132,7 +16177,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - total_attempts: 5
@@ -17764,7 +16809,6 @@ components:
           id: id
           time: time
           channel_id: channel_id
-          venue_id: venue_id
           status: status
           submission_number: 3
       properties:
@@ -18342,7 +17386,6 @@ components:
             id: id
             time: time
             channel_id: channel_id
-            venue_id: venue_id
             status: status
             submission_number: 3
       properties:
@@ -18417,7 +17460,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - updated_at: updated_at
@@ -18586,7 +17629,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - platform_fee: 0.8008281904610115
@@ -18757,7 +17800,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - updated_at: updated_at
@@ -18880,7 +17923,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - is_active: true
@@ -19008,7 +18051,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - celeb:
@@ -19434,7 +18477,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - submitted_at: submitted_at
@@ -19654,7 +18697,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - subscriber:
@@ -19944,7 +18987,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - teams:
@@ -20190,6 +19233,7 @@ components:
           venue_id: venue_id
         created_at: created_at
         description: description
+        reveal_groups_last_n_rounds: 0
         id: id
         state: state
         title: title
@@ -20221,6 +19265,11 @@ components:
           type: string
         id:
           type: string
+        reveal_groups_last_n_rounds:
+          description: |-
+            RevealGroupsLastNRounds is how many trailing rounds get their groups
+            pre-assigned from the advancers (revealed ahead of play). See ADR 0045.
+          type: integer
         rounds:
           items:
             $ref: '#/components/schemas/Domain.TournamentRound'
@@ -20351,7 +19400,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - creator:
@@ -20422,6 +19471,7 @@ components:
             venue_id: venue_id
           created_at: created_at
           description: description
+          reveal_groups_last_n_rounds: 0
           id: id
           state: state
           title: title
@@ -20510,6 +19560,7 @@ components:
             venue_id: venue_id
           created_at: created_at
           description: description
+          reveal_groups_last_n_rounds: 0
           id: id
           state: state
           title: title
@@ -20611,6 +19662,7 @@ components:
             venue_id: venue_id
           created_at: created_at
           description: description
+          reveal_groups_last_n_rounds: 0
           id: id
           state: state
           title: title
@@ -20722,7 +19774,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - tenant_id: tenant_id
@@ -20826,7 +19878,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - tenant_id: tenant_id
@@ -21267,7 +20319,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - es_event_id: es_event_id
@@ -21415,544 +20467,6 @@ components:
         error:
           $ref: '#/components/schemas/Handler.ErrorDetail'
       type: object
-    Handler.EventPredictions:
-      example:
-        event_name: event_name
-        items:
-        - prediction: prediction
-          label: label
-        - prediction: prediction
-          label: label
-      properties:
-        event_name:
-          type: string
-        items:
-          items:
-            $ref: '#/components/schemas/Handler.PredictionItem'
-          type: array
-      type: object
-    Handler.GroupWinners:
-      example:
-        winners:
-        - score: 6
-          name: name
-          rank: 0
-        - score: 6
-          name: name
-          rank: 0
-        group_name: group_name
-      properties:
-        group_name:
-          type: string
-        winners:
-          items:
-            $ref: '#/components/schemas/Handler.Winner'
-          type: array
-      type: object
-    Handler.OGChannelData:
-      example:
-        access_type: access_type
-        creator:
-          tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-        metadata:
-        - metadata
-        - metadata
-        owner_name: owner_name
-        contests_count: 0
-        image_url: image_url
-        name: name
-        subscribers_count: 6
-      properties:
-        access_type:
-          type: string
-        contests_count:
-          type: integer
-        creator:
-          $ref: '#/components/schemas/Domain.PlatformIdentity'
-        image_url:
-          type: string
-        metadata:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        owner_name:
-          type: string
-        subscribers_count:
-          type: integer
-      type: object
-    Handler.OGChannelDataResponse:
-      example:
-        data:
-          access_type: access_type
-          creator:
-            tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-          metadata:
-          - metadata
-          - metadata
-          owner_name: owner_name
-          contests_count: 0
-          image_url: image_url
-          name: name
-          subscribers_count: 6
-      properties:
-        data:
-          $ref: '#/components/schemas/Handler.OGChannelData'
-      required:
-      - data
-      type: object
-    Handler.OGContestData:
-      example:
-        channel_name: channel_name
-        difficulty: difficulty
-        end_date: end_date
-        winners_per_group: 1
-        creator:
-          tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-        metadata:
-        - metadata
-        - metadata
-        total_winners: 6
-        image_url: image_url
-        description: description
-        number_of_groups: 0
-        title: title
-        prize: prize
-      properties:
-        channel_name:
-          type: string
-        creator:
-          $ref: '#/components/schemas/Domain.PlatformIdentity'
-        description:
-          type: string
-        difficulty:
-          type: string
-        end_date:
-          type: string
-        image_url:
-          type: string
-        metadata:
-          items:
-            type: string
-          type: array
-        number_of_groups:
-          type: integer
-        prize:
-          type: string
-        title:
-          type: string
-        total_winners:
-          type: integer
-        winners_per_group:
-          type: integer
-      type: object
-    Handler.OGContestDataResponse:
-      example:
-        data:
-          channel_name: channel_name
-          difficulty: difficulty
-          end_date: end_date
-          winners_per_group: 1
-          creator:
-            tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-          metadata:
-          - metadata
-          - metadata
-          total_winners: 6
-          image_url: image_url
-          description: description
-          number_of_groups: 0
-          title: title
-          prize: prize
-      properties:
-        data:
-          $ref: '#/components/schemas/Handler.OGContestData'
-      required:
-      - data
-      type: object
-    Handler.OGParticipationData:
-      example:
-        score: 6
-        creator:
-          tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-        metadata:
-        - metadata
-        - metadata
-        participant_name: participant_name
-        contest_title: contest_title
-        group_name: group_name
-        rank: 0
-        contest_id: contest_id
-        participant:
-          tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-        predictions:
-        - event_name: event_name
-          items:
-          - prediction: prediction
-            label: label
-          - prediction: prediction
-            label: label
-        - event_name: event_name
-          items:
-          - prediction: prediction
-            label: label
-          - prediction: prediction
-            label: label
-        status: status
-      properties:
-        contest_id:
-          type: string
-        contest_title:
-          type: string
-        creator:
-          $ref: '#/components/schemas/Domain.PlatformIdentity'
-        group_name:
-          type: string
-        metadata:
-          items:
-            type: string
-          type: array
-        participant:
-          $ref: '#/components/schemas/Domain.PlatformIdentity'
-        participant_name:
-          type: string
-        predictions:
-          description: Grouped by event
-          items:
-            $ref: '#/components/schemas/Handler.EventPredictions'
-          type: array
-        rank:
-          type: integer
-        score:
-          type: integer
-        status:
-          type: string
-      type: object
-    Handler.OGParticipationDataResponse:
-      example:
-        data:
-          score: 6
-          creator:
-            tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-          metadata:
-          - metadata
-          - metadata
-          participant_name: participant_name
-          contest_title: contest_title
-          group_name: group_name
-          rank: 0
-          contest_id: contest_id
-          participant:
-            tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-          predictions:
-          - event_name: event_name
-            items:
-            - prediction: prediction
-              label: label
-            - prediction: prediction
-              label: label
-          - event_name: event_name
-            items:
-            - prediction: prediction
-              label: label
-            - prediction: prediction
-              label: label
-          status: status
-      properties:
-        data:
-          $ref: '#/components/schemas/Handler.OGParticipationData'
-      required:
-      - data
-      type: object
-    Handler.OGScoreboardData:
-      example:
-        winners_per_group: 2
-        creator:
-          tenant_id: tenant_id
-          country:
-            continent_name: continent_name
-            code: code
-            name: name
-            continent_code: continent_code
-            currency: currency
-            native_name: native_name
-          metadata:
-            key: metadata
-          profile_pic: profile_pic
-          created_at: created_at
-          last_name: last_name
-          display_name: display_name
-          country_code: country_code
-          is_official: true
-          company: company
-          id: id
-          first_name: first_name
-          header_image_url: header_image_url
-        leaderboard:
-        - winners:
-          - score: 6
-            name: name
-            rank: 0
-          - score: 6
-            name: name
-            rank: 0
-          group_name: group_name
-        - winners:
-          - score: 6
-            name: name
-            rank: 0
-          - score: 6
-            name: name
-            rank: 0
-          group_name: group_name
-        metadata:
-        - metadata
-        - metadata
-        participant_count: 5
-        total_winners: 5
-        contest_title: contest_title
-        number_of_groups: 1
-      properties:
-        contest_title:
-          type: string
-        creator:
-          $ref: '#/components/schemas/Domain.PlatformIdentity'
-        leaderboard:
-          description: Winners per group
-          items:
-            $ref: '#/components/schemas/Handler.GroupWinners'
-          type: array
-        metadata:
-          items:
-            type: string
-          type: array
-        number_of_groups:
-          type: integer
-        participant_count:
-          type: integer
-        total_winners:
-          type: integer
-        winners_per_group:
-          type: integer
-      type: object
-    Handler.OGScoreboardDataResponse:
-      example:
-        data:
-          winners_per_group: 2
-          creator:
-            tenant_id: tenant_id
-            country:
-              continent_name: continent_name
-              code: code
-              name: name
-              continent_code: continent_code
-              currency: currency
-              native_name: native_name
-            metadata:
-              key: metadata
-            profile_pic: profile_pic
-            created_at: created_at
-            last_name: last_name
-            display_name: display_name
-            country_code: country_code
-            is_official: true
-            company: company
-            id: id
-            first_name: first_name
-            header_image_url: header_image_url
-          leaderboard:
-          - winners:
-            - score: 6
-              name: name
-              rank: 0
-            - score: 6
-              name: name
-              rank: 0
-            group_name: group_name
-          - winners:
-            - score: 6
-              name: name
-              rank: 0
-            - score: 6
-              name: name
-              rank: 0
-            group_name: group_name
-          metadata:
-          - metadata
-          - metadata
-          participant_count: 5
-          total_winners: 5
-          contest_title: contest_title
-          number_of_groups: 1
-      properties:
-        data:
-          $ref: '#/components/schemas/Handler.OGScoreboardData'
-      required:
-      - data
-      type: object
-    Handler.PredictionItem:
-      example:
-        prediction: prediction
-        label: label
-      properties:
-        label:
-          type: string
-        prediction:
-          type: string
-      type: object
     Handler.StatusResponse:
       example:
         id: id
@@ -21977,19 +20491,6 @@ components:
           $ref: '#/components/schemas/Handler.StatusResponse'
       required:
       - data
-      type: object
-    Handler.Winner:
-      example:
-        score: 6
-        name: name
-        rank: 0
-      properties:
-        name:
-          type: string
-        rank:
-          type: integer
-        score:
-          type: integer
       type: object
     Handler.createApiKeyRequest:
       properties:
@@ -22035,12 +20536,13 @@ components:
         can_view:
           type: boolean
         channel_id:
-          type: string
-        venue_id:
+          description: |-
+            venue_id is not a request field (uman#177): the channel determines the
+            venue (channels.venue_id is canonical), so the caller supplies only the
+            channel and the venue is derived from it.
           type: string
       required:
       - channel_id
-      - venue_id
       type: object
     Handler.createPlatformIdentityRequest:
       properties:
@@ -22087,13 +20589,10 @@ components:
           items:
             type: integer
           type: array
-        venue_id:
-          type: string
       required:
       - channel_id
       - display_name
       - platform_identity_id
-      - venue_id
       type: object
     Handler.createPlatformRequest:
       properties:
@@ -22261,7 +20760,7 @@ components:
         prev_cursor: prev_cursor
         next_cursor: next_cursor
         has_previous: true
-        limit: 5
+        limit: 0
         has_next: true
       properties:
         has_next:
@@ -22589,7 +21088,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - updated_at: 2000-01-23T04:56:07.000+00:00
@@ -23007,7 +21506,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - is_community_questions: true
@@ -23083,7 +21582,7 @@ components:
           prev_cursor: prev_cursor
           next_cursor: next_cursor
           has_previous: true
-          limit: 5
+          limit: 0
           has_next: true
         data:
         - difficulty: average
@@ -23262,8 +21761,6 @@ components:
           $ref: '#/components/schemas/Domain.Timing'
         title:
           type: string
-        venue_id:
-          type: string
         winners_per_group:
           minimum: 1
           type: integer
@@ -23271,13 +21768,13 @@ components:
           minimum: 0
           type: integer
       required:
+      - channel_id
       - no_of_groups
       - reward
       - source_id
       - source_type
       - timing
       - title
-      - venue_id
       - winners_per_group
       - zone_advantage
       type: object
@@ -23498,21 +21995,6 @@ components:
       - header_image_url
       - name
       - size
-      type: object
-    Request.UpdateClickCountRequest:
-      properties:
-        refId:
-          type: string
-        type:
-          enum:
-          - banner
-          - campaign
-          - reward
-          - review
-          type: string
-      required:
-      - refId
-      - type
       type: object
     Request.UpdateContestHeaderImage:
       properties:
@@ -24079,21 +22561,19 @@ components:
 x-tagGroups:
 - name: User Management API
   tags:
+  - Contests
   - Analytics
   - Blocks
   - Stans
   - Channels
-  - Contests
   - Subscriptions
   - Tournaments
   - Sponsorships
   - Participation
   - CreativeContests
-  - Identities
   - Feeds
+  - Identities
   - Messages
-  - Countries
-  - OGImages
   - Sponsors
   - SponsorshipPackages
   - SponsorshipTerms
@@ -24103,8 +22583,8 @@ x-tagGroups:
 - name: Puzzle Platform API
   tags:
   - Contest Puzzles
+  - Prediction Slips
   - User Events
   - Events
-  - Prediction Slips
   - Puzzle Sheets
   - Puzzles

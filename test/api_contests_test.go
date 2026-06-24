@@ -179,6 +179,18 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ContestsAPIService GetAdminHostingInvitations", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetAdminHostingInvitations(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ContestsAPIService GetChannelsByIdContests", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -264,6 +276,20 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ContestsAPIService GetContestsByIdGroups", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetContestsByIdGroups(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ContestsAPIService GetContestsByIdHostings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -306,11 +332,51 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ContestsAPIService GetContestsByIdSubmissionFeed", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetContestsByIdSubmissionFeed(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ContestsAPIService GetContestsByRegion", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetContestsByRegion(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ContestsAPIService GetContestsSearch", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.ContestsAPI.GetContestsSearch(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ContestsAPIService GetContestsSearchKeywordByKeyword", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var keyword string
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetContestsSearchKeywordByKeyword(context.Background(), keyword).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -339,118 +405,6 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 		var piid string
 
 		resp, httpRes, err := apiClient.ContestsAPI.GetIdentitiesByPiidContests(context.Background(), piid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicChannelsByIdContests", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicChannelsByIdContests(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContests", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContests(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContestsByContestIdBuddyBoardsByBoardId", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var contestId string
-		var boardId string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsByContestIdBuddyBoardsByBoardId(context.Background(), contestId, boardId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var contestId string
-		var boardId string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers(context.Background(), contestId, boardId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContestsById", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsById(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContestsByIdGroups", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsByIdGroups(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContestsByIdSubmissionFeed", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsByIdSubmissionFeed(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ContestsAPIService GetPublicContestsSearchKeywordByKeyword", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var keyword string
-
-		resp, httpRes, err := apiClient.ContestsAPI.GetPublicContestsSearchKeywordByKeyword(context.Background(), keyword).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

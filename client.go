@@ -60,8 +60,6 @@ type APIClient struct {
 
 	ContestsAPI *ContestsAPIService
 
-	CountriesAPI *CountriesAPIService
-
 	CreativeContestsAPI *CreativeContestsAPIService
 
 	EventsAPI *EventsAPIService
@@ -71,8 +69,6 @@ type APIClient struct {
 	IdentitiesAPI *IdentitiesAPIService
 
 	MessagesAPI *MessagesAPIService
-
-	OGImagesAPI *OGImagesAPIService
 
 	ParticipationAPI *ParticipationAPIService
 
@@ -126,13 +122,11 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ChannelsAPI = (*ChannelsAPIService)(&c.common)
 	c.ContestPuzzlesAPI = (*ContestPuzzlesAPIService)(&c.common)
 	c.ContestsAPI = (*ContestsAPIService)(&c.common)
-	c.CountriesAPI = (*CountriesAPIService)(&c.common)
 	c.CreativeContestsAPI = (*CreativeContestsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.FeedsAPI = (*FeedsAPIService)(&c.common)
 	c.IdentitiesAPI = (*IdentitiesAPIService)(&c.common)
 	c.MessagesAPI = (*MessagesAPIService)(&c.common)
-	c.OGImagesAPI = (*OGImagesAPIService)(&c.common)
 	c.ParticipationAPI = (*ParticipationAPIService)(&c.common)
 	c.PredictionSlipsAPI = (*PredictionSlipsAPIService)(&c.common)
 	c.PuzzleSheetsAPI = (*PuzzleSheetsAPIService)(&c.common)

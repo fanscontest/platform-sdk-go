@@ -1,73 +1,73 @@
-# DomainCountryListResponse
+# DomainPlatformIdentityListResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**[]DomainCountry**](DomainCountry.md) |  | 
+**Data** | [**[]DomainPlatformIdentity**](DomainPlatformIdentity.md) |  | 
 **Pagination** | Pointer to [**Pagination**](Pagination.md) |  | [optional] 
 
 ## Methods
 
-### NewDomainCountryListResponse
+### NewDomainPlatformIdentityListResponse
 
-`func NewDomainCountryListResponse(data []DomainCountry, ) *DomainCountryListResponse`
+`func NewDomainPlatformIdentityListResponse(data []DomainPlatformIdentity, ) *DomainPlatformIdentityListResponse`
 
-NewDomainCountryListResponse instantiates a new DomainCountryListResponse object
+NewDomainPlatformIdentityListResponse instantiates a new DomainPlatformIdentityListResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewDomainCountryListResponseWithDefaults
+### NewDomainPlatformIdentityListResponseWithDefaults
 
-`func NewDomainCountryListResponseWithDefaults() *DomainCountryListResponse`
+`func NewDomainPlatformIdentityListResponseWithDefaults() *DomainPlatformIdentityListResponse`
 
-NewDomainCountryListResponseWithDefaults instantiates a new DomainCountryListResponse object
+NewDomainPlatformIdentityListResponseWithDefaults instantiates a new DomainPlatformIdentityListResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *DomainCountryListResponse) GetData() []DomainCountry`
+`func (o *DomainPlatformIdentityListResponse) GetData() []DomainPlatformIdentity`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *DomainCountryListResponse) GetDataOk() (*[]DomainCountry, bool)`
+`func (o *DomainPlatformIdentityListResponse) GetDataOk() (*[]DomainPlatformIdentity, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *DomainCountryListResponse) SetData(v []DomainCountry)`
+`func (o *DomainPlatformIdentityListResponse) SetData(v []DomainPlatformIdentity)`
 
 SetData sets Data field to given value.
 
 
 ### GetPagination
 
-`func (o *DomainCountryListResponse) GetPagination() Pagination`
+`func (o *DomainPlatformIdentityListResponse) GetPagination() Pagination`
 
 GetPagination returns the Pagination field if non-nil, zero value otherwise.
 
 ### GetPaginationOk
 
-`func (o *DomainCountryListResponse) GetPaginationOk() (*Pagination, bool)`
+`func (o *DomainPlatformIdentityListResponse) GetPaginationOk() (*Pagination, bool)`
 
 GetPaginationOk returns a tuple with the Pagination field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPagination
 
-`func (o *DomainCountryListResponse) SetPagination(v Pagination)`
+`func (o *DomainPlatformIdentityListResponse) SetPagination(v Pagination)`
 
 SetPagination sets Pagination field to given value.
 
 ### HasPagination
 
-`func (o *DomainCountryListResponse) HasPagination() bool`
+`func (o *DomainPlatformIdentityListResponse) HasPagination() bool`
 
 HasPagination returns a boolean if a field has been set.
 

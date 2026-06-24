@@ -25,6 +25,8 @@ type DomainTournament struct {
 	Creator *DomainPlatformIdentity `json:"creator,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id *string `json:"id,omitempty"`
+	// RevealGroupsLastNRounds is how many trailing rounds get their groups pre-assigned from the advancers (revealed ahead of play). See ADR 0045.
+	RevealGroupsLastNRounds *int32 `json:"reveal_groups_last_n_rounds,omitempty"`
 	Rounds []DomainTournamentRound `json:"rounds,omitempty"`
 	State *string `json:"state,omitempty"`
 	Title *string `json:"title,omitempty"`
@@ -207,6 +209,38 @@ func (o *DomainTournament) SetId(v string) {
 	o.Id = &v
 }
 
+// GetRevealGroupsLastNRounds returns the RevealGroupsLastNRounds field value if set, zero value otherwise.
+func (o *DomainTournament) GetRevealGroupsLastNRounds() int32 {
+	if o == nil || IsNil(o.RevealGroupsLastNRounds) {
+		var ret int32
+		return ret
+	}
+	return *o.RevealGroupsLastNRounds
+}
+
+// GetRevealGroupsLastNRoundsOk returns a tuple with the RevealGroupsLastNRounds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainTournament) GetRevealGroupsLastNRoundsOk() (*int32, bool) {
+	if o == nil || IsNil(o.RevealGroupsLastNRounds) {
+		return nil, false
+	}
+	return o.RevealGroupsLastNRounds, true
+}
+
+// HasRevealGroupsLastNRounds returns a boolean if a field has been set.
+func (o *DomainTournament) HasRevealGroupsLastNRounds() bool {
+	if o != nil && !IsNil(o.RevealGroupsLastNRounds) {
+		return true
+	}
+
+	return false
+}
+
+// SetRevealGroupsLastNRounds gets a reference to the given int32 and assigns it to the RevealGroupsLastNRounds field.
+func (o *DomainTournament) SetRevealGroupsLastNRounds(v int32) {
+	o.RevealGroupsLastNRounds = &v
+}
+
 // GetRounds returns the Rounds field value if set, zero value otherwise.
 func (o *DomainTournament) GetRounds() []DomainTournamentRound {
 	if o == nil || IsNil(o.Rounds) {
@@ -327,6 +361,9 @@ func (o DomainTournament) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.RevealGroupsLastNRounds) {
+		toSerialize["reveal_groups_last_n_rounds"] = o.RevealGroupsLastNRounds
 	}
 	if !IsNil(o.Rounds) {
 		toSerialize["rounds"] = o.Rounds

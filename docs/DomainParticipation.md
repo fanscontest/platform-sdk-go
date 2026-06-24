@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **SubmissionNumber** | Pointer to **int32** |  | [optional] 
 **Team** | Pointer to [**DomainTeam**](DomainTeam.md) |  | [optional] 
 **Time** | Pointer to **string** |  | [optional] 
-**VenueId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -388,31 +387,6 @@ SetTime sets Time field to given value.
 `func (o *DomainParticipation) HasTime() bool`
 
 HasTime returns a boolean if a field has been set.
-
-### GetVenueId
-
-`func (o *DomainParticipation) GetVenueId() string`
-
-GetVenueId returns the VenueId field if non-nil, zero value otherwise.
-
-### GetVenueIdOk
-
-`func (o *DomainParticipation) GetVenueIdOk() (*string, bool)`
-
-GetVenueIdOk returns a tuple with the VenueId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVenueId
-
-`func (o *DomainParticipation) SetVenueId(v string)`
-
-SetVenueId sets VenueId field to given value.
-
-### HasVenueId
-
-`func (o *DomainParticipation) HasVenueId() bool`
-
-HasVenueId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

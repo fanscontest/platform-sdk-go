@@ -22,13 +22,11 @@ func Test_platform_FeedsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test FeedsAPIService GetIdentitiesByPiidFeedPersonalized", func(t *testing.T) {
+	t.Run("Test FeedsAPIService GetFeed", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var piid string
-
-		resp, httpRes, err := apiClient.FeedsAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Execute()
+		resp, httpRes, err := apiClient.FeedsAPI.GetFeed(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,11 +34,13 @@ func Test_platform_FeedsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test FeedsAPIService GetPublicFeed", func(t *testing.T) {
+	t.Run("Test FeedsAPIService GetIdentitiesByPiidFeedPersonalized", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.FeedsAPI.GetPublicFeed(context.Background()).Execute()
+		var piid string
+
+		resp, httpRes, err := apiClient.FeedsAPI.GetIdentitiesByPiidFeedPersonalized(context.Background(), piid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BoardId** | Pointer to **string** |  | [optional] 
 **ContestId** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** |  | [optional] 
 **InvitedAt** | Pointer to **string** |  | [optional] 
 **InvitedById** | Pointer to **string** |  | [optional] 
 **Member** | Pointer to [**DomainPlatformIdentity**](DomainPlatformIdentity.md) |  | [optional] 
@@ -80,6 +81,31 @@ SetContestId sets ContestId field to given value.
 `func (o *DomainBuddyBoardInvite) HasContestId() bool`
 
 HasContestId returns a boolean if a field has been set.
+
+### GetId
+
+`func (o *DomainBuddyBoardInvite) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *DomainBuddyBoardInvite) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *DomainBuddyBoardInvite) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *DomainBuddyBoardInvite) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetInvitedAt
 

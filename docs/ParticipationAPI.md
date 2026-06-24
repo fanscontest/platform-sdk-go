@@ -8,14 +8,13 @@ Method | HTTP request | Description
 [**CreateContestsByIdParticipate**](ParticipationAPI.md#CreateContestsByIdParticipate) | **Post** /v2/contests/{id}/participate | Create Participation
 [**CreateParticipationByIdStart**](ParticipationAPI.md#CreateParticipationByIdStart) | **Post** /v2/participation/{id}/start | Log the start of a participation
 [**DeleteContestsByIdEnrollment**](ParticipationAPI.md#DeleteContestsByIdEnrollment) | **Delete** /v2/contests/{id}/enrollment | Withdraw the caller&#39;s enrollment from a contest
+[**GetContestsByIdGroupedScoreboard**](ParticipationAPI.md#GetContestsByIdGroupedScoreboard) | **Get** /v2/contests/{id}/grouped-scoreboard | Get ScoreBoard
+[**GetContestsByIdLiveRanking**](ParticipationAPI.md#GetContestsByIdLiveRanking) | **Get** /v2/contests/{id}/live-ranking | Get live ranking snapshot
 [**GetContestsByIdScoreboard**](ParticipationAPI.md#GetContestsByIdScoreboard) | **Get** /v2/contests/{id}/scoreboard | Get a contest scoreboard
 [**GetIdentitiesByPiidParticipation**](ParticipationAPI.md#GetIdentitiesByPiidParticipation) | **Get** /v2/identities/{piid}/participation | Get all participation for a platform identity (cursor-paginated)
-[**GetIdentitiesByPiidSchedule**](ParticipationAPI.md#GetIdentitiesByPiidSchedule) | **Get** /v2/identities/{piid}/schedule | Get a platform identity&#39;s contest schedule (cached read model)
+[**GetIdentitiesByPiidSchedule**](ParticipationAPI.md#GetIdentitiesByPiidSchedule) | **Get** /v2/identities/{piid}/schedule | Get a platform identity&#39;s contest schedule (upcoming, eligibility-sourced, cursor-paginated)
 [**GetParticipationById**](ParticipationAPI.md#GetParticipationById) | **Get** /v2/participation/{id} | Get participation by id
 [**GetParticipationContestById**](ParticipationAPI.md#GetParticipationContestById) | **Get** /v2/participation/contest/{id} | Get member participation by contest id
-[**GetPublicContestsByIdGroupedScoreboard**](ParticipationAPI.md#GetPublicContestsByIdGroupedScoreboard) | **Get** /v2/public/contests/{id}/grouped-scoreboard | Get ScoreBoard
-[**GetPublicContestsByIdLiveRanking**](ParticipationAPI.md#GetPublicContestsByIdLiveRanking) | **Get** /v2/public/contests/{id}/live-ranking | Get live ranking snapshot
-[**GetPublicContestsByIdScoreboard**](ParticipationAPI.md#GetPublicContestsByIdScoreboard) | **Get** /v2/public/contests/{id}/scoreboard | Get a contest scoreboard
 [**PatchParticipationByParticipationIdGroup**](ParticipationAPI.md#PatchParticipationByParticipationIdGroup) | **Patch** /v2/participation/{participationId}/group | Select group for open grouping contest
 
 
@@ -302,13 +301,155 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetContestsByIdGroupedScoreboard
+
+> DomainGroupedScoreBoardResponse GetContestsByIdGroupedScoreboard(ctx, id).XActingAs(xActingAs).Execute()
+
+Get ScoreBoard
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Contest ID
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ParticipationAPI.GetContestsByIdGroupedScoreboard(context.Background(), id).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetContestsByIdGroupedScoreboard``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetContestsByIdGroupedScoreboard`: DomainGroupedScoreBoardResponse
+	fmt.Fprintf(os.Stdout, "Response from `ParticipationAPI.GetContestsByIdGroupedScoreboard`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Contest ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContestsByIdGroupedScoreboardRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**DomainGroupedScoreBoardResponse**](DomainGroupedScoreBoardResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetContestsByIdLiveRanking
+
+> DomainGroupedScoreBoardResponse GetContestsByIdLiveRanking(ctx, id).XActingAs(xActingAs).Execute()
+
+Get live ranking snapshot
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Contest ID
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ParticipationAPI.GetContestsByIdLiveRanking(context.Background(), id).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetContestsByIdLiveRanking``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetContestsByIdLiveRanking`: DomainGroupedScoreBoardResponse
+	fmt.Fprintf(os.Stdout, "Response from `ParticipationAPI.GetContestsByIdLiveRanking`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Contest ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContestsByIdLiveRankingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**DomainGroupedScoreBoardResponse**](DomainGroupedScoreBoardResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetContestsByIdScoreboard
 
 > DomainScoreBoardResponse GetContestsByIdScoreboard(ctx, id).XActingAs(xActingAs).Execute()
 
 Get a contest scoreboard
-
-
 
 ### Example
 
@@ -376,7 +517,7 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidParticipation
 
-> DomainParticipationListResponse GetIdentitiesByPiidParticipation(ctx, piid).Limit(limit).Cursor(cursor).State(state).XActingAs(xActingAs).Execute()
+> DomainParticipationListResponse GetIdentitiesByPiidParticipation(ctx, piid).Limit(limit).Cursor(cursor).Status(status).XActingAs(xActingAs).Execute()
 
 Get all participation for a platform identity (cursor-paginated)
 
@@ -398,12 +539,12 @@ func main() {
 	piid := "piid_example" // string | Platform Identity ID
 	limit := int32(56) // int32 | Page size (1-200, default 50) (optional)
 	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
-	state := "state_example" // string | Contest state filter (created|started|closed|completed) (optional)
+	status := "status_example" // string | Participation status filter, comma-separated (enrolled|participated|timed_out); default all. The schedule history view passes participated,timed_out. (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetIdentitiesByPiidParticipation(context.Background(), piid).Limit(limit).Cursor(cursor).State(state).XActingAs(xActingAs).Execute()
+	resp, r, err := apiClient.ParticipationAPI.GetIdentitiesByPiidParticipation(context.Background(), piid).Limit(limit).Cursor(cursor).Status(status).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetIdentitiesByPiidParticipation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -431,7 +572,7 @@ Name | Type | Description  | Notes
 
  **limit** | **int32** | Page size (1-200, default 50) | 
  **cursor** | **string** | Opaque pagination cursor | 
- **state** | **string** | Contest state filter (created|started|closed|completed) | 
+ **status** | **string** | Participation status filter, comma-separated (enrolled|participated|timed_out); default all. The schedule history view passes participated,timed_out. | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
@@ -454,9 +595,9 @@ Name | Type | Description  | Notes
 
 ## GetIdentitiesByPiidSchedule
 
-> DomainParticipationListResponse GetIdentitiesByPiidSchedule(ctx, piid).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+> DomainContestListResponse GetIdentitiesByPiidSchedule(ctx, piid).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
-Get a platform identity's contest schedule (cached read model)
+Get a platform identity's contest schedule (upcoming, eligibility-sourced, cursor-paginated)
 
 
 
@@ -474,8 +615,8 @@ import (
 
 func main() {
 	piid := "piid_example" // string | Platform Identity ID
-	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page derived data) (optional)
-	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page derived data) (optional)
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (1-200, default 50) (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -485,7 +626,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetIdentitiesByPiidSchedule``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIdentitiesByPiidSchedule`: DomainParticipationListResponse
+	// response from `GetIdentitiesByPiidSchedule`: DomainContestListResponse
 	fmt.Fprintf(os.Stdout, "Response from `ParticipationAPI.GetIdentitiesByPiidSchedule`: %v\n", resp)
 }
 ```
@@ -506,13 +647,13 @@ Other parameters are passed through a pointer to a apiGetIdentitiesByPiidSchedul
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **cursor** | **string** | Accepted for shape uniformity; ignored (single-page derived data) | 
- **limit** | **int32** | Accepted for shape uniformity; ignored (single-page derived data) | 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (1-200, default 50) | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
 
-[**DomainParticipationListResponse**](DomainParticipationListResponse.md)
+[**DomainContestListResponse**](DomainContestListResponse.md)
 
 ### Authorization
 
@@ -657,222 +798,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DomainParticipationResponse**](DomainParticipationResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicContestsByIdGroupedScoreboard
-
-> DomainGroupedScoreBoardResponse GetPublicContestsByIdGroupedScoreboard(ctx, id).XActingAs(xActingAs).Execute()
-
-Get ScoreBoard
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	id := "id_example" // string | Contest ID
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdGroupedScoreboard(context.Background(), id).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetPublicContestsByIdGroupedScoreboard``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicContestsByIdGroupedScoreboard`: DomainGroupedScoreBoardResponse
-	fmt.Fprintf(os.Stdout, "Response from `ParticipationAPI.GetPublicContestsByIdGroupedScoreboard`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Contest ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicContestsByIdGroupedScoreboardRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainGroupedScoreBoardResponse**](DomainGroupedScoreBoardResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicContestsByIdLiveRanking
-
-> DomainGroupedScoreBoardResponse GetPublicContestsByIdLiveRanking(ctx, id).XActingAs(xActingAs).Execute()
-
-Get live ranking snapshot
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	id := "id_example" // string | Contest ID
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdLiveRanking(context.Background(), id).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetPublicContestsByIdLiveRanking``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicContestsByIdLiveRanking`: DomainGroupedScoreBoardResponse
-	fmt.Fprintf(os.Stdout, "Response from `ParticipationAPI.GetPublicContestsByIdLiveRanking`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Contest ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicContestsByIdLiveRankingRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainGroupedScoreBoardResponse**](DomainGroupedScoreBoardResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicContestsByIdScoreboard
-
-> DomainScoreBoardResponse GetPublicContestsByIdScoreboard(ctx, id).XActingAs(xActingAs).Execute()
-
-Get a contest scoreboard
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	id := "id_example" // string | Contest ID
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.GetPublicContestsByIdScoreboard(context.Background(), id).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.GetPublicContestsByIdScoreboard``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicContestsByIdScoreboard`: DomainScoreBoardResponse
-	fmt.Fprintf(os.Stdout, "Response from `ParticipationAPI.GetPublicContestsByIdScoreboard`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Contest ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicContestsByIdScoreboardRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainScoreBoardResponse**](DomainScoreBoardResponse.md)
 
 ### Authorization
 

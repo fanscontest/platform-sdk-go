@@ -17,39 +17,39 @@ import (
 	"fmt"
 )
 
-// checks if the DomainCountryListResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DomainCountryListResponse{}
+// checks if the DomainPlatformIdentityListResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DomainPlatformIdentityListResponse{}
 
-// DomainCountryListResponse struct for DomainCountryListResponse
-type DomainCountryListResponse struct {
-	Data []DomainCountry `json:"data"`
+// DomainPlatformIdentityListResponse struct for DomainPlatformIdentityListResponse
+type DomainPlatformIdentityListResponse struct {
+	Data []DomainPlatformIdentity `json:"data"`
 	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
-type _DomainCountryListResponse DomainCountryListResponse
+type _DomainPlatformIdentityListResponse DomainPlatformIdentityListResponse
 
-// NewDomainCountryListResponse instantiates a new DomainCountryListResponse object
+// NewDomainPlatformIdentityListResponse instantiates a new DomainPlatformIdentityListResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDomainCountryListResponse(data []DomainCountry) *DomainCountryListResponse {
-	this := DomainCountryListResponse{}
+func NewDomainPlatformIdentityListResponse(data []DomainPlatformIdentity) *DomainPlatformIdentityListResponse {
+	this := DomainPlatformIdentityListResponse{}
 	this.Data = data
 	return &this
 }
 
-// NewDomainCountryListResponseWithDefaults instantiates a new DomainCountryListResponse object
+// NewDomainPlatformIdentityListResponseWithDefaults instantiates a new DomainPlatformIdentityListResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDomainCountryListResponseWithDefaults() *DomainCountryListResponse {
-	this := DomainCountryListResponse{}
+func NewDomainPlatformIdentityListResponseWithDefaults() *DomainPlatformIdentityListResponse {
+	this := DomainPlatformIdentityListResponse{}
 	return &this
 }
 
 // GetData returns the Data field value
-func (o *DomainCountryListResponse) GetData() []DomainCountry {
+func (o *DomainPlatformIdentityListResponse) GetData() []DomainPlatformIdentity {
 	if o == nil {
-		var ret []DomainCountry
+		var ret []DomainPlatformIdentity
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *DomainCountryListResponse) GetData() []DomainCountry {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *DomainCountryListResponse) GetDataOk() ([]DomainCountry, bool) {
+func (o *DomainPlatformIdentityListResponse) GetDataOk() ([]DomainPlatformIdentity, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *DomainCountryListResponse) GetDataOk() ([]DomainCountry, bool) {
 }
 
 // SetData sets field value
-func (o *DomainCountryListResponse) SetData(v []DomainCountry) {
+func (o *DomainPlatformIdentityListResponse) SetData(v []DomainPlatformIdentity) {
 	o.Data = v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *DomainCountryListResponse) GetPagination() Pagination {
+func (o *DomainPlatformIdentityListResponse) GetPagination() Pagination {
 	if o == nil || IsNil(o.Pagination) {
 		var ret Pagination
 		return ret
@@ -81,7 +81,7 @@ func (o *DomainCountryListResponse) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DomainCountryListResponse) GetPaginationOk() (*Pagination, bool) {
+func (o *DomainPlatformIdentityListResponse) GetPaginationOk() (*Pagination, bool) {
 	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *DomainCountryListResponse) GetPaginationOk() (*Pagination, bool) {
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *DomainCountryListResponse) HasPagination() bool {
+func (o *DomainPlatformIdentityListResponse) HasPagination() bool {
 	if o != nil && !IsNil(o.Pagination) {
 		return true
 	}
@@ -98,11 +98,11 @@ func (o *DomainCountryListResponse) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given Pagination and assigns it to the Pagination field.
-func (o *DomainCountryListResponse) SetPagination(v Pagination) {
+func (o *DomainPlatformIdentityListResponse) SetPagination(v Pagination) {
 	o.Pagination = &v
 }
 
-func (o DomainCountryListResponse) MarshalJSON() ([]byte, error) {
+func (o DomainPlatformIdentityListResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -110,7 +110,7 @@ func (o DomainCountryListResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DomainCountryListResponse) ToMap() (map[string]interface{}, error) {
+func (o DomainPlatformIdentityListResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	if !IsNil(o.Pagination) {
@@ -119,7 +119,7 @@ func (o DomainCountryListResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *DomainCountryListResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *DomainPlatformIdentityListResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -141,53 +141,53 @@ func (o *DomainCountryListResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varDomainCountryListResponse := _DomainCountryListResponse{}
+	varDomainPlatformIdentityListResponse := _DomainPlatformIdentityListResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDomainCountryListResponse)
+	err = decoder.Decode(&varDomainPlatformIdentityListResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = DomainCountryListResponse(varDomainCountryListResponse)
+	*o = DomainPlatformIdentityListResponse(varDomainPlatformIdentityListResponse)
 
 	return err
 }
 
-type NullableDomainCountryListResponse struct {
-	value *DomainCountryListResponse
+type NullableDomainPlatformIdentityListResponse struct {
+	value *DomainPlatformIdentityListResponse
 	isSet bool
 }
 
-func (v NullableDomainCountryListResponse) Get() *DomainCountryListResponse {
+func (v NullableDomainPlatformIdentityListResponse) Get() *DomainPlatformIdentityListResponse {
 	return v.value
 }
 
-func (v *NullableDomainCountryListResponse) Set(val *DomainCountryListResponse) {
+func (v *NullableDomainPlatformIdentityListResponse) Set(val *DomainPlatformIdentityListResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDomainCountryListResponse) IsSet() bool {
+func (v NullableDomainPlatformIdentityListResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDomainCountryListResponse) Unset() {
+func (v *NullableDomainPlatformIdentityListResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDomainCountryListResponse(val *DomainCountryListResponse) *NullableDomainCountryListResponse {
-	return &NullableDomainCountryListResponse{value: val, isSet: true}
+func NewNullableDomainPlatformIdentityListResponse(val *DomainPlatformIdentityListResponse) *NullableDomainPlatformIdentityListResponse {
+	return &NullableDomainPlatformIdentityListResponse{value: val, isSet: true}
 }
 
-func (v NullableDomainCountryListResponse) MarshalJSON() ([]byte, error) {
+func (v NullableDomainPlatformIdentityListResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDomainCountryListResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableDomainPlatformIdentityListResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

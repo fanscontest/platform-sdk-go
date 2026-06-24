@@ -35,7 +35,6 @@ type DomainParticipation struct {
 	SubmissionNumber *int32 `json:"submission_number,omitempty"`
 	Team *DomainTeam `json:"team,omitempty"`
 	Time *string `json:"time,omitempty"`
-	VenueId *string `json:"venue_id,omitempty"`
 }
 
 // NewDomainParticipation instantiates a new DomainParticipation object
@@ -503,38 +502,6 @@ func (o *DomainParticipation) SetTime(v string) {
 	o.Time = &v
 }
 
-// GetVenueId returns the VenueId field value if set, zero value otherwise.
-func (o *DomainParticipation) GetVenueId() string {
-	if o == nil || IsNil(o.VenueId) {
-		var ret string
-		return ret
-	}
-	return *o.VenueId
-}
-
-// GetVenueIdOk returns a tuple with the VenueId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainParticipation) GetVenueIdOk() (*string, bool) {
-	if o == nil || IsNil(o.VenueId) {
-		return nil, false
-	}
-	return o.VenueId, true
-}
-
-// HasVenueId returns a boolean if a field has been set.
-func (o *DomainParticipation) HasVenueId() bool {
-	if o != nil && !IsNil(o.VenueId) {
-		return true
-	}
-
-	return false
-}
-
-// SetVenueId gets a reference to the given string and assigns it to the VenueId field.
-func (o *DomainParticipation) SetVenueId(v string) {
-	o.VenueId = &v
-}
-
 func (o DomainParticipation) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -586,9 +553,6 @@ func (o DomainParticipation) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Time) {
 		toSerialize["time"] = o.Time
-	}
-	if !IsNil(o.VenueId) {
-		toSerialize["venue_id"] = o.VenueId
 	}
 	return toSerialize, nil
 }

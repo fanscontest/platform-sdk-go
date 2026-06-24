@@ -130,6 +130,18 @@ func Test_platform_ChannelsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ChannelsAPIService GetChannelsByRegion", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ChannelsAPI.GetChannelsByRegion(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ChannelsAPIService GetChannelsSearch", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -163,72 +175,6 @@ func Test_platform_ChannelsAPIService(t *testing.T) {
 		var piid string
 
 		resp, httpRes, err := apiClient.ChannelsAPI.GetIdentitiesByPiidChannels(context.Background(), piid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetPublicChannels", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetPublicChannels(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetPublicChannelsById", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetPublicChannelsById(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetPublicChannelsSearchKeywordByKeyword", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var keyword string
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword(context.Background(), keyword).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetPublicIdentitiesByPiidChannels", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var piid string
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetPublicIdentitiesByPiidChannels(context.Background(), piid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetPublicTeamSetsSystem", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetPublicTeamSetsSystem(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

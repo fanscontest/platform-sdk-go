@@ -79,8 +79,6 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AnalyticsAPI* | [**CreateAnalyticsImpression**](docs/AnalyticsAPI.md#createanalyticsimpression) | **Post** /v2/analytics/impression | Record a click/impression event
-*AnalyticsAPI* | [**CreateTrackerClick**](docs/AnalyticsAPI.md#createtrackerclick) | **Post** /v2/tracker/click | Record a click/impression event
 *AnalyticsAPI* | [**GetAnalyticsOverview**](docs/AnalyticsAPI.md#getanalyticsoverview) | **Get** /v2/analytics/overview | Get the caller&#39;s analytics overview
 *BlocksAPI* | [**CreateBlocks**](docs/BlocksAPI.md#createblocks) | **Post** /v2/blocks | Create Block
 *BlocksAPI* | [**DeleteBlocksById**](docs/BlocksAPI.md#deleteblocksbyid) | **Delete** /v2/blocks/{id} | Delete Block
@@ -93,15 +91,11 @@ Class | Method | HTTP request | Description
 *ChannelsAPI* | [**GetChannels**](docs/ChannelsAPI.md#getchannels) | **Get** /v2/channels | List the caller&#39;s channels (cursor-paginated)
 *ChannelsAPI* | [**GetChannelsById**](docs/ChannelsAPI.md#getchannelsbyid) | **Get** /v2/channels/{id} | Get a channel by ID
 *ChannelsAPI* | [**GetChannelsByIdTeamSets**](docs/ChannelsAPI.md#getchannelsbyidteamsets) | **Get** /v2/channels/{id}/team-sets | List team sets owned by a channel
+*ChannelsAPI* | [**GetChannelsByRegion**](docs/ChannelsAPI.md#getchannelsbyregion) | **Get** /v2/channels/by-region | Get Channels by Region (v2)
 *ChannelsAPI* | [**GetChannelsSearch**](docs/ChannelsAPI.md#getchannelssearch) | **Get** /v2/channels/search | List public channels the caller is not subscribed to (cursor-paginated)
 *ChannelsAPI* | [**GetChannelsSearchKeywordByKeyword**](docs/ChannelsAPI.md#getchannelssearchkeywordbykeyword) | **Get** /v2/channels/searchKeyword/{keyword} | Search channels by keyword (cursor-paginated)
 *ChannelsAPI* | [**GetIdentitiesByPiidChannels**](docs/ChannelsAPI.md#getidentitiesbypiidchannels) | **Get** /v2/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
-*ChannelsAPI* | [**GetPublicChannels**](docs/ChannelsAPI.md#getpublicchannels) | **Get** /v2/public/channels | Get Channels by Region (v2)
-*ChannelsAPI* | [**GetPublicChannelsById**](docs/ChannelsAPI.md#getpublicchannelsbyid) | **Get** /v2/public/channels/{id} | Get a channel by ID
-*ChannelsAPI* | [**GetPublicChannelsSearchKeywordByKeyword**](docs/ChannelsAPI.md#getpublicchannelssearchkeywordbykeyword) | **Get** /v2/public/channels/searchKeyword/{keyword} | Search channels by keyword (cursor-paginated)
-*ChannelsAPI* | [**GetPublicIdentitiesByPiidChannels**](docs/ChannelsAPI.md#getpublicidentitiesbypiidchannels) | **Get** /v2/public/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
-*ChannelsAPI* | [**GetPublicTeamSetsSystem**](docs/ChannelsAPI.md#getpublicteamsetssystem) | **Get** /v2/public/team-sets/system | List platform-defined system team sets
-*ChannelsAPI* | [**GetTeamSetsSystem**](docs/ChannelsAPI.md#getteamsetssystem) | **Get** /v2/team-sets/system | List platform-defined system team sets
+*ChannelsAPI* | [**GetTeamSetsSystem**](docs/ChannelsAPI.md#getteamsetssystem) | **Get** /v2/team-sets/system | List the calling tenant&#39;s system team sets
 *ChannelsAPI* | [**PatchChannelsByIdAccessCode**](docs/ChannelsAPI.md#patchchannelsbyidaccesscode) | **Patch** /v2/channels/{id}/access-code | Update Channel Access Code
 *ChannelsAPI* | [**UpdateChannelsById**](docs/ChannelsAPI.md#updatechannelsbyid) | **Put** /v2/channels/{id} | Update Channel
 *ChannelsAPI* | [**UpdateChannelsByIdTeamSetsByTeamSetId**](docs/ChannelsAPI.md#updatechannelsbyidteamsetsbyteamsetid) | **Put** /v2/channels/{id}/team-sets/{teamSetId} | Replace a channel team set&#39;s lineup
@@ -119,30 +113,25 @@ Class | Method | HTTP request | Description
 *ContestsAPI* | [**CreateContestsByIdParticipations**](docs/ContestsAPI.md#createcontestsbyidparticipations) | **Post** /v2/contests/{id}/participations | Submit a participation on behalf of a tenant-side fan
 *ContestsAPI* | [**CreateTournamentsByIdContest**](docs/ContestsAPI.md#createtournamentsbyidcontest) | **Post** /v2/tournaments/{id}/contest | Create a contest for the next pending round in a tournament
 *ContestsAPI* | [**DeleteContestsById**](docs/ContestsAPI.md#deletecontestsbyid) | **Delete** /v2/contests/{id} | Delete Contest
+*ContestsAPI* | [**GetAdminHostingInvitations**](docs/ContestsAPI.md#getadminhostinginvitations) | **Get** /v2/admin/hosting-invitations | List pending hosting invitations for the calling tenant&#39;s venues
 *ContestsAPI* | [**GetChannelsByIdContests**](docs/ContestsAPI.md#getchannelsbyidcontests) | **Get** /v2/channels/{id}/contests | Get channel contests (cursor-paginated)
 *ContestsAPI* | [**GetContests**](docs/ContestsAPI.md#getcontests) | **Get** /v2/contests | List the caller&#39;s contests (cursor-paginated)
 *ContestsAPI* | [**GetContestsByContestIdBuddyBoardsByBoardId**](docs/ContestsAPI.md#getcontestsbycontestidbuddyboardsbyboardid) | **Get** /v2/contests/{contestId}/buddy-boards/{boardId} | Get buddy board view (metadata + scores filtered to board members)
 *ContestsAPI* | [**GetContestsByContestIdBuddyBoardsByBoardIdMembers**](docs/ContestsAPI.md#getcontestsbycontestidbuddyboardsbyboardidmembers) | **Get** /v2/contests/{contestId}/buddy-boards/{boardId}/members | List buddy board members (public or authed)
 *ContestsAPI* | [**GetContestsByContestIdParticipantsByMemberIdResult**](docs/ContestsAPI.md#getcontestsbycontestidparticipantsbymemberidresult) | **Get** /v2/contests/{contestId}/participants/{memberId}/result | Get participant result for a contest
 *ContestsAPI* | [**GetContestsById**](docs/ContestsAPI.md#getcontestsbyid) | **Get** /v2/contests/{id} | Get a contest by ID
+*ContestsAPI* | [**GetContestsByIdGroups**](docs/ContestsAPI.md#getcontestsbyidgroups) | **Get** /v2/contests/{id}/groups | Get Contest Groups
 *ContestsAPI* | [**GetContestsByIdHostings**](docs/ContestsAPI.md#getcontestsbyidhostings) | **Get** /v2/contests/{id}/hostings | List hostings for a contest the calling tenant owns
 *ContestsAPI* | [**GetContestsByIdParticipation**](docs/ContestsAPI.md#getcontestsbyidparticipation) | **Get** /v2/contests/{id}/participation | Get contest participation result (cursor-paginated)
 *ContestsAPI* | [**GetContestsByIdQuestionStats**](docs/ContestsAPI.md#getcontestsbyidquestionstats) | **Get** /v2/contests/{id}/question-stats | Get question statistics for a contest (Contest Owner or Admin Only)
+*ContestsAPI* | [**GetContestsByIdSubmissionFeed**](docs/ContestsAPI.md#getcontestsbyidsubmissionfeed) | **Get** /v2/contests/{id}/submission-feed | Get the real-time feed of contest submissions (cursor-paginated)
+*ContestsAPI* | [**GetContestsByRegion**](docs/ContestsAPI.md#getcontestsbyregion) | **Get** /v2/contests/by-region | List contests by region (tenant-scoped, cursor-paginated)
 *ContestsAPI* | [**GetContestsSearch**](docs/ContestsAPI.md#getcontestssearch) | **Get** /v2/contests/search | Search contests not owned by the caller (cursor-paginated)
+*ContestsAPI* | [**GetContestsSearchKeywordByKeyword**](docs/ContestsAPI.md#getcontestssearchkeywordbykeyword) | **Get** /v2/contests/searchKeyword/{keyword} | Search contests by keyword (tenant-scoped, cursor-paginated)
 *ContestsAPI* | [**GetIdentitiesByPiidBuddyBoardInvites**](docs/ContestsAPI.md#getidentitiesbypiidbuddyboardinvites) | **Get** /v2/identities/{piid}/buddy-board-invites | List buddy board invites for a platform identity
 *ContestsAPI* | [**GetIdentitiesByPiidContests**](docs/ContestsAPI.md#getidentitiesbypiidcontests) | **Get** /v2/identities/{piid}/contests | List contests for a platform identity (cursor-paginated)
-*ContestsAPI* | [**GetPublicChannelsByIdContests**](docs/ContestsAPI.md#getpublicchannelsbyidcontests) | **Get** /v2/public/channels/{id}/contests | Get channel contests (cursor-paginated)
-*ContestsAPI* | [**GetPublicContests**](docs/ContestsAPI.md#getpubliccontests) | **Get** /v2/public/contests | List public contests (region-scoped, cursor-paginated)
-*ContestsAPI* | [**GetPublicContestsByContestIdBuddyBoardsByBoardId**](docs/ContestsAPI.md#getpubliccontestsbycontestidbuddyboardsbyboardid) | **Get** /v2/public/contests/{contestId}/buddy-boards/{boardId} | Get buddy board view (metadata + scores filtered to board members)
-*ContestsAPI* | [**GetPublicContestsByContestIdBuddyBoardsByBoardIdMembers**](docs/ContestsAPI.md#getpubliccontestsbycontestidbuddyboardsbyboardidmembers) | **Get** /v2/public/contests/{contestId}/buddy-boards/{boardId}/members | List buddy board members (public or authed)
-*ContestsAPI* | [**GetPublicContestsById**](docs/ContestsAPI.md#getpubliccontestsbyid) | **Get** /v2/public/contests/{id} | Get a contest by ID
-*ContestsAPI* | [**GetPublicContestsByIdGroups**](docs/ContestsAPI.md#getpubliccontestsbyidgroups) | **Get** /v2/public/contests/{id}/groups | Get Contest Groups
-*ContestsAPI* | [**GetPublicContestsByIdSubmissionFeed**](docs/ContestsAPI.md#getpubliccontestsbyidsubmissionfeed) | **Get** /v2/public/contests/{id}/submission-feed | Get the real-time feed of contest submissions (cursor-paginated)
-*ContestsAPI* | [**GetPublicContestsSearchKeywordByKeyword**](docs/ContestsAPI.md#getpubliccontestssearchkeywordbykeyword) | **Get** /v2/public/contests/searchKeyword/{keyword} | Search public contests by keyword (cursor-paginated)
 *ContestsAPI* | [**PatchContestsById**](docs/ContestsAPI.md#patchcontestsbyid) | **Patch** /v2/contests/{id} | Update a contest
 *ContestsAPI* | [**UpdateContestsByIdHeaderImage**](docs/ContestsAPI.md#updatecontestsbyidheaderimage) | **Put** /v2/contests/{id}/header-image | Update a contest&#39;s header image
-*CountriesAPI* | [**GetPublicCountries**](docs/CountriesAPI.md#getpubliccountries) | **Get** /v2/public/countries | List enabled countries (sorted, with native names for non-English Accept-Language)
-*CountriesAPI* | [**GetPublicLocation**](docs/CountriesAPI.md#getpubliclocation) | **Get** /v2/public/location | Resolve the caller&#39;s country by IP (CF-Ipcountry, then Maxmind)
 *CreativeContestsAPI* | [**CreateContestsByIdEntries**](docs/CreativeContestsAPI.md#createcontestsbyidentries) | **Post** /v2/contests/{id}/entries | Submit entry for creative contest
 *CreativeContestsAPI* | [**CreateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestsAPI.md#createcontestsbyidentriesbyentryidscore) | **Post** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 *CreativeContestsAPI* | [**CreateContestsByIdForceProceed**](docs/CreativeContestsAPI.md#createcontestsbyidforceproceed) | **Post** /v2/contests/{id}/force-proceed | Force proceed from paused state
@@ -163,8 +152,8 @@ Class | Method | HTTP request | Description
 *EventsAPI* | [**PuzzleWebV2EventControllerSearch**](docs/EventsAPI.md#puzzlewebv2eventcontrollersearch) | **Get** /v2/events/search | Search events
 *EventsAPI* | [**PuzzleWebV2EventControllerShow**](docs/EventsAPI.md#puzzlewebv2eventcontrollershow) | **Get** /v2/events/{id} | Get event by es_event_id
 *EventsAPI* | [**PuzzleWebV2EventControllerShowDetails**](docs/EventsAPI.md#puzzlewebv2eventcontrollershowdetails) | **Get** /v2/events/{id}/details | Get event details (from Postgres)
+*FeedsAPI* | [**GetFeed**](docs/FeedsAPI.md#getfeed) | **Get** /v2/feed | Get the trending feed (tenant-scoped, cursor-paginated)
 *FeedsAPI* | [**GetIdentitiesByPiidFeedPersonalized**](docs/FeedsAPI.md#getidentitiesbypiidfeedpersonalized) | **Get** /v2/identities/{piid}/feed-personalized | Get the personalized feed for a platform identity
-*FeedsAPI* | [**GetPublicFeed**](docs/FeedsAPI.md#getpublicfeed) | **Get** /v2/public/feed | Get the public feed (trending content, unauthenticated)
 *IdentitiesAPI* | [**CreateIdentities**](docs/IdentitiesAPI.md#createidentities) | **Post** /v2/identities | Register a platform identity (platform mints the id)
 *IdentitiesAPI* | [**DeleteIdentitiesById**](docs/IdentitiesAPI.md#deleteidentitiesbyid) | **Delete** /v2/identities/{id} | Soft-delete a platform identity, scoped to the calling tenant
 *IdentitiesAPI* | [**GetIdentitiesById**](docs/IdentitiesAPI.md#getidentitiesbyid) | **Get** /v2/identities/{id} | Get a platform identity by ID, scoped to the calling tenant
@@ -173,27 +162,23 @@ Class | Method | HTTP request | Description
 *MessagesAPI* | [**GetMessages**](docs/MessagesAPI.md#getmessages) | **Get** /v2/messages | List messages for the caller
 *MessagesAPI* | [**GetMessagesById**](docs/MessagesAPI.md#getmessagesbyid) | **Get** /v2/messages/{id} | Get a message by ID
 *MessagesAPI* | [**UpdateMessagesById**](docs/MessagesAPI.md#updatemessagesbyid) | **Put** /v2/messages/{id} | Update a message&#39;s status
-*OGImagesAPI* | [**GetPublicOgChannelByChannelId**](docs/OGImagesAPI.md#getpublicogchannelbychannelid) | **Get** /v2/public/og/channel/{channelId} | Get channel data for OG image generation
-*OGImagesAPI* | [**GetPublicOgContestByContestId**](docs/OGImagesAPI.md#getpublicogcontestbycontestid) | **Get** /v2/public/og/contest/{contestId} | Get contest data for OG image generation
-*OGImagesAPI* | [**GetPublicOgScoreboardByContestId**](docs/OGImagesAPI.md#getpublicogscoreboardbycontestid) | **Get** /v2/public/og/scoreboard/{contestId} | Get scoreboard data for OG image generation
-*OGImagesAPI* | [**GetPublicOgSubmissionsByParticipationId**](docs/OGImagesAPI.md#getpublicogsubmissionsbyparticipationid) | **Get** /v2/public/og/submissions/{participationId} | Get participation data for OG image generation
 *ParticipationAPI* | [**CreateContestsByIdEnrollment**](docs/ParticipationAPI.md#createcontestsbyidenrollment) | **Post** /v2/contests/{id}/enrollment | Enroll in a Contest
 *ParticipationAPI* | [**CreateContestsByIdParticipate**](docs/ParticipationAPI.md#createcontestsbyidparticipate) | **Post** /v2/contests/{id}/participate | Create Participation
 *ParticipationAPI* | [**CreateParticipationByIdStart**](docs/ParticipationAPI.md#createparticipationbyidstart) | **Post** /v2/participation/{id}/start | Log the start of a participation
 *ParticipationAPI* | [**DeleteContestsByIdEnrollment**](docs/ParticipationAPI.md#deletecontestsbyidenrollment) | **Delete** /v2/contests/{id}/enrollment | Withdraw the caller&#39;s enrollment from a contest
+*ParticipationAPI* | [**GetContestsByIdGroupedScoreboard**](docs/ParticipationAPI.md#getcontestsbyidgroupedscoreboard) | **Get** /v2/contests/{id}/grouped-scoreboard | Get ScoreBoard
+*ParticipationAPI* | [**GetContestsByIdLiveRanking**](docs/ParticipationAPI.md#getcontestsbyidliveranking) | **Get** /v2/contests/{id}/live-ranking | Get live ranking snapshot
 *ParticipationAPI* | [**GetContestsByIdScoreboard**](docs/ParticipationAPI.md#getcontestsbyidscoreboard) | **Get** /v2/contests/{id}/scoreboard | Get a contest scoreboard
 *ParticipationAPI* | [**GetIdentitiesByPiidParticipation**](docs/ParticipationAPI.md#getidentitiesbypiidparticipation) | **Get** /v2/identities/{piid}/participation | Get all participation for a platform identity (cursor-paginated)
-*ParticipationAPI* | [**GetIdentitiesByPiidSchedule**](docs/ParticipationAPI.md#getidentitiesbypiidschedule) | **Get** /v2/identities/{piid}/schedule | Get a platform identity&#39;s contest schedule (cached read model)
+*ParticipationAPI* | [**GetIdentitiesByPiidSchedule**](docs/ParticipationAPI.md#getidentitiesbypiidschedule) | **Get** /v2/identities/{piid}/schedule | Get a platform identity&#39;s contest schedule (upcoming, eligibility-sourced, cursor-paginated)
 *ParticipationAPI* | [**GetParticipationById**](docs/ParticipationAPI.md#getparticipationbyid) | **Get** /v2/participation/{id} | Get participation by id
 *ParticipationAPI* | [**GetParticipationContestById**](docs/ParticipationAPI.md#getparticipationcontestbyid) | **Get** /v2/participation/contest/{id} | Get member participation by contest id
-*ParticipationAPI* | [**GetPublicContestsByIdGroupedScoreboard**](docs/ParticipationAPI.md#getpubliccontestsbyidgroupedscoreboard) | **Get** /v2/public/contests/{id}/grouped-scoreboard | Get ScoreBoard
-*ParticipationAPI* | [**GetPublicContestsByIdLiveRanking**](docs/ParticipationAPI.md#getpubliccontestsbyidliveranking) | **Get** /v2/public/contests/{id}/live-ranking | Get live ranking snapshot
-*ParticipationAPI* | [**GetPublicContestsByIdScoreboard**](docs/ParticipationAPI.md#getpubliccontestsbyidscoreboard) | **Get** /v2/public/contests/{id}/scoreboard | Get a contest scoreboard
 *ParticipationAPI* | [**PatchParticipationByParticipationIdGroup**](docs/ParticipationAPI.md#patchparticipationbyparticipationidgroup) | **Patch** /v2/participation/{participationId}/group | Select group for open grouping contest
 *PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerClonePredictionSlip**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollerclonepredictionslip) | **Post** /v2/prediction-slips/{id}/clone | Clone prediction slip
 *PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerCreatePredictionSlip**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollercreatepredictionslip) | **Post** /v2/prediction-slips | Create prediction slip
 *PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerDeletePredictionSlip**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollerdeletepredictionslip) | **Delete** /v2/prediction-slips/{id} | Delete prediction slip
-*PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerListCuratedSlips**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollerlistcuratedslips) | **Get** /v2/public/curated-slips | List curated prediction slips
+*PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerListCommunityPredictionSlips**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollerlistcommunitypredictionslips) | **Get** /v2/prediction-slips/community | List public/community prediction slips
+*PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerListCuratedSlips**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollerlistcuratedslips) | **Get** /v2/curated-slips | List curated prediction slips
 *PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerListPredictionSlips**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollerlistpredictionslips) | **Get** /v2/prediction-slips | List the caller&#39;s prediction slips
 *PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerShowOpenPredictionSlip**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollershowopenpredictionslip) | **Get** /v2/prediction-slips/open | Get the caller&#39;s open prediction slip
 *PredictionSlipsAPI* | [**PuzzleWebV2PredictionControllerShowPredictionSlip**](docs/PredictionSlipsAPI.md#puzzlewebv2predictioncontrollershowpredictionslip) | **Get** /v2/prediction-slips/{id} | Get prediction slip
@@ -244,7 +229,6 @@ Class | Method | HTTP request | Description
 *SubscriptionsAPI* | [**DeleteSubscriptionsById**](docs/SubscriptionsAPI.md#deletesubscriptionsbyid) | **Delete** /v2/subscriptions/{id} | Unsubscribe from Channel
 *SubscriptionsAPI* | [**GetChannelsByIdSubscriptions**](docs/SubscriptionsAPI.md#getchannelsbyidsubscriptions) | **Get** /v2/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 *SubscriptionsAPI* | [**GetIdentitiesByPiidSubscriptions**](docs/SubscriptionsAPI.md#getidentitiesbypiidsubscriptions) | **Get** /v2/identities/{piid}/subscriptions | Get a platform identity&#39;s channel subscriptions (v2)
-*SubscriptionsAPI* | [**GetPublicChannelsByIdSubscriptions**](docs/SubscriptionsAPI.md#getpublicchannelsbyidsubscriptions) | **Get** /v2/public/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 *SubscriptionsAPI* | [**GetSubscriptionsByIdLogs**](docs/SubscriptionsAPI.md#getsubscriptionsbyidlogs) | **Get** /v2/subscriptions/{id}/logs | Get the participation log for a subscription
 *SubscriptionsAPI* | [**GetSubscriptionsSearchKeywordByKeyword**](docs/SubscriptionsAPI.md#getsubscriptionssearchkeywordbykeyword) | **Get** /v2/subscriptions/searchKeyword/{keyword} | Search subscriptions by keyword (cursor-paginated)
 *SubscriptionsAPI* | [**UpdateSubscriptionsByIdStatus**](docs/SubscriptionsAPI.md#updatesubscriptionsbyidstatus) | **Put** /v2/subscriptions/{id}/status | Approve or deny subscription
@@ -300,10 +284,7 @@ Class | Method | HTTP request | Description
  - [DomainBlockResponse](docs/DomainBlockResponse.md)
  - [DomainBuddyBoard](docs/DomainBuddyBoard.md)
  - [DomainBuddyBoardInvite](docs/DomainBuddyBoardInvite.md)
- - [DomainBuddyBoardInvitesResponse](docs/DomainBuddyBoardInvitesResponse.md)
- - [DomainBuddyBoardInvitesResponseResponse](docs/DomainBuddyBoardInvitesResponseResponse.md)
- - [DomainBuddyBoardMembersResponse](docs/DomainBuddyBoardMembersResponse.md)
- - [DomainBuddyBoardMembersResponseResponse](docs/DomainBuddyBoardMembersResponseResponse.md)
+ - [DomainBuddyBoardInviteListResponse](docs/DomainBuddyBoardInviteListResponse.md)
  - [DomainBuddyBoardResponse](docs/DomainBuddyBoardResponse.md)
  - [DomainBuddyBoardView](docs/DomainBuddyBoardView.md)
  - [DomainBuddyBoardViewResponse](docs/DomainBuddyBoardViewResponse.md)
@@ -319,8 +300,6 @@ Class | Method | HTTP request | Description
  - [DomainContestResponse](docs/DomainContestResponse.md)
  - [DomainContestType](docs/DomainContestType.md)
  - [DomainCountry](docs/DomainCountry.md)
- - [DomainCountryListResponse](docs/DomainCountryListResponse.md)
- - [DomainCountryResponse](docs/DomainCountryResponse.md)
  - [DomainEntry](docs/DomainEntry.md)
  - [DomainEntryListResponse](docs/DomainEntryListResponse.md)
  - [DomainEntryResponse](docs/DomainEntryResponse.md)
@@ -350,6 +329,7 @@ Class | Method | HTTP request | Description
  - [DomainParticipationResultBreakdownInner](docs/DomainParticipationResultBreakdownInner.md)
  - [DomainParticipationRules](docs/DomainParticipationRules.md)
  - [DomainPlatformIdentity](docs/DomainPlatformIdentity.md)
+ - [DomainPlatformIdentityListResponse](docs/DomainPlatformIdentityListResponse.md)
  - [DomainPlatformIdentityResponse](docs/DomainPlatformIdentityResponse.md)
  - [DomainQuestionStats](docs/DomainQuestionStats.md)
  - [DomainQuestionStatsListResponse](docs/DomainQuestionStatsListResponse.md)
@@ -433,21 +413,9 @@ Class | Method | HTTP request | Description
  - [HandlerCreateWebhookSubscriptionRequest](docs/HandlerCreateWebhookSubscriptionRequest.md)
  - [HandlerErrorDetail](docs/HandlerErrorDetail.md)
  - [HandlerErrorResponse](docs/HandlerErrorResponse.md)
- - [HandlerEventPredictions](docs/HandlerEventPredictions.md)
- - [HandlerGroupWinners](docs/HandlerGroupWinners.md)
- - [HandlerOGChannelData](docs/HandlerOGChannelData.md)
- - [HandlerOGChannelDataResponse](docs/HandlerOGChannelDataResponse.md)
- - [HandlerOGContestData](docs/HandlerOGContestData.md)
- - [HandlerOGContestDataResponse](docs/HandlerOGContestDataResponse.md)
- - [HandlerOGParticipationData](docs/HandlerOGParticipationData.md)
- - [HandlerOGParticipationDataResponse](docs/HandlerOGParticipationDataResponse.md)
- - [HandlerOGScoreboardData](docs/HandlerOGScoreboardData.md)
- - [HandlerOGScoreboardDataResponse](docs/HandlerOGScoreboardDataResponse.md)
- - [HandlerPredictionItem](docs/HandlerPredictionItem.md)
  - [HandlerStatusResponse](docs/HandlerStatusResponse.md)
  - [HandlerStatusResponseResponse](docs/HandlerStatusResponseResponse.md)
  - [HandlerUpdatePlatformIdentityRequest](docs/HandlerUpdatePlatformIdentityRequest.md)
- - [HandlerWinner](docs/HandlerWinner.md)
  - [MessageResponse](docs/MessageResponse.md)
  - [MessageResponseData](docs/MessageResponseData.md)
  - [OpenPredictionSlipResponse](docs/OpenPredictionSlipResponse.md)
@@ -487,7 +455,6 @@ Class | Method | HTTP request | Description
  - [RequestSubmitEntryRequest](docs/RequestSubmitEntryRequest.md)
  - [RequestUpdateChannelAccessCodeRequest](docs/RequestUpdateChannelAccessCodeRequest.md)
  - [RequestUpdateChannelRequest](docs/RequestUpdateChannelRequest.md)
- - [RequestUpdateClickCountRequest](docs/RequestUpdateClickCountRequest.md)
  - [RequestUpdateContestHeaderImage](docs/RequestUpdateContestHeaderImage.md)
  - [RequestUpdateContestRequest](docs/RequestUpdateContestRequest.md)
  - [RequestUpdateSponsorshipTermRequest](docs/RequestUpdateSponsorshipTermRequest.md)

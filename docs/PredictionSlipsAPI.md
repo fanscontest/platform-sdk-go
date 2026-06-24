@@ -7,7 +7,8 @@ Method | HTTP request | Description
 [**PuzzleWebV2PredictionControllerClonePredictionSlip**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerClonePredictionSlip) | **Post** /v2/prediction-slips/{id}/clone | Clone prediction slip
 [**PuzzleWebV2PredictionControllerCreatePredictionSlip**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerCreatePredictionSlip) | **Post** /v2/prediction-slips | Create prediction slip
 [**PuzzleWebV2PredictionControllerDeletePredictionSlip**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerDeletePredictionSlip) | **Delete** /v2/prediction-slips/{id} | Delete prediction slip
-[**PuzzleWebV2PredictionControllerListCuratedSlips**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerListCuratedSlips) | **Get** /v2/public/curated-slips | List curated prediction slips
+[**PuzzleWebV2PredictionControllerListCommunityPredictionSlips**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerListCommunityPredictionSlips) | **Get** /v2/prediction-slips/community | List public/community prediction slips
+[**PuzzleWebV2PredictionControllerListCuratedSlips**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerListCuratedSlips) | **Get** /v2/curated-slips | List curated prediction slips
 [**PuzzleWebV2PredictionControllerListPredictionSlips**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerListPredictionSlips) | **Get** /v2/prediction-slips | List the caller&#39;s prediction slips
 [**PuzzleWebV2PredictionControllerShowOpenPredictionSlip**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerShowOpenPredictionSlip) | **Get** /v2/prediction-slips/open | Get the caller&#39;s open prediction slip
 [**PuzzleWebV2PredictionControllerShowPredictionSlip**](PredictionSlipsAPI.md#PuzzleWebV2PredictionControllerShowPredictionSlip) | **Get** /v2/prediction-slips/{id} | Get prediction slip
@@ -206,6 +207,76 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PuzzleWebV2PredictionControllerListCommunityPredictionSlips
+
+> PredictionSlipsListResponse PuzzleWebV2PredictionControllerListCommunityPredictionSlips(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+
+List public/community prediction slips
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	cursor := "cursor_example" // string |  (optional)
+	limit := int32(56) // int32 |  (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCommunityPredictionSlips(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCommunityPredictionSlips``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PuzzleWebV2PredictionControllerListCommunityPredictionSlips`: PredictionSlipsListResponse
+	fmt.Fprintf(os.Stdout, "Response from `PredictionSlipsAPI.PuzzleWebV2PredictionControllerListCommunityPredictionSlips`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPuzzleWebV2PredictionControllerListCommunityPredictionSlipsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** |  | 
+ **limit** | **int32** |  | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**PredictionSlipsListResponse**](PredictionSlipsListResponse.md)
 
 ### Authorization
 

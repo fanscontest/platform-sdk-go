@@ -77,6 +77,34 @@ func Test_platform_ParticipationAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ParticipationAPIService GetContestsByIdGroupedScoreboard", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ParticipationAPI.GetContestsByIdGroupedScoreboard(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ParticipationAPIService GetContestsByIdLiveRanking", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ParticipationAPI.GetContestsByIdLiveRanking(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ParticipationAPIService GetContestsByIdScoreboard", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -140,48 +168,6 @@ func Test_platform_ParticipationAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.ParticipationAPI.GetParticipationContestById(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ParticipationAPIService GetPublicContestsByIdGroupedScoreboard", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ParticipationAPI.GetPublicContestsByIdGroupedScoreboard(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ParticipationAPIService GetPublicContestsByIdLiveRanking", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ParticipationAPI.GetPublicContestsByIdLiveRanking(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ParticipationAPIService GetPublicContestsByIdScoreboard", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.ParticipationAPI.GetPublicContestsByIdScoreboard(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

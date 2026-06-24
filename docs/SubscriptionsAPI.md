@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**DeleteSubscriptionsById**](SubscriptionsAPI.md#DeleteSubscriptionsById) | **Delete** /v2/subscriptions/{id} | Unsubscribe from Channel
 [**GetChannelsByIdSubscriptions**](SubscriptionsAPI.md#GetChannelsByIdSubscriptions) | **Get** /v2/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 [**GetIdentitiesByPiidSubscriptions**](SubscriptionsAPI.md#GetIdentitiesByPiidSubscriptions) | **Get** /v2/identities/{piid}/subscriptions | Get a platform identity&#39;s channel subscriptions (v2)
-[**GetPublicChannelsByIdSubscriptions**](SubscriptionsAPI.md#GetPublicChannelsByIdSubscriptions) | **Get** /v2/public/channels/{id}/subscriptions | List channel subscriptions (cursor-paginated)
 [**GetSubscriptionsByIdLogs**](SubscriptionsAPI.md#GetSubscriptionsByIdLogs) | **Get** /v2/subscriptions/{id}/logs | Get the participation log for a subscription
 [**GetSubscriptionsSearchKeywordByKeyword**](SubscriptionsAPI.md#GetSubscriptionsSearchKeywordByKeyword) | **Get** /v2/subscriptions/searchKeyword/{keyword} | Search subscriptions by keyword (cursor-paginated)
 [**UpdateSubscriptionsByIdStatus**](SubscriptionsAPI.md#UpdateSubscriptionsByIdStatus) | **Put** /v2/subscriptions/{id}/status | Approve or deny subscription
@@ -283,82 +282,6 @@ Name | Type | Description  | Notes
 
  **cursor** | **string** | Cursor for pagination | 
  **limit** | **int32** | Items per page | 
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainSubscriptionListResponse**](DomainSubscriptionListResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicChannelsByIdSubscriptions
-
-> DomainSubscriptionListResponse GetPublicChannelsByIdSubscriptions(ctx, id).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-
-List channel subscriptions (cursor-paginated)
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	id := "id_example" // string | Channel ID
-	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
-	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SubscriptionsAPI.GetPublicChannelsByIdSubscriptions(context.Background(), id).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicChannelsByIdSubscriptions`: DomainSubscriptionListResponse
-	fmt.Fprintf(os.Stdout, "Response from `SubscriptionsAPI.GetPublicChannelsByIdSubscriptions`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Channel ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicChannelsByIdSubscriptionsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **cursor** | **string** | Opaque pagination cursor | 
- **limit** | **int32** | Page size (default 50, max 200) | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type

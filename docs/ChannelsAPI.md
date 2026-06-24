@@ -12,15 +12,11 @@ Method | HTTP request | Description
 [**GetChannels**](ChannelsAPI.md#GetChannels) | **Get** /v2/channels | List the caller&#39;s channels (cursor-paginated)
 [**GetChannelsById**](ChannelsAPI.md#GetChannelsById) | **Get** /v2/channels/{id} | Get a channel by ID
 [**GetChannelsByIdTeamSets**](ChannelsAPI.md#GetChannelsByIdTeamSets) | **Get** /v2/channels/{id}/team-sets | List team sets owned by a channel
+[**GetChannelsByRegion**](ChannelsAPI.md#GetChannelsByRegion) | **Get** /v2/channels/by-region | Get Channels by Region (v2)
 [**GetChannelsSearch**](ChannelsAPI.md#GetChannelsSearch) | **Get** /v2/channels/search | List public channels the caller is not subscribed to (cursor-paginated)
 [**GetChannelsSearchKeywordByKeyword**](ChannelsAPI.md#GetChannelsSearchKeywordByKeyword) | **Get** /v2/channels/searchKeyword/{keyword} | Search channels by keyword (cursor-paginated)
 [**GetIdentitiesByPiidChannels**](ChannelsAPI.md#GetIdentitiesByPiidChannels) | **Get** /v2/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
-[**GetPublicChannels**](ChannelsAPI.md#GetPublicChannels) | **Get** /v2/public/channels | Get Channels by Region (v2)
-[**GetPublicChannelsById**](ChannelsAPI.md#GetPublicChannelsById) | **Get** /v2/public/channels/{id} | Get a channel by ID
-[**GetPublicChannelsSearchKeywordByKeyword**](ChannelsAPI.md#GetPublicChannelsSearchKeywordByKeyword) | **Get** /v2/public/channels/searchKeyword/{keyword} | Search channels by keyword (cursor-paginated)
-[**GetPublicIdentitiesByPiidChannels**](ChannelsAPI.md#GetPublicIdentitiesByPiidChannels) | **Get** /v2/public/identities/{piid}/channels | List channels for a platform identity (cursor-paginated)
-[**GetPublicTeamSetsSystem**](ChannelsAPI.md#GetPublicTeamSetsSystem) | **Get** /v2/public/team-sets/system | List platform-defined system team sets
-[**GetTeamSetsSystem**](ChannelsAPI.md#GetTeamSetsSystem) | **Get** /v2/team-sets/system | List platform-defined system team sets
+[**GetTeamSetsSystem**](ChannelsAPI.md#GetTeamSetsSystem) | **Get** /v2/team-sets/system | List the calling tenant&#39;s system team sets
 [**PatchChannelsByIdAccessCode**](ChannelsAPI.md#PatchChannelsByIdAccessCode) | **Patch** /v2/channels/{id}/access-code | Update Channel Access Code
 [**UpdateChannelsById**](ChannelsAPI.md#UpdateChannelsById) | **Put** /v2/channels/{id} | Update Channel
 [**UpdateChannelsByIdTeamSetsByTeamSetId**](ChannelsAPI.md#UpdateChannelsByIdTeamSetsByTeamSetId) | **Put** /v2/channels/{id}/team-sets/{teamSetId} | Replace a channel team set&#39;s lineup
@@ -455,8 +451,6 @@ Name | Type | Description  | Notes
 
 Get a channel by ID
 
-
-
 ### Example
 
 ```go
@@ -597,6 +591,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetChannelsByRegion
+
+> DomainChannelListResponse GetChannelsByRegion(ctx).Region(region).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+
+Get Channels by Region (v2)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	region := "region_example" // string | Region Code
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.GetChannelsByRegion(context.Background()).Region(region).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelsByRegion``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChannelsByRegion`: DomainChannelListResponse
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelsByRegion`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChannelsByRegionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **region** | **string** | Region Code | 
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**DomainChannelListResponse**](DomainChannelListResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetChannelsSearch
 
 > DomainChannelListResponse GetChannelsSearch(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
@@ -670,8 +736,6 @@ Name | Type | Description  | Notes
 > DomainChannelListResponse GetChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
 Search channels by keyword (cursor-paginated)
-
-
 
 ### Example
 
@@ -747,8 +811,6 @@ Name | Type | Description  | Notes
 
 List channels for a platform identity (cursor-paginated)
 
-
-
 ### Example
 
 ```go
@@ -817,377 +879,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPublicChannels
-
-> DomainChannelListResponse GetPublicChannels(ctx).Region(region).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-
-Get Channels by Region (v2)
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	region := "region_example" // string | Region Code
-	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
-	limit := int32(56) // int32 | Page size (optional)
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicChannels(context.Background()).Region(region).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannels``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicChannels`: DomainChannelListResponse
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannels`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicChannelsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **region** | **string** | Region Code | 
- **cursor** | **string** | Opaque pagination cursor | 
- **limit** | **int32** | Page size | 
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainChannelListResponse**](DomainChannelListResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicChannelsById
-
-> DomainChannelResponse GetPublicChannelsById(ctx, id).XActingAs(xActingAs).Execute()
-
-Get a channel by ID
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	id := "id_example" // string | Channel ID
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsById(context.Background(), id).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsById``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicChannelsById`: DomainChannelResponse
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannelsById`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Channel ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicChannelsByIdRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainChannelResponse**](DomainChannelResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicChannelsSearchKeywordByKeyword
-
-> DomainChannelListResponse GetPublicChannelsSearchKeywordByKeyword(ctx, keyword).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-
-Search channels by keyword (cursor-paginated)
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	keyword := "keyword_example" // string | Search keyword
-	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
-	limit := int32(56) // int32 | Page size (optional)
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword(context.Background(), keyword).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicChannelsSearchKeywordByKeyword`: DomainChannelListResponse
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicChannelsSearchKeywordByKeyword`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**keyword** | **string** | Search keyword | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicChannelsSearchKeywordByKeywordRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **cursor** | **string** | Opaque pagination cursor | 
- **limit** | **int32** | Page size | 
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainChannelListResponse**](DomainChannelListResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicIdentitiesByPiidChannels
-
-> DomainChannelListResponse GetPublicIdentitiesByPiidChannels(ctx, piid).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-
-List channels for a platform identity (cursor-paginated)
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	piid := "piid_example" // string | Platform Identity ID
-	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
-	limit := int32(56) // int32 | Page size (optional)
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicIdentitiesByPiidChannels(context.Background(), piid).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicIdentitiesByPiidChannels``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicIdentitiesByPiidChannels`: DomainChannelListResponse
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicIdentitiesByPiidChannels`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**piid** | **string** | Platform Identity ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicIdentitiesByPiidChannelsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **cursor** | **string** | Opaque pagination cursor | 
- **limit** | **int32** | Page size | 
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainChannelListResponse**](DomainChannelListResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetPublicTeamSetsSystem
-
-> DomainTeamSetListResponse GetPublicTeamSetsSystem(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-
-List platform-defined system team sets
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/fanscontest/platform-sdk-go"
-)
-
-func main() {
-	cursor := "cursor_example" // string | Accepted for shape uniformity; ignored (single-page, name-sorted) (optional)
-	limit := int32(56) // int32 | Accepted for shape uniformity; ignored (single-page, name-sorted) (optional)
-	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetPublicTeamSetsSystem(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetPublicTeamSetsSystem``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPublicTeamSetsSystem`: DomainTeamSetListResponse
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetPublicTeamSetsSystem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPublicTeamSetsSystemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cursor** | **string** | Accepted for shape uniformity; ignored (single-page, name-sorted) | 
- **limit** | **int32** | Accepted for shape uniformity; ignored (single-page, name-sorted) | 
- **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
-
-### Return type
-
-[**DomainTeamSetListResponse**](DomainTeamSetListResponse.md)
-
-### Authorization
-
-[TenantApiKey](../README.md#TenantApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetTeamSetsSystem
 
 > DomainTeamSetListResponse GetTeamSetsSystem(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
 
-List platform-defined system team sets
+List the calling tenant's system team sets
 
 
 

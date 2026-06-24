@@ -6,14 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CanParticipate** | Pointer to **bool** |  | [optional] 
 **CanView** | Pointer to **bool** |  | [optional] 
-**ChannelId** | **string** |  | 
-**VenueId** | **string** |  | 
+**ChannelId** | **string** | venue_id is not a request field (uman#177): the channel determines the venue (channels.venue_id is canonical), so the caller supplies only the channel and the venue is derived from it. | 
 
 ## Methods
 
 ### NewHandlerCreatePlatformContestHostingRequest
 
-`func NewHandlerCreatePlatformContestHostingRequest(channelId string, venueId string, ) *HandlerCreatePlatformContestHostingRequest`
+`func NewHandlerCreatePlatformContestHostingRequest(channelId string, ) *HandlerCreatePlatformContestHostingRequest`
 
 NewHandlerCreatePlatformContestHostingRequest instantiates a new HandlerCreatePlatformContestHostingRequest object
 This constructor will assign default values to properties that have it defined,
@@ -96,26 +95,6 @@ and a boolean to check if the value has been set.
 `func (o *HandlerCreatePlatformContestHostingRequest) SetChannelId(v string)`
 
 SetChannelId sets ChannelId field to given value.
-
-
-### GetVenueId
-
-`func (o *HandlerCreatePlatformContestHostingRequest) GetVenueId() string`
-
-GetVenueId returns the VenueId field if non-nil, zero value otherwise.
-
-### GetVenueIdOk
-
-`func (o *HandlerCreatePlatformContestHostingRequest) GetVenueIdOk() (*string, bool)`
-
-GetVenueIdOk returns a tuple with the VenueId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVenueId
-
-`func (o *HandlerCreatePlatformContestHostingRequest) SetVenueId(v string)`
-
-SetVenueId sets VenueId field to given value.
 
 
 
