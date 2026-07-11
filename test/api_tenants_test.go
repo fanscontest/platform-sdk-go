@@ -90,4 +90,19 @@ func Test_platform_TenantsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test TenantsAPIService GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+		var subscriptionId string
+
+		resp, httpRes, err := apiClient.TenantsAPI.GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret(context.Background(), id, subscriptionId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

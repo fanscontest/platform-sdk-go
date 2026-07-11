@@ -891,3 +891,168 @@ func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsExecute(r ApiGetTe
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest struct {
+	ctx context.Context
+	ApiService *TenantsAPIService
+	id string
+	subscriptionId string
+	xActingAs *string
+}
+
+// Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
+func (r ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest) XActingAs(xActingAs string) ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest {
+	r.xActingAs = &xActingAs
+	return r
+}
+
+func (r ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest) Execute() (*DomainWebhookSubscriptionCreatedResponse, *http.Response, error) {
+	return r.ApiService.GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretExecute(r)
+}
+
+/*
+GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret Reveal a webhook subscription's signing secret
+
+Owner-only re-reveal of the existing signing secret (ADR 0048).
+The secret is minted and shown once on create; this is the
+Stripe-style "reveal in dashboard" escape hatch for an owner who
+lost it. Pure read — no rotation/re-mint. Same owner gate and
+401→404→403 check order as the other subscription routes; a
+subscription belonging to a different platform returns 404.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Tenant ID
+ @param subscriptionId Webhook Subscription ID
+ @return ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest
+*/
+func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret(ctx context.Context, id string, subscriptionId string) ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest {
+	return ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+		subscriptionId: subscriptionId,
+	}
+}
+
+// Execute executes the request
+//  @return DomainWebhookSubscriptionCreatedResponse
+func (a *TenantsAPIService) GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretExecute(r ApiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest) (*DomainWebhookSubscriptionCreatedResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainWebhookSubscriptionCreatedResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TenantsAPIService.GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/tenants/{id}/webhook-subscriptions/{subscriptionId}/signing-secret"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionId"+"}", url.PathEscape(parameterValueToString(r.subscriptionId, "subscriptionId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActingAs != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}

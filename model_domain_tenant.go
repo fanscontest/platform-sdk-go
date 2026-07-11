@@ -21,6 +21,8 @@ var _ MappedNullable = &DomainTenant{}
 // DomainTenant struct for DomainTenant
 type DomainTenant struct {
 	CreatedAt *string `json:"created_at,omitempty"`
+	// EnforcesParticipationEligibility — see Model.Tenant. When false (default), CanMemberParticipateInContest short-circuits to allow (ADR 0046).
+	EnforcesParticipationEligibility *bool `json:"enforces_participation_eligibility,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	OwnerId *string `json:"owner_id,omitempty"`
@@ -74,6 +76,38 @@ func (o *DomainTenant) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
 func (o *DomainTenant) SetCreatedAt(v string) {
 	o.CreatedAt = &v
+}
+
+// GetEnforcesParticipationEligibility returns the EnforcesParticipationEligibility field value if set, zero value otherwise.
+func (o *DomainTenant) GetEnforcesParticipationEligibility() bool {
+	if o == nil || IsNil(o.EnforcesParticipationEligibility) {
+		var ret bool
+		return ret
+	}
+	return *o.EnforcesParticipationEligibility
+}
+
+// GetEnforcesParticipationEligibilityOk returns a tuple with the EnforcesParticipationEligibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DomainTenant) GetEnforcesParticipationEligibilityOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnforcesParticipationEligibility) {
+		return nil, false
+	}
+	return o.EnforcesParticipationEligibility, true
+}
+
+// HasEnforcesParticipationEligibility returns a boolean if a field has been set.
+func (o *DomainTenant) HasEnforcesParticipationEligibility() bool {
+	if o != nil && !IsNil(o.EnforcesParticipationEligibility) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnforcesParticipationEligibility gets a reference to the given bool and assigns it to the EnforcesParticipationEligibility field.
+func (o *DomainTenant) SetEnforcesParticipationEligibility(v bool) {
+	o.EnforcesParticipationEligibility = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -216,6 +250,9 @@ func (o DomainTenant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !IsNil(o.EnforcesParticipationEligibility) {
+		toSerialize["enforces_participation_eligibility"] = o.EnforcesParticipationEligibility
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

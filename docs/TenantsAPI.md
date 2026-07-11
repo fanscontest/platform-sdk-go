@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**CreateTenantsByIdWebhookSubscriptions**](TenantsAPI.md#CreateTenantsByIdWebhookSubscriptions) | **Post** /v2/tenants/{id}/webhook-subscriptions | Register a webhook subscription for a tenant
 [**DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId**](TenantsAPI.md#DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId) | **Delete** /v2/tenants/{id}/webhook-subscriptions/{subscriptionId} | Delete a webhook subscription
 [**GetTenantsByIdWebhookSubscriptions**](TenantsAPI.md#GetTenantsByIdWebhookSubscriptions) | **Get** /v2/tenants/{id}/webhook-subscriptions | List a tenant&#39;s webhook subscriptions
+[**GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret**](TenantsAPI.md#GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret) | **Get** /v2/tenants/{id}/webhook-subscriptions/{subscriptionId}/signing-secret | Reveal a webhook subscription&#39;s signing secret
 
 
 
@@ -362,6 +363,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DomainWebhookSubscriptionListResponse**](DomainWebhookSubscriptionListResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret
+
+> DomainWebhookSubscriptionCreatedResponse GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret(ctx, id, subscriptionId).XActingAs(xActingAs).Execute()
+
+Reveal a webhook subscription's signing secret
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Tenant ID
+	subscriptionId := "subscriptionId_example" // string | Webhook Subscription ID
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TenantsAPI.GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret(context.Background(), id, subscriptionId).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TenantsAPI.GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret`: DomainWebhookSubscriptionCreatedResponse
+	fmt.Fprintf(os.Stdout, "Response from `TenantsAPI.GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Tenant ID | 
+**subscriptionId** | **string** | Webhook Subscription ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecretRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**DomainWebhookSubscriptionCreatedResponse**](DomainWebhookSubscriptionCreatedResponse.md)
 
 ### Authorization
 

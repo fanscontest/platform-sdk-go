@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | Pointer to **string** |  | [optional] 
+**EnforcesParticipationEligibility** | Pointer to **bool** | EnforcesParticipationEligibility — see Model.Tenant. When false (default), CanMemberParticipateInContest short-circuits to allow (ADR 0046). | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
@@ -53,6 +54,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *DomainTenant) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetEnforcesParticipationEligibility
+
+`func (o *DomainTenant) GetEnforcesParticipationEligibility() bool`
+
+GetEnforcesParticipationEligibility returns the EnforcesParticipationEligibility field if non-nil, zero value otherwise.
+
+### GetEnforcesParticipationEligibilityOk
+
+`func (o *DomainTenant) GetEnforcesParticipationEligibilityOk() (*bool, bool)`
+
+GetEnforcesParticipationEligibilityOk returns a tuple with the EnforcesParticipationEligibility field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnforcesParticipationEligibility
+
+`func (o *DomainTenant) SetEnforcesParticipationEligibility(v bool)`
+
+SetEnforcesParticipationEligibility sets EnforcesParticipationEligibility field to given value.
+
+### HasEnforcesParticipationEligibility
+
+`func (o *DomainTenant) HasEnforcesParticipationEligibility() bool`
+
+HasEnforcesParticipationEligibility returns a boolean if a field has been set.
 
 ### GetId
 

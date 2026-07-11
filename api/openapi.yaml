@@ -26,6 +26,8 @@ tags:
   x-displayName: Stans
 - name: Channels
   x-displayName: Channels
+- name: Leaderboard
+  x-displayName: Leaderboard
 - name: Subscriptions
   x-displayName: Subscriptions
 - name: Tournaments
@@ -854,6 +856,65 @@ paths:
       summary: Report a channel
       tags:
       - Channels
+  /v2/channels/{id}/standings:
+    get:
+      description: |-
+        Season standings for a channel, ranked by cumulative raw score — the
+        prediction/creative metric (distinct from participation points). The
+        window selects a single period bucket: "week" (the current week) or
+        "all_time" (lifetime). Read acting-as the channel owner.
+      operationId: getChannelsByIdStandings
+      parameters:
+      - description: Channel ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Standings window: week | all_time (default all_time)"
+        explode: true
+        in: query
+        name: window
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "member (truncated view) | owner (full board, default)"
+        explode: true
+        in: query
+        name: actor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.LeaderboardResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+      summary: Get a channel's season standings (ranked by cumulative score)
+      tags:
+      - Leaderboard
   /v2/channels/{id}/subscriptions:
     get:
       description: |-
@@ -4805,6 +4866,72 @@ paths:
       summary: List buddy board invites for a platform identity
       tags:
       - Contests
+  /v2/identities/{piid}/buddy-boards:
+    get:
+      operationId: getIdentitiesByPiidBuddyBoards
+      parameters:
+      - description: Platform Identity ID
+        explode: false
+        in: path
+        name: piid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size (default 50, max 200)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.BuddyBoardListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: List buddy boards owned by a platform identity (cursor-paginated)
+      tags:
+      - Contests
   /v2/identities/{piid}/channels:
     get:
       operationId: getIdentitiesByPiidChannels
@@ -5213,6 +5340,66 @@ paths:
       summary: Get a platform identity's channel subscriptions (v2)
       tags:
       - Subscriptions
+  /v2/identities/{piid}/tournaments:
+    get:
+      operationId: getIdentitiesByPiidTournaments
+      parameters:
+      - description: Platform Identity ID
+        explode: false
+        in: path
+        name: piid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.TournamentListResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: List tournaments owned by a platform identity (cursor-paginated)
+      tags:
+      - Tournaments
   /v2/jurors/assignments:
     get:
       description: Get all contest assignments for the current juror
@@ -8689,6 +8876,77 @@ paths:
       summary: Delete a webhook subscription
       tags:
       - Tenants
+  /v2/tenants/{id}/webhook-subscriptions/{subscriptionId}/signing-secret:
+    get:
+      description: |-
+        Owner-only re-reveal of the existing signing secret (ADR 0048).
+        The secret is minted and shown once on create; this is the
+        Stripe-style "reveal in dashboard" escape hatch for an owner who
+        lost it. Pure read — no rotation/re-mint. Same owner gate and
+        401→404→403 check order as the other subscription routes; a
+        subscription belonging to a different platform returns 404.
+      operationId: getTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret
+      parameters:
+      - description: Tenant ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Webhook Subscription ID
+        explode: false
+        in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.WebhookSubscriptionCreatedResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Reveal a webhook subscription's signing secret
+      tags:
+      - Tenants
   /v2/tournaments:
     post:
       description: Create a tournament with explicit round configuration
@@ -10113,6 +10371,60 @@ components:
       required:
       - data
       type: object
+    Domain.BoardContext:
+      example:
+        board_type: board_type
+        channel:
+          owner:
+            tenant_id: tenant_id
+            country:
+              continent_name: continent_name
+              code: code
+              name: name
+              continent_code: continent_code
+              currency: currency
+              native_name: native_name
+            metadata:
+              key: metadata
+            profile_pic: profile_pic
+            created_at: created_at
+            last_name: last_name
+            display_name: display_name
+            country_code: country_code
+            is_official: true
+            company: company
+            id: id
+            first_name: first_name
+            header_image_url: header_image_url
+          access_type: access_type
+          code: code
+          regions:
+          - code: code
+            name: name
+            id: id
+            type: type
+          - code: code
+            name: name
+            id: id
+            type: type
+          access_code: access_code
+          created_at: created_at
+          member_subscription: ""
+          size: 0
+          stats:
+            contests_count: 6
+            subscribers_count: 1
+          is_fan_channel: true
+          name: name
+          id: id
+          header_image_url: header_image_url
+          venue_id: venue_id
+      properties:
+        board_type:
+          type: string
+        channel:
+          $ref: '#/components/schemas/Domain.Channel'
+      type: object
     Domain.BuddyBoard:
       example:
         reward:
@@ -10259,6 +10571,47 @@ components:
         data:
           items:
             $ref: '#/components/schemas/Domain.BuddyBoardInvite'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      type: object
+    Domain.BuddyBoardListResponse:
+      example:
+        pagination:
+          prev_cursor: prev_cursor
+          next_cursor: next_cursor
+          has_previous: true
+          limit: 0
+          has_next: true
+        data:
+        - reward:
+            redemption_condition: redemption_condition
+            reward_type: money
+            currency: currency
+            value: value
+          owner_id: owner_id
+          created_at: created_at
+          id: id
+          no_of_winners: 0
+          title: title
+          contest_id: contest_id
+        - reward:
+            redemption_condition: redemption_condition
+            reward_type: money
+            currency: currency
+            value: value
+          owner_id: owner_id
+          created_at: created_at
+          id: id
+          no_of_winners: 0
+          title: title
+          contest_id: contest_id
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Domain.BuddyBoard'
           type: array
         pagination:
           $ref: '#/components/schemas/Pagination'
@@ -14562,6 +14915,402 @@ components:
       required:
       - data
       type: object
+    Domain.Leaderboard:
+      example:
+        rankings:
+        - score: 2.3021358869347655
+          current: 1
+          period: ""
+          avg_solution_time: 0.8008281904610115
+          contests_played: 6
+          previous: 5
+          member:
+            tenant_id: tenant_id
+            country:
+              continent_name: continent_name
+              code: code
+              name: name
+              continent_code: continent_code
+              currency: currency
+              native_name: native_name
+            metadata:
+              key: metadata
+            profile_pic: profile_pic
+            created_at: created_at
+            last_name: last_name
+            display_name: display_name
+            country_code: country_code
+            is_official: true
+            company: company
+            id: id
+            first_name: first_name
+            header_image_url: header_image_url
+          points: 5.962133916683182
+        - score: 2.3021358869347655
+          current: 1
+          period: ""
+          avg_solution_time: 0.8008281904610115
+          contests_played: 6
+          previous: 5
+          member:
+            tenant_id: tenant_id
+            country:
+              continent_name: continent_name
+              code: code
+              name: name
+              continent_code: continent_code
+              currency: currency
+              native_name: native_name
+            metadata:
+              key: metadata
+            profile_pic: profile_pic
+            created_at: created_at
+            last_name: last_name
+            display_name: display_name
+            country_code: country_code
+            is_official: true
+            company: company
+            id: id
+            first_name: first_name
+            header_image_url: header_image_url
+          points: 5.962133916683182
+        period:
+          end_date: end_date
+          type: type
+          start_date: start_date
+        context:
+          board_type: board_type
+          channel:
+            owner:
+              tenant_id: tenant_id
+              country:
+                continent_name: continent_name
+                code: code
+                name: name
+                continent_code: continent_code
+                currency: currency
+                native_name: native_name
+              metadata:
+                key: metadata
+              profile_pic: profile_pic
+              created_at: created_at
+              last_name: last_name
+              display_name: display_name
+              country_code: country_code
+              is_official: true
+              company: company
+              id: id
+              first_name: first_name
+              header_image_url: header_image_url
+            access_type: access_type
+            code: code
+            regions:
+            - code: code
+              name: name
+              id: id
+              type: type
+            - code: code
+              name: name
+              id: id
+              type: type
+            access_code: access_code
+            created_at: created_at
+            member_subscription: ""
+            size: 0
+            stats:
+              contests_count: 6
+              subscribers_count: 1
+            is_fan_channel: true
+            name: name
+            id: id
+            header_image_url: header_image_url
+            venue_id: venue_id
+        brand:
+          tenant_id: tenant_id
+          country:
+            continent_name: continent_name
+            code: code
+            name: name
+            continent_code: continent_code
+            currency: currency
+            native_name: native_name
+          metadata:
+            key: metadata
+          profile_pic: profile_pic
+          created_at: created_at
+          last_name: last_name
+          display_name: display_name
+          country_code: country_code
+          is_official: true
+          company: company
+          id: id
+          first_name: first_name
+          header_image_url: header_image_url
+        member_rank:
+          score: 2.3021358869347655
+          current: 1
+          period: ""
+          avg_solution_time: 0.8008281904610115
+          contests_played: 6
+          previous: 5
+          member:
+            tenant_id: tenant_id
+            country:
+              continent_name: continent_name
+              code: code
+              name: name
+              continent_code: continent_code
+              currency: currency
+              native_name: native_name
+            metadata:
+              key: metadata
+            profile_pic: profile_pic
+            created_at: created_at
+            last_name: last_name
+            display_name: display_name
+            country_code: country_code
+            is_official: true
+            company: company
+            id: id
+            first_name: first_name
+            header_image_url: header_image_url
+          points: 5.962133916683182
+      properties:
+        brand:
+          $ref: '#/components/schemas/Domain.PlatformIdentity'
+        context:
+          $ref: '#/components/schemas/Domain.BoardContext'
+        member_rank:
+          $ref: '#/components/schemas/Domain.LeaderboardRank'
+        period:
+          $ref: '#/components/schemas/Domain.Period'
+        rankings:
+          items:
+            $ref: '#/components/schemas/Domain.LeaderboardRank'
+          type: array
+      type: object
+    Domain.LeaderboardRank:
+      example:
+        score: 2.3021358869347655
+        current: 1
+        period: ""
+        avg_solution_time: 0.8008281904610115
+        contests_played: 6
+        previous: 5
+        member:
+          tenant_id: tenant_id
+          country:
+            continent_name: continent_name
+            code: code
+            name: name
+            continent_code: continent_code
+            currency: currency
+            native_name: native_name
+          metadata:
+            key: metadata
+          profile_pic: profile_pic
+          created_at: created_at
+          last_name: last_name
+          display_name: display_name
+          country_code: country_code
+          is_official: true
+          company: company
+          id: id
+          first_name: first_name
+          header_image_url: header_image_url
+        points: 5.962133916683182
+      properties:
+        avg_solution_time:
+          description: "Average solution time in seconds (nullable, with decimal precision)"
+          type: number
+        contests_played:
+          description: Count of contests
+          type: integer
+        current:
+          type: integer
+        member:
+          $ref: '#/components/schemas/Domain.PlatformIdentity'
+        period:
+          allOf:
+          - $ref: '#/components/schemas/Domain.Period'
+          description: Period type and date range
+        points:
+          description: Participation points with 3 decimal precision (MCQ/zone metric)
+          type: number
+        previous:
+          type: integer
+        score:
+          description: Cumulative raw score across the period (prediction/creative
+            metric)
+          type: number
+      type: object
+    Domain.LeaderboardResponse:
+      example:
+        data:
+          rankings:
+          - score: 2.3021358869347655
+            current: 1
+            period: ""
+            avg_solution_time: 0.8008281904610115
+            contests_played: 6
+            previous: 5
+            member:
+              tenant_id: tenant_id
+              country:
+                continent_name: continent_name
+                code: code
+                name: name
+                continent_code: continent_code
+                currency: currency
+                native_name: native_name
+              metadata:
+                key: metadata
+              profile_pic: profile_pic
+              created_at: created_at
+              last_name: last_name
+              display_name: display_name
+              country_code: country_code
+              is_official: true
+              company: company
+              id: id
+              first_name: first_name
+              header_image_url: header_image_url
+            points: 5.962133916683182
+          - score: 2.3021358869347655
+            current: 1
+            period: ""
+            avg_solution_time: 0.8008281904610115
+            contests_played: 6
+            previous: 5
+            member:
+              tenant_id: tenant_id
+              country:
+                continent_name: continent_name
+                code: code
+                name: name
+                continent_code: continent_code
+                currency: currency
+                native_name: native_name
+              metadata:
+                key: metadata
+              profile_pic: profile_pic
+              created_at: created_at
+              last_name: last_name
+              display_name: display_name
+              country_code: country_code
+              is_official: true
+              company: company
+              id: id
+              first_name: first_name
+              header_image_url: header_image_url
+            points: 5.962133916683182
+          period:
+            end_date: end_date
+            type: type
+            start_date: start_date
+          context:
+            board_type: board_type
+            channel:
+              owner:
+                tenant_id: tenant_id
+                country:
+                  continent_name: continent_name
+                  code: code
+                  name: name
+                  continent_code: continent_code
+                  currency: currency
+                  native_name: native_name
+                metadata:
+                  key: metadata
+                profile_pic: profile_pic
+                created_at: created_at
+                last_name: last_name
+                display_name: display_name
+                country_code: country_code
+                is_official: true
+                company: company
+                id: id
+                first_name: first_name
+                header_image_url: header_image_url
+              access_type: access_type
+              code: code
+              regions:
+              - code: code
+                name: name
+                id: id
+                type: type
+              - code: code
+                name: name
+                id: id
+                type: type
+              access_code: access_code
+              created_at: created_at
+              member_subscription: ""
+              size: 0
+              stats:
+                contests_count: 6
+                subscribers_count: 1
+              is_fan_channel: true
+              name: name
+              id: id
+              header_image_url: header_image_url
+              venue_id: venue_id
+          brand:
+            tenant_id: tenant_id
+            country:
+              continent_name: continent_name
+              code: code
+              name: name
+              continent_code: continent_code
+              currency: currency
+              native_name: native_name
+            metadata:
+              key: metadata
+            profile_pic: profile_pic
+            created_at: created_at
+            last_name: last_name
+            display_name: display_name
+            country_code: country_code
+            is_official: true
+            company: company
+            id: id
+            first_name: first_name
+            header_image_url: header_image_url
+          member_rank:
+            score: 2.3021358869347655
+            current: 1
+            period: ""
+            avg_solution_time: 0.8008281904610115
+            contests_played: 6
+            previous: 5
+            member:
+              tenant_id: tenant_id
+              country:
+                continent_name: continent_name
+                code: code
+                name: name
+                continent_code: continent_code
+                currency: currency
+                native_name: native_name
+              metadata:
+                key: metadata
+              profile_pic: profile_pic
+              created_at: created_at
+              last_name: last_name
+              display_name: display_name
+              country_code: country_code
+              is_official: true
+              company: company
+              id: id
+              first_name: first_name
+              header_image_url: header_image_url
+            points: 5.962133916683182
+      properties:
+        data:
+          $ref: '#/components/schemas/Domain.Leaderboard'
+      required:
+      - data
+      type: object
     Domain.MemberParticipationSummary:
       example:
         can_participate: true
@@ -15996,6 +16745,20 @@ components:
         new_members_only:
           type: boolean
         preset:
+          type: string
+      type: object
+    Domain.Period:
+      example:
+        end_date: end_date
+        type: type
+        start_date: start_date
+      properties:
+        end_date:
+          type: string
+        start_date:
+          type: string
+        type:
+          description: "'week', 'month', 'year', 'lifetime'"
           type: string
       type: object
     Domain.PlatformIdentity:
@@ -19062,6 +19825,7 @@ components:
       type: object
     Domain.Tenant:
       example:
+        enforces_participation_eligibility: true
         owner_id: owner_id
         name: name
         created_at: created_at
@@ -19070,6 +19834,11 @@ components:
       properties:
         created_at:
           type: string
+        enforces_participation_eligibility:
+          description: |-
+            EnforcesParticipationEligibility — see Model.Tenant. When false (default),
+            CanMemberParticipateInContest short-circuits to allow (ADR 0046).
+          type: boolean
         id:
           type: string
         name:
@@ -19119,6 +19888,7 @@ components:
     Domain.TenantResponse:
       example:
         data:
+          enforces_participation_eligibility: true
           owner_id: owner_id
           name: name
           created_at: created_at
@@ -22566,6 +23336,7 @@ x-tagGroups:
   - Blocks
   - Stans
   - Channels
+  - Leaderboard
   - Subscriptions
   - Tournaments
   - Sponsorships

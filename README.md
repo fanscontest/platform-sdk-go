@@ -129,6 +129,7 @@ Class | Method | HTTP request | Description
 *ContestsAPI* | [**GetContestsSearch**](docs/ContestsAPI.md#getcontestssearch) | **Get** /v2/contests/search | Search contests not owned by the caller (cursor-paginated)
 *ContestsAPI* | [**GetContestsSearchKeywordByKeyword**](docs/ContestsAPI.md#getcontestssearchkeywordbykeyword) | **Get** /v2/contests/searchKeyword/{keyword} | Search contests by keyword (tenant-scoped, cursor-paginated)
 *ContestsAPI* | [**GetIdentitiesByPiidBuddyBoardInvites**](docs/ContestsAPI.md#getidentitiesbypiidbuddyboardinvites) | **Get** /v2/identities/{piid}/buddy-board-invites | List buddy board invites for a platform identity
+*ContestsAPI* | [**GetIdentitiesByPiidBuddyBoards**](docs/ContestsAPI.md#getidentitiesbypiidbuddyboards) | **Get** /v2/identities/{piid}/buddy-boards | List buddy boards owned by a platform identity (cursor-paginated)
 *ContestsAPI* | [**GetIdentitiesByPiidContests**](docs/ContestsAPI.md#getidentitiesbypiidcontests) | **Get** /v2/identities/{piid}/contests | List contests for a platform identity (cursor-paginated)
 *ContestsAPI* | [**PatchContestsById**](docs/ContestsAPI.md#patchcontestsbyid) | **Patch** /v2/contests/{id} | Update a contest
 *ContestsAPI* | [**UpdateContestsByIdHeaderImage**](docs/ContestsAPI.md#updatecontestsbyidheaderimage) | **Put** /v2/contests/{id}/header-image | Update a contest&#39;s header image
@@ -158,6 +159,7 @@ Class | Method | HTTP request | Description
 *IdentitiesAPI* | [**DeleteIdentitiesById**](docs/IdentitiesAPI.md#deleteidentitiesbyid) | **Delete** /v2/identities/{id} | Soft-delete a platform identity, scoped to the calling tenant
 *IdentitiesAPI* | [**GetIdentitiesById**](docs/IdentitiesAPI.md#getidentitiesbyid) | **Get** /v2/identities/{id} | Get a platform identity by ID, scoped to the calling tenant
 *IdentitiesAPI* | [**UpdateIdentitiesById**](docs/IdentitiesAPI.md#updateidentitiesbyid) | **Put** /v2/identities/{id} | Replace a platform identity&#39;s profile, scoped to the calling tenant
+*LeaderboardAPI* | [**GetChannelsByIdStandings**](docs/LeaderboardAPI.md#getchannelsbyidstandings) | **Get** /v2/channels/{id}/standings | Get a channel&#39;s season standings (ranked by cumulative score)
 *MessagesAPI* | [**CreateMessages**](docs/MessagesAPI.md#createmessages) | **Post** /v2/messages | Create a message
 *MessagesAPI* | [**GetMessages**](docs/MessagesAPI.md#getmessages) | **Get** /v2/messages | List messages for the caller
 *MessagesAPI* | [**GetMessagesById**](docs/MessagesAPI.md#getmessagesbyid) | **Get** /v2/messages/{id} | Get a message by ID
@@ -238,9 +240,11 @@ Class | Method | HTTP request | Description
 *TenantsAPI* | [**CreateTenantsByIdWebhookSubscriptions**](docs/TenantsAPI.md#createtenantsbyidwebhooksubscriptions) | **Post** /v2/tenants/{id}/webhook-subscriptions | Register a webhook subscription for a tenant
 *TenantsAPI* | [**DeleteTenantsByIdWebhookSubscriptionsBySubscriptionId**](docs/TenantsAPI.md#deletetenantsbyidwebhooksubscriptionsbysubscriptionid) | **Delete** /v2/tenants/{id}/webhook-subscriptions/{subscriptionId} | Delete a webhook subscription
 *TenantsAPI* | [**GetTenantsByIdWebhookSubscriptions**](docs/TenantsAPI.md#gettenantsbyidwebhooksubscriptions) | **Get** /v2/tenants/{id}/webhook-subscriptions | List a tenant&#39;s webhook subscriptions
+*TenantsAPI* | [**GetTenantsByIdWebhookSubscriptionsBySubscriptionIdSigningSecret**](docs/TenantsAPI.md#gettenantsbyidwebhooksubscriptionsbysubscriptionidsigningsecret) | **Get** /v2/tenants/{id}/webhook-subscriptions/{subscriptionId}/signing-secret | Reveal a webhook subscription&#39;s signing secret
 *TournamentsAPI* | [**CreateTournaments**](docs/TournamentsAPI.md#createtournaments) | **Post** /v2/tournaments | Create tournament
 *TournamentsAPI* | [**GetChannelsByIdTournamentConfiguration**](docs/TournamentsAPI.md#getchannelsbyidtournamentconfiguration) | **Get** /v2/channels/{id}/tournament-configuration | Get tournament configuration templates
 *TournamentsAPI* | [**GetChannelsByIdTournaments**](docs/TournamentsAPI.md#getchannelsbyidtournaments) | **Get** /v2/channels/{id}/tournaments | List channel tournaments (cursor-paginated)
+*TournamentsAPI* | [**GetIdentitiesByPiidTournaments**](docs/TournamentsAPI.md#getidentitiesbypiidtournaments) | **Get** /v2/identities/{piid}/tournaments | List tournaments owned by a platform identity (cursor-paginated)
 *TournamentsAPI* | [**GetTournamentsById**](docs/TournamentsAPI.md#gettournamentsbyid) | **Get** /v2/tournaments/{id} | Get tournament
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerCreate**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollercreate) | **Post** /v2/user-events | Create user event
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerDelete**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollerdelete) | **Delete** /v2/user-events/{id} | Delete user event
@@ -282,9 +286,11 @@ Class | Method | HTTP request | Description
  - [DomainBlock](docs/DomainBlock.md)
  - [DomainBlockListResponse](docs/DomainBlockListResponse.md)
  - [DomainBlockResponse](docs/DomainBlockResponse.md)
+ - [DomainBoardContext](docs/DomainBoardContext.md)
  - [DomainBuddyBoard](docs/DomainBuddyBoard.md)
  - [DomainBuddyBoardInvite](docs/DomainBuddyBoardInvite.md)
  - [DomainBuddyBoardInviteListResponse](docs/DomainBuddyBoardInviteListResponse.md)
+ - [DomainBuddyBoardListResponse](docs/DomainBuddyBoardListResponse.md)
  - [DomainBuddyBoardResponse](docs/DomainBuddyBoardResponse.md)
  - [DomainBuddyBoardView](docs/DomainBuddyBoardView.md)
  - [DomainBuddyBoardViewResponse](docs/DomainBuddyBoardViewResponse.md)
@@ -316,6 +322,9 @@ Class | Method | HTTP request | Description
  - [DomainJurorResponse](docs/DomainJurorResponse.md)
  - [DomainJurorScore](docs/DomainJurorScore.md)
  - [DomainJurorScoreResponse](docs/DomainJurorScoreResponse.md)
+ - [DomainLeaderboard](docs/DomainLeaderboard.md)
+ - [DomainLeaderboardRank](docs/DomainLeaderboardRank.md)
+ - [DomainLeaderboardResponse](docs/DomainLeaderboardResponse.md)
  - [DomainMemberParticipationSummary](docs/DomainMemberParticipationSummary.md)
  - [DomainMemberResult](docs/DomainMemberResult.md)
  - [DomainMemberResultResponse](docs/DomainMemberResultResponse.md)
@@ -328,6 +337,7 @@ Class | Method | HTTP request | Description
  - [DomainParticipationResult](docs/DomainParticipationResult.md)
  - [DomainParticipationResultBreakdownInner](docs/DomainParticipationResultBreakdownInner.md)
  - [DomainParticipationRules](docs/DomainParticipationRules.md)
+ - [DomainPeriod](docs/DomainPeriod.md)
  - [DomainPlatformIdentity](docs/DomainPlatformIdentity.md)
  - [DomainPlatformIdentityListResponse](docs/DomainPlatformIdentityListResponse.md)
  - [DomainPlatformIdentityResponse](docs/DomainPlatformIdentityResponse.md)

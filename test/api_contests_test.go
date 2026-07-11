@@ -398,6 +398,20 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ContestsAPIService GetIdentitiesByPiidBuddyBoards", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var piid string
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetIdentitiesByPiidBuddyBoards(context.Background(), piid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ContestsAPIService GetIdentitiesByPiidContests", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

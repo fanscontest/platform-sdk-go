@@ -68,6 +68,8 @@ type APIClient struct {
 
 	IdentitiesAPI *IdentitiesAPIService
 
+	LeaderboardAPI *LeaderboardAPIService
+
 	MessagesAPI *MessagesAPIService
 
 	ParticipationAPI *ParticipationAPIService
@@ -126,6 +128,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.FeedsAPI = (*FeedsAPIService)(&c.common)
 	c.IdentitiesAPI = (*IdentitiesAPIService)(&c.common)
+	c.LeaderboardAPI = (*LeaderboardAPIService)(&c.common)
 	c.MessagesAPI = (*MessagesAPIService)(&c.common)
 	c.ParticipationAPI = (*ParticipationAPIService)(&c.common)
 	c.PredictionSlipsAPI = (*PredictionSlipsAPIService)(&c.common)
