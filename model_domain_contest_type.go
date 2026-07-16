@@ -24,7 +24,7 @@ const (
 	ContestTypeMC DomainContestType = "mc"
 	ContestTypePrediction DomainContestType = "prediction"
 	ContestTypeMajority DomainContestType = "majority"
-	ContestTypeCreative DomainContestType = "creative"
+	ContestTypeEntryBased DomainContestType = "creative"
 )
 
 // All allowed values of DomainContestType enum

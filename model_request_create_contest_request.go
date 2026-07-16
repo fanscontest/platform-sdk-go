@@ -27,15 +27,19 @@ type RequestCreateContestRequest struct {
 	Description *string `json:"description,omitempty"`
 	Difficulty *string `json:"difficulty,omitempty"`
 	GroupingType *string `json:"grouping_type,omitempty"`
+	JudgingMethod *string `json:"judging_method,omitempty"`
 	JurorSelectionMode *string `json:"juror_selection_mode,omitempty"`
 	NoOfGroups int32 `json:"no_of_groups"`
 	NoOfPuzzles *int32 `json:"no_of_puzzles,omitempty"`
+	Quorum *int32 `json:"quorum,omitempty"`
+	RatingModel *string `json:"rating_model,omitempty"`
 	Reward DomainReward `json:"reward"`
 	RulePreset *string `json:"rule_preset,omitempty"`
 	SourceId string `json:"source_id"`
 	SourceType string `json:"source_type"`
 	SponsorshipPackageId *string `json:"sponsorship_package_id,omitempty"`
 	TeamSetId *string `json:"team_set_id,omitempty"`
+	TieBreak *string `json:"tie_break,omitempty"`
 	Timing DomainTiming `json:"timing"`
 	Title string `json:"title"`
 	WinnersPerGroup int32 `json:"winners_per_group"`
@@ -222,6 +226,38 @@ func (o *RequestCreateContestRequest) SetGroupingType(v string) {
 	o.GroupingType = &v
 }
 
+// GetJudgingMethod returns the JudgingMethod field value if set, zero value otherwise.
+func (o *RequestCreateContestRequest) GetJudgingMethod() string {
+	if o == nil || IsNil(o.JudgingMethod) {
+		var ret string
+		return ret
+	}
+	return *o.JudgingMethod
+}
+
+// GetJudgingMethodOk returns a tuple with the JudgingMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestCreateContestRequest) GetJudgingMethodOk() (*string, bool) {
+	if o == nil || IsNil(o.JudgingMethod) {
+		return nil, false
+	}
+	return o.JudgingMethod, true
+}
+
+// HasJudgingMethod returns a boolean if a field has been set.
+func (o *RequestCreateContestRequest) HasJudgingMethod() bool {
+	if o != nil && !IsNil(o.JudgingMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetJudgingMethod gets a reference to the given string and assigns it to the JudgingMethod field.
+func (o *RequestCreateContestRequest) SetJudgingMethod(v string) {
+	o.JudgingMethod = &v
+}
+
 // GetJurorSelectionMode returns the JurorSelectionMode field value if set, zero value otherwise.
 func (o *RequestCreateContestRequest) GetJurorSelectionMode() string {
 	if o == nil || IsNil(o.JurorSelectionMode) {
@@ -308,6 +344,70 @@ func (o *RequestCreateContestRequest) HasNoOfPuzzles() bool {
 // SetNoOfPuzzles gets a reference to the given int32 and assigns it to the NoOfPuzzles field.
 func (o *RequestCreateContestRequest) SetNoOfPuzzles(v int32) {
 	o.NoOfPuzzles = &v
+}
+
+// GetQuorum returns the Quorum field value if set, zero value otherwise.
+func (o *RequestCreateContestRequest) GetQuorum() int32 {
+	if o == nil || IsNil(o.Quorum) {
+		var ret int32
+		return ret
+	}
+	return *o.Quorum
+}
+
+// GetQuorumOk returns a tuple with the Quorum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestCreateContestRequest) GetQuorumOk() (*int32, bool) {
+	if o == nil || IsNil(o.Quorum) {
+		return nil, false
+	}
+	return o.Quorum, true
+}
+
+// HasQuorum returns a boolean if a field has been set.
+func (o *RequestCreateContestRequest) HasQuorum() bool {
+	if o != nil && !IsNil(o.Quorum) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuorum gets a reference to the given int32 and assigns it to the Quorum field.
+func (o *RequestCreateContestRequest) SetQuorum(v int32) {
+	o.Quorum = &v
+}
+
+// GetRatingModel returns the RatingModel field value if set, zero value otherwise.
+func (o *RequestCreateContestRequest) GetRatingModel() string {
+	if o == nil || IsNil(o.RatingModel) {
+		var ret string
+		return ret
+	}
+	return *o.RatingModel
+}
+
+// GetRatingModelOk returns a tuple with the RatingModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestCreateContestRequest) GetRatingModelOk() (*string, bool) {
+	if o == nil || IsNil(o.RatingModel) {
+		return nil, false
+	}
+	return o.RatingModel, true
+}
+
+// HasRatingModel returns a boolean if a field has been set.
+func (o *RequestCreateContestRequest) HasRatingModel() bool {
+	if o != nil && !IsNil(o.RatingModel) {
+		return true
+	}
+
+	return false
+}
+
+// SetRatingModel gets a reference to the given string and assigns it to the RatingModel field.
+func (o *RequestCreateContestRequest) SetRatingModel(v string) {
+	o.RatingModel = &v
 }
 
 // GetReward returns the Reward field value
@@ -478,6 +578,38 @@ func (o *RequestCreateContestRequest) SetTeamSetId(v string) {
 	o.TeamSetId = &v
 }
 
+// GetTieBreak returns the TieBreak field value if set, zero value otherwise.
+func (o *RequestCreateContestRequest) GetTieBreak() string {
+	if o == nil || IsNil(o.TieBreak) {
+		var ret string
+		return ret
+	}
+	return *o.TieBreak
+}
+
+// GetTieBreakOk returns a tuple with the TieBreak field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestCreateContestRequest) GetTieBreakOk() (*string, bool) {
+	if o == nil || IsNil(o.TieBreak) {
+		return nil, false
+	}
+	return o.TieBreak, true
+}
+
+// HasTieBreak returns a boolean if a field has been set.
+func (o *RequestCreateContestRequest) HasTieBreak() bool {
+	if o != nil && !IsNil(o.TieBreak) {
+		return true
+	}
+
+	return false
+}
+
+// SetTieBreak gets a reference to the given string and assigns it to the TieBreak field.
+func (o *RequestCreateContestRequest) SetTieBreak(v string) {
+	o.TieBreak = &v
+}
+
 // GetTiming returns the Timing field value
 func (o *RequestCreateContestRequest) GetTiming() DomainTiming {
 	if o == nil {
@@ -597,12 +729,21 @@ func (o RequestCreateContestRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupingType) {
 		toSerialize["grouping_type"] = o.GroupingType
 	}
+	if !IsNil(o.JudgingMethod) {
+		toSerialize["judging_method"] = o.JudgingMethod
+	}
 	if !IsNil(o.JurorSelectionMode) {
 		toSerialize["juror_selection_mode"] = o.JurorSelectionMode
 	}
 	toSerialize["no_of_groups"] = o.NoOfGroups
 	if !IsNil(o.NoOfPuzzles) {
 		toSerialize["no_of_puzzles"] = o.NoOfPuzzles
+	}
+	if !IsNil(o.Quorum) {
+		toSerialize["quorum"] = o.Quorum
+	}
+	if !IsNil(o.RatingModel) {
+		toSerialize["rating_model"] = o.RatingModel
 	}
 	toSerialize["reward"] = o.Reward
 	if !IsNil(o.RulePreset) {
@@ -615,6 +756,9 @@ func (o RequestCreateContestRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TeamSetId) {
 		toSerialize["team_set_id"] = o.TeamSetId
+	}
+	if !IsNil(o.TieBreak) {
+		toSerialize["tie_break"] = o.TieBreak
 	}
 	toSerialize["timing"] = o.Timing
 	toSerialize["title"] = o.Title

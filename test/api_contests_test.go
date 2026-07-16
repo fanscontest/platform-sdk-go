@@ -191,6 +191,18 @@ func Test_platform_ContestsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ContestsAPIService GetBuddyBoards", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ContestsAPI.GetBuddyBoards(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ContestsAPIService GetChannelsByIdContests", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

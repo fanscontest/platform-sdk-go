@@ -22,6 +22,20 @@ func Test_platform_CreativeContestsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test CreativeContestsAPIService CreateContestsByIdBallots", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CreativeContestsAPI.CreateContestsByIdBallots(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CreativeContestsAPIService CreateContestsByIdEntries", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -58,6 +72,20 @@ func Test_platform_CreativeContestsAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.CreativeContestsAPI.CreateContestsByIdForceProceed(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CreativeContestsAPIService CreateContestsByIdJudgments", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CreativeContestsAPI.CreateContestsByIdJudgments(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

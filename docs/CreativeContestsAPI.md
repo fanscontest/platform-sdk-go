@@ -4,9 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateContestsByIdBallots**](CreativeContestsAPI.md#CreateContestsByIdBallots) | **Post** /v2/contests/{id}/ballots | Serve a community-judging matchup
 [**CreateContestsByIdEntries**](CreativeContestsAPI.md#CreateContestsByIdEntries) | **Post** /v2/contests/{id}/entries | Submit entry for creative contest
 [**CreateContestsByIdEntriesByEntryIdScore**](CreativeContestsAPI.md#CreateContestsByIdEntriesByEntryIdScore) | **Post** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 [**CreateContestsByIdForceProceed**](CreativeContestsAPI.md#CreateContestsByIdForceProceed) | **Post** /v2/contests/{id}/force-proceed | Force proceed from paused state
+[**CreateContestsByIdJudgments**](CreativeContestsAPI.md#CreateContestsByIdJudgments) | **Post** /v2/contests/{id}/judgments | Submit a community-judging pairwise choice
 [**CreateContestsByIdJurorsInvite**](CreativeContestsAPI.md#CreateContestsByIdJurorsInvite) | **Post** /v2/contests/{id}/jurors/invite | Invite jurors to judge a contest
 [**CreateJurorsInvitationsByInvitationIdAccept**](CreativeContestsAPI.md#CreateJurorsInvitationsByInvitationIdAccept) | **Post** /v2/jurors/invitations/{invitationId}/accept | Accept a juror invitation
 [**CreateJurorsInvitationsByInvitationIdDecline**](CreativeContestsAPI.md#CreateJurorsInvitationsByInvitationIdDecline) | **Post** /v2/jurors/invitations/{invitationId}/decline | Decline a juror invitation
@@ -19,6 +21,78 @@ Method | HTTP request | Description
 [**GetJurorsInvitations**](CreativeContestsAPI.md#GetJurorsInvitations) | **Get** /v2/jurors/invitations | Get my pending invitations
 [**UpdateContestsByIdEntriesByEntryIdScore**](CreativeContestsAPI.md#UpdateContestsByIdEntriesByEntryIdScore) | **Put** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 
+
+
+## CreateContestsByIdBallots
+
+> HandlerMatchupResponseResponse CreateContestsByIdBallots(ctx, id).XActingAs(xActingAs).Execute()
+
+Serve a community-judging matchup
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Contest ID
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdBallots(context.Background(), id).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdBallots``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateContestsByIdBallots`: HandlerMatchupResponseResponse
+	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdBallots`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Contest ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateContestsByIdBallotsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**HandlerMatchupResponseResponse**](HandlerMatchupResponseResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateContestsByIdEntries
@@ -237,6 +311,80 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateContestsByIdJudgments
+
+> DomainCommunityBallotResponse CreateContestsByIdJudgments(ctx, id).RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest).XActingAs(xActingAs).Execute()
+
+Submit a community-judging pairwise choice
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | Contest ID
+	requestSubmitJudgmentRequest := *openapiclient.NewRequestSubmitJudgmentRequest("BallotToken_example", "Choice_example") // RequestSubmitJudgmentRequest | Ballot token + choice
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdJudgments(context.Background(), id).RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdJudgments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateContestsByIdJudgments`: DomainCommunityBallotResponse
+	fmt.Fprintf(os.Stdout, "Response from `CreativeContestsAPI.CreateContestsByIdJudgments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Contest ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateContestsByIdJudgmentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **requestSubmitJudgmentRequest** | [**RequestSubmitJudgmentRequest**](RequestSubmitJudgmentRequest.md) | Ballot token + choice | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**DomainCommunityBallotResponse**](DomainCommunityBallotResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

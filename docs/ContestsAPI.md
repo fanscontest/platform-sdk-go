@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**CreateTournamentsByIdContest**](ContestsAPI.md#CreateTournamentsByIdContest) | **Post** /v2/tournaments/{id}/contest | Create a contest for the next pending round in a tournament
 [**DeleteContestsById**](ContestsAPI.md#DeleteContestsById) | **Delete** /v2/contests/{id} | Delete Contest
 [**GetAdminHostingInvitations**](ContestsAPI.md#GetAdminHostingInvitations) | **Get** /v2/admin/hosting-invitations | List pending hosting invitations for the calling tenant&#39;s venues
+[**GetBuddyBoards**](ContestsAPI.md#GetBuddyBoards) | **Get** /v2/buddy-boards | List the caller&#39;s buddy boards (cursor-paginated)
 [**GetChannelsByIdContests**](ContestsAPI.md#GetChannelsByIdContests) | **Get** /v2/channels/{id}/contests | Get channel contests (cursor-paginated)
 [**GetContests**](ContestsAPI.md#GetContests) | **Get** /v2/contests | List the caller&#39;s contests (cursor-paginated)
 [**GetContestsByContestIdBuddyBoardsByBoardId**](ContestsAPI.md#GetContestsByContestIdBuddyBoardsByBoardId) | **Get** /v2/contests/{contestId}/buddy-boards/{boardId} | Get buddy board view (metadata + scores filtered to board members)
@@ -896,6 +897,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DomainContestHostingListResponse**](DomainContestHostingListResponse.md)
+
+### Authorization
+
+[TenantApiKey](../README.md#TenantApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBuddyBoards
+
+> DomainBuddyBoardListResponse GetBuddyBoards(ctx).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+
+List the caller's buddy boards (cursor-paginated)
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/fanscontest/platform-sdk-go"
+)
+
+func main() {
+	cursor := "cursor_example" // string | Opaque pagination cursor (optional)
+	limit := int32(56) // int32 | Page size (default 50, max 200) (optional)
+	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ContestsAPI.GetBuddyBoards(context.Background()).Cursor(cursor).Limit(limit).XActingAs(xActingAs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.GetBuddyBoards``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetBuddyBoards`: DomainBuddyBoardListResponse
+	fmt.Fprintf(os.Stdout, "Response from `ContestsAPI.GetBuddyBoards`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBuddyBoardsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | Opaque pagination cursor | 
+ **limit** | **int32** | Page size (default 50, max 200) | 
+ **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
+
+### Return type
+
+[**DomainBuddyBoardListResponse**](DomainBuddyBoardListResponse.md)
 
 ### Authorization
 

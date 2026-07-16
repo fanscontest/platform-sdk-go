@@ -34,10 +34,10 @@ tags:
   x-displayName: Tournaments
 - name: Sponsorships
   x-displayName: Sponsorships
-- name: Participation
-  x-displayName: Participation
 - name: CreativeContests
   x-displayName: CreativeContests
+- name: Participation
+  x-displayName: Participation
 - name: Feeds
   x-displayName: Feeds
 - name: Identities
@@ -299,6 +299,58 @@ paths:
       summary: Delete Block
       tags:
       - Blocks
+  /v2/buddy-boards:
+    get:
+      operationId: getBuddyBoards
+      parameters:
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size (default 50, max 200)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.BuddyBoardListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: List the caller's buddy boards (cursor-paginated)
+      tags:
+      - Contests
   /v2/celebs:
     get:
       description: Get Celebs followed by member
@@ -2439,6 +2491,79 @@ paths:
       summary: Update a contest
       tags:
       - Contests
+  /v2/contests/{id}/ballots:
+    post:
+      description: |-
+        Issues the acting voter a single-use, exposure-balanced pairwise
+        matchup for a community-judged contest. The voter's own entries and
+        any pair they have already judged are excluded. Returns a null
+        matchup (with a reason) when none remain.
+      operationId: createContestsByIdBallots
+      parameters:
+      - description: Contest ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.matchupResponseResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Serve a community-judging matchup
+      tags:
+      - CreativeContests
   /v2/contests/{id}/enrollment:
     delete:
       operationId: deleteContestsByIdEnrollment
@@ -3240,6 +3365,87 @@ paths:
       summary: Decline a contest hosting invitation
       tags:
       - Contests
+  /v2/contests/{id}/judgments:
+    post:
+      description: |-
+        Redeems a served ballot with the voter's chosen entry. Validates
+        the token (exists, bound to this voter+contest, unexpired,
+        unredeemed) and that the choice is one of the served entries, then
+        burns the ballot. The redeemed ballot is the recorded judgment.
+      operationId: createContestsByIdJudgments
+      parameters:
+      - description: Contest ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request.SubmitJudgmentRequest'
+        description: Ballot token + choice
+        required: true
+        x-originalParamName: request
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.CommunityBallotResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: Submit a community-judging pairwise choice
+      tags:
+      - CreativeContests
   /v2/contests/{id}/jurors:
     get:
       description: |-
@@ -8948,6 +9154,57 @@ paths:
       tags:
       - Tenants
   /v2/tournaments:
+    get:
+      operationId: getTournaments
+      parameters:
+      - description: Opaque pagination cursor
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Acting-as. The platform identity id (piid) this request is on
+          behalf of. The platform verifies the piid belongs to the calling tenant
+          and acts as that identity. Omit for tenant-level calls.
+        explode: false
+        in: header
+        name: X-Acting-As
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.TournamentListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Internal Server Error
+      summary: List the caller's tournaments (cursor-paginated)
+      tags:
+      - Tournaments
     post:
       description: Create a tournament with explicit round configuration
       operationId: createTournaments
@@ -10692,7 +10949,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
         - result:
@@ -10746,15 +11003,14 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
         contest:
           tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -10811,33 +11067,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -10845,11 +11101,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -10871,29 +11127,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -10906,17 +11162,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -10938,12 +11193,9 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
         scores:
         - result:
             participation_point: 2.3021358869347655
@@ -10996,7 +11248,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
         - result:
@@ -11050,7 +11302,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
         buddy_board:
@@ -11070,8 +11322,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -11128,33 +11379,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -11162,11 +11413,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -11188,29 +11439,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -11223,17 +11474,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -11255,12 +11505,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           lastModifiedAt: lastModifiedAt
           contest_group_name: contest_group_name
           solutions:
@@ -11270,7 +11517,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           participant:
             tenant_id: tenant_id
             country:
@@ -11396,7 +11643,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           - result:
@@ -11450,15 +11697,14 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           contest:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -11515,33 +11761,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -11549,11 +11795,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -11575,29 +11821,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -11610,17 +11856,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -11642,12 +11887,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           scores:
           - result:
               participation_point: 2.3021358869347655
@@ -11700,7 +11942,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           - result:
@@ -11754,7 +11996,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           buddy_board:
@@ -11774,8 +12016,7 @@ components:
               tenant_id: tenant_id
               puzzle_sheet_id: puzzle_sheet_id
               sponsor: ""
-              winners_per_group: 1
-              judging_deadline: judging_deadline
+              winners_per_group: 2
               channel:
                 owner:
                   tenant_id: tenant_id
@@ -11832,33 +12073,33 @@ components:
                   icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 enrolled: true
                 participation_id: participation_id
                 status: status
               participation_rules:
                 minimum_participation_won:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 maximum_participation_won:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 new_members_only: true
                 minimum_participation:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 member_can_enroll: true
                 description: description
                 id: id
                 preset: preset
                 contest_id: contest_id
                 maximum_participation:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
               title: title
               grouping_type: grouping_type
               team_set:
@@ -11866,11 +12107,11 @@ components:
                 - icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 - icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 name: name
                 id: id
                 category: category
@@ -11892,29 +12133,29 @@ components:
                 orange_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 green_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 blue_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 red_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 id: id
@@ -11927,17 +12168,16 @@ components:
                 reward_type: money
                 currency: currency
                 value: value
-              no_of_puzzles: 2
+              entry_based_config: ""
+              no_of_puzzles: 1
               question_type: ""
               timing:
                 end_at: end_at
                 enroll_by: enroll_by
                 start_at: start_at
               source_type: ""
-              extension_count: 0
-              no_of_groups: 5
+              no_of_groups: 6
               difficulty: difficulty
-              juror_selection_mode: juror_selection_mode
               sender:
                 tenant_id: tenant_id
                 country:
@@ -11959,12 +12199,9 @@ components:
                 id: id
                 first_name: first_name
                 header_image_url: header_image_url
-              min_juror_scores: 5
-              no_of_winners: 7
+              no_of_winners: 5
               source_id: source_id
-              category: category
               header_image_url: header_image_url
-              jury_size: 6
             lastModifiedAt: lastModifiedAt
             contest_group_name: contest_group_name
             solutions:
@@ -11974,7 +12211,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             participant:
               tenant_id: tenant_id
               country:
@@ -12276,13 +12513,68 @@ components:
       required:
       - data
       type: object
+    Domain.CommunityBallot:
+      example:
+        choice_entry_id: choice_entry_id
+        expires_at: expires_at
+        platform_identity_id: platform_identity_id
+        submitted_at: submitted_at
+        entry_ids:
+        - entry_ids
+        - entry_ids
+        served_at: served_at
+        id: id
+        contest_id: contest_id
+        token: token
+      properties:
+        choice_entry_id:
+          type: string
+        contest_id:
+          type: string
+        entry_ids:
+          items:
+            type: string
+          type: array
+        expires_at:
+          type: string
+        id:
+          type: string
+        platform_identity_id:
+          type: string
+        served_at:
+          type: string
+        submitted_at:
+          type: string
+        token:
+          description: omitted once redeemed (the secret is burned)
+          type: string
+      type: object
+    Domain.CommunityBallotResponse:
+      example:
+        data:
+          choice_entry_id: choice_entry_id
+          expires_at: expires_at
+          platform_identity_id: platform_identity_id
+          submitted_at: submitted_at
+          entry_ids:
+          - entry_ids
+          - entry_ids
+          served_at: served_at
+          id: id
+          contest_id: contest_id
+          token: token
+      properties:
+        data:
+          $ref: '#/components/schemas/Domain.CommunityBallot'
+      required:
+      - data
+      type: object
     Domain.Contest:
       example:
         tenant_id: tenant_id
         puzzle_sheet_id: puzzle_sheet_id
         sponsor: ""
-        winners_per_group: 1
-        judging_deadline: judging_deadline
+        winners_per_group: 2
         channel:
           owner:
             tenant_id: tenant_id
@@ -12339,33 +12631,33 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           enrolled: true
           participation_id: participation_id
           status: status
         participation_rules:
           minimum_participation_won:
-            total: 3
-            monthly: 9
-            weekly: 2
+            total: 2
+            monthly: 5
+            weekly: 7
           maximum_participation_won:
-            total: 3
-            monthly: 9
-            weekly: 2
+            total: 2
+            monthly: 5
+            weekly: 7
           new_members_only: true
           minimum_participation:
-            total: 3
-            monthly: 9
-            weekly: 2
+            total: 2
+            monthly: 5
+            weekly: 7
           member_can_enroll: true
           description: description
           id: id
           preset: preset
           contest_id: contest_id
           maximum_participation:
-            total: 3
-            monthly: 9
-            weekly: 2
+            total: 2
+            monthly: 5
+            weekly: 7
         title: title
         grouping_type: grouping_type
         team_set:
@@ -12373,11 +12665,11 @@ components:
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           name: name
           id: id
           category: category
@@ -12399,29 +12691,29 @@ components:
           orange_zone:
             zone_pct_description: zone_pct_description
             color: color
-            deduction_pct: 4
-            zone_pct: 7
+            deduction_pct: 9
+            zone_pct: 3
             title: title
             deduction_pct_description: deduction_pct_description
           green_zone:
             zone_pct_description: zone_pct_description
             color: color
-            deduction_pct: 4
-            zone_pct: 7
+            deduction_pct: 9
+            zone_pct: 3
             title: title
             deduction_pct_description: deduction_pct_description
           blue_zone:
             zone_pct_description: zone_pct_description
             color: color
-            deduction_pct: 4
-            zone_pct: 7
+            deduction_pct: 9
+            zone_pct: 3
             title: title
             deduction_pct_description: deduction_pct_description
           red_zone:
             zone_pct_description: zone_pct_description
             color: color
-            deduction_pct: 4
-            zone_pct: 7
+            deduction_pct: 9
+            zone_pct: 3
             title: title
             deduction_pct_description: deduction_pct_description
           id: id
@@ -12434,17 +12726,16 @@ components:
           reward_type: money
           currency: currency
           value: value
-        no_of_puzzles: 2
+        entry_based_config: ""
+        no_of_puzzles: 1
         question_type: ""
         timing:
           end_at: end_at
           enroll_by: enroll_by
           start_at: start_at
         source_type: ""
-        extension_count: 0
-        no_of_groups: 5
+        no_of_groups: 6
         difficulty: difficulty
-        juror_selection_mode: juror_selection_mode
         sender:
           tenant_id: tenant_id
           country:
@@ -12466,16 +12757,10 @@ components:
           id: id
           first_name: first_name
           header_image_url: header_image_url
-        min_juror_scores: 5
-        no_of_winners: 7
+        no_of_winners: 5
         source_id: source_id
-        category: category
         header_image_url: header_image_url
-        jury_size: 6
       properties:
-        category:
-          description: Required for creative contests
-          type: string
         channel:
           $ref: '#/components/schemas/Domain.Channel'
         created_at:
@@ -12484,9 +12769,11 @@ components:
           type: string
         difficulty:
           type: string
-        extension_count:
-          description: "Default: 0"
-          type: integer
+        entry_based_config:
+          allOf:
+          - $ref: '#/components/schemas/EntryBasedContest.Config'
+          description: Present only for entry-based (creative) contests — juror sizing
+            + judging config (uman#221)
         fair_play_grouping:
           description: '@deprecated'
           type: boolean
@@ -12497,21 +12784,8 @@ components:
           type: string
         id:
           type: string
-        judging_deadline:
-          description: "Calculated: EndAt + 7 days"
-          type: string
-        juror_selection_mode:
-          description: "Use JurorSelectionModeRandom, JurorSelectionModeInvited, or\
-            \ JurorSelectionModeHybrid"
-          type: string
-        jury_size:
-          description: "Default: 5"
-          type: integer
         member_participation:
           $ref: '#/components/schemas/Domain.MemberParticipationSummary'
-        min_juror_scores:
-          description: "Default: 3"
-          type: integer
         no_of_groups:
           type: integer
         no_of_puzzles:
@@ -12764,8 +13038,7 @@ components:
         - tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -12822,33 +13095,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -12856,11 +13129,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -12882,29 +13155,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -12917,17 +13190,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -12949,17 +13221,13 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
         - tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -13016,33 +13284,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -13050,11 +13318,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -13076,29 +13344,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -13111,17 +13379,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -13143,12 +13410,9 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
       properties:
         data:
           items:
@@ -13165,8 +13429,7 @@ components:
           tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -13223,33 +13486,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -13257,11 +13520,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -13283,29 +13546,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -13318,17 +13581,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -13350,12 +13612,9 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
       properties:
         data:
           $ref: '#/components/schemas/Domain.Contest'
@@ -13373,7 +13632,7 @@ components:
       - ContestTypeMC
       - ContestTypePrediction
       - ContestTypeMajority
-      - ContestTypeCreative
+      - ContestTypeEntryBased
     Domain.Country:
       example:
         continent_name: continent_name
@@ -13564,8 +13823,7 @@ components:
           tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -13622,33 +13880,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -13656,11 +13914,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -13682,29 +13940,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -13717,17 +13975,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -13749,12 +14006,9 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
         scores_by_group:
           key:
           - result:
@@ -13808,7 +14062,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           - result:
@@ -13862,7 +14116,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
         member_participation:
@@ -13870,8 +14124,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -13928,33 +14181,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -13962,11 +14215,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -13988,29 +14241,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -14023,17 +14276,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -14055,12 +14307,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           lastModifiedAt: lastModifiedAt
           contest_group_name: contest_group_name
           solutions:
@@ -14070,7 +14319,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           participant:
             tenant_id: tenant_id
             country:
@@ -14144,8 +14393,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -14202,33 +14450,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -14236,11 +14484,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -14262,29 +14510,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -14297,17 +14545,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -14329,12 +14576,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           scores_by_group:
             key:
             - result:
@@ -14388,7 +14632,7 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               contest_id: contest_id
               group: group
             - result:
@@ -14442,7 +14686,7 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               contest_id: contest_id
               group: group
           member_participation:
@@ -14450,8 +14694,7 @@ components:
               tenant_id: tenant_id
               puzzle_sheet_id: puzzle_sheet_id
               sponsor: ""
-              winners_per_group: 1
-              judging_deadline: judging_deadline
+              winners_per_group: 2
               channel:
                 owner:
                   tenant_id: tenant_id
@@ -14508,33 +14751,33 @@ components:
                   icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 enrolled: true
                 participation_id: participation_id
                 status: status
               participation_rules:
                 minimum_participation_won:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 maximum_participation_won:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 new_members_only: true
                 minimum_participation:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 member_can_enroll: true
                 description: description
                 id: id
                 preset: preset
                 contest_id: contest_id
                 maximum_participation:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
               title: title
               grouping_type: grouping_type
               team_set:
@@ -14542,11 +14785,11 @@ components:
                 - icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 - icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 name: name
                 id: id
                 category: category
@@ -14568,29 +14811,29 @@ components:
                 orange_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 green_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 blue_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 red_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 id: id
@@ -14603,17 +14846,16 @@ components:
                 reward_type: money
                 currency: currency
                 value: value
-              no_of_puzzles: 2
+              entry_based_config: ""
+              no_of_puzzles: 1
               question_type: ""
               timing:
                 end_at: end_at
                 enroll_by: enroll_by
                 start_at: start_at
               source_type: ""
-              extension_count: 0
-              no_of_groups: 5
+              no_of_groups: 6
               difficulty: difficulty
-              juror_selection_mode: juror_selection_mode
               sender:
                 tenant_id: tenant_id
                 country:
@@ -14635,12 +14877,9 @@ components:
                 id: id
                 first_name: first_name
                 header_image_url: header_image_url
-              min_juror_scores: 5
-              no_of_winners: 7
+              no_of_winners: 5
               source_id: source_id
-              category: category
               header_image_url: header_image_url
-              jury_size: 6
             lastModifiedAt: lastModifiedAt
             contest_group_name: contest_group_name
             solutions:
@@ -14650,7 +14889,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             participant:
               tenant_id: tenant_id
               country:
@@ -14713,9 +14952,9 @@ components:
       type: object
     Domain.IntervalOccurrence:
       example:
-        total: 3
-        monthly: 9
-        weekly: 2
+        total: 2
+        monthly: 5
+        weekly: 7
       properties:
         monthly:
           type: integer
@@ -15321,7 +15560,7 @@ components:
           icon_url: icon_url
           name: name
           id: id
-          sort_order: 1
+          sort_order: 0
         enrolled: true
         participation_id: participation_id
         status: status
@@ -15396,7 +15635,7 @@ components:
           icon_url: icon_url
           name: name
           id: id
-          sort_order: 1
+          sort_order: 0
         contest_id: contest_id
         group: group
       properties:
@@ -15465,7 +15704,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
       properties:
@@ -15506,8 +15745,7 @@ components:
           tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -15564,33 +15802,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -15598,11 +15836,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -15624,29 +15862,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -15659,17 +15897,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -15691,12 +15928,9 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
         lastModifiedAt: lastModifiedAt
         contest_group_name: contest_group_name
         solutions:
@@ -15706,7 +15940,7 @@ components:
           icon_url: icon_url
           name: name
           id: id
-          sort_order: 1
+          sort_order: 0
         participant:
           tenant_id: tenant_id
           country:
@@ -15838,8 +16072,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -15896,33 +16129,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -15930,11 +16163,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -15956,29 +16189,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -15991,17 +16224,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -16023,12 +16255,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           lastModifiedAt: lastModifiedAt
           contest_group_name: contest_group_name
           solutions:
@@ -16038,7 +16267,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           participant:
             tenant_id: tenant_id
             country:
@@ -16097,8 +16326,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -16155,33 +16383,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -16189,11 +16417,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -16215,29 +16443,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -16250,17 +16478,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -16282,12 +16509,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           lastModifiedAt: lastModifiedAt
           contest_group_name: contest_group_name
           solutions:
@@ -16297,7 +16521,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           participant:
             tenant_id: tenant_id
             country:
@@ -16369,8 +16593,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -16427,33 +16650,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -16461,11 +16684,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -16487,29 +16710,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -16522,17 +16745,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -16554,12 +16776,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           lastModifiedAt: lastModifiedAt
           contest_group_name: contest_group_name
           solutions:
@@ -16569,7 +16788,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           participant:
             tenant_id: tenant_id
             country:
@@ -16704,27 +16923,27 @@ components:
     Domain.ParticipationRules:
       example:
         minimum_participation_won:
-          total: 3
-          monthly: 9
-          weekly: 2
+          total: 2
+          monthly: 5
+          weekly: 7
         maximum_participation_won:
-          total: 3
-          monthly: 9
-          weekly: 2
+          total: 2
+          monthly: 5
+          weekly: 7
         new_members_only: true
         minimum_participation:
-          total: 3
-          monthly: 9
-          weekly: 2
+          total: 2
+          monthly: 5
+          weekly: 7
         member_can_enroll: true
         description: description
         id: id
         preset: preset
         contest_id: contest_id
         maximum_participation:
-          total: 3
-          monthly: 9
-          weekly: 2
+          total: 2
+          monthly: 5
+          weekly: 7
       properties:
         contest_id:
           type: string
@@ -17014,8 +17233,7 @@ components:
           tenant_id: tenant_id
           puzzle_sheet_id: puzzle_sheet_id
           sponsor: ""
-          winners_per_group: 1
-          judging_deadline: judging_deadline
+          winners_per_group: 2
           channel:
             owner:
               tenant_id: tenant_id
@@ -17072,33 +17290,33 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             enrolled: true
             participation_id: participation_id
             status: status
           participation_rules:
             minimum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             maximum_participation_won:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             new_members_only: true
             minimum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
             member_can_enroll: true
             description: description
             id: id
             preset: preset
             contest_id: contest_id
             maximum_participation:
-              total: 3
-              monthly: 9
-              weekly: 2
+              total: 2
+              monthly: 5
+              weekly: 7
           title: title
           grouping_type: grouping_type
           team_set:
@@ -17106,11 +17324,11 @@ components:
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             - icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             name: name
             id: id
             category: category
@@ -17132,29 +17350,29 @@ components:
             orange_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             green_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             blue_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             red_zone:
               zone_pct_description: zone_pct_description
               color: color
-              deduction_pct: 4
-              zone_pct: 7
+              deduction_pct: 9
+              zone_pct: 3
               title: title
               deduction_pct_description: deduction_pct_description
             id: id
@@ -17167,17 +17385,16 @@ components:
             reward_type: money
             currency: currency
             value: value
-          no_of_puzzles: 2
+          entry_based_config: ""
+          no_of_puzzles: 1
           question_type: ""
           timing:
             end_at: end_at
             enroll_by: enroll_by
             start_at: start_at
           source_type: ""
-          extension_count: 0
-          no_of_groups: 5
+          no_of_groups: 6
           difficulty: difficulty
-          juror_selection_mode: juror_selection_mode
           sender:
             tenant_id: tenant_id
             country:
@@ -17199,12 +17416,9 @@ components:
             id: id
             first_name: first_name
             header_image_url: header_image_url
-          min_juror_scores: 5
-          no_of_winners: 7
+          no_of_winners: 5
           source_id: source_id
-          category: category
           header_image_url: header_image_url
-          jury_size: 6
         scores:
         - result:
             participation_point: 2.3021358869347655
@@ -17257,7 +17471,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
         - result:
@@ -17311,7 +17525,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           contest_id: contest_id
           group: group
         member_participation:
@@ -17319,8 +17533,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -17377,33 +17590,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -17411,11 +17624,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -17437,29 +17650,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -17472,17 +17685,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -17504,12 +17716,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           lastModifiedAt: lastModifiedAt
           contest_group_name: contest_group_name
           solutions:
@@ -17519,7 +17728,7 @@ components:
             icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           participant:
             tenant_id: tenant_id
             country:
@@ -17591,8 +17800,7 @@ components:
             tenant_id: tenant_id
             puzzle_sheet_id: puzzle_sheet_id
             sponsor: ""
-            winners_per_group: 1
-            judging_deadline: judging_deadline
+            winners_per_group: 2
             channel:
               owner:
                 tenant_id: tenant_id
@@ -17649,33 +17857,33 @@ components:
                 icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               enrolled: true
               participation_id: participation_id
               status: status
             participation_rules:
               minimum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               maximum_participation_won:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               new_members_only: true
               minimum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
               member_can_enroll: true
               description: description
               id: id
               preset: preset
               contest_id: contest_id
               maximum_participation:
-                total: 3
-                monthly: 9
-                weekly: 2
+                total: 2
+                monthly: 5
+                weekly: 7
             title: title
             grouping_type: grouping_type
             team_set:
@@ -17683,11 +17891,11 @@ components:
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               - icon_url: icon_url
                 name: name
                 id: id
-                sort_order: 1
+                sort_order: 0
               name: name
               id: id
               category: category
@@ -17709,29 +17917,29 @@ components:
               orange_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               green_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               blue_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               red_zone:
                 zone_pct_description: zone_pct_description
                 color: color
-                deduction_pct: 4
-                zone_pct: 7
+                deduction_pct: 9
+                zone_pct: 3
                 title: title
                 deduction_pct_description: deduction_pct_description
               id: id
@@ -17744,17 +17952,16 @@ components:
               reward_type: money
               currency: currency
               value: value
-            no_of_puzzles: 2
+            entry_based_config: ""
+            no_of_puzzles: 1
             question_type: ""
             timing:
               end_at: end_at
               enroll_by: enroll_by
               start_at: start_at
             source_type: ""
-            extension_count: 0
-            no_of_groups: 5
+            no_of_groups: 6
             difficulty: difficulty
-            juror_selection_mode: juror_selection_mode
             sender:
               tenant_id: tenant_id
               country:
@@ -17776,12 +17983,9 @@ components:
               id: id
               first_name: first_name
               header_image_url: header_image_url
-            min_juror_scores: 5
-            no_of_winners: 7
+            no_of_winners: 5
             source_id: source_id
-            category: category
             header_image_url: header_image_url
-            jury_size: 6
           scores:
           - result:
               participation_point: 2.3021358869347655
@@ -17834,7 +18038,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           - result:
@@ -17888,7 +18092,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             contest_id: contest_id
             group: group
           member_participation:
@@ -17896,8 +18100,7 @@ components:
               tenant_id: tenant_id
               puzzle_sheet_id: puzzle_sheet_id
               sponsor: ""
-              winners_per_group: 1
-              judging_deadline: judging_deadline
+              winners_per_group: 2
               channel:
                 owner:
                   tenant_id: tenant_id
@@ -17954,33 +18157,33 @@ components:
                   icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 enrolled: true
                 participation_id: participation_id
                 status: status
               participation_rules:
                 minimum_participation_won:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 maximum_participation_won:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 new_members_only: true
                 minimum_participation:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
                 member_can_enroll: true
                 description: description
                 id: id
                 preset: preset
                 contest_id: contest_id
                 maximum_participation:
-                  total: 3
-                  monthly: 9
-                  weekly: 2
+                  total: 2
+                  monthly: 5
+                  weekly: 7
               title: title
               grouping_type: grouping_type
               team_set:
@@ -17988,11 +18191,11 @@ components:
                 - icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 - icon_url: icon_url
                   name: name
                   id: id
-                  sort_order: 1
+                  sort_order: 0
                 name: name
                 id: id
                 category: category
@@ -18014,29 +18217,29 @@ components:
                 orange_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 green_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 blue_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 red_zone:
                   zone_pct_description: zone_pct_description
                   color: color
-                  deduction_pct: 4
-                  zone_pct: 7
+                  deduction_pct: 9
+                  zone_pct: 3
                   title: title
                   deduction_pct_description: deduction_pct_description
                 id: id
@@ -18049,17 +18252,16 @@ components:
                 reward_type: money
                 currency: currency
                 value: value
-              no_of_puzzles: 2
+              entry_based_config: ""
+              no_of_puzzles: 1
               question_type: ""
               timing:
                 end_at: end_at
                 enroll_by: enroll_by
                 start_at: start_at
               source_type: ""
-              extension_count: 0
-              no_of_groups: 5
+              no_of_groups: 6
               difficulty: difficulty
-              juror_selection_mode: juror_selection_mode
               sender:
                 tenant_id: tenant_id
                 country:
@@ -18081,12 +18283,9 @@ components:
                 id: id
                 first_name: first_name
                 header_image_url: header_image_url
-              min_juror_scores: 5
-              no_of_winners: 7
+              no_of_winners: 5
               source_id: source_id
-              category: category
               header_image_url: header_image_url
-              jury_size: 6
             lastModifiedAt: lastModifiedAt
             contest_group_name: contest_group_name
             solutions:
@@ -18096,7 +18295,7 @@ components:
               icon_url: icon_url
               name: name
               id: id
-              sort_order: 1
+              sort_order: 0
             participant:
               tenant_id: tenant_id
               country:
@@ -19307,8 +19506,8 @@ components:
       example:
         zone_pct_description: zone_pct_description
         color: color
-        deduction_pct: 4
-        zone_pct: 7
+        deduction_pct: 9
+        zone_pct: 3
         title: title
         deduction_pct_description: deduction_pct_description
       properties:
@@ -19330,29 +19529,29 @@ components:
         orange_zone:
           zone_pct_description: zone_pct_description
           color: color
-          deduction_pct: 4
-          zone_pct: 7
+          deduction_pct: 9
+          zone_pct: 3
           title: title
           deduction_pct_description: deduction_pct_description
         green_zone:
           zone_pct_description: zone_pct_description
           color: color
-          deduction_pct: 4
-          zone_pct: 7
+          deduction_pct: 9
+          zone_pct: 3
           title: title
           deduction_pct_description: deduction_pct_description
         blue_zone:
           zone_pct_description: zone_pct_description
           color: color
-          deduction_pct: 4
-          zone_pct: 7
+          deduction_pct: 9
+          zone_pct: 3
           title: title
           deduction_pct_description: deduction_pct_description
         red_zone:
           zone_pct_description: zone_pct_description
           color: color
-          deduction_pct: 4
-          zone_pct: 7
+          deduction_pct: 9
+          zone_pct: 3
           title: title
           deduction_pct_description: deduction_pct_description
         id: id
@@ -19694,7 +19893,7 @@ components:
         icon_url: icon_url
         name: name
         id: id
-        sort_order: 1
+        sort_order: 0
       properties:
         icon_url:
           type: string
@@ -19711,11 +19910,11 @@ components:
         - icon_url: icon_url
           name: name
           id: id
-          sort_order: 1
+          sort_order: 0
         - icon_url: icon_url
           name: name
           id: id
-          sort_order: 1
+          sort_order: 0
         name: name
         id: id
         category: category
@@ -19757,11 +19956,11 @@ components:
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           name: name
           id: id
           category: category
@@ -19774,11 +19973,11 @@ components:
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           name: name
           id: id
           category: category
@@ -19804,11 +20003,11 @@ components:
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           - icon_url: icon_url
             name: name
             id: id
-            sort_order: 1
+            sort_order: 0
           name: name
           id: id
           category: category
@@ -20690,6 +20889,42 @@ components:
       - result
       title: EnterEventResultRequest
       type: object
+    EntryBasedContest.Config:
+      properties:
+        category:
+          description: |-
+            Category is the creative category (e.g. photography, comedy) — required for
+            entry-based contests. See Domain.ValidCategories.
+          type: string
+        extension_count:
+          description: default 0; incremented when judging is extended for insufficient
+            jurors
+          type: integer
+        judging_deadline:
+          description: set when the contest enters judging (EndAt + 7d)
+          type: string
+        judging_method:
+          description: Judging method + community-method settlement config (uman#221).
+          type: string
+        juror_selection_mode:
+          description: "Domain.JurorSelectionMode{Random,Invited,Hybrid}"
+          type: string
+        jury_size:
+          description: Juror-method sizing.
+          type: integer
+        min_juror_scores:
+          description: default 3
+          type: integer
+        quorum:
+          description: "community: min judgments per entry to settle"
+          type: integer
+        rating_model:
+          description: "community: Domain.RatingModelWinFraction"
+          type: string
+        tie_break:
+          description: "community: Domain.TieBreakEarliestSubmission"
+          type: string
+      type: object
     Event:
       description: "A prediction event — sports match, election, user-created event,\
         \ etc."
@@ -21396,6 +21631,114 @@ components:
       required:
       - event_types
       - url
+      type: object
+    Handler.matchupResponse:
+      example:
+        reason: reason
+        matchup:
+          ballot_token: ballot_token
+          entries:
+          - duration: 0
+            metadata:
+            - 6
+            - 6
+            media_type: media_type
+            submitted_at: submitted_at
+            participant_id: participant_id
+            created_at: created_at
+            id: id
+            contest_id: contest_id
+            media_url: media_url
+          - duration: 0
+            metadata:
+            - 6
+            - 6
+            media_type: media_type
+            submitted_at: submitted_at
+            participant_id: participant_id
+            created_at: created_at
+            id: id
+            contest_id: contest_id
+            media_url: media_url
+          expires_at: expires_at
+      properties:
+        matchup:
+          $ref: '#/components/schemas/Handler.servedMatchup'
+        reason:
+          type: string
+      type: object
+    Handler.matchupResponseResponse:
+      example:
+        data:
+          reason: reason
+          matchup:
+            ballot_token: ballot_token
+            entries:
+            - duration: 0
+              metadata:
+              - 6
+              - 6
+              media_type: media_type
+              submitted_at: submitted_at
+              participant_id: participant_id
+              created_at: created_at
+              id: id
+              contest_id: contest_id
+              media_url: media_url
+            - duration: 0
+              metadata:
+              - 6
+              - 6
+              media_type: media_type
+              submitted_at: submitted_at
+              participant_id: participant_id
+              created_at: created_at
+              id: id
+              contest_id: contest_id
+              media_url: media_url
+            expires_at: expires_at
+      properties:
+        data:
+          $ref: '#/components/schemas/Handler.matchupResponse'
+      required:
+      - data
+      type: object
+    Handler.servedMatchup:
+      example:
+        ballot_token: ballot_token
+        entries:
+        - duration: 0
+          metadata:
+          - 6
+          - 6
+          media_type: media_type
+          submitted_at: submitted_at
+          participant_id: participant_id
+          created_at: created_at
+          id: id
+          contest_id: contest_id
+          media_url: media_url
+        - duration: 0
+          metadata:
+          - 6
+          - 6
+          media_type: media_type
+          submitted_at: submitted_at
+          participant_id: participant_id
+          created_at: created_at
+          id: id
+          contest_id: contest_id
+          media_url: media_url
+        expires_at: expires_at
+      properties:
+        ballot_token:
+          type: string
+        entries:
+          items:
+            $ref: '#/components/schemas/Domain.Entry'
+          type: array
+        expires_at:
+          type: string
       type: object
     Handler.updatePlatformIdentityRequest:
       properties:
@@ -22498,6 +22841,11 @@ components:
           - system
           - open
           type: string
+        judging_method:
+          enum:
+          - juror
+          - community
+          type: string
         juror_selection_mode:
           enum:
           - random
@@ -22510,6 +22858,13 @@ components:
         no_of_puzzles:
           minimum: 0
           type: integer
+        quorum:
+          minimum: 0
+          type: integer
+        rating_model:
+          enum:
+          - win_fraction
+          type: string
         reward:
           $ref: '#/components/schemas/Domain.Reward'
         rule_preset:
@@ -22526,6 +22881,10 @@ components:
         sponsorship_package_id:
           type: string
         team_set_id:
+          type: string
+        tie_break:
+          enum:
+          - earliest_submission
           type: string
         timing:
           $ref: '#/components/schemas/Domain.Timing'
@@ -22733,6 +23092,16 @@ components:
       required:
       - media_type
       - media_url
+      type: object
+    Request.SubmitJudgmentRequest:
+      properties:
+        ballot_token:
+          type: string
+        choice:
+          type: string
+      required:
+      - ballot_token
+      - choice
       type: object
     Request.UpdateChannelAccessCodeRequest:
       properties:
@@ -23340,8 +23709,8 @@ x-tagGroups:
   - Subscriptions
   - Tournaments
   - Sponsorships
-  - Participation
   - CreativeContests
+  - Participation
   - Feeds
   - Identities
   - Messages

@@ -20,29 +20,19 @@ var _ MappedNullable = &DomainContest{}
 
 // DomainContest struct for DomainContest
 type DomainContest struct {
-	// Required for creative contests
-	Category *string `json:"category,omitempty"`
 	Channel *DomainChannel `json:"channel,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Difficulty *string `json:"difficulty,omitempty"`
-	// Default: 0
-	ExtensionCount *int32 `json:"extension_count,omitempty"`
+	// Present only for entry-based (creative) contests — juror sizing + judging config (uman#221)
+	EntryBasedConfig *EntryBasedContestConfig `json:"entry_based_config,omitempty"`
 	// @deprecated
 	FairPlayGrouping *bool `json:"fair_play_grouping,omitempty"`
 	// 'system' or 'open'
 	GroupingType *string `json:"grouping_type,omitempty"`
 	HeaderImageUrl *string `json:"header_image_url,omitempty"`
 	Id *string `json:"id,omitempty"`
-	// Calculated: EndAt + 7 days
-	JudgingDeadline *string `json:"judging_deadline,omitempty"`
-	// Use JurorSelectionModeRandom, JurorSelectionModeInvited, or JurorSelectionModeHybrid
-	JurorSelectionMode *string `json:"juror_selection_mode,omitempty"`
-	// Default: 5
-	JurySize *int32 `json:"jury_size,omitempty"`
 	MemberParticipation *DomainMemberParticipationSummary `json:"member_participation,omitempty"`
-	// Default: 3
-	MinJurorScores *int32 `json:"min_juror_scores,omitempty"`
 	NoOfGroups *int32 `json:"no_of_groups,omitempty"`
 	NoOfPuzzles *int32 `json:"no_of_puzzles,omitempty"`
 	// @deprecated
@@ -85,38 +75,6 @@ func NewDomainContest() *DomainContest {
 func NewDomainContestWithDefaults() *DomainContest {
 	this := DomainContest{}
 	return &this
-}
-
-// GetCategory returns the Category field value if set, zero value otherwise.
-func (o *DomainContest) GetCategory() string {
-	if o == nil || IsNil(o.Category) {
-		var ret string
-		return ret
-	}
-	return *o.Category
-}
-
-// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainContest) GetCategoryOk() (*string, bool) {
-	if o == nil || IsNil(o.Category) {
-		return nil, false
-	}
-	return o.Category, true
-}
-
-// HasCategory returns a boolean if a field has been set.
-func (o *DomainContest) HasCategory() bool {
-	if o != nil && !IsNil(o.Category) {
-		return true
-	}
-
-	return false
-}
-
-// SetCategory gets a reference to the given string and assigns it to the Category field.
-func (o *DomainContest) SetCategory(v string) {
-	o.Category = &v
 }
 
 // GetChannel returns the Channel field value if set, zero value otherwise.
@@ -247,36 +205,36 @@ func (o *DomainContest) SetDifficulty(v string) {
 	o.Difficulty = &v
 }
 
-// GetExtensionCount returns the ExtensionCount field value if set, zero value otherwise.
-func (o *DomainContest) GetExtensionCount() int32 {
-	if o == nil || IsNil(o.ExtensionCount) {
-		var ret int32
+// GetEntryBasedConfig returns the EntryBasedConfig field value if set, zero value otherwise.
+func (o *DomainContest) GetEntryBasedConfig() EntryBasedContestConfig {
+	if o == nil || IsNil(o.EntryBasedConfig) {
+		var ret EntryBasedContestConfig
 		return ret
 	}
-	return *o.ExtensionCount
+	return *o.EntryBasedConfig
 }
 
-// GetExtensionCountOk returns a tuple with the ExtensionCount field value if set, nil otherwise
+// GetEntryBasedConfigOk returns a tuple with the EntryBasedConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DomainContest) GetExtensionCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.ExtensionCount) {
+func (o *DomainContest) GetEntryBasedConfigOk() (*EntryBasedContestConfig, bool) {
+	if o == nil || IsNil(o.EntryBasedConfig) {
 		return nil, false
 	}
-	return o.ExtensionCount, true
+	return o.EntryBasedConfig, true
 }
 
-// HasExtensionCount returns a boolean if a field has been set.
-func (o *DomainContest) HasExtensionCount() bool {
-	if o != nil && !IsNil(o.ExtensionCount) {
+// HasEntryBasedConfig returns a boolean if a field has been set.
+func (o *DomainContest) HasEntryBasedConfig() bool {
+	if o != nil && !IsNil(o.EntryBasedConfig) {
 		return true
 	}
 
 	return false
 }
 
-// SetExtensionCount gets a reference to the given int32 and assigns it to the ExtensionCount field.
-func (o *DomainContest) SetExtensionCount(v int32) {
-	o.ExtensionCount = &v
+// SetEntryBasedConfig gets a reference to the given EntryBasedContestConfig and assigns it to the EntryBasedConfig field.
+func (o *DomainContest) SetEntryBasedConfig(v EntryBasedContestConfig) {
+	o.EntryBasedConfig = &v
 }
 
 // GetFairPlayGrouping returns the FairPlayGrouping field value if set, zero value otherwise.
@@ -407,102 +365,6 @@ func (o *DomainContest) SetId(v string) {
 	o.Id = &v
 }
 
-// GetJudgingDeadline returns the JudgingDeadline field value if set, zero value otherwise.
-func (o *DomainContest) GetJudgingDeadline() string {
-	if o == nil || IsNil(o.JudgingDeadline) {
-		var ret string
-		return ret
-	}
-	return *o.JudgingDeadline
-}
-
-// GetJudgingDeadlineOk returns a tuple with the JudgingDeadline field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainContest) GetJudgingDeadlineOk() (*string, bool) {
-	if o == nil || IsNil(o.JudgingDeadline) {
-		return nil, false
-	}
-	return o.JudgingDeadline, true
-}
-
-// HasJudgingDeadline returns a boolean if a field has been set.
-func (o *DomainContest) HasJudgingDeadline() bool {
-	if o != nil && !IsNil(o.JudgingDeadline) {
-		return true
-	}
-
-	return false
-}
-
-// SetJudgingDeadline gets a reference to the given string and assigns it to the JudgingDeadline field.
-func (o *DomainContest) SetJudgingDeadline(v string) {
-	o.JudgingDeadline = &v
-}
-
-// GetJurorSelectionMode returns the JurorSelectionMode field value if set, zero value otherwise.
-func (o *DomainContest) GetJurorSelectionMode() string {
-	if o == nil || IsNil(o.JurorSelectionMode) {
-		var ret string
-		return ret
-	}
-	return *o.JurorSelectionMode
-}
-
-// GetJurorSelectionModeOk returns a tuple with the JurorSelectionMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainContest) GetJurorSelectionModeOk() (*string, bool) {
-	if o == nil || IsNil(o.JurorSelectionMode) {
-		return nil, false
-	}
-	return o.JurorSelectionMode, true
-}
-
-// HasJurorSelectionMode returns a boolean if a field has been set.
-func (o *DomainContest) HasJurorSelectionMode() bool {
-	if o != nil && !IsNil(o.JurorSelectionMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetJurorSelectionMode gets a reference to the given string and assigns it to the JurorSelectionMode field.
-func (o *DomainContest) SetJurorSelectionMode(v string) {
-	o.JurorSelectionMode = &v
-}
-
-// GetJurySize returns the JurySize field value if set, zero value otherwise.
-func (o *DomainContest) GetJurySize() int32 {
-	if o == nil || IsNil(o.JurySize) {
-		var ret int32
-		return ret
-	}
-	return *o.JurySize
-}
-
-// GetJurySizeOk returns a tuple with the JurySize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainContest) GetJurySizeOk() (*int32, bool) {
-	if o == nil || IsNil(o.JurySize) {
-		return nil, false
-	}
-	return o.JurySize, true
-}
-
-// HasJurySize returns a boolean if a field has been set.
-func (o *DomainContest) HasJurySize() bool {
-	if o != nil && !IsNil(o.JurySize) {
-		return true
-	}
-
-	return false
-}
-
-// SetJurySize gets a reference to the given int32 and assigns it to the JurySize field.
-func (o *DomainContest) SetJurySize(v int32) {
-	o.JurySize = &v
-}
-
 // GetMemberParticipation returns the MemberParticipation field value if set, zero value otherwise.
 func (o *DomainContest) GetMemberParticipation() DomainMemberParticipationSummary {
 	if o == nil || IsNil(o.MemberParticipation) {
@@ -533,38 +395,6 @@ func (o *DomainContest) HasMemberParticipation() bool {
 // SetMemberParticipation gets a reference to the given DomainMemberParticipationSummary and assigns it to the MemberParticipation field.
 func (o *DomainContest) SetMemberParticipation(v DomainMemberParticipationSummary) {
 	o.MemberParticipation = &v
-}
-
-// GetMinJurorScores returns the MinJurorScores field value if set, zero value otherwise.
-func (o *DomainContest) GetMinJurorScores() int32 {
-	if o == nil || IsNil(o.MinJurorScores) {
-		var ret int32
-		return ret
-	}
-	return *o.MinJurorScores
-}
-
-// GetMinJurorScoresOk returns a tuple with the MinJurorScores field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainContest) GetMinJurorScoresOk() (*int32, bool) {
-	if o == nil || IsNil(o.MinJurorScores) {
-		return nil, false
-	}
-	return o.MinJurorScores, true
-}
-
-// HasMinJurorScores returns a boolean if a field has been set.
-func (o *DomainContest) HasMinJurorScores() bool {
-	if o != nil && !IsNil(o.MinJurorScores) {
-		return true
-	}
-
-	return false
-}
-
-// SetMinJurorScores gets a reference to the given int32 and assigns it to the MinJurorScores field.
-func (o *DomainContest) SetMinJurorScores(v int32) {
-	o.MinJurorScores = &v
 }
 
 // GetNoOfGroups returns the NoOfGroups field value if set, zero value otherwise.
@@ -1185,9 +1015,6 @@ func (o DomainContest) MarshalJSON() ([]byte, error) {
 
 func (o DomainContest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Category) {
-		toSerialize["category"] = o.Category
-	}
 	if !IsNil(o.Channel) {
 		toSerialize["channel"] = o.Channel
 	}
@@ -1200,8 +1027,8 @@ func (o DomainContest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Difficulty) {
 		toSerialize["difficulty"] = o.Difficulty
 	}
-	if !IsNil(o.ExtensionCount) {
-		toSerialize["extension_count"] = o.ExtensionCount
+	if !IsNil(o.EntryBasedConfig) {
+		toSerialize["entry_based_config"] = o.EntryBasedConfig
 	}
 	if !IsNil(o.FairPlayGrouping) {
 		toSerialize["fair_play_grouping"] = o.FairPlayGrouping
@@ -1215,20 +1042,8 @@ func (o DomainContest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.JudgingDeadline) {
-		toSerialize["judging_deadline"] = o.JudgingDeadline
-	}
-	if !IsNil(o.JurorSelectionMode) {
-		toSerialize["juror_selection_mode"] = o.JurorSelectionMode
-	}
-	if !IsNil(o.JurySize) {
-		toSerialize["jury_size"] = o.JurySize
-	}
 	if !IsNil(o.MemberParticipation) {
 		toSerialize["member_participation"] = o.MemberParticipation
-	}
-	if !IsNil(o.MinJurorScores) {
-		toSerialize["min_juror_scores"] = o.MinJurorScores
 	}
 	if !IsNil(o.NoOfGroups) {
 		toSerialize["no_of_groups"] = o.NoOfGroups

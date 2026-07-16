@@ -9,15 +9,19 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** |  | [optional] 
 **Difficulty** | Pointer to **string** |  | [optional] 
 **GroupingType** | Pointer to **string** |  | [optional] 
+**JudgingMethod** | Pointer to **string** |  | [optional] 
 **JurorSelectionMode** | Pointer to **string** |  | [optional] 
 **NoOfGroups** | **int32** |  | 
 **NoOfPuzzles** | Pointer to **int32** |  | [optional] 
+**Quorum** | Pointer to **int32** |  | [optional] 
+**RatingModel** | Pointer to **string** |  | [optional] 
 **Reward** | [**DomainReward**](DomainReward.md) |  | 
 **RulePreset** | Pointer to **string** |  | [optional] 
 **SourceId** | **string** |  | 
 **SourceType** | **string** |  | 
 **SponsorshipPackageId** | Pointer to **string** |  | [optional] 
 **TeamSetId** | Pointer to **string** |  | [optional] 
+**TieBreak** | Pointer to **string** |  | [optional] 
 **Timing** | [**DomainTiming**](DomainTiming.md) |  | 
 **Title** | **string** |  | 
 **WinnersPerGroup** | **int32** |  | 
@@ -162,6 +166,31 @@ SetGroupingType sets GroupingType field to given value.
 
 HasGroupingType returns a boolean if a field has been set.
 
+### GetJudgingMethod
+
+`func (o *RequestCreateContestRequest) GetJudgingMethod() string`
+
+GetJudgingMethod returns the JudgingMethod field if non-nil, zero value otherwise.
+
+### GetJudgingMethodOk
+
+`func (o *RequestCreateContestRequest) GetJudgingMethodOk() (*string, bool)`
+
+GetJudgingMethodOk returns a tuple with the JudgingMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJudgingMethod
+
+`func (o *RequestCreateContestRequest) SetJudgingMethod(v string)`
+
+SetJudgingMethod sets JudgingMethod field to given value.
+
+### HasJudgingMethod
+
+`func (o *RequestCreateContestRequest) HasJudgingMethod() bool`
+
+HasJudgingMethod returns a boolean if a field has been set.
+
 ### GetJurorSelectionMode
 
 `func (o *RequestCreateContestRequest) GetJurorSelectionMode() string`
@@ -231,6 +260,56 @@ SetNoOfPuzzles sets NoOfPuzzles field to given value.
 `func (o *RequestCreateContestRequest) HasNoOfPuzzles() bool`
 
 HasNoOfPuzzles returns a boolean if a field has been set.
+
+### GetQuorum
+
+`func (o *RequestCreateContestRequest) GetQuorum() int32`
+
+GetQuorum returns the Quorum field if non-nil, zero value otherwise.
+
+### GetQuorumOk
+
+`func (o *RequestCreateContestRequest) GetQuorumOk() (*int32, bool)`
+
+GetQuorumOk returns a tuple with the Quorum field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuorum
+
+`func (o *RequestCreateContestRequest) SetQuorum(v int32)`
+
+SetQuorum sets Quorum field to given value.
+
+### HasQuorum
+
+`func (o *RequestCreateContestRequest) HasQuorum() bool`
+
+HasQuorum returns a boolean if a field has been set.
+
+### GetRatingModel
+
+`func (o *RequestCreateContestRequest) GetRatingModel() string`
+
+GetRatingModel returns the RatingModel field if non-nil, zero value otherwise.
+
+### GetRatingModelOk
+
+`func (o *RequestCreateContestRequest) GetRatingModelOk() (*string, bool)`
+
+GetRatingModelOk returns a tuple with the RatingModel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRatingModel
+
+`func (o *RequestCreateContestRequest) SetRatingModel(v string)`
+
+SetRatingModel sets RatingModel field to given value.
+
+### HasRatingModel
+
+`func (o *RequestCreateContestRequest) HasRatingModel() bool`
+
+HasRatingModel returns a boolean if a field has been set.
 
 ### GetReward
 
@@ -366,6 +445,31 @@ SetTeamSetId sets TeamSetId field to given value.
 `func (o *RequestCreateContestRequest) HasTeamSetId() bool`
 
 HasTeamSetId returns a boolean if a field has been set.
+
+### GetTieBreak
+
+`func (o *RequestCreateContestRequest) GetTieBreak() string`
+
+GetTieBreak returns the TieBreak field if non-nil, zero value otherwise.
+
+### GetTieBreakOk
+
+`func (o *RequestCreateContestRequest) GetTieBreakOk() (*string, bool)`
+
+GetTieBreakOk returns a tuple with the TieBreak field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTieBreak
+
+`func (o *RequestCreateContestRequest) SetTieBreak(v string)`
+
+SetTieBreak sets TieBreak field to given value.
+
+### HasTieBreak
+
+`func (o *RequestCreateContestRequest) HasTieBreak() bool`
+
+HasTieBreak returns a boolean if a field has been set.
 
 ### GetTiming
 

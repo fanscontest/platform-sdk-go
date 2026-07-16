@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
 *ContestsAPI* | [**CreateTournamentsByIdContest**](docs/ContestsAPI.md#createtournamentsbyidcontest) | **Post** /v2/tournaments/{id}/contest | Create a contest for the next pending round in a tournament
 *ContestsAPI* | [**DeleteContestsById**](docs/ContestsAPI.md#deletecontestsbyid) | **Delete** /v2/contests/{id} | Delete Contest
 *ContestsAPI* | [**GetAdminHostingInvitations**](docs/ContestsAPI.md#getadminhostinginvitations) | **Get** /v2/admin/hosting-invitations | List pending hosting invitations for the calling tenant&#39;s venues
+*ContestsAPI* | [**GetBuddyBoards**](docs/ContestsAPI.md#getbuddyboards) | **Get** /v2/buddy-boards | List the caller&#39;s buddy boards (cursor-paginated)
 *ContestsAPI* | [**GetChannelsByIdContests**](docs/ContestsAPI.md#getchannelsbyidcontests) | **Get** /v2/channels/{id}/contests | Get channel contests (cursor-paginated)
 *ContestsAPI* | [**GetContests**](docs/ContestsAPI.md#getcontests) | **Get** /v2/contests | List the caller&#39;s contests (cursor-paginated)
 *ContestsAPI* | [**GetContestsByContestIdBuddyBoardsByBoardId**](docs/ContestsAPI.md#getcontestsbycontestidbuddyboardsbyboardid) | **Get** /v2/contests/{contestId}/buddy-boards/{boardId} | Get buddy board view (metadata + scores filtered to board members)
@@ -133,9 +134,11 @@ Class | Method | HTTP request | Description
 *ContestsAPI* | [**GetIdentitiesByPiidContests**](docs/ContestsAPI.md#getidentitiesbypiidcontests) | **Get** /v2/identities/{piid}/contests | List contests for a platform identity (cursor-paginated)
 *ContestsAPI* | [**PatchContestsById**](docs/ContestsAPI.md#patchcontestsbyid) | **Patch** /v2/contests/{id} | Update a contest
 *ContestsAPI* | [**UpdateContestsByIdHeaderImage**](docs/ContestsAPI.md#updatecontestsbyidheaderimage) | **Put** /v2/contests/{id}/header-image | Update a contest&#39;s header image
+*CreativeContestsAPI* | [**CreateContestsByIdBallots**](docs/CreativeContestsAPI.md#createcontestsbyidballots) | **Post** /v2/contests/{id}/ballots | Serve a community-judging matchup
 *CreativeContestsAPI* | [**CreateContestsByIdEntries**](docs/CreativeContestsAPI.md#createcontestsbyidentries) | **Post** /v2/contests/{id}/entries | Submit entry for creative contest
 *CreativeContestsAPI* | [**CreateContestsByIdEntriesByEntryIdScore**](docs/CreativeContestsAPI.md#createcontestsbyidentriesbyentryidscore) | **Post** /v2/contests/{id}/entries/{entryId}/score | Score an entry
 *CreativeContestsAPI* | [**CreateContestsByIdForceProceed**](docs/CreativeContestsAPI.md#createcontestsbyidforceproceed) | **Post** /v2/contests/{id}/force-proceed | Force proceed from paused state
+*CreativeContestsAPI* | [**CreateContestsByIdJudgments**](docs/CreativeContestsAPI.md#createcontestsbyidjudgments) | **Post** /v2/contests/{id}/judgments | Submit a community-judging pairwise choice
 *CreativeContestsAPI* | [**CreateContestsByIdJurorsInvite**](docs/CreativeContestsAPI.md#createcontestsbyidjurorsinvite) | **Post** /v2/contests/{id}/jurors/invite | Invite jurors to judge a contest
 *CreativeContestsAPI* | [**CreateJurorsInvitationsByInvitationIdAccept**](docs/CreativeContestsAPI.md#createjurorsinvitationsbyinvitationidaccept) | **Post** /v2/jurors/invitations/{invitationId}/accept | Accept a juror invitation
 *CreativeContestsAPI* | [**CreateJurorsInvitationsByInvitationIdDecline**](docs/CreativeContestsAPI.md#createjurorsinvitationsbyinvitationiddecline) | **Post** /v2/jurors/invitations/{invitationId}/decline | Decline a juror invitation
@@ -245,6 +248,7 @@ Class | Method | HTTP request | Description
 *TournamentsAPI* | [**GetChannelsByIdTournamentConfiguration**](docs/TournamentsAPI.md#getchannelsbyidtournamentconfiguration) | **Get** /v2/channels/{id}/tournament-configuration | Get tournament configuration templates
 *TournamentsAPI* | [**GetChannelsByIdTournaments**](docs/TournamentsAPI.md#getchannelsbyidtournaments) | **Get** /v2/channels/{id}/tournaments | List channel tournaments (cursor-paginated)
 *TournamentsAPI* | [**GetIdentitiesByPiidTournaments**](docs/TournamentsAPI.md#getidentitiesbypiidtournaments) | **Get** /v2/identities/{piid}/tournaments | List tournaments owned by a platform identity (cursor-paginated)
+*TournamentsAPI* | [**GetTournaments**](docs/TournamentsAPI.md#gettournaments) | **Get** /v2/tournaments | List the caller&#39;s tournaments (cursor-paginated)
 *TournamentsAPI* | [**GetTournamentsById**](docs/TournamentsAPI.md#gettournamentsbyid) | **Get** /v2/tournaments/{id} | Get tournament
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerCreate**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollercreate) | **Post** /v2/user-events | Create user event
 *UserEventsAPI* | [**PuzzleWebV2UserEventsControllerDelete**](docs/UserEventsAPI.md#puzzlewebv2usereventscontrollerdelete) | **Delete** /v2/user-events/{id} | Delete user event
@@ -297,6 +301,8 @@ Class | Method | HTTP request | Description
  - [DomainChannel](docs/DomainChannel.md)
  - [DomainChannelListResponse](docs/DomainChannelListResponse.md)
  - [DomainChannelResponse](docs/DomainChannelResponse.md)
+ - [DomainCommunityBallot](docs/DomainCommunityBallot.md)
+ - [DomainCommunityBallotResponse](docs/DomainCommunityBallotResponse.md)
  - [DomainContest](docs/DomainContest.md)
  - [DomainContestGroups](docs/DomainContestGroups.md)
  - [DomainContestGroupsResponse](docs/DomainContestGroupsResponse.md)
@@ -404,6 +410,7 @@ Class | Method | HTTP request | Description
  - [DomainWebhookSubscriptionCreatedResponse](docs/DomainWebhookSubscriptionCreatedResponse.md)
  - [DomainWebhookSubscriptionListResponse](docs/DomainWebhookSubscriptionListResponse.md)
  - [EnterEventResultRequest](docs/EnterEventResultRequest.md)
+ - [EntryBasedContestConfig](docs/EntryBasedContestConfig.md)
  - [Event](docs/Event.md)
  - [EventItem](docs/EventItem.md)
  - [EventOption](docs/EventOption.md)
@@ -423,6 +430,9 @@ Class | Method | HTTP request | Description
  - [HandlerCreateWebhookSubscriptionRequest](docs/HandlerCreateWebhookSubscriptionRequest.md)
  - [HandlerErrorDetail](docs/HandlerErrorDetail.md)
  - [HandlerErrorResponse](docs/HandlerErrorResponse.md)
+ - [HandlerMatchupResponse](docs/HandlerMatchupResponse.md)
+ - [HandlerMatchupResponseResponse](docs/HandlerMatchupResponseResponse.md)
+ - [HandlerServedMatchup](docs/HandlerServedMatchup.md)
  - [HandlerStatusResponse](docs/HandlerStatusResponse.md)
  - [HandlerStatusResponseResponse](docs/HandlerStatusResponseResponse.md)
  - [HandlerUpdatePlatformIdentityRequest](docs/HandlerUpdatePlatformIdentityRequest.md)
@@ -463,6 +473,7 @@ Class | Method | HTTP request | Description
  - [RequestScoreEntryRequest](docs/RequestScoreEntryRequest.md)
  - [RequestSelectGroupRequest](docs/RequestSelectGroupRequest.md)
  - [RequestSubmitEntryRequest](docs/RequestSubmitEntryRequest.md)
+ - [RequestSubmitJudgmentRequest](docs/RequestSubmitJudgmentRequest.md)
  - [RequestUpdateChannelAccessCodeRequest](docs/RequestUpdateChannelAccessCodeRequest.md)
  - [RequestUpdateChannelRequest](docs/RequestUpdateChannelRequest.md)
  - [RequestUpdateContestHeaderImage](docs/RequestUpdateContestHeaderImage.md)

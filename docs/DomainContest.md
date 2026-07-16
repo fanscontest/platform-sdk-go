@@ -4,21 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Category** | Pointer to **string** | Required for creative contests | [optional] 
 **Channel** | Pointer to [**DomainChannel**](DomainChannel.md) |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Difficulty** | Pointer to **string** |  | [optional] 
-**ExtensionCount** | Pointer to **int32** | Default: 0 | [optional] 
+**EntryBasedConfig** | Pointer to [**EntryBasedContestConfig**](EntryBasedContestConfig.md) | Present only for entry-based (creative) contests — juror sizing + judging config (uman#221) | [optional] 
 **FairPlayGrouping** | Pointer to **bool** | @deprecated | [optional] 
 **GroupingType** | Pointer to **string** | &#39;system&#39; or &#39;open&#39; | [optional] 
 **HeaderImageUrl** | Pointer to **string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
-**JudgingDeadline** | Pointer to **string** | Calculated: EndAt + 7 days | [optional] 
-**JurorSelectionMode** | Pointer to **string** | Use JurorSelectionModeRandom, JurorSelectionModeInvited, or JurorSelectionModeHybrid | [optional] 
-**JurySize** | Pointer to **int32** | Default: 5 | [optional] 
 **MemberParticipation** | Pointer to [**DomainMemberParticipationSummary**](DomainMemberParticipationSummary.md) |  | [optional] 
-**MinJurorScores** | Pointer to **int32** | Default: 3 | [optional] 
 **NoOfGroups** | Pointer to **int32** |  | [optional] 
 **NoOfPuzzles** | Pointer to **int32** |  | [optional] 
 **NoOfWinners** | Pointer to **int32** | @deprecated | [optional] 
@@ -57,31 +52,6 @@ will change when the set of required properties is changed
 NewDomainContestWithDefaults instantiates a new DomainContest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCategory
-
-`func (o *DomainContest) GetCategory() string`
-
-GetCategory returns the Category field if non-nil, zero value otherwise.
-
-### GetCategoryOk
-
-`func (o *DomainContest) GetCategoryOk() (*string, bool)`
-
-GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCategory
-
-`func (o *DomainContest) SetCategory(v string)`
-
-SetCategory sets Category field to given value.
-
-### HasCategory
-
-`func (o *DomainContest) HasCategory() bool`
-
-HasCategory returns a boolean if a field has been set.
 
 ### GetChannel
 
@@ -183,30 +153,30 @@ SetDifficulty sets Difficulty field to given value.
 
 HasDifficulty returns a boolean if a field has been set.
 
-### GetExtensionCount
+### GetEntryBasedConfig
 
-`func (o *DomainContest) GetExtensionCount() int32`
+`func (o *DomainContest) GetEntryBasedConfig() EntryBasedContestConfig`
 
-GetExtensionCount returns the ExtensionCount field if non-nil, zero value otherwise.
+GetEntryBasedConfig returns the EntryBasedConfig field if non-nil, zero value otherwise.
 
-### GetExtensionCountOk
+### GetEntryBasedConfigOk
 
-`func (o *DomainContest) GetExtensionCountOk() (*int32, bool)`
+`func (o *DomainContest) GetEntryBasedConfigOk() (*EntryBasedContestConfig, bool)`
 
-GetExtensionCountOk returns a tuple with the ExtensionCount field if it's non-nil, zero value otherwise
+GetEntryBasedConfigOk returns a tuple with the EntryBasedConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExtensionCount
+### SetEntryBasedConfig
 
-`func (o *DomainContest) SetExtensionCount(v int32)`
+`func (o *DomainContest) SetEntryBasedConfig(v EntryBasedContestConfig)`
 
-SetExtensionCount sets ExtensionCount field to given value.
+SetEntryBasedConfig sets EntryBasedConfig field to given value.
 
-### HasExtensionCount
+### HasEntryBasedConfig
 
-`func (o *DomainContest) HasExtensionCount() bool`
+`func (o *DomainContest) HasEntryBasedConfig() bool`
 
-HasExtensionCount returns a boolean if a field has been set.
+HasEntryBasedConfig returns a boolean if a field has been set.
 
 ### GetFairPlayGrouping
 
@@ -308,81 +278,6 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
-### GetJudgingDeadline
-
-`func (o *DomainContest) GetJudgingDeadline() string`
-
-GetJudgingDeadline returns the JudgingDeadline field if non-nil, zero value otherwise.
-
-### GetJudgingDeadlineOk
-
-`func (o *DomainContest) GetJudgingDeadlineOk() (*string, bool)`
-
-GetJudgingDeadlineOk returns a tuple with the JudgingDeadline field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetJudgingDeadline
-
-`func (o *DomainContest) SetJudgingDeadline(v string)`
-
-SetJudgingDeadline sets JudgingDeadline field to given value.
-
-### HasJudgingDeadline
-
-`func (o *DomainContest) HasJudgingDeadline() bool`
-
-HasJudgingDeadline returns a boolean if a field has been set.
-
-### GetJurorSelectionMode
-
-`func (o *DomainContest) GetJurorSelectionMode() string`
-
-GetJurorSelectionMode returns the JurorSelectionMode field if non-nil, zero value otherwise.
-
-### GetJurorSelectionModeOk
-
-`func (o *DomainContest) GetJurorSelectionModeOk() (*string, bool)`
-
-GetJurorSelectionModeOk returns a tuple with the JurorSelectionMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetJurorSelectionMode
-
-`func (o *DomainContest) SetJurorSelectionMode(v string)`
-
-SetJurorSelectionMode sets JurorSelectionMode field to given value.
-
-### HasJurorSelectionMode
-
-`func (o *DomainContest) HasJurorSelectionMode() bool`
-
-HasJurorSelectionMode returns a boolean if a field has been set.
-
-### GetJurySize
-
-`func (o *DomainContest) GetJurySize() int32`
-
-GetJurySize returns the JurySize field if non-nil, zero value otherwise.
-
-### GetJurySizeOk
-
-`func (o *DomainContest) GetJurySizeOk() (*int32, bool)`
-
-GetJurySizeOk returns a tuple with the JurySize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetJurySize
-
-`func (o *DomainContest) SetJurySize(v int32)`
-
-SetJurySize sets JurySize field to given value.
-
-### HasJurySize
-
-`func (o *DomainContest) HasJurySize() bool`
-
-HasJurySize returns a boolean if a field has been set.
-
 ### GetMemberParticipation
 
 `func (o *DomainContest) GetMemberParticipation() DomainMemberParticipationSummary`
@@ -407,31 +302,6 @@ SetMemberParticipation sets MemberParticipation field to given value.
 `func (o *DomainContest) HasMemberParticipation() bool`
 
 HasMemberParticipation returns a boolean if a field has been set.
-
-### GetMinJurorScores
-
-`func (o *DomainContest) GetMinJurorScores() int32`
-
-GetMinJurorScores returns the MinJurorScores field if non-nil, zero value otherwise.
-
-### GetMinJurorScoresOk
-
-`func (o *DomainContest) GetMinJurorScoresOk() (*int32, bool)`
-
-GetMinJurorScoresOk returns a tuple with the MinJurorScores field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMinJurorScores
-
-`func (o *DomainContest) SetMinJurorScores(v int32)`
-
-SetMinJurorScores sets MinJurorScores field to given value.
-
-### HasMinJurorScores
-
-`func (o *DomainContest) HasMinJurorScores() bool`
-
-HasMinJurorScores returns a boolean if a field has been set.
 
 ### GetNoOfGroups
 

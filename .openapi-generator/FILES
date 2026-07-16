@@ -71,6 +71,8 @@ docs/DomainBuddyBoardViewResponse.md
 docs/DomainChannel.md
 docs/DomainChannelListResponse.md
 docs/DomainChannelResponse.md
+docs/DomainCommunityBallot.md
+docs/DomainCommunityBallotResponse.md
 docs/DomainContest.md
 docs/DomainContestGroups.md
 docs/DomainContestGroupsResponse.md
@@ -178,6 +180,7 @@ docs/DomainWebhookSubscriptionCreated.md
 docs/DomainWebhookSubscriptionCreatedResponse.md
 docs/DomainWebhookSubscriptionListResponse.md
 docs/EnterEventResultRequest.md
+docs/EntryBasedContestConfig.md
 docs/Event.md
 docs/EventItem.md
 docs/EventOption.md
@@ -199,6 +202,9 @@ docs/HandlerCreatePlatformVenueRequest.md
 docs/HandlerCreateWebhookSubscriptionRequest.md
 docs/HandlerErrorDetail.md
 docs/HandlerErrorResponse.md
+docs/HandlerMatchupResponse.md
+docs/HandlerMatchupResponseResponse.md
+docs/HandlerServedMatchup.md
 docs/HandlerStatusResponse.md
 docs/HandlerStatusResponseResponse.md
 docs/HandlerUpdatePlatformIdentityRequest.md
@@ -246,6 +252,7 @@ docs/RequestRegion.md
 docs/RequestScoreEntryRequest.md
 docs/RequestSelectGroupRequest.md
 docs/RequestSubmitEntryRequest.md
+docs/RequestSubmitJudgmentRequest.md
 docs/RequestUpdateChannelAccessCodeRequest.md
 docs/RequestUpdateChannelRequest.md
 docs/RequestUpdateContestHeaderImage.md
@@ -314,6 +321,8 @@ model_domain_buddy_board_view_response.go
 model_domain_channel.go
 model_domain_channel_list_response.go
 model_domain_channel_response.go
+model_domain_community_ballot.go
+model_domain_community_ballot_response.go
 model_domain_contest.go
 model_domain_contest_groups.go
 model_domain_contest_groups_response.go
@@ -421,6 +430,7 @@ model_domain_webhook_subscription_created.go
 model_domain_webhook_subscription_created_response.go
 model_domain_webhook_subscription_list_response.go
 model_enter_event_result_request.go
+model_entry_based_contest_config.go
 model_event.go
 model_event_item.go
 model_event_option.go
@@ -440,6 +450,9 @@ model_handler_create_platform_venue_request.go
 model_handler_create_webhook_subscription_request.go
 model_handler_error_detail.go
 model_handler_error_response.go
+model_handler_matchup_response.go
+model_handler_matchup_response_response.go
+model_handler_served_matchup.go
 model_handler_status_response.go
 model_handler_status_response_response.go
 model_handler_update_platform_identity_request.go
@@ -480,6 +493,7 @@ model_request_region.go
 model_request_score_entry_request.go
 model_request_select_group_request.go
 model_request_submit_entry_request.go
+model_request_submit_judgment_request.go
 model_request_update_channel_access_code_request.go
 model_request_update_channel_request.go
 model_request_update_contest_header_image.go
