@@ -11167,7 +11167,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -11479,7 +11478,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -11861,7 +11859,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -12173,7 +12170,6 @@ components:
               question_type: ""
               timing:
                 end_at: end_at
-                enroll_by: enroll_by
                 start_at: start_at
               source_type: ""
               no_of_groups: 6
@@ -12731,7 +12727,6 @@ components:
         question_type: ""
         timing:
           end_at: end_at
-          enroll_by: enroll_by
           start_at: start_at
         source_type: ""
         no_of_groups: 6
@@ -13195,7 +13190,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -13384,7 +13378,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -13586,7 +13579,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -13980,7 +13972,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -14281,7 +14272,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -14550,7 +14540,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -14851,7 +14840,6 @@ components:
               question_type: ""
               timing:
                 end_at: end_at
-                enroll_by: enroll_by
                 start_at: start_at
               source_type: ""
               no_of_groups: 6
@@ -15902,7 +15890,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -16229,7 +16216,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -16483,7 +16469,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -16750,7 +16735,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -17390,7 +17374,6 @@ components:
           question_type: ""
           timing:
             end_at: end_at
-            enroll_by: enroll_by
             start_at: start_at
           source_type: ""
           no_of_groups: 6
@@ -17690,7 +17673,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -17957,7 +17939,6 @@ components:
             question_type: ""
             timing:
               end_at: end_at
-              enroll_by: enroll_by
               start_at: start_at
             source_type: ""
             no_of_groups: 6
@@ -18257,7 +18238,6 @@ components:
               question_type: ""
               timing:
                 end_at: end_at
-                enroll_by: enroll_by
                 start_at: start_at
               source_type: ""
               no_of_groups: 6
@@ -20118,18 +20098,14 @@ components:
     Domain.Timing:
       example:
         end_at: end_at
-        enroll_by: enroll_by
         start_at: start_at
       properties:
         end_at:
-          type: string
-        enroll_by:
           type: string
         start_at:
           type: string
       required:
       - end_at
-      - enroll_by
       - start_at
       type: object
     Domain.Tournament:

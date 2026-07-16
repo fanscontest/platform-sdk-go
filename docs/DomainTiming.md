@@ -5,14 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EndAt** | **string** |  | 
-**EnrollBy** | **string** |  | 
 **StartAt** | **string** |  | 
 
 ## Methods
 
 ### NewDomainTiming
 
-`func NewDomainTiming(endAt string, enrollBy string, startAt string, ) *DomainTiming`
+`func NewDomainTiming(endAt string, startAt string, ) *DomainTiming`
 
 NewDomainTiming instantiates a new DomainTiming object
 This constructor will assign default values to properties that have it defined,
@@ -45,26 +44,6 @@ and a boolean to check if the value has been set.
 `func (o *DomainTiming) SetEndAt(v string)`
 
 SetEndAt sets EndAt field to given value.
-
-
-### GetEnrollBy
-
-`func (o *DomainTiming) GetEnrollBy() string`
-
-GetEnrollBy returns the EnrollBy field if non-nil, zero value otherwise.
-
-### GetEnrollByOk
-
-`func (o *DomainTiming) GetEnrollByOk() (*string, bool)`
-
-GetEnrollByOk returns a tuple with the EnrollBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnrollBy
-
-`func (o *DomainTiming) SetEnrollBy(v string)`
-
-SetEnrollBy sets EnrollBy field to given value.
 
 
 ### GetStartAt

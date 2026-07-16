@@ -23,7 +23,6 @@ var _ MappedNullable = &DomainTiming{}
 // DomainTiming struct for DomainTiming
 type DomainTiming struct {
 	EndAt string `json:"end_at"`
-	EnrollBy string `json:"enroll_by"`
 	StartAt string `json:"start_at"`
 }
 
@@ -33,10 +32,9 @@ type _DomainTiming DomainTiming
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDomainTiming(endAt string, enrollBy string, startAt string) *DomainTiming {
+func NewDomainTiming(endAt string, startAt string) *DomainTiming {
 	this := DomainTiming{}
 	this.EndAt = endAt
-	this.EnrollBy = enrollBy
 	this.StartAt = startAt
 	return &this
 }
@@ -71,30 +69,6 @@ func (o *DomainTiming) GetEndAtOk() (*string, bool) {
 // SetEndAt sets field value
 func (o *DomainTiming) SetEndAt(v string) {
 	o.EndAt = v
-}
-
-// GetEnrollBy returns the EnrollBy field value
-func (o *DomainTiming) GetEnrollBy() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.EnrollBy
-}
-
-// GetEnrollByOk returns a tuple with the EnrollBy field value
-// and a boolean to check if the value has been set.
-func (o *DomainTiming) GetEnrollByOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.EnrollBy, true
-}
-
-// SetEnrollBy sets field value
-func (o *DomainTiming) SetEnrollBy(v string) {
-	o.EnrollBy = v
 }
 
 // GetStartAt returns the StartAt field value
@@ -132,7 +106,6 @@ func (o DomainTiming) MarshalJSON() ([]byte, error) {
 func (o DomainTiming) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["end_at"] = o.EndAt
-	toSerialize["enroll_by"] = o.EnrollBy
 	toSerialize["start_at"] = o.StartAt
 	return toSerialize, nil
 }
@@ -143,7 +116,6 @@ func (o *DomainTiming) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"end_at",
-		"enroll_by",
 		"start_at",
 	}
 
