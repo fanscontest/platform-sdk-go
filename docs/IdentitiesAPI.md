@@ -33,7 +33,7 @@ import (
 
 func main() {
 	handlerCreatePlatformIdentityRequest := *openapiclient.NewHandlerCreatePlatformIdentityRequest() // HandlerCreatePlatformIdentityRequest | Platform identity payload
-	idempotencyKey := "idempotencyKey_example" // string | Best-effort retry key (~24h). Replays are keyed only by this header and return the original response body. (optional)
+	idempotencyKey := "idempotencyKey_example" // string | Retry key (~24h). Same key + same body replays the original response; a different body returns 422. (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiCreateIdentitiesRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **handlerCreatePlatformIdentityRequest** | [**HandlerCreatePlatformIdentityRequest**](HandlerCreatePlatformIdentityRequest.md) | Platform identity payload | 
- **idempotencyKey** | **string** | Best-effort retry key (~24h). Replays are keyed only by this header and return the original response body. | 
+ **idempotencyKey** | **string** | Retry key (~24h). Same key + same body replays the original response; a different body returns 422. | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type

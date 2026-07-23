@@ -41,7 +41,7 @@ Method | HTTP request | Description
 
 ## CreateContests
 
-> DomainContestResponse CreateContests(ctx).RequestCreateContestRequest(requestCreateContestRequest).XActingAs(xActingAs).Execute()
+> DomainContestResponse CreateContests(ctx).RequestCreateContestRequest(requestCreateContestRequest).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 
 Create a contest
 
@@ -59,11 +59,12 @@ import (
 
 func main() {
 	requestCreateContestRequest := *openapiclient.NewRequestCreateContestRequest("ChannelId_example", int32(123), *openapiclient.NewDomainReward("RewardType_example", "Value_example"), "SourceId_example", "SourceType_example", *openapiclient.NewDomainTiming("EndAt_example", "StartAt_example"), "Title_example", int32(123), int32(123)) // RequestCreateContestRequest | Contest payload
+	idempotencyKey := "idempotencyKey_example" // string | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContestsAPI.CreateContests(context.Background()).RequestCreateContestRequest(requestCreateContestRequest).XActingAs(xActingAs).Execute()
+	resp, r, err := apiClient.ContestsAPI.CreateContests(context.Background()).RequestCreateContestRequest(requestCreateContestRequest).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContestsAPI.CreateContests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -85,6 +86,7 @@ Other parameters are passed through a pointer to a apiCreateContestsRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestCreateContestRequest** | [**RequestCreateContestRequest**](RequestCreateContestRequest.md) | Contest payload | 
+ **idempotencyKey** | **string** | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type

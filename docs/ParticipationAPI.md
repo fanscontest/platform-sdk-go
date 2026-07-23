@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdParticipate
 
-> DomainParticipationResponse CreateContestsByIdParticipate(ctx, id).XActingAs(xActingAs).Execute()
+> DomainParticipationResponse CreateContestsByIdParticipate(ctx, id).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 
 Create Participation
 
@@ -113,11 +113,12 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	idempotencyKey := "idempotencyKey_example" // string | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ParticipationAPI.CreateContestsByIdParticipate(context.Background(), id).XActingAs(xActingAs).Execute()
+	resp, r, err := apiClient.ParticipationAPI.CreateContestsByIdParticipate(context.Background(), id).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ParticipationAPI.CreateContestsByIdParticipate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -143,6 +144,7 @@ Other parameters are passed through a pointer to a apiCreateContestsByIdParticip
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type

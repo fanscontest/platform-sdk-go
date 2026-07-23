@@ -28,12 +28,19 @@ type ApiCreateContestsRequest struct {
 	ctx context.Context
 	ApiService *ContestsAPIService
 	requestCreateContestRequest *RequestCreateContestRequest
+	idempotencyKey *string
 	xActingAs *string
 }
 
 // Contest payload
 func (r ApiCreateContestsRequest) RequestCreateContestRequest(requestCreateContestRequest RequestCreateContestRequest) ApiCreateContestsRequest {
 	r.requestCreateContestRequest = &requestCreateContestRequest
+	return r
+}
+
+// Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055).
+func (r ApiCreateContestsRequest) IdempotencyKey(idempotencyKey string) ApiCreateContestsRequest {
+	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
@@ -101,6 +108,9 @@ func (a *ContestsAPIService) CreateContestsExecute(r ApiCreateContestsRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
+	}
 	if r.xActingAs != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
@@ -140,6 +150,28 @@ func (a *ContestsAPIService) CreateContestsExecute(r ApiCreateContestsRequest) (
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 ## CreateContestsByIdBallots
 
-> HandlerMatchupResponseResponse CreateContestsByIdBallots(ctx, id).XActingAs(xActingAs).Execute()
+> HandlerMatchupResponseResponse CreateContestsByIdBallots(ctx, id).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 
 Serve a community-judging matchup
 
@@ -45,11 +45,12 @@ import (
 
 func main() {
 	id := "id_example" // string | Contest ID
+	idempotencyKey := "idempotencyKey_example" // string | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdBallots(context.Background(), id).XActingAs(xActingAs).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdBallots(context.Background(), id).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdBallots``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -75,6 +76,7 @@ Other parameters are passed through a pointer to a apiCreateContestsByIdBallotsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
@@ -97,7 +99,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdEntries
 
-> DomainEntryResponse CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XActingAs(xActingAs).Execute()
+> DomainEntryResponse CreateContestsByIdEntries(ctx, id).RequestSubmitEntryRequest(requestSubmitEntryRequest).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 
 Submit entry for creative contest
 
@@ -118,11 +120,12 @@ import (
 func main() {
 	id := "id_example" // string | Contest ID
 	requestSubmitEntryRequest := *openapiclient.NewRequestSubmitEntryRequest("MediaType_example", "MediaUrl_example") // RequestSubmitEntryRequest | Entry submission
+	idempotencyKey := "idempotencyKey_example" // string | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdEntries(context.Background(), id).RequestSubmitEntryRequest(requestSubmitEntryRequest).XActingAs(xActingAs).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdEntries(context.Background(), id).RequestSubmitEntryRequest(requestSubmitEntryRequest).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdEntries``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -149,6 +152,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestSubmitEntryRequest** | [**RequestSubmitEntryRequest**](RequestSubmitEntryRequest.md) | Entry submission | 
+ **idempotencyKey** | **string** | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type
@@ -320,7 +324,7 @@ Name | Type | Description  | Notes
 
 ## CreateContestsByIdJudgments
 
-> DomainCommunityBallotResponse CreateContestsByIdJudgments(ctx, id).RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest).XActingAs(xActingAs).Execute()
+> DomainCommunityBallotResponse CreateContestsByIdJudgments(ctx, id).RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 
 Submit a community-judging pairwise choice
 
@@ -341,11 +345,12 @@ import (
 func main() {
 	id := "id_example" // string | Contest ID
 	requestSubmitJudgmentRequest := *openapiclient.NewRequestSubmitJudgmentRequest("BallotToken_example", "Choice_example") // RequestSubmitJudgmentRequest | Ballot token + choice
+	idempotencyKey := "idempotencyKey_example" // string | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). (optional)
 	xActingAs := "xActingAs_example" // string | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdJudgments(context.Background(), id).RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest).XActingAs(xActingAs).Execute()
+	resp, r, err := apiClient.CreativeContestsAPI.CreateContestsByIdJudgments(context.Background(), id).RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest).IdempotencyKey(idempotencyKey).XActingAs(xActingAs).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CreativeContestsAPI.CreateContestsByIdJudgments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -372,6 +377,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **requestSubmitJudgmentRequest** | [**RequestSubmitJudgmentRequest**](RequestSubmitJudgmentRequest.md) | Ballot token + choice | 
+ **idempotencyKey** | **string** | Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055). | 
  **xActingAs** | **string** | Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls. | 
 
 ### Return type

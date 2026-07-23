@@ -28,7 +28,14 @@ type ApiCreateContestsByIdBallotsRequest struct {
 	ctx context.Context
 	ApiService *CreativeContestsAPIService
 	id string
+	idempotencyKey *string
 	xActingAs *string
+}
+
+// Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055).
+func (r ApiCreateContestsByIdBallotsRequest) IdempotencyKey(idempotencyKey string) ApiCreateContestsByIdBallotsRequest {
+	r.idempotencyKey = &idempotencyKey
+	return r
 }
 
 // Acting-as. The platform identity id (piid) this request is on behalf of. The platform verifies the piid belongs to the calling tenant and acts as that identity. Omit for tenant-level calls.
@@ -99,6 +106,9 @@ func (a *CreativeContestsAPIService) CreateContestsByIdBallotsExecute(r ApiCreat
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
 	}
 	if r.xActingAs != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
@@ -180,6 +190,17 @@ func (a *CreativeContestsAPIService) CreateContestsByIdBallotsExecute(r ApiCreat
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -210,12 +231,19 @@ type ApiCreateContestsByIdEntriesRequest struct {
 	ApiService *CreativeContestsAPIService
 	id string
 	requestSubmitEntryRequest *RequestSubmitEntryRequest
+	idempotencyKey *string
 	xActingAs *string
 }
 
 // Entry submission
 func (r ApiCreateContestsByIdEntriesRequest) RequestSubmitEntryRequest(requestSubmitEntryRequest RequestSubmitEntryRequest) ApiCreateContestsByIdEntriesRequest {
 	r.requestSubmitEntryRequest = &requestSubmitEntryRequest
+	return r
+}
+
+// Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055).
+func (r ApiCreateContestsByIdEntriesRequest) IdempotencyKey(idempotencyKey string) ApiCreateContestsByIdEntriesRequest {
+	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
@@ -288,6 +316,9 @@ func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
+	}
 	if r.xActingAs != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
@@ -316,6 +347,28 @@ func (a *CreativeContestsAPIService) CreateContestsByIdEntriesExecute(r ApiCreat
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -640,12 +693,19 @@ type ApiCreateContestsByIdJudgmentsRequest struct {
 	ApiService *CreativeContestsAPIService
 	id string
 	requestSubmitJudgmentRequest *RequestSubmitJudgmentRequest
+	idempotencyKey *string
 	xActingAs *string
 }
 
 // Ballot token + choice
 func (r ApiCreateContestsByIdJudgmentsRequest) RequestSubmitJudgmentRequest(requestSubmitJudgmentRequest RequestSubmitJudgmentRequest) ApiCreateContestsByIdJudgmentsRequest {
 	r.requestSubmitJudgmentRequest = &requestSubmitJudgmentRequest
+	return r
+}
+
+// Retry key (~24h). Same key + same body replays the original response; a different body returns 422 (ADR 0055).
+func (r ApiCreateContestsByIdJudgmentsRequest) IdempotencyKey(idempotencyKey string) ApiCreateContestsByIdJudgmentsRequest {
+	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
@@ -721,6 +781,9 @@ func (a *CreativeContestsAPIService) CreateContestsByIdJudgmentsExecute(r ApiCre
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
+	}
 	if r.xActingAs != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Acting-As", r.xActingAs, "simple", "")
 	}
@@ -793,6 +856,17 @@ func (a *CreativeContestsAPIService) CreateContestsByIdJudgmentsExecute(r ApiCre
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

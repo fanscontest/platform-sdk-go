@@ -38,7 +38,7 @@ func (r ApiCreateIdentitiesRequest) HandlerCreatePlatformIdentityRequest(handler
 	return r
 }
 
-// Best-effort retry key (~24h). Replays are keyed only by this header and return the original response body.
+// Retry key (~24h). Same key + same body replays the original response; a different body returns 422.
 func (r ApiCreateIdentitiesRequest) IdempotencyKey(idempotencyKey string) ApiCreateIdentitiesRequest {
 	r.idempotencyKey = &idempotencyKey
 	return r
@@ -58,11 +58,12 @@ func (r ApiCreateIdentitiesRequest) Execute() (*DomainPlatformIdentityResponse, 
 CreateIdentities Register a platform identity (platform mints the id)
 
 The platform mints the piid (ADR 0033). Supply an optional
-Idempotency-Key header for best-effort retry dedup: while the
-replay record lives (~24h) the same key replays the original
-201. Replays are keyed only by the header — the request body is
-not compared (ADR 0034). Profile mutations land via PUT, never
-via repeat POST. metadata is opaque and echoed verbatim.
+Idempotency-Key header to make a create retry-safe (ADR 0055):
+while the replay record lives (~24h) the same key + same body
+replays the original 201; reusing the key with a different body
+returns 422; a concurrent in-flight retry returns 409. Profile
+mutations land via PUT, never via repeat POST. metadata is
+opaque and echoed verbatim.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIdentitiesRequest
@@ -157,6 +158,28 @@ func (a *IdentitiesAPIService) CreateIdentitiesExecute(r ApiCreateIdentitiesRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v HandlerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v HandlerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

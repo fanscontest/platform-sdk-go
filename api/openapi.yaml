@@ -558,6 +558,15 @@ paths:
     post:
       operationId: createChannels
       parameters:
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -589,6 +598,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Bad Request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -1753,6 +1774,15 @@ paths:
     post:
       operationId: createContests
       parameters:
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -1790,6 +1820,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -2508,6 +2550,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -2555,6 +2606,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -2772,6 +2829,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -2803,6 +2869,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Bad Request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -3382,6 +3460,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -3437,6 +3524,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -3693,6 +3786,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -3716,6 +3818,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -4761,15 +4875,16 @@ paths:
     post:
       description: |-
         The platform mints the piid (ADR 0033). Supply an optional
-        Idempotency-Key header for best-effort retry dedup: while the
-        replay record lives (~24h) the same key replays the original
-        201. Replays are keyed only by the header — the request body is
-        not compared (ADR 0034). Profile mutations land via PUT, never
-        via repeat POST. metadata is opaque and echoed verbatim.
+        Idempotency-Key header to make a create retry-safe (ADR 0055):
+        while the replay record lives (~24h) the same key + same body
+        replays the original 201; reusing the key with a different body
+        returns 422; a concurrent in-flight retry returns 409. Profile
+        mutations land via PUT, never via repeat POST. metadata is
+        opaque and echoed verbatim.
       operationId: createIdentities
       parameters:
-      - description: Best-effort retry key (~24h). Replays are keyed only by this
-          header and return the original response body.
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422.
         explode: false
         in: header
         name: Idempotency-Key
@@ -4814,6 +4929,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Unauthorized
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -8370,6 +8497,15 @@ paths:
     post:
       operationId: createSubscriptions
       parameters:
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -8401,6 +8537,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Bad Request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -8738,6 +8886,15 @@ paths:
         ADR 0008 / ADR 0009.
       operationId: createTenants
       parameters:
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -8775,6 +8932,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Unauthorized
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -9782,6 +9951,15 @@ paths:
     post:
       operationId: createVenues
       parameters:
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -9819,6 +9997,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Unauthorized
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
@@ -9905,6 +10095,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Retry key (~24h). Same key + same body replays the original response;
+          a different body returns 422 (ADR 0055).
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
       - description: Acting-as. The platform identity id (piid) this request is on
           behalf of. The platform verifies the piid belongs to the calling tenant
           and acts as that identity. Omit for tenant-level calls.
@@ -9948,6 +10147,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Handler.ErrorResponse'
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handler.ErrorResponse'
+          description: Unprocessable Entity
         "500":
           content:
             application/json:
